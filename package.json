@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "clean": "rm -rf .next node_modules next-env.d.ts",
     "format": "prettier 'src/**/*' --write --ignore-unknown",
     "dev": "next dev",
     "build": "next build",
@@ -16,10 +17,16 @@
     "@headlessui/react": "1.7.8",
     "@heroicons/react": "2.0.14",
     "@next/font": "13.1.6",
+    "@tanstack/react-query": "4.24.4",
+    "@trpc/client": "10.9.1",
+    "@trpc/next": "10.9.1",
+    "@trpc/react-query": "10.9.1",
+    "@trpc/server": "10.9.1",
     "daisyui": "2.49.0",
     "next": "13.1.6",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "zod": "3.20.2"
   },
   "devDependencies": {
     "@commitlint/cli": "17.4.2",

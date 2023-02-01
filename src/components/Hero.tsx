@@ -1,4 +1,8 @@
-export function Hero() {
+type HeroProps = {
+  description: string
+}
+
+export function Hero({ description }: HeroProps) {
   return (
     <div className="hero min-h-screen">
       <div className="hero-content text-center">
@@ -7,11 +11,7 @@ export function Hero() {
             Welcome to <br />
             AUS Force App
           </h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
-          </p>
+          <p className="py-6">{description}</p>
           <button className="btn btn-primary">Get Started</button>
         </div>
       </div>
