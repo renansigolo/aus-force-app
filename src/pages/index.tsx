@@ -25,7 +25,6 @@ export default function Home() {
       </Head>
       <main className={inter.className}>
         <Container>
-          <h1>{data.greeting}</h1>
           <Hero description={data.greeting} />
         </Container>
       </main>
