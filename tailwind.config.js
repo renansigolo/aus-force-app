@@ -2,11 +2,7 @@ const defaultTheme = require("tailwindcss/defaultTheme")
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    "./app/**/*.{ts,tsx}",
-    "./src/pages/**/*.{ts,tsx}",
-    "./src/components/**/*.{ts,tsx}",
-  ],
+  content: ["./src/pages/**/*.tsx", "./src/components/**/*.tsx"],
   theme: {
     container: {
       center: true,
@@ -17,8 +13,8 @@ module.exports = {
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), require("@tailwindcss/forms")],
   daisyui: {
-    themes: ["light", "dark", "halloween"],
+    themes: ["light", "dark"],
   },
 }
