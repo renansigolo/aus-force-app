@@ -7,6 +7,7 @@ const frequencies = [
   { value: "monthly", label: "Monthly", priceSuffix: "/month" },
   { value: "annually", label: "Annually", priceSuffix: "/year" },
 ]
+
 const tiers = [
   {
     name: "Hobby",
@@ -53,7 +54,7 @@ const tiers = [
     name: "Enterprise",
     id: "tier-enterprise",
     href: "#",
-    price: { monthly: "$400", annually: "$4000" },
+    price: { monthly: "$400", annually: "$4000" } as any,
     description: "Dedicated support and infrastructure for your company.",
     features: [
       "Unlimited owener's accounts",
@@ -85,7 +86,7 @@ export function Pricing() {
           </p>
         </div>
         <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-600">
-          Choose an affordable plan that’s packed with the best features for
+          Choose an affordable plan that is packed with the best features for
           engaging your audience, creating customer loyalty, and driving sales.
         </p>
         <div className="mt-16 flex justify-center">
