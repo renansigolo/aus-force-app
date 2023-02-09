@@ -6,7 +6,7 @@
     "build": "next build",
     "clean": "rm -rf .next node_modules next-env.d.ts",
     "dev": "next dev",
-    "format:check": "prettier --check .",
+    "format:check": "prettier --check 'src/**/*'",
     "format": "prettier 'src/**/*' --write --ignore-unknown",
     "lint": "next lint",
     "prepare": "husky install",
