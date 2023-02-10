@@ -1,6 +1,12 @@
 import { LockClosedIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
 
+// const SignInForm = z.object({
+//   email: z.string(),
+//   password: z.string(),
+// })
+// type SignInForm = z.infer<typeof SignInForm>
+
 export default function SignIn() {
   return (
     <>

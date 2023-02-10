@@ -1,10 +1,10 @@
 import Link from "next/link"
 
 type HeroProps = {
-  description: string
+  description?: string
 }
 
-export function Hero({ description }: HeroProps) {
+export function Hero({ description = "Hello" }: HeroProps) {
   return (
     <div className="hero min-h-screen">
       <div className="hero-content text-center">
