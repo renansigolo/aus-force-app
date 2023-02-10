@@ -1,4 +1,5 @@
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
+import Link from "next/link"
 
 // require('@tailwindcss/forms')
 export default function Register() {
@@ -16,8 +17,7 @@ export default function Register() {
                 Profile
               </h3>
               <p className="mt-1 text-sm text-gray-500">
-                This information will be displayed publicly so be careful what
-                you share.
+                This information will be displayed as your profile.
               </p>
             </div>
 
@@ -48,17 +48,7 @@ export default function Register() {
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="pt-8">
-            <div>
-              <h3 className="text-lg font-medium leading-6 text-gray-900">
-                Business Information
-              </h3>
-              <p className="mt-1 text-sm text-gray-500">
-                Use a permanent address where you can receive mail.
-              </p>
-            </div>
             <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
               <div className="sm:col-span-3">
                 <label
@@ -96,7 +86,7 @@ export default function Register() {
                 </div>
               </div>
 
-              <div className="sm:col-span-4">
+              <div className="sm:col-span-6">
                 <label
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700"
@@ -109,6 +99,125 @@ export default function Register() {
                     name="email"
                     type="email"
                     autoComplete="email"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="tel"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Phone Number
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="tel"
+                    name="tel"
+                    type="tel"
+                    autoComplete="phone"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="dob"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Date of birthday
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="dob"
+                    name="dob"
+                    type="date"
+                    autoComplete="date"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-8">
+            <div>
+              <h3 className="text-lg font-medium leading-6 text-gray-900">
+                Business Information
+              </h3>
+              <p className="mt-1 text-sm text-gray-500">
+                Enter the details of your business.
+              </p>
+            </div>
+            <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="legal-name"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Legal name
+                </label>
+                <div className="mt-1">
+                  <input
+                    type="text"
+                    name="legal-name"
+                    id="legal-name"
+                    autoComplete="company"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="trading-name"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Trading name
+                </label>
+                <div className="mt-1">
+                  <input
+                    type="text"
+                    name="trading-name"
+                    id="trading-name"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="abn"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  ABN number
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="abn"
+                    name="abn"
+                    type="number"
+                    autoComplete="abn"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-3">
+                <label
+                  htmlFor="acn"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  ACN number
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="acn"
+                    name="acn"
+                    type="number"
+                    autoComplete="acn"
                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>
@@ -213,12 +322,12 @@ export default function Register() {
 
         <div className="pt-5">
           <div className="flex justify-end">
-            <button
-              type="submit"
+            <Link
+              href="/dashboard"
               className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              Save
-            </button>
+              Register
+            </Link>
           </div>
         </div>
       </form>
