@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  accent-color: #6366f1;
+  color-scheme: light;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+} */
+
+/* Buttons */
+.btn {
+  @apply inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2;
+}
+
+.btn-primary {
+  @apply border-transparent bg-indigo-600 text-white hover:bg-indigo-700;
+}
+
+.btn-large {
+  @apply text-base;
+}
+
+.btn-xl {
+  @apply text-base px-6 py-3;
+}

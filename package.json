@@ -4,14 +4,15 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "clean": "rm -rf .next node_modules next-env.d.ts",
+    "clean": "rm -rf .next node_modules package-lock.json next-env.d.ts",
     "dev": "next dev",
-    "format:check": "prettier --check 'src/**/*'",
-    "format": "prettier 'src/**/*' --write --ignore-unknown",
+    "format:check": "prettier --check '**/*' --ignore-unknown",
+    "format": "prettier --write '**/*' --ignore-unknown",
     "lint": "next lint",
     "prepare": "husky install",
     "start": "next start",
-    "test": "npm run format && npm run lint"
+    "test": "npm run format && npm run lint",
+    "turbo": "next dev --turbo"
   },
   "dependencies": {
     "@headlessui/react": "1.7.10",
@@ -23,13 +24,13 @@
     "@trpc/next": "10.10.0",
     "@trpc/react-query": "10.10.0",
     "@trpc/server": "10.10.0",
-    "daisyui": "2.50.0",
     "firebase": "9.17.1",
     "next": "13.1.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-firebase-hooks": "5.1.1",
-    "zod": "3.20.5"
+    "react-hot-toast": "2.4.0",
+    "zod": "3.20.6"
   },
   "devDependencies": {
     "@commitlint/cli": "17.4.2",
