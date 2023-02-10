@@ -2,7 +2,6 @@
 // require('@tailwindcss/forms'),
 
 import { Dialog, Switch, Transition } from "@headlessui/react"
-import { MagnifyingGlassIcon } from "@heroicons/react/20/solid"
 import {
   ArrowLeftOnRectangleIcon,
   Bars3BottomLeftIcon,
@@ -19,7 +18,7 @@ import {
 import { Fragment, useState } from "react"
 
 const navigation = [
-  { name: "Home", href: "#", icon: HomeIcon, current: false },
+  { name: "Home", href: "#", icon: HomeIcon, current: true },
   { name: "Jobs", href: "#", icon: BriefcaseIcon, current: false },
   {
     name: "Applications",
@@ -34,7 +33,7 @@ const navigation = [
     current: false,
   },
   { name: "Team", href: "#", icon: UsersIcon, current: false },
-  { name: "Settings", href: "#", icon: CogIcon, current: true },
+  { name: "Settings", href: "#", icon: CogIcon, current: false },
 ]
 const secondaryNavigation = [
   { name: "Help", href: "#", icon: QuestionMarkCircleIcon },
@@ -124,7 +123,7 @@ export default function Dashboard() {
                   <div className="flex flex-shrink-0 items-center px-4">
                     <img
                       className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=purple&shade=600"
+                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                       alt="Easywire"
                     />
                   </div>
@@ -137,7 +136,7 @@ export default function Dashboard() {
                             href={item.href}
                             className={classNames(
                               item.current
-                                ? "bg-purple-50 border-purple-600 text-purple-600"
+                                ? "bg-indigo-50 border-indigo-600 text-indigo-600"
                                 : "border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900",
                               "group border-l-4 py-2 px-3 flex items-center text-base font-medium"
                             )}
@@ -146,7 +145,7 @@ export default function Dashboard() {
                             <item.icon
                               className={classNames(
                                 item.current
-                                  ? "text-purple-500"
+                                  ? "text-indigo-500"
                                   : "text-gray-400 group-hover:text-gray-500",
                                 "mr-4 flex-shrink-0 h-6 w-6"
                               )}
@@ -189,7 +188,7 @@ export default function Dashboard() {
             <div className="flex flex-shrink-0 items-center px-4">
               <img
                 className="h-8 w-auto"
-                src="https://tailwindui.com/img/logos/mark.svg?color=purple&shade=600"
+                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
                 alt="Easywire"
               />
             </div>
@@ -201,7 +200,7 @@ export default function Dashboard() {
                     href={item.href}
                     className={classNames(
                       item.current
-                        ? "bg-purple-50 border-purple-600 text-purple-600"
+                        ? "bg-indigo-50 border-indigo-600 text-indigo-600"
                         : "border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50",
                       "group border-l-4 py-2 px-3 flex items-center text-sm font-medium"
                     )}
@@ -209,7 +208,7 @@ export default function Dashboard() {
                     <item.icon
                       className={classNames(
                         item.current
-                          ? "text-purple-500"
+                          ? "text-indigo-500"
                           : "text-gray-400 group-hover:text-gray-500",
                         "mr-3 flex-shrink-0 h-6 w-6"
                       )}
@@ -244,49 +243,17 @@ export default function Dashboard() {
             <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 border-b border-gray-200 bg-white">
               <button
                 type="button"
-                className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500 md:hidden"
+                className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
                 onClick={() => setSidebarOpen(true)}
               >
                 <span className="sr-only">Open sidebar</span>
                 <Bars3BottomLeftIcon className="h-6 w-6" aria-hidden="true" />
               </button>
               <div className="flex flex-1 justify-between px-4 md:px-0">
-                <div className="flex flex-1">
-                  <form className="flex w-full md:ml-0" action="#" method="GET">
-                    <label htmlFor="mobile-search-field" className="sr-only">
-                      Search
-                    </label>
-                    <label htmlFor="desktop-search-field" className="sr-only">
-                      Search
-                    </label>
-                    <div className="relative w-full text-gray-400 focus-within:text-gray-600">
-                      <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center">
-                        <MagnifyingGlassIcon
-                          className="h-5 w-5 flex-shrink-0"
-                          aria-hidden="true"
-                        />
-                      </div>
-                      <input
-                        name="mobile-search-field"
-                        id="mobile-search-field"
-                        className="h-full w-full border-transparent py-2 pl-8 pr-3 text-base text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:hidden"
-                        placeholder="Search"
-                        type="search"
-                      />
-                      <input
-                        name="desktop-search-field"
-                        id="desktop-search-field"
-                        className="hidden h-full w-full border-transparent py-2 pl-8 pr-3 text-sm text-gray-900 placeholder-gray-500 focus:border-transparent focus:placeholder-gray-400 focus:outline-none focus:ring-0 sm:block"
-                        placeholder="Search jobs, applicants, and more"
-                        type="search"
-                      />
-                    </div>
-                  </form>
-                </div>
                 <div className="ml-4 flex items-center md:ml-6">
                   <button
                     type="button"
-                    className="rounded-full bg-white p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                    className="rounded-full bg-white p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
                     <BellIcon className="h-6 w-6" aria-hidden="true" />
                     <span className="sr-only">View notifications</span>
@@ -313,7 +280,7 @@ export default function Dashboard() {
                         <select
                           id="selected-tab"
                           name="selected-tab"
-                          className="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-purple-500 focus:outline-none focus:ring-purple-500 sm:text-sm"
+                          className="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                           defaultValue={tabs.find((tab) => tab.current)?.name}
                         >
                           {tabs.map((tab) => (
@@ -330,7 +297,7 @@ export default function Dashboard() {
                                 href={tab.href}
                                 className={classNames(
                                   tab.current
-                                    ? "border-purple-500 text-purple-600"
+                                    ? "border-indigo-500 text-indigo-600"
                                     : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700",
                                   "whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm"
                                 )}
@@ -364,7 +331,7 @@ export default function Dashboard() {
                                 <span className="ml-4 flex-shrink-0">
                                   <button
                                     type="button"
-                                    className="rounded-md bg-white font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                                    className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                   >
                                     Update
                                   </button>
@@ -386,7 +353,7 @@ export default function Dashboard() {
                                 <span className="ml-4 flex flex-shrink-0 items-start space-x-4">
                                   <button
                                     type="button"
-                                    className="rounded-md bg-white font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                                    className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                   >
                                     Update
                                   </button>
@@ -398,7 +365,7 @@ export default function Dashboard() {
                                   </span>
                                   <button
                                     type="button"
-                                    className="rounded-md bg-white font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                                    className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                   >
                                     Remove
                                   </button>
@@ -416,7 +383,7 @@ export default function Dashboard() {
                                 <span className="ml-4 flex-shrink-0">
                                   <button
                                     type="button"
-                                    className="rounded-md bg-white font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                                    className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                   >
                                     Update
                                   </button>
@@ -434,7 +401,7 @@ export default function Dashboard() {
                                 <span className="ml-4 flex-shrink-0">
                                   <button
                                     type="button"
-                                    className="rounded-md bg-white font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                                    className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                   >
                                     Update
                                   </button>
@@ -465,7 +432,7 @@ export default function Dashboard() {
                                 <span className="ml-4 flex-shrink-0">
                                   <button
                                     type="button"
-                                    className="rounded-md bg-white font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                                    className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                   >
                                     Update
                                   </button>
@@ -481,7 +448,7 @@ export default function Dashboard() {
                                 <span className="ml-4 flex flex-shrink-0 items-start space-x-4">
                                   <button
                                     type="button"
-                                    className="rounded-md bg-white font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                                    className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                   >
                                     Update
                                   </button>
@@ -493,7 +460,7 @@ export default function Dashboard() {
                                   </span>
                                   <button
                                     type="button"
-                                    className="rounded-md bg-white font-medium text-purple-600 hover:text-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2"
+                                    className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                                   >
                                     Remove
                                   </button>
@@ -517,9 +484,9 @@ export default function Dashboard() {
                                   onChange={setAutomaticTimezoneEnabled}
                                   className={classNames(
                                     automaticTimezoneEnabled
-                                      ? "bg-purple-600"
+                                      ? "bg-indigo-600"
                                       : "bg-gray-200",
-                                    "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 sm:ml-auto"
+                                    "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:ml-auto"
                                   )}
                                 >
                                   <span
@@ -551,9 +518,9 @@ export default function Dashboard() {
                                   onChange={setAutoUpdateApplicantDataEnabled}
                                   className={classNames(
                                     autoUpdateApplicantDataEnabled
-                                      ? "bg-purple-600"
+                                      ? "bg-indigo-600"
                                       : "bg-gray-200",
-                                    "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 sm:ml-auto"
+                                    "relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:ml-auto"
                                   )}
                                 >
                                   <span

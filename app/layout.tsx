@@ -1,3 +1,4 @@
+import { Providers } from "@/app/providers"
 import { Inter } from "@next/font/google"
 import { ReactNode } from "react"
 import "./globals.css"
@@ -13,9 +14,10 @@ const inter = Inter({
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en" data-theme="light" className={inter.className}>
+    <html lang="en" className={inter.className}>
       <head />
       <body>{children}</body>
+      <Providers />
     </html>
   )
 }

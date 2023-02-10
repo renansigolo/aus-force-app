@@ -1,9 +1,13 @@
-import { Container } from "@/components/Container"
+import { EnterHeader } from "@/app/(enter)/EnterHeader"
 
 // require('@tailwindcss/forms')
 export default function Register() {
   return (
-    <Container>
+    <>
+      <EnterHeader
+        title="Register your account"
+        description="Enter your details below"
+      />
       <form className="space-y-8 divide-y divide-gray-200 my-12">
         <div className="space-y-8 divide-y divide-gray-200">
           <div>
@@ -218,6 +222,6 @@ export default function Register() {
           </div>
         </div>
       </form>
-    </Container>
+    </>
   )
 }
