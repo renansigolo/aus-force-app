@@ -1,6 +1,5 @@
 "use client"
 
-import { Heading } from "@/components/dashboard/Heading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { classNames } from "@/lib/helpers"
 import { Switch } from "@headlessui/react"
@@ -13,7 +12,7 @@ export default function SettingsPage() {
 
   return (
     <SectionWrapper>
-      <Heading title="Settings" />
+      <h2 className="heading-2">Settings</h2>
       <div className="px-4 sm:px-6 md:px-0">
         <div className="py-6">
           {/* Description list with inline editing */}
