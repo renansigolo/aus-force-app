@@ -3,10 +3,10 @@ import { Dialog, Transition } from "@headlessui/react"
 import {
   BriefcaseIcon,
   CalendarIcon,
-  CogIcon,
   HomeIcon,
   XMarkIcon,
 } from "@heroicons/react/20/solid"
+import Link from "next/link"
 import { Fragment } from "react"
 
 const user = {
@@ -30,7 +30,6 @@ const navigation = [
     icon: BriefcaseIcon,
     current: false,
   },
-  { name: "Settings", href: "/settings", icon: CogIcon, current: false },
 ]
 
 type SidebarProps = {
@@ -100,7 +99,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                   <nav className="flex h-full flex-col">
                     <div className="space-y-1">
                       {navigation.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
                           href={item.href}
                           className={classNames(
@@ -121,13 +120,16 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                             aria-hidden="true"
                           />
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </nav>
                 </div>
                 <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
-                  <a href="#" className="group block flex-shrink-0">
+                  <Link
+                    href="/account-details"
+                    className="group block flex-shrink-0"
+                  >
                     <div className="flex items-center">
                       <div>
                         <img
@@ -145,7 +147,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                         </p>
                       </div>
                     </div>
-                  </a>
+                  </Link>
                 </div>
               </Dialog.Panel>
             </Transition.Child>
@@ -166,7 +168,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
           <div className="mt-5 flex-grow">
             <div className="space-y-1">
               {navigation.map((item) => (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
                   className={classNames(
@@ -186,13 +188,16 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                     aria-hidden="true"
                   />
                   {item.name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
           <div className="block w-full flex-shrink-0">
             <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
-              <a href="#" className="group block w-full flex-shrink-0">
+              <Link
+                href="/account-details"
+                className="group block w-full flex-shrink-0"
+              >
                 <div className="flex items-center">
                   <div>
                     <img
@@ -210,7 +215,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                     </p>
                   </div>
                 </div>
-              </a>
+              </Link>
             </div>
           </div>
         </nav>
