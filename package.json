@@ -2,6 +2,7 @@
   "name": "aus-force-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://aus-force-app.vercel.app",
   "scripts": {
     "build": "next build",
     "clean": "rm -rf .next node_modules package-lock.json next-env.d.ts",

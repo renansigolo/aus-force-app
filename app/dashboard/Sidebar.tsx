@@ -17,16 +17,16 @@ const user = {
 }
 
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: false },
+  { name: "Home", href: "/dashboard", icon: HomeIcon, current: false },
   {
     name: "Weekly Jobs",
-    href: "/weekly-jobs",
+    href: "/dashboard/weekly-jobs",
     icon: CalendarIcon,
     current: false,
   },
   {
     name: "Request Leave",
-    href: "/request-leave",
+    href: "/dashboard/request-leave",
     icon: BriefcaseIcon,
     current: false,
   },

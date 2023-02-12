@@ -12,6 +12,10 @@ const cards = [
   { name: "Week Payment", href: "#", icon: BanknotesIcon, amount: "$4.800,00" },
 ]
 
+export const metadata = {
+  title: "About",
+}
+
 export default function DashboardPage() {
   return (
     <section className="flex-1 pb-8">
