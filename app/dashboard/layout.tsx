@@ -3,7 +3,7 @@ import { ReactNode } from "react"
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   return (
     <section>
-      <nav>SIDEBAR</nav>
+      <nav>{/* TODO: Add sidebar here */}</nav>
       {children}
     </section>
   )
