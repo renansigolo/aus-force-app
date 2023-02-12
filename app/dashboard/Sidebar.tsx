@@ -127,7 +127,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                 </div>
                 <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
                   <Link
-                    href="/account-details"
+                    href="/dashboard/account-details"
                     className="group block flex-shrink-0"
                   >
                     <div className="flex items-center">
@@ -195,7 +195,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
           <div className="block w-full flex-shrink-0">
             <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
               <Link
-                href="/account-details"
+                href="/dashboard/account-details"
                 className="group block w-full flex-shrink-0"
               >
                 <div className="flex items-center">
