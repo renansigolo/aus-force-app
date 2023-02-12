@@ -5,6 +5,7 @@ export default function RequestLeavePage() {
   return (
     <SectionWrapper>
       <Heading title="Request Leave" />
+      <p className="mt-2">Coming soon...</p>
     </SectionWrapper>
   )
 }
