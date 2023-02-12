@@ -32,6 +32,7 @@ type SidebarProps = {
   sidebarOpen: boolean
   setSidebarOpen: (value: boolean) => void
 }
+
 export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
   return (
     <>
@@ -88,11 +89,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                   </div>
                 </Transition.Child>
                 <div className="flex flex-shrink-0 items-center px-4">
-                  <img
-                    className="h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                    alt="Easywire"
-                  />
+                  <img className="h-9 w-auto" src="/logo.svg" alt="Easywire" />
                 </div>
                 <div className="mt-5 h-0 flex-1 overflow-y-auto">
                   <nav className="flex h-full flex-col">
@@ -153,11 +150,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
         {/* Sidebar component, swap this element with another sidebar if you like */}
         <nav className="flex flex-grow flex-col overflow-y-auto border-r border-gray-200 bg-gray-50 pt-5 pb-4">
           <div className="flex flex-shrink-0 items-center px-4">
-            <img
-              className="h-8 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Easywire"
-            />
+            <img className="h-9 w-auto" src="/logo.svg" alt="Easywire" />
           </div>
           <div className="mt-5 flex-grow">
             <div className="space-y-1">
