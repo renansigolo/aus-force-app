@@ -14,7 +14,7 @@ export function EnterHeader({ title, description, page }: EnterHeaderProps) {
       <div className="sm:mx-auto sm:w-full pb-12">
         <img
           className="mx-auto h-12 w-auto"
-          src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+          src="/logo.svg"
           alt="Your Company"
         />
         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">

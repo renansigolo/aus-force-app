@@ -3,7 +3,7 @@
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
 import Link from "next/link"
 
-export default function SignIn() {
+export default function SignInPage() {
   return (
     <div className="flex min-h-full flex-col justify-center">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">

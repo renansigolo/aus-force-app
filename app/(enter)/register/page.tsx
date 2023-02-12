@@ -1,8 +1,7 @@
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
 import Link from "next/link"
 
-// require('@tailwindcss/forms')
-export default function Register() {
+export default function RegisterPage() {
   return (
     <>
       <EnterHeader
@@ -238,9 +237,6 @@ export default function Register() {
                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   >
                     <option>Australia</option>
-                    <option>United States</option>
-                    <option>Canada</option>
-                    <option>Mexico</option>
                   </select>
                 </div>
               </div>
