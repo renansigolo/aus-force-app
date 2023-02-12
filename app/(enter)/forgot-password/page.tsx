@@ -37,7 +37,7 @@ function handleSubmit(e: FormEvent<HTMLFormElement>) {
   //   })
 }
 
-export default function ForgotPassword() {
+export default function ForgotPasswordPage() {
   return (
     <>
       <div className="flex min-h-full flex-col justify-center">

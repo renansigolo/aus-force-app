@@ -17,15 +17,20 @@ const user = {
 }
 
 const navigation = [
-  { name: "Home", href: "#", icon: HomeIcon, current: true },
-  { name: "Weekly Jobs", href: "#", icon: CalendarIcon, current: false },
+  { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
+  {
+    name: "Weekly Jobs",
+    href: "/weekly-jobs",
+    icon: CalendarIcon,
+    current: false,
+  },
   {
     name: "Request Leave",
-    href: "#",
+    href: "/request-leave",
     icon: BriefcaseIcon,
     current: false,
   },
-  { name: "Settings", href: "#", icon: CogIcon, current: false },
+  { name: "Settings", href: "/settings", icon: CogIcon, current: false },
 ]
 
 type SidebarProps = {

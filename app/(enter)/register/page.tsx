@@ -1,7 +1,7 @@
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
 import Link from "next/link"
 
-export default function Register() {
+export default function RegisterPage() {
   return (
     <>
       <EnterHeader
