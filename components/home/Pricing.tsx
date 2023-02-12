@@ -1,4 +1,5 @@
 /* This example requires Tailwind CSS v3.0+ */
+import { classNames } from "@/lib/helpers"
 import { RadioGroup } from "@headlessui/react"
 import { CheckIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
@@ -67,10 +68,6 @@ const tiers = [
     mostPopular: false,
   },
 ]
-
-function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(" ")
-}
 
 export function Pricing() {
   const [frequency, setFrequency] = useState(frequencies[0])

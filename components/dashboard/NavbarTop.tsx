@@ -1,8 +1,10 @@
 import { Bars3Icon } from "@heroicons/react/20/solid"
 
-export function NavbarTop(props) {
-  const { setSidebarOpen } = props
+type NavbarTopProps = {
+  setSidebarOpen: (value: boolean) => void
+}
 
+export function NavbarTop({ setSidebarOpen }: NavbarTopProps) {
   return (
     <div className="sticky top-0 z-10 flex h-16 flex-shrink-0 border-b border-gray-200 bg-white">
       <button
