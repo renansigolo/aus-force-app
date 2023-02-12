@@ -1,6 +1,7 @@
 /* This example requires Tailwind CSS v3.0+ */
 import { RadioGroup } from "@headlessui/react"
 import { CheckIcon } from "@heroicons/react/20/solid"
+import Link from "next/link"
 import { useState } from "react"
 
 const frequencies = [
@@ -145,7 +146,7 @@ export function Pricing() {
                   {frequency.priceSuffix}
                 </span>
               </p>
-              <a
+              <Link
                 href={tier.href}
                 aria-describedby={tier.id}
                 className={classNames(
@@ -156,7 +157,7 @@ export function Pricing() {
                 )}
               >
                 Buy plan
-              </a>
+              </Link>
               <ul
                 role="list"
                 className="mt-8 space-y-3 text-sm leading-6 text-gray-600"

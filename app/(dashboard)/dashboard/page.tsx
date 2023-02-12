@@ -5,6 +5,7 @@ import {
   BuildingOfficeIcon,
   ClockIcon,
 } from "@heroicons/react/20/solid"
+import Link from "next/link"
 
 const cards = [
   { name: "Hours Worked", href: "#", icon: ClockIcon, amount: "48h" },
@@ -91,12 +92,12 @@ export default function DashboardPage() {
                 </div>
                 <div className="bg-gray-50 px-5 py-3">
                   <div className="text-sm">
-                    <a
+                    <Link
                       href={card.href}
                       className="font-medium text-indigo-700 hover:text-indigo-900"
                     >
                       View all
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

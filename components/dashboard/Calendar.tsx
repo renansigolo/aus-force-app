@@ -9,6 +9,7 @@ import {
   ClockIcon,
   EllipsisHorizontalIcon,
 } from "@heroicons/react/20/solid"
+import Link from "next/link"
 import { Fragment } from "react"
 
 const days = [
@@ -189,7 +190,7 @@ export function Calendar() {
                   <div className="py-1">
                     <Menu.Item>
                       {({ active }) => (
-                        <a
+                        <Link
                           href="#"
                           className={classNames(
                             active
@@ -199,12 +200,12 @@ export function Calendar() {
                           )}
                         >
                           Day view
-                        </a>
+                        </Link>
                       )}
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <a
+                        <Link
                           href="#"
                           className={classNames(
                             active
@@ -214,12 +215,12 @@ export function Calendar() {
                           )}
                         >
                           Week view
-                        </a>
+                        </Link>
                       )}
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <a
+                        <Link
                           href="#"
                           className={classNames(
                             active
@@ -229,12 +230,12 @@ export function Calendar() {
                           )}
                         >
                           Month view
-                        </a>
+                        </Link>
                       )}
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <a
+                        <Link
                           href="#"
                           className={classNames(
                             active
@@ -244,7 +245,7 @@ export function Calendar() {
                           )}
                         >
                           Year view
-                        </a>
+                        </Link>
                       )}
                     </Menu.Item>
                   </div>
@@ -271,7 +272,7 @@ export function Calendar() {
                 <div className="py-1">
                   <Menu.Item>
                     {({ active }) => (
-                      <a
+                      <Link
                         href="#"
                         className={classNames(
                           active
@@ -281,14 +282,14 @@ export function Calendar() {
                         )}
                       >
                         Create event
-                      </a>
+                      </Link>
                     )}
                   </Menu.Item>
                 </div>
                 <div className="py-1">
                   <Menu.Item>
                     {({ active }) => (
-                      <a
+                      <Link
                         href="#"
                         className={classNames(
                           active
@@ -298,14 +299,14 @@ export function Calendar() {
                         )}
                       >
                         Go to today
-                      </a>
+                      </Link>
                     )}
                   </Menu.Item>
                 </div>
                 <div className="py-1">
                   <Menu.Item>
                     {({ active }) => (
-                      <a
+                      <Link
                         href="#"
                         className={classNames(
                           active
@@ -315,12 +316,12 @@ export function Calendar() {
                         )}
                       >
                         Day view
-                      </a>
+                      </Link>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
-                      <a
+                      <Link
                         href="#"
                         className={classNames(
                           active
@@ -330,12 +331,12 @@ export function Calendar() {
                         )}
                       >
                         Week view
-                      </a>
+                      </Link>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
-                      <a
+                      <Link
                         href="#"
                         className={classNames(
                           active
@@ -345,12 +346,12 @@ export function Calendar() {
                         )}
                       >
                         Month view
-                      </a>
+                      </Link>
                     )}
                   </Menu.Item>
                   <Menu.Item>
                     {({ active }) => (
-                      <a
+                      <Link
                         href="#"
                         className={classNames(
                           active
@@ -360,7 +361,7 @@ export function Calendar() {
                         )}
                       >
                         Year view
-                      </a>
+                      </Link>
                     )}
                   </Menu.Item>
                 </div>
@@ -417,7 +418,7 @@ export function Calendar() {
                   <ol className="mt-2">
                     {day.events.slice(0, 2).map((event) => (
                       <li key={event.id}>
-                        <a href={event.href} className="group flex">
+                        <Link href={event.href} className="group flex">
                           <p className="flex-auto truncate font-medium text-gray-900 group-hover:text-indigo-600">
                             {event.name}
                           </p>
@@ -427,7 +428,7 @@ export function Calendar() {
                           >
                             {event.time}
                           </time>
-                        </a>
+                        </Link>
                       </li>
                     ))}
                     {day.events.length > 2 && (
@@ -510,12 +511,12 @@ export function Calendar() {
                     {event.time}
                   </time>
                 </div>
-                <a
+                <Link
                   href={event.href}
                   className="ml-6 flex-none self-center rounded-md border border-gray-300 bg-white py-2 px-3 font-semibold text-gray-700 opacity-0 shadow-sm hover:bg-gray-50 focus:opacity-100 group-hover:opacity-100"
                 >
                   Edit<span className="sr-only">, {event.name}</span>
-                </a>
+                </Link>
               </li>
             ))}
           </ol>
