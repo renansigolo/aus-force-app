@@ -1,5 +1,6 @@
 "use client"
 
+import { Overview } from "@/app/dashboard/Overview"
 import {
   BanknotesIcon,
   BuildingOfficeIcon,
@@ -11,6 +12,10 @@ const cards = [
   { name: "Hours Worked", href: "#", icon: ClockIcon, amount: "48h" },
   { name: "Week Payment", href: "#", icon: BanknotesIcon, amount: "$4.800,00" },
 ]
+
+export const metadata = {
+  title: "About",
+}
 
 export default function DashboardPage() {
   return (
@@ -56,13 +61,16 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      <div className="mt-8">
+      <section className="mt-8">
         <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-          <h2 className="text-lg font-medium leading-6 text-gray-900">
-            Overview
-          </h2>
+          <Overview />
+        </div>
+      </section>
+
+      <section className="mt-8">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <h2 className="heading-3">Weekly Activity</h2>
           <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2">
-            {/* Card */}
             {cards.map((card) => (
               <div
                 key={card.name}
@@ -104,7 +112,7 @@ export default function DashboardPage() {
             ))}
           </div>
         </div>
-      </div>
+      </section>
     </section>
   )
 }

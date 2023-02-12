@@ -1,4 +1,4 @@
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
+import { SectionWrapper } from "@/app/dashboard/SectionWrapper"
 
 export default function RequestLeavePage() {
   return (

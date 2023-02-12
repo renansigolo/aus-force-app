@@ -1,7 +1,7 @@
 "use client"
 
-import { NavbarTop } from "@/components/dashboard/NavbarTop"
-import { Sidebar } from "@/components/dashboard/Sidebar"
+import { NavbarTop } from "@/app/dashboard/NavbarTop"
+import { Sidebar } from "@/app/dashboard/Sidebar"
 import { ReactNode, useState } from "react"
 
 export default function DashboardLayout({ children }: { children: ReactNode }) {

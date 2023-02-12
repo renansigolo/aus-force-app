@@ -17,16 +17,16 @@ const user = {
 }
 
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: false },
+  { name: "Home", href: "/dashboard", icon: HomeIcon, current: false },
   {
     name: "Weekly Jobs",
-    href: "/weekly-jobs",
+    href: "/dashboard/weekly-jobs",
     icon: CalendarIcon,
     current: false,
   },
   {
     name: "Request Leave",
-    href: "/request-leave",
+    href: "/dashboard/request-leave",
     icon: BriefcaseIcon,
     current: false,
   },
@@ -127,7 +127,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                 </div>
                 <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
                   <Link
-                    href="/account-details"
+                    href="/dashboard/account-details"
                     className="group block flex-shrink-0"
                   >
                     <div className="flex items-center">
@@ -195,7 +195,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
           <div className="block w-full flex-shrink-0">
             <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
               <Link
-                href="/account-details"
+                href="/dashboard/account-details"
                 className="group block w-full flex-shrink-0"
               >
                 <div className="flex items-center">
