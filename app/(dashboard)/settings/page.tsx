@@ -1,5 +1,6 @@
 "use client"
 
+import { Heading } from "@/components/dashboard/Heading"
 import { classNames } from "@/lib/helpers"
 import { Switch } from "@headlessui/react"
 import { useState } from "react"
@@ -12,11 +13,7 @@ export default function SettingsPage() {
   return (
     <section className="flex-1">
       <div className="relative mx-auto max-w-4xl md:px-8 xl:px-0 pt-10 pb-16">
-        <div className="px-4 sm:px-6 md:px-0">
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-            Settings
-          </h1>
-        </div>
+        <Heading title="Settings" />
         <div className="px-4 sm:px-6 md:px-0">
           <div className="py-6">
             {/* Description list with inline editing */}
@@ -35,7 +32,7 @@ export default function SettingsPage() {
                   <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
                     <dt className="text-sm font-medium text-gray-500">Name</dt>
                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                      <span className="flex-grow">Chelsea Hagon</span>
+                      <span className="flex-grow">Lindsay Watson</span>
                       <span className="ml-4 flex-shrink-0">
                         <button
                           type="button"
@@ -52,7 +49,7 @@ export default function SettingsPage() {
                       <span className="flex-grow">
                         <img
                           className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          src="https://images.unsplash.com/photo-1507101105822-7472b28e22ac?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
                           alt=""
                         />
                       </span>
@@ -79,7 +76,7 @@ export default function SettingsPage() {
                     <dt className="text-sm font-medium text-gray-500">Email</dt>
                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                       <span className="flex-grow">
-                        chelsea.hagon@example.com
+                        lindsay.watson@example.com
                       </span>
                       <span className="ml-4 flex-shrink-0">
                         <button
@@ -96,7 +93,7 @@ export default function SettingsPage() {
                       Job title
                     </dt>
                     <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                      <span className="flex-grow">Human Resources Manager</span>
+                      <span className="flex-grow">Compliance Manager</span>
                       <span className="ml-4 flex-shrink-0">
                         <button
                           type="button"

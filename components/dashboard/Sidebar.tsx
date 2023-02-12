@@ -10,14 +10,14 @@ import {
 import { Fragment } from "react"
 
 const user = {
-  name: "Tom Cook",
-  company: "Apple Inc.",
+  name: "Lindsay Watson",
+  company: "Duke Marketing Inc.",
   imageUrl:
-    "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+    "https://images.unsplash.com/photo-1507101105822-7472b28e22ac?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
 }
 
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: true },
+  { name: "Dashboard", href: "/dashboard", icon: HomeIcon, current: false },
   {
     name: "Weekly Jobs",
     href: "/weekly-jobs",
@@ -133,7 +133,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                         <img
                           className="inline-block h-10 w-10 rounded-full"
                           src={user.imageUrl}
-                          alt=""
+                          alt="User Profile Image"
                         />
                       </div>
                       <div className="ml-3">

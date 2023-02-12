@@ -1,7 +1,9 @@
+import { Heading } from "@/components/dashboard/Heading"
+
 export default function WeeklyJobsPage() {
   return (
     <>
-      <h1>WeeklyJobs</h1>
+      <Heading title="Weekly Jobs" />
     </>
   )
 }

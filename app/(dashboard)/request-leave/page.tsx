@@ -1,7 +1,9 @@
+import { Heading } from "@/components/dashboard/Heading"
+
 export default function RequestLeavePage() {
   return (
     <>
-      <h1>Request Leave Page</h1>
+      <Heading title="Request Leave" />
     </>
   )
 }
