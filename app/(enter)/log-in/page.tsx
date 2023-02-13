@@ -18,7 +18,6 @@ export default function LogInPage() {
       .then((userCredential) => {
         // router.push("/dashboard")
         toast.success(`Welcome back, ${userCredential.user.email}`)
-        console.log("🚀 ~ handleLogIn ~ userCredential", userCredential)
       })
       .catch((error: FirebaseError) => toast.error(error.message))
   }
