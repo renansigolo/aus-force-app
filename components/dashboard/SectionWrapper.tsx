@@ -1,8 +1,7 @@
 import { Container } from "@/components/Container"
-import { ReactNode } from "react"
 
 type SectionWrapperProps = {
-  children: ReactNode
+  children: React.ReactNode
 }
 export function SectionWrapper({ children }: SectionWrapperProps) {
   return (

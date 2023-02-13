@@ -2,6 +2,14 @@
 
 import { Toaster } from "react-hot-toast"
 
-export function Providers() {
-  return <Toaster position="top-right" reverseOrder={true} />
+type ProvidersProps = {
+  children: React.ReactNode
+}
+export function Providers({ children }: ProvidersProps) {
+  return (
+    <>
+      {children}
+      <Toaster position="top-right" reverseOrder={true} />
+    </>
+  )
 }

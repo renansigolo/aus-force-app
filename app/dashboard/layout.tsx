@@ -2,9 +2,12 @@
 
 import { NavbarTop } from "@/components/dashboard/NavbarTop"
 import { Sidebar } from "@/components/dashboard/Sidebar"
-import { ReactNode, useState } from "react"
+import { useState } from "react"
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
+type DashboardLayoutProps = {
+  children: React.ReactNode
+}
+export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
