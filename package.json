@@ -9,7 +9,7 @@
     "dev": "next dev",
     "format:check": "prettier --check '**/*' --ignore-unknown",
     "format": "prettier --write '**/*' --ignore-unknown",
-    "lint": "eslint .",
+    "lint": "next lint",
     "prepare": "husky install",
     "start": "next start",
     "test": "npm run format && npm run lint",

@@ -19,8 +19,8 @@ export function Navbar() {
             </div>
           </div>
           <div className="flex items-center sm:ml-6">
-            <Link href="/sign-in" className="btn">
-              Sign In
+            <Link href="/log-in" className="btn">
+              Log In
             </Link>
           </div>
         </div>

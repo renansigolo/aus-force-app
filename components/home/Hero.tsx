@@ -14,7 +14,7 @@ export function Hero() {
           cupidatat commodo. Elit sunt amet fugiat veniam occaecat fugiat
           aliqua.
         </p>
-        <Link href="/sign-in" className="btn btn-primary btn-xl">
+        <Link href="/log-in" className="btn btn-primary btn-xl">
           Get Started
         </Link>
       </div>

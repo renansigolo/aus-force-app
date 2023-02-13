@@ -1,15 +1,40 @@
-import { EnterHeader } from "@/app/(enter)/EnterHeader"
-import Link from "next/link"
+"use client"
 
-export default function RegisterPage() {
+import { EnterHeader } from "@/app/(enter)/EnterHeader"
+import { auth } from "@/lib/firebase"
+import { FirebaseError } from "firebase/app"
+import { createUserWithEmailAndPassword } from "firebase/auth"
+import Link from "next/link"
+import { toast } from "react-hot-toast"
+
+export default function SignUpPage() {
+  const handleSignUp = async (e: any) => {
+    e.preventDefault()
+    const email = "renan.sigolo@gmail.com",
+      password = "Lalaldhaus@13423149&#$"
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Redirect User
+        toast.success(
+          `Account created successfully, welcome ${userCredential.user.email}`
+        )
+      })
+      .catch((error: FirebaseError) => toast.error(error.message))
+  }
+
   return (
     <>
       <EnterHeader
-        title="Register your account"
-        description="Enter your details below"
+        title="Sign Up"
+        description="Enter your details below to sign-up for a new account"
       />
-      <form className="my-12 space-y-8 divide-y divide-gray-200">
+      <form
+        className="my-12 space-y-8 divide-y divide-gray-200"
+        onSubmit={handleSignUp}
+      >
         <div className="space-y-8 divide-y divide-gray-200">
+          {/* Profile Details */}
           <div>
             <div>
               <h3 className="text-lg font-medium leading-6 text-gray-900">
@@ -85,24 +110,6 @@ export default function RegisterPage() {
                 </div>
               </div>
 
-              <div className="sm:col-span-6">
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Email address
-                </label>
-                <div className="mt-1">
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-                </div>
-              </div>
-
               <div className="sm:col-span-3">
                 <label
                   htmlFor="tel"
@@ -141,6 +148,7 @@ export default function RegisterPage() {
             </div>
           </div>
 
+          {/* Business Information */}
           <div className="pt-8">
             <div>
               <h3 className="text-lg font-medium leading-6 text-gray-900">
@@ -314,15 +322,66 @@ export default function RegisterPage() {
               </div>
             </div>
           </div>
+
+          {/* Account Details */}
+          <div>
+            <div className="pt-8">
+              <h3 className="text-lg font-medium leading-6 text-gray-900">
+                Account Details
+              </h3>
+              <p className="mt-1 text-sm text-gray-500">
+                You&apos;ll use this details to login to your account.
+              </p>
+            </div>
+
+            <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+              <div className="sm:col-span-6">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Email address
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    autoComplete="email"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+
+              <div className="sm:col-span-6">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Password
+                </label>
+                <div className="mt-1">
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    autoComplete="password"
+                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div className="pt-5">
           <div className="flex justify-end">
+            <button className="btn btn-primary">Register with email</button>
             <Link
               href="/dashboard"
               className="ml-3 inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
             >
-              Register
+              Go to Dashboard
             </Link>
           </div>
         </div>

@@ -5,7 +5,7 @@ import Link from "next/link"
 type EnterHeaderProps = {
   title: string
   description: string
-  page?: "sign-in" | "register" | "forgot-password"
+  page?: "log-in" | "register" | "forgot-password"
 }
 
 export function EnterHeader({ title, description, page }: EnterHeaderProps) {
@@ -23,9 +23,9 @@ export function EnterHeader({ title, description, page }: EnterHeaderProps) {
         <p className="mt-2 text-center text-sm text-gray-600">
           {description}
 
-          {page === "sign-in" && (
+          {page === "log-in" && (
             <Link
-              href="/register"
+              href="/sign-up"
               className="font-medium text-indigo-600 hover:text-indigo-500"
             >
               register now

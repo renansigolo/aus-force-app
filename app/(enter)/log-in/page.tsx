@@ -1,19 +1,38 @@
 "use client"
 
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
+import { auth } from "@/lib/firebase"
+import { FirebaseError } from "firebase/app"
+import { signInWithEmailAndPassword } from "firebase/auth"
 import Link from "next/link"
+import { FormEventHandler } from "react"
+import toast from "react-hot-toast"
 
-export default function SignInPage() {
+export default function LogInPage() {
+  const handleLogIn = (e: FormEventHandler<HTMLFormElement> | any) => {
+    e.preventDefault()
+    const email = "renan.sigolo@gmail.com",
+      password = "Lalaldhaus@13423149&#$"
+
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // router.push("/dashboard")
+        toast.success(`Welcome back, ${userCredential.user.email}`)
+        console.log("🚀 ~ handleLogIn ~ userCredential", userCredential)
+      })
+      .catch((error: FirebaseError) => toast.error(error.message))
+  }
+
   return (
     <div className="flex min-h-full flex-col justify-center">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <EnterHeader
-          title="Sign in to your account"
+          title="Log in to your account"
           description="Or "
-          page="sign-in"
+          page="log-in"
         />
 
-        <form className="space-y-6" action="#" method="POST">
+        <form className="space-y-6" onSubmit={handleLogIn}>
           <div>
             <label
               htmlFor="email"
@@ -64,11 +83,15 @@ export default function SignInPage() {
           </div>
 
           <div>
+            <button className="btn btn-primary flex w-full justify-center text-center">
+              Log in
+            </button>
+
             <Link
               href="/dashboard"
-              className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+              className="btn btn-primary mt-2 flex w-full justify-center text-center"
             >
-              Sign in
+              Dashboard
             </Link>
           </div>
         </form>
