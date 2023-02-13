@@ -1,4 +1,4 @@
-import { SectionWrapper } from "@/app/dashboard/SectionWrapper"
+import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 
 const personalDetails = [
   {

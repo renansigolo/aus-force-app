@@ -1,8 +1,10 @@
 import { classNames } from "@/lib/helpers"
 import { Dialog, Transition } from "@headlessui/react"
 import {
+  BanknotesIcon,
   BriefcaseIcon,
-  CalendarIcon,
+  CalendarDaysIcon,
+  ClockIcon,
   HomeIcon,
   XMarkIcon,
 } from "@heroicons/react/20/solid"
@@ -21,13 +23,25 @@ const navigation = [
   {
     name: "Weekly Jobs",
     href: "/dashboard/weekly-jobs",
-    icon: CalendarIcon,
+    icon: CalendarDaysIcon,
     current: false,
   },
   {
     name: "Request Leave",
     href: "/dashboard/request-leave",
     icon: BriefcaseIcon,
+    current: false,
+  },
+  {
+    name: "Timesheets",
+    href: "/dashboard/timesheets",
+    icon: ClockIcon,
+    current: false,
+  },
+  {
+    name: "Payments",
+    href: "/dashboard/payments",
+    icon: BanknotesIcon,
     current: false,
   },
 ]

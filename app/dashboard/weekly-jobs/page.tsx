@@ -1,5 +1,5 @@
-import { SectionWrapper } from "@/app/dashboard/SectionWrapper"
 import { Calendar } from "@/app/dashboard/weekly-jobs/Calendar"
+import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 
 export default function WeeklyJobsPage() {
   return (

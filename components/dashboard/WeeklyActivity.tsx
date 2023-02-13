@@ -2,10 +2,15 @@ import { BanknotesIcon, ClockIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
 
 const cards = [
-  { name: "Hours Worked", href: "/dashboard", icon: ClockIcon, amount: "48h" },
+  {
+    name: "Hours Worked",
+    href: "/dashboard/timesheets",
+    icon: ClockIcon,
+    amount: "48h",
+  },
   {
     name: "Week Payment",
-    href: "/dashboard",
+    href: "/dashboard/payments",
     icon: BanknotesIcon,
     amount: "$4.800,00",
   },

@@ -1,7 +1,7 @@
 "use client"
 
-import { Overview } from "@/app/dashboard/Overview"
-import { WeeklyActivity } from "@/app/dashboard/WeeklyActivity"
+import { Overview } from "@/components/dashboard/Overview"
+import { WeeklyActivity } from "@/components/dashboard/WeeklyActivity"
 import { BuildingOfficeIcon } from "@heroicons/react/20/solid"
 
 export default function DashboardPage() {
