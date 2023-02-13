@@ -1,24 +1,27 @@
+import {
+  BuildingOffice2Icon,
+  ClockIcon,
+  MapIcon,
+} from "@heroicons/react/24/outline"
+
 const stats = [
   {
-    name: "Ongoing Position",
-    stat: "@ ACR",
-    previousStat: "70,946",
+    name: "Today",
+    company: "ACR",
     address: "377/12 Church Avenue",
-    time: "7am to 3pm",
-  },
-  {
-    name: "Until 03 March",
-    stat: "@ CAPA",
-    previousStat: "56.14%",
-    address: "333 George St",
-    time: "8am to 4pm",
+    time: "7am - 3pm",
   },
   {
     name: "Tomorrow",
-    stat: "@ NSAC",
-    previousStat: "28.62%",
+    company: "NSAC",
     address: "6 Mackenzie St.",
-    time: "9am to 5pm",
+    time: "9am - 5pm",
+  },
+  {
+    name: "Until 03 March",
+    company: "CAPA",
+    address: "333 George St",
+    time: "8am - 4pm",
   },
 ]
 
@@ -29,32 +32,36 @@ export function Overview() {
       <dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
         {stats.map((item) => (
           <div key={item.name} className="px-4 py-5 sm:p-6">
-            <dt className="text-xl text-gray-900 text-center font-semibold mb-4">
+            <dt className="text-lg font-semibold leading-8 text-gray-900">
               {item.name}
             </dt>
-            <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-              <div className="flex items-baseline text-xl font-semibold text-indigo-600">
-                {item.stat}
-              </div>
-            </dd>
 
-            <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-              <div className="flex items-baseline">
-                <span className="text-lg font-semibold text-indigo-600 mr-1">
-                  Address:
-                </span>
+            <ul
+              role="list"
+              className="mt-8 space-y-3 text-sm leading-6 text-gray-600"
+            >
+              <li className="flex gap-x-3">
+                <BuildingOffice2Icon
+                  className="h-6 w-5 flex-none text-indigo-600"
+                  aria-hidden="true"
+                />
+                {item.company}
+              </li>
+              <li className="flex gap-x-3">
+                <MapIcon
+                  className="h-6 w-5 flex-none text-indigo-600"
+                  aria-hidden="true"
+                />
+                {item.address}
+              </li>
+              <li className="flex gap-x-3">
+                <ClockIcon
+                  className="h-6 w-5 flex-none text-indigo-600"
+                  aria-hidden="true"
+                />
                 {item.time}
-              </div>
-            </dd>
-
-            <dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
-              <div className="flex items-baseline">
-                <span className="text-lg font-semibold text-indigo-600 mr-1">
-                  Time:
-                </span>
-                {item.time}
-              </div>
-            </dd>
+              </li>
+            </ul>
           </div>
         ))}
       </dl>
