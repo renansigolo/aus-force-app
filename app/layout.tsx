@@ -1,4 +1,4 @@
-import { Providers } from "@/app/aProviders"
+import { Providers } from "@/app/Providers"
 import { Inter } from "@next/font/google"
 import "./globals.css"
 
