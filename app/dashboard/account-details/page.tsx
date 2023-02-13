@@ -1,4 +1,5 @@
-import { SectionWrapper } from "@/app/dashboard/SectionWrapper"
+import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
+import { PencilSquareIcon } from "@heroicons/react/24/outline"
 
 const personalDetails = [
   {
@@ -89,11 +90,8 @@ export default function ProfilePage() {
                     />
                   </span>
                   <span className="ml-4 flex flex-shrink-0 items-start space-x-4">
-                    <button
-                      type="button"
-                      className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                    >
-                      Update
+                    <button type="button">
+                      <PencilSquareIcon className="h-5 w-5 text-indigo-600 hover:text-indigo-500" />
                     </button>
                   </span>
                 </dd>
@@ -140,11 +138,8 @@ function FormRow({ title, value }: FormRowProps) {
       <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
         <span className="flex-grow">{value}</span>
         <span className="ml-4 flex-shrink-0">
-          <button
-            type="button"
-            className="rounded-md bg-white font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          >
-            Update
+          <button type="button">
+            <PencilSquareIcon className="h-5 w-5 text-indigo-600 hover:text-indigo-500" />
           </button>
         </span>
       </dd>

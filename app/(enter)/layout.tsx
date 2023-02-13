@@ -1,12 +1,11 @@
 import { Container } from "@/components/Container"
-import { ReactNode } from "react"
 
 type EnterLayoutProps = {
-  children: ReactNode
+  children: React.ReactNode
 }
 export default function EnterLayout({ children }: EnterLayoutProps) {
   return (
-    <div className="bg-zinc-50 min-h-full py-12 grid place-content-center">
+    <div className="grid min-h-full place-content-center bg-zinc-50 py-12">
       <Container>
         <div className="sm:mx-auto sm:w-full sm:max-w-2xl">
           <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">

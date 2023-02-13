@@ -1,5 +1,5 @@
+import { Providers } from "@/app/Providers"
 import { Inter } from "@next/font/google"
-import { ReactNode } from "react"
 import "./globals.css"
 
 const isProduction = process.env.NODE_ENV === "production"
@@ -63,15 +63,16 @@ export const metadata = {
 }
 
 type RootLayoutProps = {
-  children: ReactNode
+  children: React.ReactNode
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className={inter.className}>
       <head />
-      <body>{children}</body>
-      {/* <Providers /> */}
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   )
 }

@@ -1,10 +1,13 @@
 "use client"
 
-import { NavbarTop } from "@/app/dashboard/NavbarTop"
-import { Sidebar } from "@/app/dashboard/Sidebar"
-import { ReactNode, useState } from "react"
+import { NavbarTop } from "@/components/dashboard/NavbarTop"
+import { Sidebar } from "@/components/dashboard/Sidebar"
+import { useState } from "react"
 
-export default function DashboardLayout({ children }: { children: ReactNode }) {
+type DashboardLayoutProps = {
+  children: React.ReactNode
+}
+export default function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
