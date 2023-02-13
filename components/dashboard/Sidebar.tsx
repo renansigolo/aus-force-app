@@ -118,9 +118,9 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                           href={item.href}
                           className={classNames(
                             item.current
-                              ? "bg-indigo-50 border-indigo-600 text-indigo-600"
+                              ? "border-indigo-600 bg-indigo-50 text-indigo-600"
                               : "border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                            "group border-l-4 py-2 px-3 flex items-center text-base font-medium"
+                            "group flex items-center border-l-4 py-2 px-3 text-base font-medium"
                           )}
                           aria-current={item.current ? "page" : undefined}
                         >
@@ -129,7 +129,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                               item.current
                                 ? "text-indigo-500"
                                 : "text-gray-400 group-hover:text-gray-500",
-                              "mr-4 flex-shrink-0 h-6 w-6"
+                              "mr-4 h-6 w-6 flex-shrink-0"
                             )}
                             aria-hidden="true"
                           />
@@ -187,9 +187,9 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                   href={item.href}
                   className={classNames(
                     item.current
-                      ? "bg-indigo-50 border-indigo-600 text-indigo-600"
-                      : "border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50",
-                    "group border-l-4 py-2 px-3 flex items-center text-sm font-medium"
+                      ? "border-indigo-600 bg-indigo-50 text-indigo-600"
+                      : "border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900",
+                    "group flex items-center border-l-4 py-2 px-3 text-sm font-medium"
                   )}
                 >
                   <item.icon
@@ -197,7 +197,7 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                       item.current
                         ? "text-indigo-500"
                         : "text-gray-400 group-hover:text-gray-500",
-                      "mr-3 flex-shrink-0 h-6 w-6"
+                      "mr-3 h-6 w-6 flex-shrink-0"
                     )}
                     aria-hidden="true"
                   />

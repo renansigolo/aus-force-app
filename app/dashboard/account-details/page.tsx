@@ -91,7 +91,7 @@ export default function ProfilePage() {
                   </span>
                   <span className="ml-4 flex flex-shrink-0 items-start space-x-4">
                     <button type="button">
-                      <PencilSquareIcon className="text-indigo-600 hover:text-indigo-500 h-5 w-5" />
+                      <PencilSquareIcon className="h-5 w-5 text-indigo-600 hover:text-indigo-500" />
                     </button>
                   </span>
                 </dd>
@@ -139,7 +139,7 @@ function FormRow({ title, value }: FormRowProps) {
         <span className="flex-grow">{value}</span>
         <span className="ml-4 flex-shrink-0">
           <button type="button">
-            <PencilSquareIcon className="text-indigo-600 hover:text-indigo-500 h-5 w-5" />
+            <PencilSquareIcon className="h-5 w-5 text-indigo-600 hover:text-indigo-500" />
           </button>
         </span>
       </dd>

@@ -11,7 +11,7 @@ type EnterHeaderProps = {
 export function EnterHeader({ title, description, page }: EnterHeaderProps) {
   return (
     <>
-      <div className="sm:mx-auto sm:w-full pb-12">
+      <div className="pb-12 sm:mx-auto sm:w-full">
         <img
           className="mx-auto h-12 w-auto"
           src="/logo.svg"

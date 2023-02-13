@@ -8,7 +8,7 @@ export default function RegisterPage() {
         title="Register your account"
         description="Enter your details below"
       />
-      <form className="space-y-8 divide-y divide-gray-200 my-12">
+      <form className="my-12 space-y-8 divide-y divide-gray-200">
         <div className="space-y-8 divide-y divide-gray-200">
           <div>
             <div>

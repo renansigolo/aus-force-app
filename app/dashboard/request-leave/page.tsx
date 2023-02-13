@@ -26,11 +26,11 @@ export default function RequestLeavePage() {
             </select>
           </div>
 
-          <div className="mb-4 flex flex-col sm:flex-row gap-4">
+          <div className="mb-4 flex flex-col gap-4 sm:flex-row">
             <div className="w-full sm:w-1/2">
               <label
                 htmlFor="start-date"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="mb-1 block text-sm font-medium text-gray-700"
               >
                 Start Date
               </label>
@@ -46,7 +46,7 @@ export default function RequestLeavePage() {
             <div className="w-full sm:w-1/2">
               <label
                 htmlFor="end-date"
-                className="block text-sm font-medium text-gray-700 mb-1"
+                className="mb-1 block text-sm font-medium text-gray-700"
               >
                 End Date
               </label>
@@ -78,7 +78,7 @@ export default function RequestLeavePage() {
           </div>
         </div>
 
-        <div className="flex pt-4 flex-row-reverse w-full">
+        <div className="flex w-full flex-row-reverse pt-4">
           <button className="btn btn-primary">Submit</button>
         </div>
       </section>
