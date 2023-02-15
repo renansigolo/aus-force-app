@@ -1,22 +1,16 @@
-"use client"
+import { AuthWrapper } from "@/components/AuthWrapper"
 
-import { NavbarTop } from "@/components/dashboard/NavbarTop"
-import { Sidebar } from "@/components/dashboard/Sidebar"
-import { useState } from "react"
+export const dynamic = "force-dynamic"
 
 type DashboardLayoutProps = {
   children: React.ReactNode
 }
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
 
+export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <>
-      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-
-      <main className="flex flex-1 flex-col md:pl-64">
-        <NavbarTop setSidebarOpen={setSidebarOpen} />
-
+      <AuthWrapper />
+      <main className="min-h-almost-full flex flex-1 flex-col bg-gray-100 py-4">
         {children}
       </main>
     </>

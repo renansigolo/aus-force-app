@@ -1,3 +1,5 @@
+"use client"
+
 /* This example requires Tailwind CSS v3.0+ */
 import { classNames } from "@/lib/helpers"
 import { RadioGroup } from "@headlessui/react"

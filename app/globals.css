@@ -13,7 +13,25 @@ html {
 
 html,
 body {
-  @apply h-full;
+  /* @apply h-almost-full min-h-full; */
+  height: calc(100vh - 80px) !important;
+}
+
+main {
+  @apply mt-1;
+}
+
+/* Registration Form */
+.register-form-input {
+  @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
+}
+
+.min-h-almost-full {
+  min-height: calc(100vh - 84px);
+}
+
+.h-almost-full {
+  height: calc(100vh - 84px);
 }
 
 /* Headings */

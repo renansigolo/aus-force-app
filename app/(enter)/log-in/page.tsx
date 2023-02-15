@@ -5,25 +5,31 @@ import { auth } from "@/lib/firebase"
 import { FirebaseError } from "firebase/app"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { FormEventHandler } from "react"
 import toast from "react-hot-toast"
 
 export default function LogInPage() {
+  const router = useRouter()
+
   const handleLogIn = (e: FormEventHandler<HTMLFormElement> | any) => {
     e.preventDefault()
-    const email = "renan.sigolo@gmail.com",
-      password = "Lalaldhaus@13423149&#$"
 
-    signInWithEmailAndPassword(auth, email, password)
+    // Read the form data
+    const form = e.target as HTMLFormElement
+    const formData = new FormData(form)
+    const formJson = Object.fromEntries(formData.entries()) as any
+
+    signInWithEmailAndPassword(auth, formJson.email, formJson.password)
       .then((userCredential) => {
-        // router.push("/dashboard")
+        router.push("/dashboard")
         toast.success(`Welcome back, ${userCredential.user.email}`)
       })
       .catch((error: FirebaseError) => toast.error(error.message))
   }
 
   return (
-    <div className="flex min-h-full flex-col justify-center">
+    <div className="flex h-full flex-col justify-center">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <EnterHeader
           title="Log in to your account"
@@ -46,7 +52,7 @@ export default function LogInPage() {
                 type="email"
                 autoComplete="email"
                 className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                // required
+                required
               />
             </div>
           </div>
@@ -65,7 +71,7 @@ export default function LogInPage() {
                 type="password"
                 autoComplete="current-password"
                 className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                // required
+                required
               />
             </div>
           </div>
@@ -85,13 +91,6 @@ export default function LogInPage() {
             <button className="btn btn-primary flex w-full justify-center text-center">
               Log in
             </button>
-
-            <Link
-              href="/dashboard"
-              className="btn btn-primary mt-2 flex w-full justify-center text-center"
-            >
-              Dashboard
-            </Link>
           </div>
         </form>
       </div>

@@ -1,26 +1,46 @@
 "use client"
 
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
-import { auth } from "@/lib/firebase"
+import { auth, db } from "@/lib/firebase"
 import { FirebaseError } from "firebase/app"
 import { createUserWithEmailAndPassword } from "firebase/auth"
+import { addDoc, collection } from "firebase/firestore"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import { FormEvent } from "react"
 import { toast } from "react-hot-toast"
 
 export default function SignUpPage() {
-  const handleSignUp = async (e: any) => {
-    e.preventDefault()
-    const email = "renan.sigolo@gmail.com",
-      password = "Lalaldhaus@13423149&#$"
+  const router = useRouter()
 
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Redirect User
-        toast.success(
-          `Account created successfully, welcome ${userCredential.user.email}`
-        )
+  const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    // Read the form data
+    const form = e.target as HTMLFormElement
+    const formData = new FormData(form)
+    const formJson = Object.fromEntries(formData.entries()) as any
+    console.log("🚀 ~ handleSignUp ~ formJson", formJson)
+
+    await createUserWithEmailAndPassword(
+      auth,
+      formJson.email,
+      formJson.password
+    ).then(async (userCredential) => {
+      await addDoc(collection(db, "users"), {
+        ...formJson,
+        uid: userCredential.user.uid,
+        displayName: `${formJson.firstName} ${formJson.lastName}`,
       })
-      .catch((error: FirebaseError) => toast.error(error.message))
+        .then((res) => {
+          console.log("🚀 ~ awaitset ~ res", res)
+          router.push("/dashboard")
+          toast.success(
+            `Account created successfully, welcome ${userCredential.user.email}`
+          )
+        })
+        .catch((error: FirebaseError) => toast.error(error.message))
+    })
   }
 
   return (
@@ -63,10 +83,7 @@ export default function SignUpPage() {
                       <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                   </span>
-                  <button
-                    type="button"
-                    className="ml-5 rounded-md border border-gray-300 bg-white py-2 px-3 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  >
+                  <button type="button" className="btn ml-4">
                     Change
                   </button>
                 </div>
@@ -76,7 +93,7 @@ export default function SignUpPage() {
             <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
               <div className="sm:col-span-3">
                 <label
-                  htmlFor="first-name"
+                  htmlFor="firstName"
                   className="block text-sm font-medium text-gray-700"
                 >
                   First name
@@ -84,10 +101,11 @@ export default function SignUpPage() {
                 <div className="mt-1">
                   <input
                     type="text"
-                    name="first-name"
-                    id="first-name"
+                    name="firstName"
+                    id="firstName"
                     autoComplete="given-name"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="register-form-input"
+                    required
                   />
                 </div>
               </div>
@@ -101,11 +119,12 @@ export default function SignUpPage() {
                 </label>
                 <div className="mt-1">
                   <input
+                    required
                     type="text"
-                    name="last-name"
-                    id="last-name"
+                    name="lastName"
+                    id="lastName"
                     autoComplete="family-name"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="register-form-input"
                   />
                 </div>
               </div>
@@ -123,7 +142,7 @@ export default function SignUpPage() {
                     name="tel"
                     type="tel"
                     autoComplete="phone"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="register-form-input"
                   />
                 </div>
               </div>
@@ -140,8 +159,8 @@ export default function SignUpPage() {
                     id="dob"
                     name="dob"
                     type="date"
-                    autoComplete="date"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    autoComplete="bday"
+                    className="register-form-input"
                   />
                 </div>
               </div>
@@ -169,10 +188,10 @@ export default function SignUpPage() {
                 <div className="mt-1">
                   <input
                     type="text"
-                    name="legal-name"
-                    id="legal-name"
+                    name="legalName"
+                    id="legalName"
                     autoComplete="company"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="register-form-input"
                   />
                 </div>
               </div>
@@ -187,9 +206,10 @@ export default function SignUpPage() {
                 <div className="mt-1">
                   <input
                     type="text"
-                    name="trading-name"
-                    id="trading-name"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    name="tradingName"
+                    id="tradingName"
+                    autoComplete="organization"
+                    className="register-form-input"
                   />
                 </div>
               </div>
@@ -207,7 +227,7 @@ export default function SignUpPage() {
                     name="abn"
                     type="number"
                     autoComplete="abn"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="register-form-input"
                   />
                 </div>
               </div>
@@ -225,7 +245,7 @@ export default function SignUpPage() {
                     name="acn"
                     type="number"
                     autoComplete="acn"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="register-form-input"
                   />
                 </div>
               </div>
@@ -242,7 +262,7 @@ export default function SignUpPage() {
                     id="country"
                     name="country"
                     autoComplete="country-name"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="register-form-input"
                   >
                     <option>Australia</option>
                   </select>
@@ -259,10 +279,10 @@ export default function SignUpPage() {
                 <div className="mt-1">
                   <input
                     type="text"
-                    name="street-address"
-                    id="street-address"
+                    name="streetAddress"
+                    id="streetAddress"
                     autoComplete="street-address"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="register-form-input"
                   />
                 </div>
               </div>
@@ -280,7 +300,7 @@ export default function SignUpPage() {
                     name="city"
                     id="city"
                     autoComplete="address-level2"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="register-form-input"
                   />
                 </div>
               </div>
@@ -298,7 +318,7 @@ export default function SignUpPage() {
                     name="region"
                     id="region"
                     autoComplete="address-level1"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="register-form-input"
                   />
                 </div>
               </div>
@@ -316,7 +336,7 @@ export default function SignUpPage() {
                     name="postal-code"
                     id="postal-code"
                     autoComplete="postal-code"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="register-form-input"
                   />
                 </div>
               </div>
@@ -348,7 +368,8 @@ export default function SignUpPage() {
                     name="email"
                     type="email"
                     autoComplete="email"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="register-form-input"
+                    required
                   />
                 </div>
               </div>
@@ -366,7 +387,8 @@ export default function SignUpPage() {
                     name="password"
                     type="password"
                     autoComplete="password"
-                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="register-form-input"
+                    required
                   />
                 </div>
               </div>

@@ -20,7 +20,7 @@ export function WeeklyActivity() {
   return (
     <>
       <h2 className="heading-3">Weekly Activity</h2>
-      <div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2">
+      <div className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2">
         {cards.map((card) => (
           <div
             key={card.name}
