@@ -13,12 +13,7 @@ html {
 
 html,
 body {
-  /* @apply h-almost-full min-h-full; */
-  height: calc(100vh - 80px) !important;
-}
-
-main {
-  @apply mt-1;
+  @apply h-full;
 }
 
 /* Registration Form */

@@ -1,4 +1,3 @@
-import { Navbar } from "@/app/Navbar"
 import { Providers } from "@/app/Providers"
 import { Inter } from "@next/font/google"
 import "./globals.css"
@@ -72,7 +71,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" className={inter.className}>
       <head />
       <body>
-        <Navbar />
         <Providers>{children}</Providers>
       </body>
     </html>
