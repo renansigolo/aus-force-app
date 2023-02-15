@@ -1,7 +1,16 @@
-import { AuthWrapper } from "@/components/AuthWrapper"
-
-export const dynamic = "force-dynamic"
+import { Container } from "@/components/Container"
+import { Footer } from "@/components/Footer"
+import { Hero } from "@/components/home/Hero"
+import { Pricing } from "@/components/home/Pricing"
 
 export default function HomePage() {
-  return <AuthWrapper />
+  return (
+    <main>
+      <Container>
+        <Hero />
+        <Pricing />
+        <Footer />
+      </Container>
+    </main>
+  )
 }

@@ -4,15 +4,17 @@ import { auth } from "@/lib/firebase"
 import { useRouter } from "next/navigation"
 import { useAuthState } from "react-firebase-hooks/auth"
 
-export function AuthWrapper() {
+type AuthWrapperProps = {
+  children: React.ReactNode
+}
+export function AuthWrapper({ children }: AuthWrapperProps) {
   const [user] = useAuthState(auth)
   const router = useRouter()
 
-  if (user) {
-    router.push("/dashboard")
-  } else {
+  if (!user) {
     router.push("/log-in")
+    return null
   }
 
-  return <p>Authenticating, please wait...</p>
+  return <>{children}</>
 }
