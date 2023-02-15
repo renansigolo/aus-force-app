@@ -5,10 +5,12 @@ import { auth } from "@/lib/firebase"
 import { FirebaseError } from "firebase/app"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { FormEventHandler } from "react"
 import toast from "react-hot-toast"
 
 export default function LogInPage() {
+  const router = useRouter()
   const handleLogIn = (e: FormEventHandler<HTMLFormElement> | any) => {
     e.preventDefault()
     const email = "renan.sigolo@gmail.com",
@@ -16,7 +18,7 @@ export default function LogInPage() {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        // router.push("/dashboard")
+        router.push("/dashboard")
         toast.success(`Welcome back, ${userCredential.user.email}`)
       })
       .catch((error: FirebaseError) => toast.error(error.message))
@@ -85,13 +87,6 @@ export default function LogInPage() {
             <button className="btn btn-primary flex w-full justify-center text-center">
               Log in
             </button>
-
-            <Link
-              href="/dashboard"
-              className="btn btn-primary mt-2 flex w-full justify-center text-center"
-            >
-              Dashboard
-            </Link>
           </div>
         </form>
       </div>

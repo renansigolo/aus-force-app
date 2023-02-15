@@ -1,3 +1,4 @@
+import { auth } from "@/lib/firebase"
 import { classNames } from "@/lib/helpers"
 import { Dialog, Transition } from "@headlessui/react"
 import {
@@ -10,13 +11,7 @@ import {
 } from "@heroicons/react/20/solid"
 import Link from "next/link"
 import { Fragment } from "react"
-
-const user = {
-  name: "Lindsay Watson",
-  company: "Duke Marketing Inc.",
-  imageUrl:
-    "https://images.unsplash.com/photo-1507101105822-7472b28e22ac?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
-}
+import { useAuthState } from "react-firebase-hooks/auth"
 
 const navigation = [
   { name: "Home", href: "/dashboard", icon: HomeIcon, current: false },
@@ -52,6 +47,7 @@ type SidebarProps = {
 }
 
 export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
+  const [user] = useAuthState(auth)
   return (
     <>
       <Transition.Root show={sidebarOpen} as={Fragment}>
@@ -141,20 +137,23 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                 </div>
                 <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
                   <Link
-                    href="/dashboard/account-details"
+                    href="/dashboard/profile"
                     className="group block flex-shrink-0"
                   >
                     <div className="flex items-center">
                       <div>
                         <img
                           className="inline-block h-10 w-10 rounded-full"
-                          src={user.imageUrl}
+                          src={
+                            user?.photoURL ||
+                            "https://images.unsplash.com/photo-1507101105822-7472b28e22ac?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
+                          }
                           alt="User Profile Image"
                         />
                       </div>
                       <div className="ml-3">
                         <p className="text-base font-medium text-gray-700 group-hover:text-gray-900">
-                          {user.name}
+                          {user?.displayName}
                         </p>
                         <p className="text-sm font-medium text-gray-500 group-hover:text-gray-700">
                           View profile
@@ -204,32 +203,6 @@ export function Sidebar({ sidebarOpen, setSidebarOpen }: SidebarProps) {
                   {item.name}
                 </Link>
               ))}
-            </div>
-          </div>
-          <div className="block w-full flex-shrink-0">
-            <div className="flex flex-shrink-0 border-t border-gray-200 p-4">
-              <Link
-                href="/dashboard/account-details"
-                className="group block w-full flex-shrink-0"
-              >
-                <div className="flex items-center">
-                  <div>
-                    <img
-                      className="inline-block h-9 w-9 rounded-full"
-                      src={user.imageUrl}
-                      alt="User Profile Image"
-                    />
-                  </div>
-                  <div className="ml-3">
-                    <p className="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                      {user.name}
-                    </p>
-                    <p className="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-                      {user.company}
-                    </p>
-                  </div>
-                </div>
-              </Link>
             </div>
           </div>
         </nav>

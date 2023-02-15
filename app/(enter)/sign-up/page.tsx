@@ -5,9 +5,11 @@ import { auth } from "@/lib/firebase"
 import { FirebaseError } from "firebase/app"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { toast } from "react-hot-toast"
 
 export default function SignUpPage() {
+  const router = useRouter()
   const handleSignUp = async (e: any) => {
     e.preventDefault()
     const email = "renan.sigolo@gmail.com",
@@ -16,6 +18,7 @@ export default function SignUpPage() {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Redirect User
+        router.push("/dashboard")
         toast.success(
           `Account created successfully, welcome ${userCredential.user.email}`
         )
