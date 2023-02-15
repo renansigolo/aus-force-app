@@ -27,17 +27,17 @@ export const metadata = {
     index: isProduction,
     follow: isProduction,
   },
-  // appleWebApp: {
-  //   title: "AUS Force App",
-  //   statusBarStyle: "black-translucent",
-  //   startupImage: [
-  //     "/assets/startup/apple-touch-startup-image-768x1004.png",
-  //     {
-  //       url: "/assets/startup/apple-touch-startup-image-1536x2008.png",
-  //       media: "(device-width: 768px) and (device-height: 1024px)",
-  //     },
-  //   ],
-  // },
+  appleWebApp: {
+    title: "AUS Force App",
+    statusBarStyle: "black-translucent",
+    // startupImage: [
+    //   "/assets/startup/apple-touch-startup-image-768x1004.png",
+    //   {
+    //     url: "/assets/startup/apple-touch-startup-image-1536x2008.png",
+    //     media: "(device-width: 768px) and (device-height: 1024px)",
+    //   },
+    // ],
+  },
   openGraph: {
     title: "AUS Force App",
     siteName: "AUS Force App",
