@@ -20,7 +20,6 @@ export default function SignUpPage() {
     const form = e.target as HTMLFormElement
     const formData = new FormData(form)
     const formJson = Object.fromEntries(formData.entries()) as any
-    console.log("🚀 ~ handleSignUp ~ formJson", formJson)
 
     await createUserWithEmailAndPassword(
       auth,
@@ -32,8 +31,7 @@ export default function SignUpPage() {
         uid: userCredential.user.uid,
         displayName: `${formJson.firstName} ${formJson.lastName}`,
       })
-        .then((res) => {
-          console.log("🚀 ~ awaitset ~ res", res)
+        .then(() => {
           router.push("/dashboard")
           toast.success(
             `Account created successfully, welcome ${userCredential.user.email}`
@@ -41,11 +39,6 @@ export default function SignUpPage() {
         })
         .catch((error: FirebaseError) => toast.error(error.message))
     })
-  }
-
-  const uploadFile = async (e: any) => {
-    const file = Array.from(e.target.files)[0]
-    console.log("🚀 ~ uploadFile ~ file", file)
   }
 
   return (

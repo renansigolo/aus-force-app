@@ -6,7 +6,6 @@ import toast from "react-hot-toast"
 
 function handleSubmit(e: FormEvent<HTMLFormElement>) {
   e.preventDefault()
-  // setLoading(true)
 
   // Read the form data
   const form = e.target as HTMLFormElement
@@ -15,26 +14,6 @@ function handleSubmit(e: FormEvent<HTMLFormElement>) {
 
   // Show a success message notification
   toast.success(`Email sent to ${formJson.email}`)
-
-  // fetch(`/forgotPassword`, {
-  //   method: "post",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify(formJson),
-  // })
-  //   .then((res) => {
-  //     if (res.ok) {
-  //       form.reset()
-  //       // setSuccess(true)
-  //     } else {
-  //       throw new Error("Something went wrong")
-  //     }
-  //   })
-  //   .catch((err) => {
-  //     console.error(err)
-  //   })
-  //   .finally(() => {
-  //     // setLoading(false)
-  //   })
 }
 
 export default function ForgotPasswordPage() {
