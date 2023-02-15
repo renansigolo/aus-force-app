@@ -1,6 +1,5 @@
 "use client"
 
-import { mockIsAuth } from "@/lib/constants"
 import { auth } from "@/lib/firebase"
 import { classNames } from "@/lib/helpers"
 import { Menu, Popover, Transition } from "@headlessui/react"
@@ -87,7 +86,7 @@ export function Navbar() {
                   />
 
                   {/* Desktop - Authenticated Navigation Links */}
-                  {mockIsAuth && (
+                  {user && (
                     <nav
                       className="hidden pl-12 lg:flex lg:space-x-8"
                       aria-label="Global"
@@ -112,70 +111,77 @@ export function Navbar() {
                 </div>
 
                 {/* Mobile - Right Navbar */}
-                <div className="flex items-center lg:hidden">
-                  {/* Mobile menu button */}
-                  <Popover.Button className="-mx-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
-                    <span className="sr-only">Open menu</span>
-                    {open ? (
-                      <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
-                    ) : (
-                      <Bars3Icon className="block h-6 w-6" aria-hidden="true" />
-                    )}
-                  </Popover.Button>
-                </div>
-
-                {/* Desktop - Profile dropdown */}
-                {mockIsAuth && (
-                  <div className="hidden lg:flex lg:items-center lg:justify-end">
-                    <Menu as="div" className="relative ml-5 flex-shrink-0">
-                      <div>
-                        <Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                          <span className="sr-only">Open user menu</span>
-                          <img
-                            className="h-8 w-8 rounded-full"
-                            src={
-                              user?.photoURL ||
-                              "https://images.unsplash.com/photo-1507101105822-7472b28e22ac?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
-                            }
-                            alt=""
+                {user && (
+                  <>
+                    <div className="flex items-center lg:hidden">
+                      {/* Mobile menu button */}
+                      <Popover.Button className="-mx-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                        <span className="sr-only">Open menu</span>
+                        {open ? (
+                          <XMarkIcon
+                            className="block h-6 w-6"
+                            aria-hidden="true"
                           />
-                        </Menu.Button>
-                      </div>
-                      <Transition
-                        as={Fragment}
-                        enter="transition ease-out duration-100"
-                        enterFrom="transform opacity-0 scale-95"
-                        enterTo="transform opacity-100 scale-100"
-                        leave="transition ease-in duration-75"
-                        leaveFrom="transform opacity-100 scale-100"
-                        leaveTo="transform opacity-0 scale-95"
-                      >
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          {userNavigation.map((item) => (
-                            <Menu.Item key={item.name}>
-                              {({ active }) => (
-                                <Link
-                                  href={item.href}
-                                  className={classNames(
-                                    active ? "bg-gray-100" : "",
-                                    "block py-2 px-4 text-sm text-gray-700"
-                                  )}
-                                >
-                                  {item.name}
-                                </Link>
-                              )}
-                            </Menu.Item>
-                          ))}
-                          <button
-                            className="block w-full py-2 px-4 text-left text-sm text-gray-700 hover:bg-gray-100"
-                            onClick={signOutNow}
-                          >
-                            Logout
-                          </button>
-                        </Menu.Items>
-                      </Transition>
-                    </Menu>
-                  </div>
+                        ) : (
+                          <Bars3Icon
+                            className="block h-6 w-6"
+                            aria-hidden="true"
+                          />
+                        )}
+                      </Popover.Button>
+                    </div>
+
+                    <div className="hidden lg:flex lg:items-center lg:justify-end">
+                      <Menu as="div" className="relative ml-5 flex-shrink-0">
+                        <div>
+                          <Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            <span className="sr-only">Open user menu</span>
+                            <img
+                              className="h-8 w-8 rounded-full"
+                              src={
+                                user?.photoURL ||
+                                "/images/profile-placeholder.png"
+                              }
+                              alt="Profile Image"
+                            />
+                          </Menu.Button>
+                        </div>
+                        <Transition
+                          as={Fragment}
+                          enter="transition ease-out duration-100"
+                          enterFrom="transform opacity-0 scale-95"
+                          enterTo="transform opacity-100 scale-100"
+                          leave="transition ease-in duration-75"
+                          leaveFrom="transform opacity-100 scale-100"
+                          leaveTo="transform opacity-0 scale-95"
+                        >
+                          <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            {userNavigation.map((item) => (
+                              <Menu.Item key={item.name}>
+                                {({ active }) => (
+                                  <Link
+                                    href={item.href}
+                                    className={classNames(
+                                      active ? "bg-gray-100" : "",
+                                      "block py-2 px-4 text-sm text-gray-700"
+                                    )}
+                                  >
+                                    {item.name}
+                                  </Link>
+                                )}
+                              </Menu.Item>
+                            ))}
+                            <button
+                              className="block w-full py-2 px-4 text-left text-sm text-gray-700 hover:bg-gray-100"
+                              onClick={signOutNow}
+                            >
+                              Logout
+                            </button>
+                          </Menu.Items>
+                        </Transition>
+                      </Menu>
+                    </div>
+                  </>
                 )}
               </div>
             </div>
@@ -205,7 +211,7 @@ export function Navbar() {
                   <div className="flex-shrink-0">
                     <img
                       className="h-10 w-10 rounded-full"
-                      src={user?.photoURL || "/images/profile-placeholder"}
+                      src={user?.photoURL || "/images/profile-placeholder.png"}
                       alt="Profile Image"
                     />
                   </div>
