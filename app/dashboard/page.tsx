@@ -1,5 +1,3 @@
-"use client"
-
 import { Container } from "@/components/Container"
 import { Overview } from "@/components/dashboard/Overview"
 import { WeeklyActivity } from "@/components/dashboard/WeeklyActivity"
