@@ -7,22 +7,18 @@ import { WelcomePanel } from "@/components/dashboard/WelcomePanel"
 
 export default function DashboardPage() {
   return (
-    <section className="flex-1 pb-8">
-      <Container>
+    <Container>
+      <section className="flex-1 pb-8">
         <WelcomePanel />
-      </Container>
 
-      <section className="mt-8">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <section className="mt-8">
           <Overview />
-        </div>
-      </section>
+        </section>
 
-      <section className="mt-8">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+        <section className="mt-8">
           <WeeklyActivity />
-        </div>
+        </section>
       </section>
-    </section>
+    </Container>
   )
 }

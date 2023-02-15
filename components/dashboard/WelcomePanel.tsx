@@ -1,4 +1,5 @@
 import { mockUser } from "@/lib/constants"
+import Link from "next/link"
 
 const stats = [
   { label: "Vacation days left", value: 12 },
@@ -36,12 +37,12 @@ export function WelcomePanel() {
               </div>
             </div>
             <div className="mt-5 flex justify-center sm:mt-0">
-              <a
+              <Link
                 href="#"
                 className="flex items-center justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50"
               >
                 View profile
-              </a>
+              </Link>
             </div>
           </div>
         </div>

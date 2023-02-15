@@ -7,4 +7,4 @@ export const mockUser = {
   company: "Duke Marketing Inc.",
 }
 
-export const mockIsAuth = false
+export const mockIsAuth = true

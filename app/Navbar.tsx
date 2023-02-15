@@ -48,9 +48,9 @@ const navigation = [
 ]
 
 const userNavigation = [
-  { name: "Your Profile", href: "#" },
+  { name: "Your Profile", href: "/dashboard/profile" },
   { name: "Settings", href: "#" },
-  { name: "Sign out", href: "#" },
+  { name: "Sign out", href: "/log-in" },
 ]
 
 export function Navbar() {
@@ -75,13 +75,11 @@ export function Navbar() {
                 {/* Left Desktop Navbar */}
                 <div className="flex flex-shrink-0 items-center">
                   {/* Logo Image */}
-                  <Link href="#">
-                    <img
-                      className="block h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                      alt="Your Company"
-                    />
-                  </Link>
+                  <img
+                    className="block h-8 w-auto"
+                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    alt="Your Company"
+                  />
 
                   {/* Desktop - Authenticated Navigation Links */}
                   {mockIsAuth && (
@@ -90,7 +88,7 @@ export function Navbar() {
                       aria-label="Global"
                     >
                       {navigation.map((item) => (
-                        <a
+                        <Link
                           key={item.name}
                           href={item.href}
                           className={classNames(
@@ -102,13 +100,13 @@ export function Navbar() {
                           aria-current={item.current ? "page" : undefined}
                         >
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </nav>
                   )}
                 </div>
 
-                {/* Right Desktop Navbar */}
+                {/* Mobile - Right Navbar */}
                 <div className="flex items-center lg:hidden">
                   {/* Mobile menu button */}
                   <Popover.Button className="-mx-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
@@ -121,51 +119,53 @@ export function Navbar() {
                   </Popover.Button>
                 </div>
 
-                {/* Profile dropdown */}
-                <div className="hidden lg:flex lg:items-center lg:justify-end">
-                  <Menu as="div" className="relative ml-5 flex-shrink-0">
-                    <div>
-                      <Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                        <span className="sr-only">Open user menu</span>
-                        <img
-                          className="h-8 w-8 rounded-full"
-                          src={
-                            user?.photoURL ||
-                            "https://images.unsplash.com/photo-1507101105822-7472b28e22ac?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
-                          }
-                          alt=""
-                        />
-                      </Menu.Button>
-                    </div>
-                    <Transition
-                      as={Fragment}
-                      enter="transition ease-out duration-100"
-                      enterFrom="transform opacity-0 scale-95"
-                      enterTo="transform opacity-100 scale-100"
-                      leave="transition ease-in duration-75"
-                      leaveFrom="transform opacity-100 scale-100"
-                      leaveTo="transform opacity-0 scale-95"
-                    >
-                      <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                        {userNavigation.map((item) => (
-                          <Menu.Item key={item.name}>
-                            {({ active }) => (
-                              <a
-                                href={item.href}
-                                className={classNames(
-                                  active ? "bg-gray-100" : "",
-                                  "block py-2 px-4 text-sm text-gray-700"
-                                )}
-                              >
-                                {item.name}
-                              </a>
-                            )}
-                          </Menu.Item>
-                        ))}
-                      </Menu.Items>
-                    </Transition>
-                  </Menu>
-                </div>
+                {/* Desktop - Profile dropdown */}
+                {mockIsAuth && (
+                  <div className="hidden lg:flex lg:items-center lg:justify-end">
+                    <Menu as="div" className="relative ml-5 flex-shrink-0">
+                      <div>
+                        <Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                          <span className="sr-only">Open user menu</span>
+                          <img
+                            className="h-8 w-8 rounded-full"
+                            src={
+                              user?.photoURL ||
+                              "https://images.unsplash.com/photo-1507101105822-7472b28e22ac?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
+                            }
+                            alt=""
+                          />
+                        </Menu.Button>
+                      </div>
+                      <Transition
+                        as={Fragment}
+                        enter="transition ease-out duration-100"
+                        enterFrom="transform opacity-0 scale-95"
+                        enterTo="transform opacity-100 scale-100"
+                        leave="transition ease-in duration-75"
+                        leaveFrom="transform opacity-100 scale-100"
+                        leaveTo="transform opacity-0 scale-95"
+                      >
+                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                          {userNavigation.map((item) => (
+                            <Menu.Item key={item.name}>
+                              {({ active }) => (
+                                <Link
+                                  href={item.href}
+                                  className={classNames(
+                                    active ? "bg-gray-100" : "",
+                                    "block py-2 px-4 text-sm text-gray-700"
+                                  )}
+                                >
+                                  {item.name}
+                                </Link>
+                              )}
+                            </Menu.Item>
+                          ))}
+                        </Menu.Items>
+                      </Transition>
+                    </Menu>
+                  </div>
+                )}
               </div>
             </div>
 
@@ -173,7 +173,7 @@ export function Navbar() {
             <Popover.Panel as="nav" className="lg:hidden" aria-label="Global">
               <div className="mx-auto max-w-3xl space-y-1 px-2 pt-2 pb-3 sm:px-4">
                 {navigation.map((item) => (
-                  <a
+                  <Link
                     key={item.name}
                     href={item.href}
                     aria-current={item.current ? "page" : undefined}
@@ -185,7 +185,7 @@ export function Navbar() {
                     )}
                   >
                     {item.name}
-                  </a>
+                  </Link>
                 ))}
               </div>
 
@@ -219,13 +219,13 @@ export function Navbar() {
                 </div>
                 <div className="mx-auto mt-3 max-w-3xl space-y-1 px-2 sm:px-4">
                   {userNavigation.map((item) => (
-                    <a
+                    <Link
                       key={item.name}
                       href={item.href}
                       className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
                     >
                       {item.name}
-                    </a>
+                    </Link>
                   ))}
                 </div>
               </div>

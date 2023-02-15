@@ -3,7 +3,7 @@ type DashboardLayoutProps = {
 }
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <main className="flex h-full flex-1 flex-col bg-gray-100 py-4">
+    <main className="min-h-almost-full flex flex-1 flex-col bg-gray-100 py-4">
       {children}
     </main>
   )
