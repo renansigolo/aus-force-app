@@ -14,7 +14,9 @@ import {
   XMarkIcon,
 } from "@heroicons/react/20/solid"
 import { BellIcon } from "@heroicons/react/24/outline"
+import { signOut } from "firebase/auth"
 import Link from "next/link"
+import router from "next/router"
 import { Fragment } from "react"
 import { useAuthState } from "react-firebase-hooks/auth"
 
@@ -49,12 +51,15 @@ const navigation = [
 const userNavigation = [
   { name: "Your Profile", href: "/dashboard/profile" },
   { name: "Settings", href: "#" },
-  { name: "Sign out", href: "/log-in" },
 ]
 
 export function Navbar() {
   const [user] = useAuthState(auth)
-  console.log("🚀 ~ Navbar ~ user", user)
+
+  const signOutNow = () => {
+    signOut(auth)
+    router.reload()
+  }
 
   return (
     <nav className="bg-white shadow">
@@ -161,6 +166,12 @@ export function Navbar() {
                               )}
                             </Menu.Item>
                           ))}
+                          <button
+                            className="block w-full py-2 px-4 text-left text-sm text-gray-700 hover:bg-gray-100"
+                            onClick={signOutNow}
+                          >
+                            Logout
+                          </button>
                         </Menu.Items>
                       </Transition>
                     </Menu>

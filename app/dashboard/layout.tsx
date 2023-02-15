@@ -8,10 +8,11 @@ type DashboardLayoutProps = {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <AuthWrapper>
+    <>
+      <AuthWrapper />
       <main className="min-h-almost-full flex flex-1 flex-col bg-gray-100 py-4">
         {children}
       </main>
-    </AuthWrapper>
+    </>
   )
 }
