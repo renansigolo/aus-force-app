@@ -1,9 +1,5 @@
-"use client"
+import { AuthWrapper } from "@/components/AuthWrapper"
 
 export default function HomePage() {
-  return (
-    <>
-      <h1>Home</h1>
-    </>
-  )
+  return <AuthWrapper />
 }
