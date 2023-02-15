@@ -1,18 +1,10 @@
-"use client"
-
-import { Sidebar } from "@/components/dashboard/Sidebar"
-import { useState } from "react"
-
 type DashboardLayoutProps = {
   children: React.ReactNode
 }
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-
   return (
-    <>
-      <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
-      <main className="flex flex-1 flex-col md:pl-64">{children}</main>
-    </>
+    <main className="flex h-full flex-1 flex-col bg-gray-100 py-4">
+      {children}
+    </main>
   )
 }

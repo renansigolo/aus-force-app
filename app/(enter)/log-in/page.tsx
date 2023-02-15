@@ -11,6 +11,7 @@ import toast from "react-hot-toast"
 
 export default function LogInPage() {
   const router = useRouter()
+
   const handleLogIn = (e: FormEventHandler<HTMLFormElement> | any) => {
     e.preventDefault()
     const email = "renan.sigolo@gmail.com",
@@ -25,7 +26,7 @@ export default function LogInPage() {
   }
 
   return (
-    <div className="flex min-h-full flex-col justify-center">
+    <div className="flex h-full flex-col justify-center">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <EnterHeader
           title="Log in to your account"

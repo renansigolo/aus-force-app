@@ -1,5 +1,5 @@
+import { Navbar } from "@/app/Navbar"
 import { Providers } from "@/app/Providers"
-import { Navbar } from "@/components/home/Navbar"
 import { Inter } from "@next/font/google"
 import "./globals.css"
 
