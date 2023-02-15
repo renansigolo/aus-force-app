@@ -5,12 +5,10 @@ import { Pricing } from "@/components/home/Pricing"
 
 export default function HomePage() {
   return (
-    <main>
-      <Container>
-        <Hero />
-        <Pricing />
-        <Footer />
-      </Container>
-    </main>
+    <Container>
+      <Hero />
+      <Pricing />
+      <Footer />
+    </Container>
   )
 }

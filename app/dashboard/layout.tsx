@@ -1,6 +1,5 @@
-import { AuthWrapper } from "@/components/AuthWrapper"
-
-export const dynamic = "force-dynamic"
+import { AuthCheck } from "@/components/AuthCheck"
+import { Navbar } from "@/components/dashboard/Navbar"
 
 type DashboardLayoutProps = {
   children: React.ReactNode
@@ -8,11 +7,11 @@ type DashboardLayoutProps = {
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
-    <>
-      <AuthWrapper />
+    <AuthCheck>
+      <Navbar />
       <main className="min-h-almost-full flex flex-1 flex-col bg-gray-100 py-4">
         {children}
       </main>
-    </>
+    </AuthCheck>
   )
 }
