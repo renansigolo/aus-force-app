@@ -91,13 +91,13 @@ export function Navbar() {
                       <Link
                         key={item.name}
                         href={item.href}
+                        aria-current={item.current ? "page" : undefined}
                         className={cn(
                           item.current
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-900 hover:bg-gray-50 hover:text-gray-900",
                           "inline-flex items-center rounded-md p-3 text-sm font-medium"
                         )}
-                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
                       </Link>
@@ -126,10 +126,10 @@ export function Navbar() {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
+                          alt="Profile Image"
                           src={
                             user?.photoURL || "/images/profile-placeholder.png"
                           }
-                          alt="Profile Image"
                         />
                       </Menu.Button>
                     </div>
