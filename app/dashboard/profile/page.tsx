@@ -120,7 +120,7 @@ export default function ProfilePage() {
                     <img
                       className="h-8 w-8 rounded-full"
                       src="https://images.unsplash.com/photo-1507101105822-7472b28e22ac?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
-                      alt=""
+                      alt="Profile Image"
                     />
                   </span>
                   <span className="ml-4 flex flex-shrink-0 items-start space-x-4">
