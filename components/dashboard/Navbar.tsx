@@ -82,7 +82,7 @@ export function Navbar() {
                   <img
                     className="block h-8 w-auto"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
+                    alt="Company Logo"
                   />
 
                   {/* Desktop - Authenticated Navigation Links */}
@@ -202,10 +202,10 @@ export function Navbar() {
                       <div className="flex-shrink-0">
                         <img
                           className="h-10 w-10 rounded-full"
+                          alt="Profile Image"
                           src={
                             user?.photoURL || "/images/profile-placeholder.png"
                           }
-                          alt="Profile Image"
                         />
                       </div>
                       <div className="ml-3">

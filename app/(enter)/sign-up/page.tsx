@@ -75,7 +75,7 @@ export default function SignUpPage() {
                   <div className="mt-1 flex items-center">
                     <img
                       src={picture}
-                      alt="User profile"
+                      alt="Profile Image"
                       className="h-12 w-12 rounded-full object-fill"
                     />
                     <input
