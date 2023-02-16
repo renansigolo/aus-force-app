@@ -1,7 +1,7 @@
 "use client"
 
 import { auth } from "@/lib/firebase"
-import { classNames } from "@/lib/helpers"
+import { cn } from "@/lib/helpers"
 import { Menu, Popover, Transition } from "@headlessui/react"
 import {
   BanknotesIcon,
@@ -63,7 +63,7 @@ export function Navbar() {
       <Popover
         as="header"
         className={({ open }) =>
-          classNames(
+          cn(
             open ? "fixed inset-0 z-40 overflow-y-auto" : "",
             "bg-white py-4 shadow-sm lg:static lg:overflow-y-visible"
           )
@@ -91,7 +91,7 @@ export function Navbar() {
                       <Link
                         key={item.name}
                         href={item.href}
-                        className={classNames(
+                        className={cn(
                           item.current
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-900 hover:bg-gray-50 hover:text-gray-900",
@@ -148,7 +148,7 @@ export function Navbar() {
                             {({ active }) => (
                               <Link
                                 href={item.href}
-                                className={classNames(
+                                className={cn(
                                   active ? "bg-gray-100" : "",
                                   "block py-2 px-4 text-sm text-gray-700"
                                 )}
@@ -179,7 +179,7 @@ export function Navbar() {
                     key={item.name}
                     href={item.href}
                     aria-current={item.current ? "page" : undefined}
-                    className={classNames(
+                    className={cn(
                       item.current
                         ? "bg-gray-100 text-gray-900"
                         : "hover:bg-gray-50",

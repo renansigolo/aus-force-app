@@ -1,22 +1,31 @@
 "use client"
 
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
-import { FormEvent } from "react"
+import { auth } from "@/lib/firebase"
+import { FirebaseError } from "firebase/app"
+import { sendPasswordResetEmail } from "firebase/auth"
+import { useState } from "react"
 import toast from "react-hot-toast"
 
-function handleSubmit(e: FormEvent<HTMLFormElement>) {
-  e.preventDefault()
-
-  // Read the form data
-  const form = e.target as HTMLFormElement
-  const formData = new FormData(form)
-  const formJson = Object.fromEntries(formData.entries())
-
-  // Show a success message notification
-  toast.success(`Email sent to ${formJson.email}`)
-}
-
 export default function ForgotPasswordPage() {
+  const [submitting, setSubmitting] = useState(false)
+
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setSubmitting(true)
+
+    // Read the form data
+    const form = e.currentTarget
+    const formInput = form.elements.namedItem("email") as HTMLInputElement
+    const email = formInput.value
+
+    // Send the password reset email
+    sendPasswordResetEmail(auth, email)
+      .then(() => toast.success(`Password reset email sent to ${email}!`))
+      .catch((error: FirebaseError) => toast.error(error.message))
+      .finally(() => setSubmitting(false))
+  }
+
   return (
     <div className="sm:mx-auto sm:w-full sm:max-w-2xl">
       <div className="min-h-full bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
@@ -35,19 +44,22 @@ export default function ForgotPasswordPage() {
             </label>
             <div className="mt-1">
               <input
+                required
+                disabled={submitting}
                 id="email"
                 name="email"
                 type="email"
                 autoComplete="email"
-                className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-                required
               />
             </div>
           </div>
 
           <div>
-            <button className="flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-              Reset Password
+            <button
+              disabled={submitting}
+              className="btn btn-primary flex w-full justify-center"
+            >
+              {submitting ? "Submitting..." : "Reset Password"}
             </button>
           </div>
         </form>

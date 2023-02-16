@@ -105,7 +105,6 @@ export default function SignUpPage() {
                       name="firstName"
                       id="firstName"
                       autoComplete="given-name"
-                      className="register-form-input"
                       required
                     />
                   </div>
@@ -125,7 +124,6 @@ export default function SignUpPage() {
                       name="lastName"
                       id="lastName"
                       autoComplete="family-name"
-                      className="register-form-input"
                     />
                   </div>
                 </div>
@@ -143,7 +141,6 @@ export default function SignUpPage() {
                       name="tel"
                       type="tel"
                       autoComplete="phone"
-                      className="register-form-input"
                     />
                   </div>
                 </div>
@@ -161,7 +158,6 @@ export default function SignUpPage() {
                       name="dob"
                       type="date"
                       autoComplete="bday"
-                      className="register-form-input"
                     />
                   </div>
                 </div>
@@ -192,7 +188,6 @@ export default function SignUpPage() {
                       name="legalName"
                       id="legalName"
                       autoComplete="company"
-                      className="register-form-input"
                     />
                   </div>
                 </div>
@@ -210,7 +205,6 @@ export default function SignUpPage() {
                       name="tradingName"
                       id="tradingName"
                       autoComplete="organization"
-                      className="register-form-input"
                     />
                   </div>
                 </div>
@@ -228,7 +222,6 @@ export default function SignUpPage() {
                       name="abn"
                       type="number"
                       autoComplete="abn"
-                      className="register-form-input"
                     />
                   </div>
                 </div>
@@ -246,7 +239,6 @@ export default function SignUpPage() {
                       name="acn"
                       type="number"
                       autoComplete="acn"
-                      className="register-form-input"
                     />
                   </div>
                 </div>
@@ -263,7 +255,6 @@ export default function SignUpPage() {
                       id="country"
                       name="country"
                       autoComplete="country-name"
-                      className="register-form-input"
                     >
                       <option>Australia</option>
                     </select>
@@ -283,7 +274,6 @@ export default function SignUpPage() {
                       name="streetAddress"
                       id="streetAddress"
                       autoComplete="street-address"
-                      className="register-form-input"
                     />
                   </div>
                 </div>
@@ -301,7 +291,6 @@ export default function SignUpPage() {
                       name="city"
                       id="city"
                       autoComplete="address-level2"
-                      className="register-form-input"
                     />
                   </div>
                 </div>
@@ -319,7 +308,6 @@ export default function SignUpPage() {
                       name="region"
                       id="region"
                       autoComplete="address-level1"
-                      className="register-form-input"
                     />
                   </div>
                 </div>
@@ -337,7 +325,6 @@ export default function SignUpPage() {
                       name="postal-code"
                       id="postal-code"
                       autoComplete="postal-code"
-                      className="register-form-input"
                     />
                   </div>
                 </div>
@@ -369,7 +356,6 @@ export default function SignUpPage() {
                       name="email"
                       type="email"
                       autoComplete="email"
-                      className="register-form-input"
                       required
                     />
                   </div>
@@ -388,7 +374,23 @@ export default function SignUpPage() {
                       name="password"
                       type="password"
                       autoComplete="password"
-                      className="register-form-input"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div className="sm:col-span-6">
+                  <label
+                    htmlFor="password"
+                    className="block text-sm font-medium text-gray-700"
+                  >
+                    Password Confirmation
+                  </label>
+                  <div className="mt-1">
+                    <input
+                      id="passwordConfirmation"
+                      name="passwordConfirmation"
+                      type="password"
                       required
                     />
                   </div>

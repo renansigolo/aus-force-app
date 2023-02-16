@@ -1,7 +1,7 @@
 "use client"
 
 /* This example requires Tailwind CSS v3.0+ */
-import { classNames } from "@/lib/helpers"
+import { cn } from "@/lib/helpers"
 import { RadioGroup } from "@headlessui/react"
 import { CheckIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
@@ -103,7 +103,7 @@ export function Pricing() {
                 key={option.value}
                 value={option}
                 className={({ checked }) =>
-                  classNames(
+                  cn(
                     checked ? "bg-indigo-600 text-white" : "text-gray-500",
                     "cursor-pointer rounded-full py-1 px-2.5"
                   )
@@ -118,7 +118,7 @@ export function Pricing() {
           {tiers.map((tier) => (
             <div
               key={tier.id}
-              className={classNames(
+              className={cn(
                 tier.mostPopular
                   ? "ring-2 ring-indigo-600"
                   : "ring-1 ring-gray-200",
@@ -127,7 +127,7 @@ export function Pricing() {
             >
               <h3
                 id={tier.id}
-                className={classNames(
+                className={cn(
                   tier.mostPopular ? "text-indigo-600" : "text-gray-900",
                   "text-lg font-semibold leading-8"
                 )}
@@ -148,7 +148,7 @@ export function Pricing() {
               <Link
                 href={tier.href}
                 aria-describedby={tier.id}
-                className={classNames(
+                className={cn(
                   tier.mostPopular
                     ? "bg-indigo-600 text-white shadow-sm hover:bg-indigo-500"
                     : "text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300",
