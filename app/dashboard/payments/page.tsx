@@ -45,7 +45,7 @@ export default function PaymentsPage() {
 
 function Payments() {
   return (
-    <div className="pb-4">
+    <div className="pb-6">
       <h2 className="heading-3 pl-4">Week 32</h2>
       {/* Activity list (smallest breakpoint only) */}
       <div className="rounded-lg shadow sm:hidden">

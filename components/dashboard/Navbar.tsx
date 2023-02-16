@@ -36,7 +36,7 @@ const navigation = [
   },
   {
     name: "Reports",
-    href: "/dashboard/staff",
+    href: "/dashboard/reports",
   },
   {
     name: "Job Requests",
