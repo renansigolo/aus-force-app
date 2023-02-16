@@ -1,6 +1,6 @@
 "use client"
 
-import { classNames } from "@/lib/helpers"
+import { cn } from "@/lib/helpers"
 import { Menu, Transition } from "@headlessui/react"
 import {
   ChevronDownIcon,
@@ -192,7 +192,7 @@ export function Calendar() {
                       {({ active }) => (
                         <Link
                           href="#"
-                          className={classNames(
+                          className={cn(
                             active
                               ? "bg-gray-100 text-gray-900"
                               : "text-gray-700",
@@ -207,7 +207,7 @@ export function Calendar() {
                       {({ active }) => (
                         <Link
                           href="#"
-                          className={classNames(
+                          className={cn(
                             active
                               ? "bg-gray-100 text-gray-900"
                               : "text-gray-700",
@@ -222,7 +222,7 @@ export function Calendar() {
                       {({ active }) => (
                         <Link
                           href="#"
-                          className={classNames(
+                          className={cn(
                             active
                               ? "bg-gray-100 text-gray-900"
                               : "text-gray-700",
@@ -237,7 +237,7 @@ export function Calendar() {
                       {({ active }) => (
                         <Link
                           href="#"
-                          className={classNames(
+                          className={cn(
                             active
                               ? "bg-gray-100 text-gray-900"
                               : "text-gray-700",
@@ -274,7 +274,7 @@ export function Calendar() {
                     {({ active }) => (
                       <Link
                         href="#"
-                        className={classNames(
+                        className={cn(
                           active
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-700",
@@ -291,7 +291,7 @@ export function Calendar() {
                     {({ active }) => (
                       <Link
                         href="#"
-                        className={classNames(
+                        className={cn(
                           active
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-700",
@@ -308,7 +308,7 @@ export function Calendar() {
                     {({ active }) => (
                       <Link
                         href="#"
-                        className={classNames(
+                        className={cn(
                           active
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-700",
@@ -323,7 +323,7 @@ export function Calendar() {
                     {({ active }) => (
                       <Link
                         href="#"
-                        className={classNames(
+                        className={cn(
                           active
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-700",
@@ -338,7 +338,7 @@ export function Calendar() {
                     {({ active }) => (
                       <Link
                         href="#"
-                        className={classNames(
+                        className={cn(
                           active
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-700",
@@ -353,7 +353,7 @@ export function Calendar() {
                     {({ active }) => (
                       <Link
                         href="#"
-                        className={classNames(
+                        className={cn(
                           active
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-700",
@@ -399,7 +399,7 @@ export function Calendar() {
             {days.map((day) => (
               <div
                 key={day.date}
-                className={classNames(
+                className={cn(
                   day.isCurrentMonth ? "bg-white" : "bg-gray-50 text-gray-500",
                   "relative py-2 px-3"
                 )}
@@ -446,7 +446,7 @@ export function Calendar() {
               <button
                 key={day.date}
                 type="button"
-                className={classNames(
+                className={cn(
                   day.isCurrentMonth ? "bg-white" : "bg-gray-50",
                   (day.isSelected || day.isToday) && "font-semibold",
                   day.isSelected && "text-white",
@@ -464,7 +464,7 @@ export function Calendar() {
               >
                 <time
                   dateTime={day.date}
-                  className={classNames(
+                  className={cn(
                     day.isSelected &&
                       ("flex h-6 w-6 items-center justify-center rounded-full" as any),
                     day.isSelected && day.isToday && "bg-indigo-600",

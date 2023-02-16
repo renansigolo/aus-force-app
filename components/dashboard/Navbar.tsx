@@ -1,49 +1,46 @@
 "use client"
 
 import { auth } from "@/lib/firebase"
-import { classNames } from "@/lib/helpers"
+import { cn } from "@/lib/helpers"
 import { Menu, Popover, Transition } from "@headlessui/react"
-import {
-  BanknotesIcon,
-  Bars3Icon,
-  BriefcaseIcon,
-  CalendarDaysIcon,
-  ClockIcon,
-  HomeIcon,
-  XMarkIcon,
-} from "@heroicons/react/20/solid"
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid"
 import { BellIcon } from "@heroicons/react/24/outline"
 import { signOut } from "firebase/auth"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import router from "next/router"
 import { Fragment } from "react"
 import { useAuthState } from "react-firebase-hooks/auth"
 
 const navigation = [
-  { name: "Home", href: "/dashboard", icon: HomeIcon, current: true },
+  { name: "Home", href: "/dashboard" },
   {
     name: "Weekly Jobs",
     href: "/dashboard/weekly-jobs",
-    icon: CalendarDaysIcon,
-    current: false,
   },
   {
     name: "Request Leave",
     href: "/dashboard/request-leave",
-    icon: BriefcaseIcon,
-    current: false,
   },
   {
-    name: "Timesheets",
-    href: "/dashboard/timesheets",
-    icon: ClockIcon,
-    current: false,
+    name: "Shifts",
+    href: "/dashboard/shifts",
   },
   {
     name: "Payments",
     href: "/dashboard/payments",
-    icon: BanknotesIcon,
-    current: false,
+  },
+  {
+    name: "Staff",
+    href: "/dashboard/staff",
+  },
+  {
+    name: "Reports",
+    href: "/dashboard/reports",
+  },
+  {
+    name: "Job Requests",
+    href: "/dashboard/job-requests",
   },
 ]
 
@@ -51,6 +48,12 @@ const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }]
 
 export function Navbar() {
   const [user] = useAuthState(auth)
+  const pathname = usePathname()
+  console.log("🚀 ~ Navbar ~ pathname", pathname)
+
+  const isActive = (href: string) => {
+    return pathname === href
+  }
 
   const signOutNow = () => {
     signOut(auth)
@@ -63,7 +66,7 @@ export function Navbar() {
       <Popover
         as="header"
         className={({ open }) =>
-          classNames(
+          cn(
             open ? "fixed inset-0 z-40 overflow-y-auto" : "",
             "bg-white py-4 shadow-sm lg:static lg:overflow-y-visible"
           )
@@ -79,7 +82,7 @@ export function Navbar() {
                   <img
                     className="block h-8 w-auto"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
+                    alt="Company Logo"
                   />
 
                   {/* Desktop - Authenticated Navigation Links */}
@@ -91,13 +94,13 @@ export function Navbar() {
                       <Link
                         key={item.name}
                         href={item.href}
-                        className={classNames(
-                          item.current
+                        aria-current={isActive(item.href) ? "page" : undefined}
+                        className={cn(
+                          isActive(item.href)
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-900 hover:bg-gray-50 hover:text-gray-900",
                           "inline-flex items-center rounded-md p-3 text-sm font-medium"
                         )}
-                        aria-current={item.current ? "page" : undefined}
                       >
                         {item.name}
                       </Link>
@@ -126,10 +129,10 @@ export function Navbar() {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
+                          alt="Profile Image"
                           src={
                             user?.photoURL || "/images/profile-placeholder.png"
                           }
-                          alt="Profile Image"
                         />
                       </Menu.Button>
                     </div>
@@ -148,7 +151,7 @@ export function Navbar() {
                             {({ active }) => (
                               <Link
                                 href={item.href}
-                                className={classNames(
+                                className={cn(
                                   active ? "bg-gray-100" : "",
                                   "block py-2 px-4 text-sm text-gray-700"
                                 )}
@@ -173,61 +176,75 @@ export function Navbar() {
 
             {/* Mobile Dropdown Menu */}
             <Popover.Panel as="nav" className="lg:hidden" aria-label="Global">
-              <div className="mx-auto max-w-3xl space-y-1 px-2 pt-2 pb-3 sm:px-4">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    aria-current={item.current ? "page" : undefined}
-                    className={classNames(
-                      item.current
-                        ? "bg-gray-100 text-gray-900"
-                        : "hover:bg-gray-50",
-                      "block rounded-md py-2 px-3 text-base font-medium"
-                    )}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-              </div>
+              {({ close }) => (
+                <>
+                  <div className="mx-auto max-w-3xl space-y-1 px-2 pt-2 pb-3 sm:px-4">
+                    {navigation.map((item) => (
+                      <Link
+                        key={item.name}
+                        href={item.href}
+                        aria-current={isActive(item.href) ? "page" : undefined}
+                        onClick={() => close()}
+                        className={cn(
+                          isActive(item.href)
+                            ? "bg-gray-100 text-gray-900"
+                            : "hover:bg-gray-50",
+                          "block rounded-md py-2 px-3 text-base font-medium"
+                        )}
+                      >
+                        {item.name}
+                      </Link>
+                    ))}
+                  </div>
 
-              <div className="border-t border-gray-200 pt-4">
-                <div className="mx-auto flex max-w-3xl items-center px-4 sm:px-6">
-                  <div className="flex-shrink-0">
-                    <img
-                      className="h-10 w-10 rounded-full"
-                      src={user?.photoURL || "/images/profile-placeholder.png"}
-                      alt="Profile Image"
-                    />
-                  </div>
-                  <div className="ml-3">
-                    <div className="text-base font-medium text-gray-800">
-                      {user?.displayName || ""}
+                  <div className="border-t border-gray-200 pt-4">
+                    <div className="mx-auto flex max-w-3xl items-center px-4 sm:px-6">
+                      <div className="flex-shrink-0">
+                        <img
+                          className="h-10 w-10 rounded-full"
+                          alt="Profile Image"
+                          src={
+                            user?.photoURL || "/images/profile-placeholder.png"
+                          }
+                        />
+                      </div>
+                      <div className="ml-3">
+                        <div className="text-base font-medium text-gray-800">
+                          {user?.displayName || ""}
+                        </div>
+                        <div className="text-sm font-medium text-gray-500">
+                          {user?.email || ""}
+                        </div>
+                      </div>
+                      <button
+                        type="button"
+                        className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                      >
+                        <span className="sr-only">View notifications</span>
+                        <BellIcon className="h-6 w-6" aria-hidden="true" />
+                      </button>
                     </div>
-                    <div className="text-sm font-medium text-gray-500">
-                      {user?.email || ""}
+                    <div className="mx-auto mt-3 max-w-3xl space-y-1 px-2 sm:px-4">
+                      {userNavigation.map((item) => (
+                        <Link
+                          key={item.name}
+                          href={item.href}
+                          onClick={() => close()}
+                          className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+                        >
+                          {item.name}
+                        </Link>
+                      ))}
+                      <button
+                        className="block w-full rounded-md py-2 px-3 text-left text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
+                        onClick={signOutNow}
+                      >
+                        Logout
+                      </button>
                     </div>
                   </div>
-                  <button
-                    type="button"
-                    className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
-                </div>
-                <div className="mx-auto mt-3 max-w-3xl space-y-1 px-2 sm:px-4">
-                  {userNavigation.map((item) => (
-                    <Link
-                      key={item.name}
-                      href={item.href}
-                      className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-                    >
-                      {item.name}
-                    </Link>
-                  ))}
-                </div>
-              </div>
+                </>
+              )}
             </Popover.Panel>
           </>
         )}

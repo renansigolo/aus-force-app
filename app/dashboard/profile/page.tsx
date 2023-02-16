@@ -63,6 +63,40 @@ const businessDetails = [
   },
 ]
 
+const bankDetails = [
+  {
+    title: "Bank",
+    value: "Commonwealth Bank",
+  },
+  {
+    title: "Account Name",
+    value: "Lindsay Watson",
+  },
+  {
+    title: "BSB",
+    value: "123 456",
+  },
+  {
+    title: "Account Number",
+    value: "004 499 987",
+  },
+]
+
+const additionalDocuments = [
+  {
+    title: "ID / Passport",
+    value: "123456789",
+  },
+  {
+    title: "White Card",
+    value: "1321414",
+  },
+  {
+    title: "Signature",
+    value: "",
+  },
+]
+
 export default function ProfilePage() {
   return (
     <SectionWrapper>
@@ -86,7 +120,7 @@ export default function ProfilePage() {
                     <img
                       className="h-8 w-8 rounded-full"
                       src="https://images.unsplash.com/photo-1507101105822-7472b28e22ac?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80"
-                      alt=""
+                      alt="Profile Image"
                     />
                   </span>
                   <span className="ml-4 flex flex-shrink-0 items-start space-x-4">
@@ -107,6 +141,42 @@ export default function ProfilePage() {
         <section className="mt-10 divide-y divide-gray-200">
           <div className="space-y-1">
             <h3 className="text-lg font-medium leading-6 text-gray-900">
+              Bank Details
+            </h3>
+            <p className="max-w-2xl text-sm text-gray-500">
+              Your bank details.
+            </p>
+          </div>
+          <div className="mt-6">
+            <dl className="divide-y divide-gray-200">
+              {bankDetails.map((item) => (
+                <FormRow {...item} key={item.title} />
+              ))}
+            </dl>
+          </div>
+        </section>
+
+        <section className="mt-10 divide-y divide-gray-200">
+          <div className="space-y-1">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">
+              Additional Documents
+            </h3>
+            <p className="max-w-2xl text-sm text-gray-500">
+              Some additional documents.
+            </p>
+          </div>
+          <div className="mt-6">
+            <dl className="divide-y divide-gray-200">
+              {additionalDocuments.map((item) => (
+                <FormRow {...item} key={item.title} />
+              ))}
+            </dl>
+          </div>
+        </section>
+
+        {/* <section className="mt-10 divide-y divide-gray-200">
+          <div className="space-y-1">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">
               Business Details
             </h3>
             <p className="max-w-2xl text-sm text-gray-500">
@@ -120,7 +190,7 @@ export default function ProfilePage() {
               ))}
             </dl>
           </div>
-        </section>
+        </section> */}
       </div>
     </SectionWrapper>
   )

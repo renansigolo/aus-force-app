@@ -21,7 +21,7 @@ export function WelcomePanel() {
                 <img
                   className="mx-auto h-20 w-20 rounded-full"
                   src={mockUser.photoURL || ""}
-                  alt=""
+                  alt="Profile IMage"
                 />
               </div>
               <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">

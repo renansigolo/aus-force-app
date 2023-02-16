@@ -1,37 +1,24 @@
+import { Card } from "@/components/Card"
 import {
   BuildingOffice2Icon,
   ClockIcon,
   MapIcon,
-} from "@heroicons/react/24/outline"
+} from "@heroicons/react/20/solid"
 
-const stats = [
-  {
-    name: "Today",
-    company: "ACR",
-    address: "377/12 Church Avenue",
-    time: "7am - 3pm",
-  },
-  {
-    name: "Tomorrow",
-    company: "NSAC",
-    address: "6 Mackenzie St.",
-    time: "9am - 5pm",
-  },
-  {
-    name: "Until 03 March",
-    company: "CAPA",
-    address: "333 George St",
-    time: "8am - 4pm",
-  },
-]
+const item = {
+  name: "Today",
+  company: "ACR",
+  address: "377/12 Church Avenue",
+  time: "7am - 3pm",
+}
 
-export function Overview() {
+export default function PendingApproval() {
   return (
-    <div>
-      <h2 className="heading-3 mb-3">Overview</h2>
-      <dl className="grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-y-0 md:divide-x">
-        {stats.map((item) => (
-          <div key={item.name} className="px-4 py-5 sm:p-6">
+    <>
+      <h2 className="heading-3 mb-3">Waiting Approval</h2>
+      <div className="grid gap-4 lg:grid-cols-2">
+        <Card>
+          <div key={item.name}>
             <dt className="text-lg font-semibold leading-8 text-gray-900">
               {item.name}
             </dt>
@@ -63,8 +50,8 @@ export function Overview() {
               </li>
             </ul>
           </div>
-        ))}
-      </dl>
-    </div>
+        </Card>
+      </div>
+    </>
   )
 }
