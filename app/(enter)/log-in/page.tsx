@@ -6,26 +6,29 @@ import { FirebaseError } from "firebase/app"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { FormEventHandler } from "react"
+import { useState } from "react"
 import toast from "react-hot-toast"
 
 export default function LogInPage() {
   const router = useRouter()
+  const [submitting, setSubmitting] = useState(false)
 
-  const handleLogIn = (e: FormEventHandler<HTMLFormElement> | any) => {
+  const handleLogIn = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setSubmitting(true)
 
     // Read the form data
-    const form = e.target as HTMLFormElement
-    const formData = new FormData(form)
-    const formJson = Object.fromEntries(formData.entries()) as any
+    const form = e.currentTarget as HTMLFormElement
+    const email = form.elements.namedItem("email")
+    const password = form.elements.namedItem("password")
 
-    signInWithEmailAndPassword(auth, formJson.email, formJson.password)
+    signInWithEmailAndPassword(auth, String(email), String(password))
       .then((userCredential) => {
         router.push("/dashboard")
         toast.success(`Welcome back, ${userCredential.user.email}`)
       })
       .catch((error: FirebaseError) => toast.error(error.message))
+      .finally(() => setSubmitting(false))
   }
 
   return (
@@ -49,11 +52,11 @@ export default function LogInPage() {
                 </label>
                 <div className="mt-1">
                   <input
+                    disabled={submitting}
                     id="email"
                     name="email"
                     type="email"
                     autoComplete="email"
-                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     required
                   />
                 </div>
@@ -68,11 +71,11 @@ export default function LogInPage() {
                 </label>
                 <div className="mt-1">
                   <input
+                    disabled={submitting}
                     id="password"
                     name="password"
                     type="password"
                     autoComplete="current-password"
-                    className="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                     required
                   />
                 </div>
@@ -90,7 +93,10 @@ export default function LogInPage() {
               </div>
 
               <div>
-                <button className="btn btn-primary flex w-full justify-center text-center">
+                <button
+                  disabled={submitting}
+                  className="btn btn-primary flex w-full justify-center"
+                >
                   Log in
                 </button>
               </div>
