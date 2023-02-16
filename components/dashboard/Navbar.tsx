@@ -3,15 +3,7 @@
 import { auth } from "@/lib/firebase"
 import { cn } from "@/lib/helpers"
 import { Menu, Popover, Transition } from "@headlessui/react"
-import {
-  BanknotesIcon,
-  Bars3Icon,
-  BriefcaseIcon,
-  CalendarDaysIcon,
-  ClockIcon,
-  HomeIcon,
-  XMarkIcon,
-} from "@heroicons/react/20/solid"
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid"
 import { BellIcon } from "@heroicons/react/24/outline"
 import { signOut } from "firebase/auth"
 import Link from "next/link"
@@ -21,26 +13,34 @@ import { Fragment } from "react"
 import { useAuthState } from "react-firebase-hooks/auth"
 
 const navigation = [
-  { name: "Home", href: "/dashboard", icon: HomeIcon },
+  { name: "Home", href: "/dashboard" },
   {
     name: "Weekly Jobs",
     href: "/dashboard/weekly-jobs",
-    icon: CalendarDaysIcon,
   },
   {
     name: "Request Leave",
     href: "/dashboard/request-leave",
-    icon: BriefcaseIcon,
   },
   {
     name: "Shifts",
     href: "/dashboard/shifts",
-    icon: ClockIcon,
   },
   {
     name: "Payments",
     href: "/dashboard/payments",
-    icon: BanknotesIcon,
+  },
+  {
+    name: "Staff",
+    href: "/dashboard/staff",
+  },
+  {
+    name: "Reports",
+    href: "/dashboard/staff",
+  },
+  {
+    name: "Job Requests",
+    href: "/dashboard/job-requests",
   },
 ]
 
