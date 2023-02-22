@@ -3,7 +3,6 @@ import { Overview } from "@/components/dashboard/Overview"
 import { PendingApproval } from "@/components/dashboard/PendingApproval"
 import { WeeklyActivity } from "@/components/dashboard/WeeklyActivity"
 import { WelcomePanel } from "@/components/dashboard/WelcomePanel"
-import { Modal } from "@/components/Modal"
 
 export default function DashboardPage() {
   return (
@@ -25,7 +24,6 @@ export default function DashboardPage() {
           </section>
         </section>
       </Container>
-      <Modal title="Modal Title" />
     </>
   )
 }

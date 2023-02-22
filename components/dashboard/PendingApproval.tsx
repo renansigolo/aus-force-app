@@ -1,6 +1,8 @@
 "use client"
 
 import { Card } from "@/components/Card"
+import Modal from "@/components/Modal"
+import NiceModal from "@ebay/nice-modal-react"
 import {
   BuildingOffice2Icon,
   ClockIcon,
@@ -15,7 +17,7 @@ const item = {
 }
 
 export function PendingApproval() {
-  const showModal = () => console.log("Show Modal")
+  const showModal = () => NiceModal.show(Modal, { title: "Review Shift" })
 
   return (
     <>
