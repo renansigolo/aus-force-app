@@ -1,3 +1,5 @@
+"use client"
+
 import { Card } from "@/components/Card"
 import {
   BuildingOffice2Icon,
@@ -12,12 +14,14 @@ const item = {
   time: "7am - 3pm",
 }
 
-export default function PendingApproval() {
+export function PendingApproval() {
+  const showModal = () => console.log("Show Modal")
+
   return (
     <>
       <h2 className="heading-3 mb-3">Waiting Approval</h2>
       <div className="grid gap-4 lg:grid-cols-2">
-        <Card>
+        <Card buttonAction={showModal}>
           <div key={item.name}>
             <dt className="text-lg font-semibold leading-8 text-gray-900">
               {item.name}
