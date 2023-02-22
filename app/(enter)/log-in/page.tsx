@@ -18,11 +18,10 @@ export default function LogInPage() {
     setSubmitting(true)
 
     // Read the form data
-    const form = e.currentTarget as HTMLFormElement
-    const email = form.elements.namedItem("email")
-    const password = form.elements.namedItem("password")
+    const form = new FormData(e.currentTarget)
+    const formData = Object.fromEntries(form.entries()) as any
 
-    signInWithEmailAndPassword(auth, String(email), String(password))
+    signInWithEmailAndPassword(auth, formData.email, formData.password)
       .then((userCredential) => {
         router.push("/dashboard")
         toast.success(`Welcome back, ${userCredential.user.email}`)
