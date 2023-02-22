@@ -12,9 +12,11 @@ import { toast } from "react-hot-toast"
 export default function SignUpPage() {
   const router = useRouter()
   const [picture, setPicture] = useState("/images/profile-placeholder.png")
+  const [submitting, setSubmitting] = useState(false)
 
   const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    setSubmitting(true)
 
     // Read the form data
     const form = e.target as HTMLFormElement
@@ -38,6 +40,7 @@ export default function SignUpPage() {
           )
         })
         .catch((error: FirebaseError) => toast.error(error.message))
+        .finally(() => setSubmitting(false))
     })
   }
 
@@ -401,7 +404,9 @@ export default function SignUpPage() {
 
           <div className="pt-5">
             <div className="flex justify-end">
-              <button className="btn btn-primary">Register with email</button>
+              <button className="btn btn-primary" disabled={submitting}>
+                Register with email
+              </button>
             </div>
           </div>
         </form>
