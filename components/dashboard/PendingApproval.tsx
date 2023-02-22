@@ -17,7 +17,11 @@ const item = {
 }
 
 export function PendingApproval() {
-  const showModal = () => NiceModal.show(Modal, { title: "Review Shift" })
+  const showModal = () =>
+    NiceModal.show(Modal, {
+      title: "Review Shift",
+      description: "Please review the details and confirm your shift.",
+    })
 
   return (
     <>

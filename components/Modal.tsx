@@ -6,8 +6,9 @@ import { Fragment, useRef } from "react"
 
 type ModalProps = {
   title: string
+  description: string
 }
-export default NiceModal.create(({ title }: ModalProps) => {
+export default NiceModal.create(({ title, description }: ModalProps) => {
   const cancelButtonRef = useRef(null)
   const modal = useModal()
 
@@ -52,18 +53,14 @@ export default NiceModal.create(({ title }: ModalProps) => {
                       {title}
                     </Dialog.Title>
                     <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        Are you sure you want to deactivate your account? All of
-                        your data will be permanently removed from our servers
-                        forever. This action cannot be undone.
-                      </p>
+                      <p className="text-sm text-gray-500">{description}</p>
                     </div>
                   </div>
                 </div>
                 <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                   <button
                     type="button"
-                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
                     onClick={() => modal.remove()}
                   >
                     Confirm
