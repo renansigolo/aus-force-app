@@ -49,7 +49,6 @@ const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }]
 export function Navbar() {
   const [user] = useAuthState(auth)
   const pathname = usePathname()
-  console.log("🚀 ~ Navbar ~ pathname", pathname)
 
   const isActive = (href: string) => {
     return pathname === href

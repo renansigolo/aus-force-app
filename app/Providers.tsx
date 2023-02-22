@@ -1,6 +1,7 @@
 "use client"
 
 import { auth } from "@/lib/firebase"
+import NiceModal from "@ebay/nice-modal-react"
 import { createContext } from "react"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { Toaster } from "react-hot-toast"
@@ -16,7 +17,7 @@ export function Providers({ children }: ProvidersProps) {
   return (
     <>
       <UserContext.Provider value={user as any}>
-        {children}
+        <NiceModal.Provider>{children}</NiceModal.Provider>
         <Toaster position="top-right" reverseOrder={true} />
       </UserContext.Provider>
     </>

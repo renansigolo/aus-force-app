@@ -1,4 +1,8 @@
+"use client"
+
 import { Card } from "@/components/Card"
+import Modal from "@/components/Modal"
+import NiceModal from "@ebay/nice-modal-react"
 import {
   BuildingOffice2Icon,
   ClockIcon,
@@ -12,12 +16,18 @@ const item = {
   time: "7am - 3pm",
 }
 
-export default function PendingApproval() {
+export function PendingApproval() {
+  const showModal = () =>
+    NiceModal.show(Modal, {
+      title: "Review Shift",
+      description: "Please review the details and confirm your shift.",
+    })
+
   return (
     <>
       <h2 className="heading-3 mb-3">Waiting Approval</h2>
       <div className="grid gap-4 lg:grid-cols-2">
-        <Card>
+        <Card buttonAction={showModal}>
           <div key={item.name}>
             <dt className="text-lg font-semibold leading-8 text-gray-900">
               {item.name}

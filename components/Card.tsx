@@ -1,23 +1,29 @@
+"use client"
+
 type CardProps = {
   children: React.ReactNode
+  buttonAction: () => void
 }
 
-export function Card({ children }: CardProps) {
+export function Card({ children, buttonAction }: CardProps) {
   return (
-    <>
-      <div className="overflow-hidden rounded-lg bg-white shadow">
-        <CardHeading title="Shift #123" buttonLabel="Approve Shift" />
-        <div className="px-4 py-5 sm:p-6">{children}</div>
-      </div>
-    </>
+    <div className="overflow-hidden rounded-lg bg-white shadow">
+      <CardHeading
+        title="Shift #123"
+        buttonLabel="Approve Shift"
+        buttonAction={buttonAction}
+      />
+      <div className="px-4 py-5 sm:p-6">{children}</div>
+    </div>
   )
 }
 
 type CardHeadingProps = {
   title: string
-  buttonLabel?: string
+  buttonLabel: string
+  buttonAction: () => void
 }
-function CardHeading({ title, buttonLabel }: CardHeadingProps) {
+function CardHeading({ title, buttonLabel, buttonAction }: CardHeadingProps) {
   return (
     <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
       <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
@@ -29,7 +35,11 @@ function CardHeading({ title, buttonLabel }: CardHeadingProps) {
 
         {buttonLabel && (
           <div className="ml-4 mt-2 flex-shrink-0">
-            <button type="button" className="btn btn-primary capitalize">
+            <button
+              type="button"
+              className="btn btn-primary capitalize"
+              onClick={() => buttonAction()}
+            >
               {buttonLabel}
             </button>
           </div>
