@@ -6,13 +6,19 @@ import NiceModal from "@ebay/nice-modal-react"
 type SectionHeadingProps = {
   title: string
   buttonLabel?: string
+  children?: React.ReactNode
 }
 
-export function SectionHeading({ title, buttonLabel }: SectionHeadingProps) {
+export function SectionHeading({
+  title,
+  buttonLabel,
+  children,
+}: SectionHeadingProps) {
   const showModal = () =>
     NiceModal.show(Modal, {
       title: buttonLabel,
       description: "Please review the details and confirm your shift.",
+      children,
     })
 
   return (
