@@ -24,47 +24,56 @@ function JobSitesContent() {
         <div className="mt-6 grid grid-cols-1 gap-4">
           <div className="col-span-1">
             <label
-              htmlFor="email"
+              htmlFor="site-name"
               className="block text-sm font-medium text-gray-700"
             >
-              Email address
+              Site Name
             </label>
             <div className="mt-1">
-              <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                required
-              />
+              <input id="site-name" name="site-name" type="text" required />
             </div>
           </div>
+
           <div className="col-span-1">
             <label
-              htmlFor="role"
+              htmlFor="address"
               className="block text-sm font-medium text-gray-700"
             >
-              Role
+              Address
             </label>
             <div className="mt-1">
-              <select id="role" name="role">
-                <option>Supervisor</option>
-                <option>Manager</option>
-              </select>
+              <input id="address" name="address" type="text" required />
             </div>
           </div>
+
+          <div className="col-span-1">
+            <div className="relative flex items-start">
+              <div className="flex h-5 items-center">
+                <input
+                  id="parking"
+                  aria-describedby="parking-description"
+                  name="parking"
+                  type="checkbox"
+                  className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                />
+              </div>
+              <div className="ml-3 text-sm">
+                <label htmlFor="parking" className="font-medium text-gray-700">
+                  Parking available for workers?
+                </label>
+              </div>
+            </div>
+          </div>
+
           <div className="col-span-1">
             <label
-              htmlFor="job-site"
+              htmlFor="additional-notes"
               className="block text-sm font-medium text-gray-700"
             >
-              Job Site
+              Additional Notes
             </label>
             <div className="mt-1">
-              <select id="job-site" name="job-site">
-                <option>Site 1</option>
-                <option>Site 2</option>
-              </select>
+              <textarea id="additional-notes" name="additional-notes" />
             </div>
           </div>
         </div>
