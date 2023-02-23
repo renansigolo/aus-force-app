@@ -33,3 +33,11 @@ export const db = getFirestore(firebaseApp)
 
 // Storage
 export const storage = getStorage(firebaseApp)
+
+/** Gets a users/{uid} document with username */
+// export async function getUserDoc(uid: string) {
+//   const q = query(collection(db, "users"), where("uid", "==", uid), limit(1))
+//   const userDoc = (await getDocs(q)).docs[0]
+//   console.log("🚀 ~ getUserDoc ~ userDoc:", userDoc)
+//   return userDoc
+// }

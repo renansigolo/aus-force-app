@@ -1,9 +1,10 @@
+import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 
 export default function RequestLeavePage() {
   return (
     <SectionWrapper>
-      <h2 className="heading-2">Request Leave</h2>
+      <SectionHeading title="Request Leave" />
 
       <section className="py-8">
         <div>

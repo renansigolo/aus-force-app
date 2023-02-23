@@ -2,18 +2,22 @@ import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Empty } from "@/components/Empty"
 
-export default function JobRequestsPage() {
+export default function JobSitesPage() {
   return (
     <SectionWrapper>
-      <SectionHeading title="Job Requests" buttonLabel="New Job" />
+      <SectionHeading
+        title="Job Sites"
+        buttonLabel="New Site"
+        children={<JobSitesContent />}
+      />
       <section className="py-8">
-        <Empty title="job requests" />
+        <Empty title="job sites" />
       </section>
     </SectionWrapper>
   )
 }
 
-function JobRequestsContent() {
+function JobSitesContent() {
   return (
     <>
       <form className="my-12 space-y-8 divide-y divide-gray-200">

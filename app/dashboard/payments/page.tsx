@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { cn } from "@/lib/helpers"
 import { BanknotesIcon } from "@heroicons/react/20/solid"
@@ -34,7 +35,7 @@ const statusStyles: any = {
 export default function PaymentsPage() {
   return (
     <SectionWrapper>
-      <h2 className="heading-2">Payments</h2>
+      <SectionHeading title="Payments" />
       <section className="py-8">
         <Payments />
         <Payments />

@@ -1,9 +1,10 @@
+import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 
 export default function ReportsPage() {
   return (
     <SectionWrapper>
-      <h2 className="heading-2">Reports</h2>
+      <SectionHeading title="Reports" />
       <section className="py-8">
         <p>Coming soon...</p>
       </section>
