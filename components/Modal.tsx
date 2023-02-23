@@ -6,7 +6,7 @@ import { Fragment, useRef } from "react"
 
 type ModalProps = {
   title: string
-  description: string
+  description?: string
   children?: React.ReactNode
 }
 
@@ -57,9 +57,13 @@ export default NiceModal.create(
                       >
                         {title}
                       </Dialog.Title>
-                      <div className="mt-2">
-                        <p className="text-sm text-gray-500">{description}</p>
-                      </div>
+
+                      {description && (
+                        <div className="mt-2">
+                          <p className="text-sm text-gray-500">{description}</p>
+                        </div>
+                      )}
+
                       <div className="mt-2">{children}</div>
                     </div>
                   </div>

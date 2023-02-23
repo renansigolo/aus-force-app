@@ -17,7 +17,6 @@ export function SectionHeading({
   const showModal = () =>
     NiceModal.show(Modal, {
       title: buttonLabel,
-      description: "Please review the details and confirm your shift.",
       children,
     })
 
