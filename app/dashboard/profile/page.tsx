@@ -1,3 +1,4 @@
+import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { PencilSquareIcon } from "@heroicons/react/24/outline"
 
@@ -100,7 +101,7 @@ const additionalDocuments = [
 export default function ProfilePage() {
   return (
     <SectionWrapper>
-      <h2 className="heading-2">Account Details</h2>
+      <SectionHeading title="Account Details" buttonLabel="New Job" />
       <div className="px-4 sm:px-6 md:px-0">
         <section className="mt-10 divide-y divide-gray-200">
           <div className="space-y-1">
