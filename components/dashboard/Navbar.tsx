@@ -42,6 +42,10 @@ const navigation = [
     name: "Job Requests",
     href: "/dashboard/job-requests",
   },
+  {
+    name: "Job Sites",
+    href: "/dashboard/job-sites",
+  },
 ]
 
 const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }]
