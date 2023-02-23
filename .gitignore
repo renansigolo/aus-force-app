@@ -38,3 +38,7 @@ next-env.d.ts
 # next-sitemap
 sitemap*
 public/robots.txt
+
+# firebase
+firebase-debug.log
+ui-debug.log
