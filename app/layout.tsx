@@ -1,15 +1,15 @@
 import { Providers } from "@/app/Providers"
-import { Inter } from "@next/font/google"
+import type { Metadata } from "next"
+import { Inter } from "next/font/google"
 import "./globals.css"
 
 const isProduction = process.env.NODE_ENV === "production"
 
 const inter = Inter({
   subsets: ["latin"],
-  display: "swap",
 })
 
-export const metadata = {
+export const metadata: Metadata = {
   title: {
     default: "AUS Force App",
     template: "AUS Force App | %s",

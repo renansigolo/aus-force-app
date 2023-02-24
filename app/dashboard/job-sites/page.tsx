@@ -1,15 +1,26 @@
+"use client"
+
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Empty } from "@/components/Empty"
+import Modal from "@/components/Modal"
+import NiceModal from "@ebay/nice-modal-react"
 
 export default function JobSitesPage() {
+  const showModal = () =>
+    NiceModal.show(Modal, {
+      title: "New Site",
+      children: <JobSitesContent />,
+    })
+
   return (
     <SectionWrapper>
       <SectionHeading
         title="Job Sites"
         buttonLabel="New Site"
-        children={<JobSitesContent />}
+        buttonAction={showModal}
       />
+
       <section className="py-8">
         <Empty title="job sites" />
       </section>
@@ -30,7 +41,7 @@ function JobSitesContent() {
               Site Name
             </label>
             <div className="mt-1">
-              <input id="site-name" name="site-name" type="text" required />
+              <input required id="site-name" name="site-name" type="text" />
             </div>
           </div>
 
@@ -42,7 +53,7 @@ function JobSitesContent() {
               Address
             </label>
             <div className="mt-1">
-              <input id="address" name="address" type="text" required />
+              <input required id="address" name="address" type="text" />
             </div>
           </div>
 

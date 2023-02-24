@@ -26,7 +26,7 @@ function JobRequestsContent() {
               Site Name
             </label>
             <div className="mt-1">
-              <input id="site-name" name="site-name" type="text" required />
+              <input required id="site-name" name="site-name" type="text" />
             </div>
           </div>
 
@@ -38,7 +38,7 @@ function JobRequestsContent() {
               Address
             </label>
             <div className="mt-1">
-              <input id="address" name="address" type="text" required />
+              <input required id="address" name="address" type="text" />
             </div>
           </div>
 

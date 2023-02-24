@@ -51,12 +51,12 @@ export default function LogInPage() {
                 </label>
                 <div className="mt-1">
                   <input
+                    required
                     disabled={submitting}
                     id="email"
                     name="email"
                     type="email"
                     autoComplete="email"
-                    required
                   />
                 </div>
               </div>
@@ -70,12 +70,12 @@ export default function LogInPage() {
                 </label>
                 <div className="mt-1">
                   <input
+                    required
                     disabled={submitting}
                     id="password"
                     name="password"
                     type="password"
                     autoComplete="current-password"
-                    required
                   />
                 </div>
               </div>
