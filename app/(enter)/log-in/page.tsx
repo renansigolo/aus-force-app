@@ -4,7 +4,6 @@ import { EnterHeader } from "@/app/(enter)/EnterHeader"
 import { auth } from "@/lib/firebase"
 import { FirebaseError } from "firebase/app"
 import { signInWithEmailAndPassword } from "firebase/auth"
-import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import toast from "react-hot-toast"
@@ -82,12 +81,12 @@ export default function LogInPage() {
 
               <div className="flex items-center justify-between">
                 <div className="text-sm">
-                  <Link
+                  <a
                     href="/forgot-password"
                     className="font-medium text-indigo-600 hover:text-indigo-500"
                   >
                     Forgot your password?
-                  </Link>
+                  </a>
                 </div>
               </div>
 
