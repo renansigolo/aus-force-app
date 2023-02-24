@@ -418,7 +418,7 @@ export function Calendar() {
                   <ol className="mt-2">
                     {day.events.slice(0, 2).map((event) => (
                       <li key={event.id}>
-                        {/* <Link href={event.href} className="group flex">
+                        <Link href={event.href as any} className="group flex">
                           <p className="flex-auto truncate font-medium text-gray-900 group-hover:text-indigo-600">
                             {event.name}
                           </p>
@@ -428,7 +428,7 @@ export function Calendar() {
                           >
                             {event.time}
                           </time>
-                        </Link> */}
+                        </Link>
                       </li>
                     ))}
                     {day.events.length > 2 && (
@@ -511,12 +511,12 @@ export function Calendar() {
                     {event.time}
                   </time>
                 </div>
-                {/* <Link
-                  href={event.href}
+                <Link
+                  href={event.href as any}
                   className="ml-6 flex-none self-center rounded-md border border-gray-300 bg-white py-2 px-3 font-semibold text-gray-700 opacity-0 shadow-sm hover:bg-gray-50 focus:opacity-100 group-hover:opacity-100"
                 >
                   Edit<span className="sr-only">, {event.name}</span>
-                </Link> */}
+                </Link>
               </li>
             ))}
           </ol>

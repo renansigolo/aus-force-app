@@ -144,7 +144,7 @@ export function Pricing() {
                 </span>
               </p>
               <Link
-                href={tier.href}
+                href={tier.href as any}
                 aria-describedby={tier.id}
                 className={cn(
                   tier.mostPopular
