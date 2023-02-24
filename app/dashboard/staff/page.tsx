@@ -1,14 +1,24 @@
+"use client"
+
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Empty } from "@/components/Empty"
+import Modal from "@/components/Modal"
+import NiceModal from "@ebay/nice-modal-react"
 
 export default function StaffPage() {
+  const showModal = () =>
+    NiceModal.show(Modal, {
+      title: "New Site",
+      children: <StaffContent />,
+    })
+
   return (
     <SectionWrapper>
       <SectionHeading
         title="Staff"
         buttonLabel="New Staff"
-        children={<StaffContent />}
+        buttonAction={showModal}
       />
       <section className="py-8">
         <Empty title="staff" />
@@ -31,11 +41,11 @@ function StaffContent() {
             </label>
             <div className="mt-1">
               <input
+                required
                 id="email"
                 name="email"
                 type="email"
                 autoComplete="email"
-                required
               />
             </div>
           </div>

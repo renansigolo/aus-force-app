@@ -22,7 +22,7 @@ const tiers = [
     features: [
       "5 owener's accounts",
       "Up to 10 client's accounts",
-      "Basic support",
+      "Basic app support",
     ],
     mostPopular: false,
   },
@@ -35,8 +35,7 @@ const tiers = [
     features: [
       "10 owener's accounts",
       "Up to 20 client's accounts",
-      "Basic support",
-      "48-hour support response time",
+      "Basic app support",
     ],
     mostPopular: false,
   },
@@ -49,8 +48,7 @@ const tiers = [
     features: [
       "20 owener's accounts",
       "Up to 40 client's accounts",
-      "Advanced support",
-      "24-hour support response time",
+      "Advanced app support",
     ],
     mostPopular: true,
   },
@@ -63,8 +61,8 @@ const tiers = [
     features: [
       "Unlimited owener's accounts",
       "Unlimited client's accounts",
-      "Advanced support",
-      "1-hour, dedicated support response time",
+      "Advanced app support",
+      "Dedicated app support response time",
       "Custom reporting tools",
     ],
     mostPopular: false,
@@ -146,7 +144,7 @@ export function Pricing() {
                 </span>
               </p>
               <Link
-                href={tier.href}
+                href={tier.href as any}
                 aria-describedby={tier.id}
                 className={cn(
                   tier.mostPopular

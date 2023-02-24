@@ -84,11 +84,11 @@ export default function SignUpPage() {
                     <input
                       type="file"
                       className="btn ml-4 w-full"
+                      accept="image/x-png,image/gif,image/jpeg"
                       onChange={(e) => {
                         if (!e.target.files) return
                         setPicture(URL.createObjectURL(e.target.files[0]))
                       }}
-                      accept="image/x-png,image/gif,image/jpeg"
                     />
                   </div>
                 </div>
@@ -104,11 +104,11 @@ export default function SignUpPage() {
                   </label>
                   <div className="mt-1">
                     <input
+                      required
                       type="text"
                       name="firstName"
                       id="firstName"
                       autoComplete="given-name"
-                      required
                     />
                   </div>
                 </div>
@@ -355,11 +355,11 @@ export default function SignUpPage() {
                   </label>
                   <div className="mt-1">
                     <input
+                      required
                       id="email"
                       name="email"
                       type="email"
                       autoComplete="email"
-                      required
                     />
                   </div>
                 </div>
@@ -373,11 +373,11 @@ export default function SignUpPage() {
                   </label>
                   <div className="mt-1">
                     <input
+                      required
                       id="password"
                       name="password"
                       type="password"
                       autoComplete="password"
-                      required
                     />
                   </div>
                 </div>
@@ -391,10 +391,10 @@ export default function SignUpPage() {
                   </label>
                   <div className="mt-1">
                     <input
+                      required
                       id="passwordConfirmation"
                       name="passwordConfirmation"
                       type="password"
-                      required
                     />
                   </div>
                 </div>

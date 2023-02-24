@@ -1,12 +1,11 @@
 import { Providers } from "@/app/Providers"
-import { Inter } from "@next/font/google"
+import { Inter } from "next/font/google"
 import "./globals.css"
 
 const isProduction = process.env.NODE_ENV === "production"
 
 const inter = Inter({
   subsets: ["latin"],
-  display: "swap",
 })
 
 export const metadata = {
