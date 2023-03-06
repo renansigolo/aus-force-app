@@ -1,11 +1,25 @@
+"use client"
+
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Empty } from "@/components/Empty"
+import Modal from "@/components/Modal"
+import NiceModal from "@ebay/nice-modal-react"
 
 export default function JobRequestsPage() {
+  const showModal = () =>
+    NiceModal.show(Modal, {
+      title: "New Site",
+      children: <JobRequestsContent />,
+    })
+
   return (
     <SectionWrapper>
-      <SectionHeading title="Job Requests" buttonLabel="New Job" />
+      <SectionHeading
+        title="Job Requests"
+        buttonLabel="New Job"
+        buttonAction={showModal}
+      />
       <section className="py-8">
         <Empty title="job requests" />
       </section>
@@ -23,7 +37,7 @@ function JobRequestsContent() {
               htmlFor="site-name"
               className="block text-sm font-medium text-gray-700"
             >
-              Site Name
+              Job Site
             </label>
             <div className="mt-1">
               <input required id="site-name" name="site-name" type="text" />
@@ -32,13 +46,48 @@ function JobRequestsContent() {
 
           <div className="col-span-1">
             <label
-              htmlFor="address"
+              htmlFor="role"
               className="block text-sm font-medium text-gray-700"
             >
-              Address
+              Job position
             </label>
             <div className="mt-1">
-              <input required id="address" name="address" type="text" />
+              <select id="role" name="role">
+                <option>Supervisor</option>
+                <option>Manager</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="col-span-1">
+            <label
+              htmlFor="start-datetime"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Start Time
+            </label>
+            <div className="mt-1">
+              <input
+                type="datetime-local"
+                name="start-datetime"
+                id="start-datetime"
+              />
+            </div>
+          </div>
+
+          <div className="col-span-1">
+            <label
+              htmlFor="end-datetime"
+              className="block text-sm font-medium text-gray-700"
+            >
+              End Time
+            </label>
+            <div className="mt-1">
+              <input
+                type="datetime-local"
+                name="end-datetime"
+                id="end-datetime"
+              />
             </div>
           </div>
 
@@ -46,16 +95,16 @@ function JobRequestsContent() {
             <div className="relative flex items-start">
               <div className="flex h-5 items-center">
                 <input
-                  id="parking"
-                  aria-describedby="parking-description"
-                  name="parking"
+                  id="break"
+                  aria-describedby="break-description"
+                  name="break"
                   type="checkbox"
                   className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                 />
               </div>
               <div className="ml-3 text-sm">
-                <label htmlFor="parking" className="font-medium text-gray-700">
-                  Parking available for workers?
+                <label htmlFor="break" className="font-medium text-gray-700">
+                  Break?
                 </label>
               </div>
             </div>
@@ -70,6 +119,22 @@ function JobRequestsContent() {
             </label>
             <div className="mt-1">
               <textarea id="additional-notes" name="additional-notes" />
+            </div>
+          </div>
+
+          <div className="col-span-1">
+            <label
+              htmlFor="supplier"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Select Supplier
+            </label>
+            <div className="mt-1">
+              <select id="supplier" name="supplier">
+                <option>Supplier 01</option>
+                <option>Supplier 02</option>
+                <option>Supplier 03</option>
+              </select>
             </div>
           </div>
         </div>

@@ -49,6 +49,7 @@ function StaffContent() {
               />
             </div>
           </div>
+
           <div className="col-span-1">
             <label
               htmlFor="role"
@@ -63,6 +64,7 @@ function StaffContent() {
               </select>
             </div>
           </div>
+
           <div className="col-span-1">
             <label
               htmlFor="job-site"
