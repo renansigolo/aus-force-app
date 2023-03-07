@@ -96,7 +96,7 @@ export function Navbar() {
                     {navigation.map((item) => (
                       <Link
                         key={item.name}
-                        href={item.href as any}
+                        href={item.href}
                         aria-current={isActive(item.href) ? "page" : undefined}
                         className={cn(
                           isActive(item.href)
@@ -153,7 +153,7 @@ export function Navbar() {
                           <Menu.Item key={item.name}>
                             {({ active }) => (
                               <Link
-                                href={item.href as any}
+                                href={item.href}
                                 className={cn(
                                   active ? "bg-gray-100" : "",
                                   "block py-2 px-4 text-sm text-gray-700"
@@ -185,7 +185,7 @@ export function Navbar() {
                     {navigation.map((item) => (
                       <Link
                         key={item.name}
-                        href={item.href as any}
+                        href={item.href}
                         aria-current={isActive(item.href) ? "page" : undefined}
                         onClick={() => close()}
                         className={cn(
@@ -231,7 +231,7 @@ export function Navbar() {
                       {userNavigation.map((item) => (
                         <Link
                           key={item.name}
-                          href={item.href as any}
+                          href={item.href}
                           onClick={() => close()}
                           className="block rounded-md py-2 px-3 text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
                         >
