@@ -1,24 +1,37 @@
 "use client"
 
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
+import { FormInputError } from "@/components/FormInputError"
 import { auth } from "@/lib/firebase"
+import { zodResolver } from "@hookform/resolvers/zod"
 import { FirebaseError } from "firebase/app"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { useForm, UseFormRegister } from "react-hook-form"
 import toast from "react-hot-toast"
+import { z } from "zod"
+
+const FormSchema = z.object({
+  email: z.string().email(),
+  password: z.string().nonempty().min(6),
+})
+type FormSchemaType = z.infer<typeof FormSchema>
 
 export default function LogInPage() {
   const router = useRouter()
   const [submitting, setSubmitting] = useState(false)
 
-  const handleLogIn = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setSubmitting(true)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormSchemaType>({
+    resolver: zodResolver(FormSchema),
+  })
 
-    // Read the form data
-    const form = new FormData(e.currentTarget)
-    const formData = Object.fromEntries(form.entries()) as any
+  const onSubmit = (formData: FormSchemaType) => {
+    setSubmitting(true)
 
     signInWithEmailAndPassword(auth, formData.email, formData.password)
       .then((userCredential) => {
@@ -40,43 +53,25 @@ export default function LogInPage() {
               page="log-in"
             />
 
-            <form className="space-y-6" onSubmit={handleLogIn}>
+            <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Email address
-                </label>
-                <div className="mt-1">
-                  <input
-                    required
-                    disabled={submitting}
-                    id="email"
-                    name="email"
-                    type="email"
-                    autoComplete="email"
-                  />
-                </div>
+                <FormInput
+                  register={register}
+                  id="email"
+                  name="Email address"
+                  type="email"
+                />
+                <FormInputError message={errors.email?.message} />
               </div>
 
               <div>
-                <label
-                  htmlFor="password"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Password
-                </label>
-                <div className="mt-1">
-                  <input
-                    required
-                    disabled={submitting}
-                    id="password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                  />
-                </div>
+                <FormInput
+                  register={register}
+                  id="password"
+                  name="Password"
+                  type="password"
+                />
+                <FormInputError message={errors.password?.message} />
               </div>
 
               <div className="flex items-center justify-between">
@@ -90,18 +85,33 @@ export default function LogInPage() {
                 </div>
               </div>
 
-              <div>
-                <button
-                  disabled={submitting}
-                  className="btn btn-primary flex w-full justify-center"
-                >
-                  Log in
-                </button>
-              </div>
+              <button
+                disabled={submitting}
+                className="btn btn-primary flex w-full justify-center"
+              >
+                Log in
+              </button>
             </form>
           </div>
         </div>
       </div>
+    </div>
+  )
+}
+
+type FormInputProps = {
+  register: UseFormRegister<FormSchemaType>
+  id: keyof FormSchemaType
+  name: string
+  type: string
+}
+function FormInput({ register, id, name, type }: FormInputProps) {
+  return (
+    <div>
+      <label htmlFor={id} className="form-label">
+        {name}
+      </label>
+      <input className="form-input" type={type} {...register(id)} />
     </div>
   )
 }
