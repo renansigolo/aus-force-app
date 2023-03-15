@@ -59,12 +59,18 @@ export default function LogInPage() {
                   register={register}
                   id="email"
                   name="Email address"
+                  type="email"
                 />
                 <FormInputError message={errors.email?.message} />
               </div>
 
               <div>
-                <FormInput register={register} id="password" name="Password" />
+                <FormInput
+                  register={register}
+                  id="password"
+                  name="Password"
+                  type="password"
+                />
                 <FormInputError message={errors.password?.message} />
               </div>
 
@@ -97,14 +103,15 @@ type FormInputProps = {
   register: UseFormRegister<FormSchemaType>
   id: keyof FormSchemaType
   name: string
+  type: string
 }
-function FormInput({ register, id, name }: FormInputProps) {
+function FormInput({ register, id, name, type }: FormInputProps) {
   return (
     <div>
       <label htmlFor={id} className="form-label">
         {name}
       </label>
-      <input className="form-input" {...register(id)} />
+      <input className="form-input" type={type} {...register(id)} />
     </div>
   )
 }
