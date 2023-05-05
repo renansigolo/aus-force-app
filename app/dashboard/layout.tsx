@@ -1,8 +1,9 @@
 import { AuthCheck } from "@/components/AuthCheck"
 import { Navbar } from "@/components/dashboard/Navbar"
+import { ReactNode } from "react"
 
 type DashboardLayoutProps = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export default function DashboardLayout({ children }: DashboardLayoutProps) {

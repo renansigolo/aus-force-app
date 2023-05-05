@@ -1,5 +1,6 @@
 import { Providers } from "@/app/Providers"
 import { Inter } from "next/font/google"
+import { ReactNode } from "react"
 import "./globals.css"
 
 const isProduction = process.env.NODE_ENV === "production"
@@ -15,7 +16,7 @@ export const metadata = {
   },
   applicationName: "AUS Force App",
   description: "AUS Force App",
-  authors: ["Renan Sigolo", "Vinicius Turl"],
+  authors: [{ name: "Renan Sigolo", url: "https://renansigolo.com" }],
   creator: "Renan Sigolo",
   colorScheme: "light",
   icons: {
@@ -37,7 +38,7 @@ export const metadata = {
     url: "https://aus-force-app.vercel.app",
     locale: "en-AU",
     type: "website",
-    image: {
+    images: {
       url: "https://aus-force-app.vercel.app/og.png",
       width: 1200,
       height: 627,
@@ -45,17 +46,16 @@ export const metadata = {
     },
   },
   twitter: {
-    card: "summary_large_image",
     title: "AUS Force App",
     description: "AUS Force App",
     creator: "@renan_sigolo",
     creatorId: "23168747",
-    image: "https://aus-force-app.vercel.app/og.png",
+    images: "https://aus-force-app.vercel.app/og.png",
   },
 }
 
 type RootLayoutProps = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export default function RootLayout({ children }: RootLayoutProps) {

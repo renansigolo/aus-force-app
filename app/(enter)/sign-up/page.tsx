@@ -2,36 +2,118 @@
 
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
 import { auth, db } from "@/lib/firebase"
+import { RegisterFormSchema, RegisterFormSchemaType } from "@/lib/schemas"
+import { zodResolver } from "@hookform/resolvers/zod"
+import Form from "@rjsf/core"
+import { RJSFSchema } from "@rjsf/utils"
+import validator from "@rjsf/validator-ajv8"
 import { FirebaseError } from "firebase/app"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { addDoc, collection } from "firebase/firestore"
 import { useRouter } from "next/navigation"
-import { FormEvent, useState } from "react"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
+
+const schema: RJSFSchema = {
+  title: "Personal Details",
+  type: "object",
+  required: ["title"],
+  properties: {
+    title: { type: "string", title: "Title", default: "A new task" },
+    done: { type: "boolean", title: "Done?", default: false },
+    age: { type: "tel", title: "Age" },
+  },
+}
+
+const personalForm = [
+  {
+    required: true,
+    id: "firstName",
+    label: "First name",
+    type: "text",
+    autoComplete: "given-name",
+  },
+  {
+    required: true,
+    id: "lastName",
+    label: "Last Name",
+    type: "text",
+    autoComplete: "family-name",
+  },
+  {
+    required: true,
+    id: "phone",
+    label: "Phone Number",
+    type: "tel",
+    autoComplete: "phone",
+  },
+  {
+    required: true,
+    id: "dob",
+    label: "Date of birthday",
+    type: "date",
+    autoComplete: "bday",
+  },
+]
+
+const businessForm = [
+  {
+    required: true,
+    id: "legalName",
+    label: "Legal Name",
+    type: "text",
+    autoComplete: "company",
+  },
+  {
+    required: true,
+    id: "tradingName",
+    label: "Trading Name",
+    type: "text",
+    autoComplete: "organization",
+  },
+  {
+    required: true,
+    id: "abn",
+    label: "ABN number",
+    type: "number",
+    autoComplete: "",
+  },
+  {
+    required: false,
+    id: "acn",
+    label: "ACN number",
+    type: "number",
+    autoComplete: "",
+  },
+]
 
 export default function SignUpPage() {
   const router = useRouter()
   const [picture, setPicture] = useState("/images/profile-placeholder.png")
   const [submitting, setSubmitting] = useState(false)
+  const log = (type: any) => console.log.bind(console, type)
 
-  const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<RegisterFormSchemaType>({
+    resolver: zodResolver(RegisterFormSchema),
+  })
+
+  const signUp = async (formData: RegisterFormSchemaType) => {
     setSubmitting(true)
-
-    // Read the form data
-    const form = e.target as HTMLFormElement
-    const formData = new FormData(form)
-    const formJson = Object.fromEntries(formData.entries()) as any
 
     await createUserWithEmailAndPassword(
       auth,
-      formJson.email,
-      formJson.password
+      formData.email,
+      formData.password
     ).then(async (userCredential) => {
       await addDoc(collection(db, "users"), {
-        ...formJson,
+        ...formData,
         uid: userCredential.user.uid,
-        displayName: `${formJson.firstName} ${formJson.lastName}`,
+        displayName: `${formData.firstName} ${formData.lastName}`,
       })
         .then(() => {
           router.push("/dashboard")
@@ -46,14 +128,23 @@ export default function SignUpPage() {
 
   return (
     <div className="sm:mx-auto sm:w-full sm:max-w-2xl">
-      <div className="min-h-full bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <div className="min-h-full bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
         <EnterHeader
           title="Sign Up"
           description="Enter your details below to sign-up for a new account"
         />
+
+        <Form
+          schema={schema}
+          validator={validator}
+          onChange={log("changed")}
+          onSubmit={log("submitted")}
+          onError={log("errors")}
+        />
+
         <form
           className="my-12 space-y-8 divide-y divide-gray-200"
-          onSubmit={handleSignUp}
+          onSubmit={handleSubmit(signUp)}
         >
           <div className="space-y-8 divide-y divide-gray-200">
             {/* Profile Details */}
@@ -67,7 +158,7 @@ export default function SignUpPage() {
                 </p>
               </div>
 
-              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+              <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
                 <div className="sm:col-span-6">
                   <label
                     htmlFor="photo"
@@ -94,76 +185,26 @@ export default function SignUpPage() {
                 </div>
               </div>
 
-              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="firstName"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    First name
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      required
-                      type="text"
-                      name="firstName"
-                      id="firstName"
-                      autoComplete="given-name"
-                    />
+              <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
+                {personalForm.map((field, index) => (
+                  <div key={index} className="sm:col-span-3">
+                    <label
+                      htmlFor={field.id}
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      {field.label}
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        required
+                        type={field.type}
+                        name={field.id}
+                        id={field.id}
+                        autoComplete={field.autoComplete}
+                      />
+                    </div>
                   </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="last-name"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Last name
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      required
-                      type="text"
-                      name="lastName"
-                      id="lastName"
-                      autoComplete="family-name"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="tel"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Phone Number
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      id="tel"
-                      name="tel"
-                      type="tel"
-                      autoComplete="phone"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="dob"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Date of birthday
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      id="dob"
-                      name="dob"
-                      type="date"
-                      autoComplete="bday"
-                    />
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
@@ -177,74 +218,26 @@ export default function SignUpPage() {
                   Enter the details of your business.
                 </p>
               </div>
-              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="legal-name"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Legal name
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      name="legalName"
-                      id="legalName"
-                      autoComplete="company"
-                    />
+              <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
+                {businessForm.map((field, index) => (
+                  <div key={index} className="sm:col-span-3">
+                    <label
+                      htmlFor={field.id}
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      {field.label}
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        required
+                        type={field.type}
+                        name={field.id}
+                        id={field.id}
+                        autoComplete={field.autoComplete}
+                      />
+                    </div>
                   </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="trading-name"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Trading name
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      name="tradingName"
-                      id="tradingName"
-                      autoComplete="organization"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="abn"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    ABN number
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      id="abn"
-                      name="abn"
-                      type="number"
-                      autoComplete="abn"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="acn"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    ACN number
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      id="acn"
-                      name="acn"
-                      type="number"
-                      autoComplete="acn"
-                    />
-                  </div>
-                </div>
+                ))}
 
                 <div className="sm:col-span-3">
                   <label
@@ -345,7 +338,7 @@ export default function SignUpPage() {
                 </p>
               </div>
 
-              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+              <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
                 <div className="sm:col-span-6">
                   <label
                     htmlFor="email"

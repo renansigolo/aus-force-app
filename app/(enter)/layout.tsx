@@ -1,7 +1,8 @@
 import { Container } from "@/components/Container"
+import { ReactNode } from "react"
 
 type EnterLayoutProps = {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 export default function EnterLayout({ children }: EnterLayoutProps) {

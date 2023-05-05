@@ -2,21 +2,16 @@
 
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
 import { FormInputError } from "@/components/FormInputError"
+import { FormInputWrapper } from "@/components/FormInputWrapper"
 import { auth } from "@/lib/firebase"
+import { LoginFormSchema, LoginFormSchemaType } from "@/lib/schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FirebaseError } from "firebase/app"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { useForm, UseFormRegister } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
-import { z } from "zod"
-
-const FormSchema = z.object({
-  email: z.string().email(),
-  password: z.string().nonempty().min(6),
-})
-type FormSchemaType = z.infer<typeof FormSchema>
 
 export default function LogInPage() {
   const router = useRouter()
@@ -26,11 +21,11 @@ export default function LogInPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormSchemaType>({
-    resolver: zodResolver(FormSchema),
+  } = useForm<LoginFormSchemaType>({
+    resolver: zodResolver(LoginFormSchema),
   })
 
-  const onSubmit = (formData: FormSchemaType) => {
+  const login = (formData: LoginFormSchemaType) => {
     setSubmitting(true)
 
     signInWithEmailAndPassword(auth, formData.email, formData.password)
@@ -44,7 +39,7 @@ export default function LogInPage() {
 
   return (
     <div className="min-h-full sm:mx-auto sm:w-full sm:max-w-2xl">
-      <div className="min-h-full bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <div className="min-h-full bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
         <div className="flex h-full flex-col justify-center">
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
             <EnterHeader
@@ -53,9 +48,9 @@ export default function LogInPage() {
               page="log-in"
             />
 
-            <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+            <form className="space-y-6" onSubmit={handleSubmit(login)}>
               <div>
-                <FormInput
+                <FormInputWrapper
                   register={register}
                   id="email"
                   name="Email address"
@@ -65,7 +60,7 @@ export default function LogInPage() {
               </div>
 
               <div>
-                <FormInput
+                <FormInputWrapper
                   register={register}
                   id="password"
                   name="Password"
@@ -95,23 +90,6 @@ export default function LogInPage() {
           </div>
         </div>
       </div>
-    </div>
-  )
-}
-
-type FormInputProps = {
-  register: UseFormRegister<FormSchemaType>
-  id: keyof FormSchemaType
-  name: string
-  type: string
-}
-function FormInput({ register, id, name, type }: FormInputProps) {
-  return (
-    <div>
-      <label htmlFor={id} className="form-label">
-        {name}
-      </label>
-      <input className="form-input" type={type} {...register(id)} />
     </div>
   )
 }
