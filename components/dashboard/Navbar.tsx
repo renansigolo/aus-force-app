@@ -8,7 +8,6 @@ import { BellIcon } from "@heroicons/react/24/outline"
 import { signOut } from "firebase/auth"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import router from "next/router"
 import { Fragment } from "react"
 import { useAuthState } from "react-firebase-hooks/auth"
 
@@ -60,7 +59,7 @@ export function Navbar() {
 
   const signOutNow = () => {
     signOut(auth)
-    router.reload()
+    window.location.reload()
   }
 
   return (

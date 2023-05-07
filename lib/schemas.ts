@@ -9,8 +9,9 @@ export type LoginFormSchemaType = z.infer<typeof LoginFormSchema>
 export const RegisterFormSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
-  phoneNumber: z.number(),
+  phone: z.number(),
   email: z.string().email(),
+  dob: z.number(),
   password: z.string().nonempty().min(6),
 })
 export type RegisterFormSchemaType = z.infer<typeof RegisterFormSchema>

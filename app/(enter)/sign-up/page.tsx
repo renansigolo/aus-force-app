@@ -1,12 +1,8 @@
 "use client"
 
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
+import { Container } from "@/components/Container"
 import { auth, db } from "@/lib/firebase"
-import { RegisterFormSchema, RegisterFormSchemaType } from "@/lib/schemas"
-import { zodResolver } from "@hookform/resolvers/zod"
-import Form from "@rjsf/core"
-import { RJSFSchema } from "@rjsf/utils"
-import validator from "@rjsf/validator-ajv8"
 import { FirebaseError } from "firebase/app"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { addDoc, collection } from "firebase/firestore"
@@ -15,41 +11,34 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
 
-const schema: RJSFSchema = {
-  title: "Personal Details",
-  type: "object",
-  required: ["title"],
-  properties: {
-    title: { type: "string", title: "Title", default: "A new task" },
-    done: { type: "boolean", title: "Done?", default: false },
-    age: { type: "tel", title: "Age" },
-  },
-}
-
 const personalForm = [
   {
-    required: true,
+    required: "First Name is required",
+    name: "firstName",
     id: "firstName",
     label: "First name",
     type: "text",
     autoComplete: "given-name",
   },
   {
-    required: true,
+    required: "Last Name is required",
+    name: "lastName",
     id: "lastName",
-    label: "Last Name",
+    label: "Last name",
     type: "text",
     autoComplete: "family-name",
   },
   {
-    required: true,
+    required: "Phone Number is required",
+    name: "phone",
     id: "phone",
     label: "Phone Number",
     type: "tel",
     autoComplete: "phone",
   },
   {
-    required: true,
+    required: "Date of birthday is required",
+    name: "dob",
     id: "dob",
     label: "Date of birthday",
     type: "date",
@@ -59,28 +48,32 @@ const personalForm = [
 
 const businessForm = [
   {
-    required: true,
+    required: "Legal Name is required",
+    name: "legalName",
     id: "legalName",
     label: "Legal Name",
     type: "text",
     autoComplete: "company",
   },
   {
-    required: true,
+    required: "Trading Name is required",
+    name: "tradingName",
     id: "tradingName",
     label: "Trading Name",
     type: "text",
     autoComplete: "organization",
   },
   {
-    required: true,
+    required: "ABN is required",
+    name: "abn",
     id: "abn",
     label: "ABN number",
     type: "number",
     autoComplete: "",
   },
   {
-    required: false,
+    required: "",
+    name: "acn",
     id: "acn",
     label: "ACN number",
     type: "number",
@@ -88,58 +81,73 @@ const businessForm = [
   },
 ]
 
+const accountsForm = [
+  {
+    required: "Email Address is required",
+    name: "email",
+    id: "email",
+    label: "Email Address",
+    type: "text",
+    autoComplete: "email",
+  },
+  {
+    required: "Password is required",
+    name: "password",
+    id: "password",
+    label: "Password",
+    type: "password",
+    autoComplete: "password",
+  },
+  {
+    required: "Confirm Password is required",
+    name: "confirmPassword",
+    id: "confirmPassword",
+    label: "Confirm Password",
+    type: "password",
+    autoComplete: "",
+  },
+]
+
 export default function SignUpPage() {
   const router = useRouter()
   const [picture, setPicture] = useState("/images/profile-placeholder.png")
-  const [submitting, setSubmitting] = useState(false)
-  const log = (type: any) => console.log.bind(console, type)
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-  } = useForm<RegisterFormSchemaType>({
-    resolver: zodResolver(RegisterFormSchema),
-  })
+    formState: { errors, isDirty, isValid, isSubmitting },
+  } = useForm()
 
-  const signUp = async (formData: RegisterFormSchemaType) => {
-    setSubmitting(true)
+  const signUp = async (formData: any) => {
+    console.log("🚀 ~ signUp ~ formData:", formData)
 
     await createUserWithEmailAndPassword(
       auth,
       formData.email,
       formData.password
-    ).then(async (userCredential) => {
-      await addDoc(collection(db, "users"), {
-        ...formData,
-        uid: userCredential.user.uid,
-        displayName: `${formData.firstName} ${formData.lastName}`,
-      })
-        .then(() => {
-          router.push("/dashboard")
-          toast.success(
-            `Account created successfully, welcome ${userCredential.user.email}`
-          )
-        })
-        .catch((error: FirebaseError) => toast.error(error.message))
-        .finally(() => setSubmitting(false))
-    })
+    )
+      .then(
+        async (userCredential) =>
+          await addDoc(collection(db, "users"), {
+            ...formData,
+            uid: userCredential.user.uid,
+            displayName: `${formData.firstName} ${formData.lastName}`,
+          }).then(() => {
+            router.push("/dashboard")
+            toast.success(
+              `Account created successfully, welcome ${userCredential.user.email}`
+            )
+          })
+      )
+      .catch((error: FirebaseError) => toast.error(error.message))
   }
 
   return (
-    <div className="sm:mx-auto sm:w-full sm:max-w-2xl">
+    <Container>
       <div className="min-h-full bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
         <EnterHeader
           title="Sign Up"
           description="Enter your details below to sign-up for a new account"
-        />
-
-        <Form
-          schema={schema}
-          validator={validator}
-          onChange={log("changed")}
-          onSubmit={log("submitted")}
-          onError={log("errors")}
         />
 
         <form
@@ -173,6 +181,7 @@ export default function SignUpPage() {
                       className="h-12 w-12 rounded-full object-fill"
                     />
                     <input
+                      // {...register("profileImage")}
                       type="file"
                       className="btn ml-4 w-full"
                       accept="image/x-png,image/gif,image/jpeg"
@@ -193,15 +202,19 @@ export default function SignUpPage() {
                       className="block text-sm font-medium text-gray-700"
                     >
                       {field.label}
+                      {field.required && (
+                        <span className="text-red-500">*</span>
+                      )}
                     </label>
                     <div className="mt-1">
                       <input
-                        required
                         type={field.type}
-                        name={field.id}
-                        id={field.id}
                         autoComplete={field.autoComplete}
+                        {...register(field.id, { required: field.required })}
                       />
+                      {errors[field.id] && (
+                        <span>{String(errors[field.id]?.message)}</span>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -226,20 +239,24 @@ export default function SignUpPage() {
                       className="block text-sm font-medium text-gray-700"
                     >
                       {field.label}
+                      {field.required && (
+                        <span className="text-red-500">*</span>
+                      )}
                     </label>
                     <div className="mt-1">
                       <input
-                        required
                         type={field.type}
-                        name={field.id}
-                        id={field.id}
                         autoComplete={field.autoComplete}
+                        {...register(field.id, { required: field.required })}
                       />
+                      {errors[field.id] && (
+                        <span>{String(errors[field.id]?.message)}</span>
+                      )}
                     </div>
                   </div>
                 ))}
 
-                <div className="sm:col-span-3">
+                <div className="sm:col-span-6">
                   <label
                     htmlFor="country"
                     className="block text-sm font-medium text-gray-700"
@@ -248,8 +265,7 @@ export default function SignUpPage() {
                   </label>
                   <div className="mt-1">
                     <select
-                      id="country"
-                      name="country"
+                      {...register("country")}
                       autoComplete="country-name"
                     >
                       <option>Australia</option>
@@ -266,9 +282,8 @@ export default function SignUpPage() {
                   </label>
                   <div className="mt-1">
                     <input
+                      {...register("streetAddress")}
                       type="text"
-                      name="streetAddress"
-                      id="streetAddress"
                       autoComplete="street-address"
                     />
                   </div>
@@ -283,9 +298,8 @@ export default function SignUpPage() {
                   </label>
                   <div className="mt-1">
                     <input
+                      {...register("city")}
                       type="text"
-                      name="city"
-                      id="city"
                       autoComplete="address-level2"
                     />
                   </div>
@@ -300,9 +314,8 @@ export default function SignUpPage() {
                   </label>
                   <div className="mt-1">
                     <input
+                      {...register("region")}
                       type="text"
-                      name="region"
-                      id="region"
                       autoComplete="address-level1"
                     />
                   </div>
@@ -317,9 +330,8 @@ export default function SignUpPage() {
                   </label>
                   <div className="mt-1">
                     <input
+                      {...register("postalCode")}
                       type="text"
-                      name="postal-code"
-                      id="postal-code"
                       autoComplete="postal-code"
                     />
                   </div>
@@ -339,71 +351,45 @@ export default function SignUpPage() {
               </div>
 
               <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
-                <div className="sm:col-span-6">
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Email address
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      required
-                      id="email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                    />
+                {accountsForm.map((field, index) => (
+                  <div key={index} className="sm:col-span-6">
+                    <label
+                      htmlFor={field.id}
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      {field.label}
+                      {field.required && (
+                        <span className="text-red-500">*</span>
+                      )}
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        type={field.type}
+                        autoComplete={field.autoComplete}
+                        {...register(field.id, { required: field.required })}
+                      />
+                      {errors[field.id] && (
+                        <span>{String(errors[field.id]?.message)}</span>
+                      )}
+                    </div>
                   </div>
-                </div>
-
-                <div className="sm:col-span-6">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Password
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      required
-                      id="password"
-                      name="password"
-                      type="password"
-                      autoComplete="password"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-6">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Password Confirmation
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      required
-                      id="passwordConfirmation"
-                      name="passwordConfirmation"
-                      type="password"
-                    />
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
 
           <div className="pt-5">
             <div className="flex justify-end">
-              <button className="btn btn-primary" disabled={submitting}>
+              <button
+                className="btn btn-primary"
+                disabled={isSubmitting || !isDirty}
+              >
                 Register with email
               </button>
             </div>
           </div>
         </form>
       </div>
-    </div>
+    </Container>
   )
 }
