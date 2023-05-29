@@ -10,6 +10,7 @@ const inter = Inter({
 })
 
 export const metadata = {
+  metadataBase: new URL("https://aus-force-app.vercel.app"),
   title: {
     default: "AUS Force App",
     template: "AUS Force App | %s",
