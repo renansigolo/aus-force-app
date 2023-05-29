@@ -6,7 +6,7 @@ import { BanknotesIcon } from "@heroicons/react/20/solid"
 const transactions = [
   {
     id: 1,
-    name: "Payment from comapny ABC",
+    name: "Payment from company ABC",
     href: "#",
     amount: "$20,000",
     currency: "AUD",
@@ -16,7 +16,7 @@ const transactions = [
   },
   {
     id: 2,
-    name: "Payment from comapny DEF",
+    name: "Payment from company DEF",
     href: "#",
     amount: "$20,000",
     currency: "AUD",

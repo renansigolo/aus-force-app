@@ -4,6 +4,7 @@ import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Empty } from "@/components/Empty"
 import Modal from "@/components/Modal"
+import { Role } from "@/components/Roles"
 import NiceModal from "@ebay/nice-modal-react"
 
 export default function JobRequestsPage() {
@@ -15,14 +16,16 @@ export default function JobRequestsPage() {
 
   return (
     <SectionWrapper>
-      <SectionHeading
-        title="Job Requests"
-        buttonLabel="New Job"
-        buttonAction={showModal}
-      />
-      <section className="py-8">
-        <Empty title="job requests" />
-      </section>
+      <Role role="client">
+        <SectionHeading
+          title="Job Requests"
+          buttonLabel="New Job"
+          buttonAction={showModal}
+        />
+        <section className="py-8">
+          <Empty title="job requests" />
+        </section>
+      </Role>
     </SectionWrapper>
   )
 }

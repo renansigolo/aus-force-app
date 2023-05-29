@@ -1,7 +1,9 @@
 "use client"
 
+import { ReactNode } from "react"
+
 type CardProps = {
-  children: React.ReactNode
+  children: ReactNode
   buttonAction: () => void
 }
 

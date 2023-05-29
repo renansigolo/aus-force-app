@@ -1,6 +1,7 @@
 type FormInputErrorProps = {
   message?: string | undefined
 }
+
 export function FormInputError({ message }: FormInputErrorProps) {
   if (!message) return null
 

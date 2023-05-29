@@ -1,59 +1,159 @@
 "use client"
 
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
+import { Container } from "@/components/Container"
+import { Role } from "@/components/Roles"
 import { auth, db } from "@/lib/firebase"
 import { FirebaseError } from "firebase/app"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { addDoc, collection } from "firebase/firestore"
 import { useRouter } from "next/navigation"
-import { FormEvent, useState } from "react"
+import { useState } from "react"
+import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
+
+const personalForm = [
+  {
+    required: "First Name is required",
+    name: "firstName",
+    id: "firstName",
+    label: "First name",
+    type: "text",
+    autoComplete: "given-name",
+  },
+  {
+    required: "Last Name is required",
+    name: "lastName",
+    id: "lastName",
+    label: "Last name",
+    type: "text",
+    autoComplete: "family-name",
+  },
+  {
+    required: "Phone Number is required",
+    name: "phone",
+    id: "phone",
+    label: "Phone Number",
+    type: "tel",
+    autoComplete: "phone",
+  },
+  {
+    required: "Date of birthday is required",
+    name: "dob",
+    id: "dob",
+    label: "Date of birthday",
+    type: "date",
+    autoComplete: "bday",
+  },
+]
+
+const businessForm = [
+  {
+    required: "Legal Name is required",
+    name: "legalName",
+    id: "legalName",
+    label: "Legal Name",
+    type: "text",
+    autoComplete: "company",
+  },
+  {
+    required: "Trading Name is required",
+    name: "tradingName",
+    id: "tradingName",
+    label: "Trading Name",
+    type: "text",
+    autoComplete: "organization",
+  },
+  {
+    required: "ABN is required",
+    name: "abn",
+    id: "abn",
+    label: "ABN number",
+    type: "number",
+    autoComplete: "",
+  },
+  {
+    required: "",
+    name: "acn",
+    id: "acn",
+    label: "ACN number",
+    type: "number",
+    autoComplete: "",
+  },
+]
+
+const accountsForm = [
+  {
+    required: "Email Address is required",
+    name: "email",
+    id: "email",
+    label: "Email Address",
+    type: "text",
+    autoComplete: "email",
+  },
+  {
+    required: "Password is required",
+    name: "password",
+    id: "password",
+    label: "Password",
+    type: "password",
+    autoComplete: "password",
+  },
+  {
+    required: "Confirm Password is required",
+    name: "confirmPassword",
+    id: "confirmPassword",
+    label: "Confirm Password",
+    type: "password",
+    autoComplete: "",
+  },
+]
 
 export default function SignUpPage() {
   const router = useRouter()
   const [picture, setPicture] = useState("/images/profile-placeholder.png")
-  const [submitting, setSubmitting] = useState(false)
 
-  const handleSignUp = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setSubmitting(true)
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isDirty, isValid, isSubmitting },
+  } = useForm()
 
-    // Read the form data
-    const form = e.target as HTMLFormElement
-    const formData = new FormData(form)
-    const formJson = Object.fromEntries(formData.entries()) as any
+  const signUp = async (formData: any) => {
+    console.log("🚀 ~ signUp ~ formData:", formData)
 
     await createUserWithEmailAndPassword(
       auth,
-      formJson.email,
-      formJson.password
-    ).then(async (userCredential) => {
-      await addDoc(collection(db, "users"), {
-        ...formJson,
-        uid: userCredential.user.uid,
-        displayName: `${formJson.firstName} ${formJson.lastName}`,
-      })
-        .then(() => {
-          router.push("/dashboard")
-          toast.success(
-            `Account created successfully, welcome ${userCredential.user.email}`
-          )
-        })
-        .catch((error: FirebaseError) => toast.error(error.message))
-        .finally(() => setSubmitting(false))
-    })
+      formData.email,
+      formData.password
+    )
+      .then(
+        async (userCredential) =>
+          await addDoc(collection(db, "users"), {
+            ...formData,
+            uid: userCredential.user.uid,
+            displayName: `${formData.firstName} ${formData.lastName}`,
+          }).then(() => {
+            router.push("/dashboard")
+            toast.success(
+              `Account created successfully, welcome ${userCredential.user.email}`
+            )
+          })
+      )
+      .catch((error: FirebaseError) => toast.error(error.message))
   }
 
   return (
-    <div className="sm:mx-auto sm:w-full sm:max-w-2xl">
-      <div className="min-h-full bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+    <Container>
+      <div className="min-h-full bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
         <EnterHeader
           title="Sign Up"
           description="Enter your details below to sign-up for a new account"
         />
+
         <form
           className="my-12 space-y-8 divide-y divide-gray-200"
-          onSubmit={handleSignUp}
+          onSubmit={handleSubmit(signUp)}
         >
           <div className="space-y-8 divide-y divide-gray-200">
             {/* Profile Details */}
@@ -67,7 +167,7 @@ export default function SignUpPage() {
                 </p>
               </div>
 
-              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
+              <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
                 <div className="sm:col-span-6">
                   <label
                     htmlFor="photo"
@@ -82,6 +182,7 @@ export default function SignUpPage() {
                       className="h-12 w-12 rounded-full object-fill"
                     />
                     <input
+                      // {...register("profileImage")}
                       type="file"
                       className="btn ml-4 w-full"
                       accept="image/x-png,image/gif,image/jpeg"
@@ -94,245 +195,152 @@ export default function SignUpPage() {
                 </div>
               </div>
 
-              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="firstName"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    First name
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      required
-                      type="text"
-                      name="firstName"
-                      id="firstName"
-                      autoComplete="given-name"
-                    />
+              <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
+                {personalForm.map((field, index) => (
+                  <div key={index} className="sm:col-span-3">
+                    <label
+                      htmlFor={field.id}
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      {field.label}
+                      {field.required && (
+                        <span className="text-red-500">*</span>
+                      )}
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        type={field.type}
+                        autoComplete={field.autoComplete}
+                        {...register(field.id, { required: field.required })}
+                      />
+                      {errors[field.id] && (
+                        <span>{String(errors[field.id]?.message)}</span>
+                      )}
+                    </div>
                   </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="last-name"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Last name
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      required
-                      type="text"
-                      name="lastName"
-                      id="lastName"
-                      autoComplete="family-name"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="tel"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Phone Number
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      id="tel"
-                      name="tel"
-                      type="tel"
-                      autoComplete="phone"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="dob"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Date of birthday
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      id="dob"
-                      name="dob"
-                      type="date"
-                      autoComplete="bday"
-                    />
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
             {/* Business Information */}
-            <div className="pt-8">
-              <div>
-                <h3 className="text-lg font-medium leading-6 text-gray-900">
-                  Business Information
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">
-                  Enter the details of your business.
-                </p>
-              </div>
-              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="legal-name"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Legal name
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      name="legalName"
-                      id="legalName"
-                      autoComplete="company"
-                    />
-                  </div>
+            <Role role="client">
+              <div className="pt-8">
+                <div>
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">
+                    Business Information
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Enter the details of your business.
+                  </p>
                 </div>
+                <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
+                  {businessForm.map((field, index) => (
+                    <div key={index} className="sm:col-span-3">
+                      <label
+                        htmlFor={field.id}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        {field.label}
+                        {field.required && (
+                          <span className="text-red-500">*</span>
+                        )}
+                      </label>
+                      <div className="mt-1">
+                        <input
+                          type={field.type}
+                          autoComplete={field.autoComplete}
+                          {...register(field.id, { required: field.required })}
+                        />
+                        {errors[field.id] && (
+                          <span>{String(errors[field.id]?.message)}</span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
 
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="trading-name"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Trading name
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      name="tradingName"
-                      id="tradingName"
-                      autoComplete="organization"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="abn"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    ABN number
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      id="abn"
-                      name="abn"
-                      type="number"
-                      autoComplete="abn"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="acn"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    ACN number
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      id="acn"
-                      name="acn"
-                      type="number"
-                      autoComplete="acn"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-3">
-                  <label
-                    htmlFor="country"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Country
-                  </label>
-                  <div className="mt-1">
-                    <select
-                      id="country"
-                      name="country"
-                      autoComplete="country-name"
+                  <div className="sm:col-span-6">
+                    <label
+                      htmlFor="country"
+                      className="block text-sm font-medium text-gray-700"
                     >
-                      <option>Australia</option>
-                    </select>
+                      Country
+                    </label>
+                    <div className="mt-1">
+                      <select
+                        {...register("country")}
+                        autoComplete="country-name"
+                      >
+                        <option>Australia</option>
+                      </select>
+                    </div>
                   </div>
-                </div>
 
-                <div className="sm:col-span-6">
-                  <label
-                    htmlFor="street-address"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Street address
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      name="streetAddress"
-                      id="streetAddress"
-                      autoComplete="street-address"
-                    />
+                  <div className="sm:col-span-6">
+                    <label
+                      htmlFor="street-address"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Street address
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        {...register("streetAddress")}
+                        type="text"
+                        autoComplete="street-address"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div className="sm:col-span-2">
-                  <label
-                    htmlFor="city"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    City
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      name="city"
-                      id="city"
-                      autoComplete="address-level2"
-                    />
+                  <div className="sm:col-span-2">
+                    <label
+                      htmlFor="city"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      City
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        {...register("city")}
+                        type="text"
+                        autoComplete="address-level2"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div className="sm:col-span-2">
-                  <label
-                    htmlFor="region"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    State / Province
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      name="region"
-                      id="region"
-                      autoComplete="address-level1"
-                    />
+                  <div className="sm:col-span-2">
+                    <label
+                      htmlFor="region"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      State / Province
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        {...register("region")}
+                        type="text"
+                        autoComplete="address-level1"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div className="sm:col-span-2">
-                  <label
-                    htmlFor="postal-code"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    ZIP / Postal code
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      type="text"
-                      name="postal-code"
-                      id="postal-code"
-                      autoComplete="postal-code"
-                    />
+                  <div className="sm:col-span-2">
+                    <label
+                      htmlFor="postal-code"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      ZIP / Postal code
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        {...register("postalCode")}
+                        type="text"
+                        autoComplete="postal-code"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </Role>
 
             {/* Account Details */}
             <div>
@@ -345,72 +353,46 @@ export default function SignUpPage() {
                 </p>
               </div>
 
-              <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-                <div className="sm:col-span-6">
-                  <label
-                    htmlFor="email"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Email address
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      required
-                      id="email"
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                    />
+              <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
+                {accountsForm.map((field, index) => (
+                  <div key={index} className="sm:col-span-6">
+                    <label
+                      htmlFor={field.id}
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      {field.label}
+                      {field.required && (
+                        <span className="text-red-500">*</span>
+                      )}
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        type={field.type}
+                        autoComplete={field.autoComplete}
+                        {...register(field.id, { required: field.required })}
+                      />
+                      {errors[field.id] && (
+                        <span>{String(errors[field.id]?.message)}</span>
+                      )}
+                    </div>
                   </div>
-                </div>
-
-                <div className="sm:col-span-6">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Password
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      required
-                      id="password"
-                      name="password"
-                      type="password"
-                      autoComplete="password"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-6">
-                  <label
-                    htmlFor="password"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Password Confirmation
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      required
-                      id="passwordConfirmation"
-                      name="passwordConfirmation"
-                      type="password"
-                    />
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>
 
           <div className="pt-5">
             <div className="flex justify-end">
-              <button className="btn btn-primary" disabled={submitting}>
+              <button
+                className="btn btn-primary"
+                disabled={isSubmitting || !isDirty}
+              >
                 Register with email
               </button>
             </div>
           </div>
         </form>
       </div>
-    </div>
+    </Container>
   )
 }

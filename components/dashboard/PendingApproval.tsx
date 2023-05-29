@@ -2,6 +2,7 @@
 
 import { Card } from "@/components/Card"
 import Modal from "@/components/Modal"
+import { Role } from "@/components/Roles"
 import NiceModal from "@ebay/nice-modal-react"
 import {
   BuildingOffice2Icon,
@@ -24,7 +25,7 @@ export function PendingApproval() {
     })
 
   return (
-    <>
+    <Role role="worker">
       <h2 className="heading-3 mb-3">Waiting Approval</h2>
       <div className="grid gap-4 lg:grid-cols-2">
         <Card buttonAction={showModal}>
@@ -62,6 +63,6 @@ export function PendingApproval() {
           </div>
         </Card>
       </div>
-    </>
+    </Role>
   )
 }

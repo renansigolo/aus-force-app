@@ -2,14 +2,14 @@
 
 import { auth } from "@/lib/firebase"
 import NiceModal from "@ebay/nice-modal-react"
-import { createContext } from "react"
+import { createContext, ReactNode } from "react"
 import { useAuthState } from "react-firebase-hooks/auth"
 import { Toaster } from "react-hot-toast"
 
 export const UserContext = createContext({ user: null })
 
 type ProvidersProps = {
-  children: React.ReactNode
+  children: ReactNode
 }
 export function Providers({ children }: ProvidersProps) {
   const [user] = useAuthState(auth)

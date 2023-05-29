@@ -151,7 +151,7 @@ export function Calendar() {
             </button>
             <button
               type="button"
-              className="hidden border-t border-b border-gray-300 bg-white px-3.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:relative md:block"
+              className="hidden border-b border-t border-gray-300 bg-white px-3.5 text-sm font-medium text-gray-700 hover:bg-gray-50 hover:text-gray-900 focus:relative md:block"
             >
               Today
             </button>
@@ -401,7 +401,7 @@ export function Calendar() {
                 key={day.date}
                 className={cn(
                   day.isCurrentMonth ? "bg-white" : "bg-gray-50 text-gray-500",
-                  "relative py-2 px-3"
+                  "relative px-3 py-2"
                 )}
               >
                 <time
@@ -459,7 +459,7 @@ export function Calendar() {
                     !day.isCurrentMonth &&
                     !day.isToday &&
                     "text-gray-500",
-                  "flex h-14 flex-col py-2 px-3 hover:bg-gray-100 focus:z-10"
+                  "flex h-14 flex-col px-3 py-2 hover:bg-gray-100 focus:z-10"
                 )}
               >
                 <time
@@ -491,7 +491,7 @@ export function Calendar() {
         </div>
       </div>
       {selectedDay && selectedDay?.events.length > 0 && (
-        <div className="py-10 px-4 sm:px-6 lg:hidden">
+        <div className="px-4 py-10 sm:px-6 lg:hidden">
           <ol className="divide-y divide-gray-100 overflow-hidden rounded-lg bg-white text-sm shadow ring-1 ring-black ring-opacity-5">
             {selectedDay?.events.map((event) => (
               <li
@@ -513,7 +513,7 @@ export function Calendar() {
                 </div>
                 <Link
                   href={event.href}
-                  className="ml-6 flex-none self-center rounded-md border border-gray-300 bg-white py-2 px-3 font-semibold text-gray-700 opacity-0 shadow-sm hover:bg-gray-50 focus:opacity-100 group-hover:opacity-100"
+                  className="ml-6 flex-none self-center rounded-md border border-gray-300 bg-white px-3 py-2 font-semibold text-gray-700 opacity-0 shadow-sm hover:bg-gray-50 focus:opacity-100 group-hover:opacity-100"
                 >
                   Edit<span className="sr-only">, {event.name}</span>
                 </Link>
