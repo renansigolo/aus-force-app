@@ -2,6 +2,7 @@
 
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
 import { Container } from "@/components/Container"
+import { Role } from "@/components/Roles"
 import { auth, db } from "@/lib/firebase"
 import { FirebaseError } from "firebase/app"
 import { createUserWithEmailAndPassword } from "firebase/auth"
@@ -222,122 +223,124 @@ export default function SignUpPage() {
             </div>
 
             {/* Business Information */}
-            <div className="pt-8">
-              <div>
-                <h3 className="text-lg font-medium leading-6 text-gray-900">
-                  Business Information
-                </h3>
-                <p className="mt-1 text-sm text-gray-500">
-                  Enter the details of your business.
-                </p>
-              </div>
-              <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
-                {businessForm.map((field, index) => (
-                  <div key={index} className="sm:col-span-3">
+            <Role role="client">
+              <div className="pt-8">
+                <div>
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">
+                    Business Information
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Enter the details of your business.
+                  </p>
+                </div>
+                <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
+                  {businessForm.map((field, index) => (
+                    <div key={index} className="sm:col-span-3">
+                      <label
+                        htmlFor={field.id}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        {field.label}
+                        {field.required && (
+                          <span className="text-red-500">*</span>
+                        )}
+                      </label>
+                      <div className="mt-1">
+                        <input
+                          type={field.type}
+                          autoComplete={field.autoComplete}
+                          {...register(field.id, { required: field.required })}
+                        />
+                        {errors[field.id] && (
+                          <span>{String(errors[field.id]?.message)}</span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+
+                  <div className="sm:col-span-6">
                     <label
-                      htmlFor={field.id}
+                      htmlFor="country"
                       className="block text-sm font-medium text-gray-700"
                     >
-                      {field.label}
-                      {field.required && (
-                        <span className="text-red-500">*</span>
-                      )}
+                      Country
+                    </label>
+                    <div className="mt-1">
+                      <select
+                        {...register("country")}
+                        autoComplete="country-name"
+                      >
+                        <option>Australia</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="sm:col-span-6">
+                    <label
+                      htmlFor="street-address"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Street address
                     </label>
                     <div className="mt-1">
                       <input
-                        type={field.type}
-                        autoComplete={field.autoComplete}
-                        {...register(field.id, { required: field.required })}
+                        {...register("streetAddress")}
+                        type="text"
+                        autoComplete="street-address"
                       />
-                      {errors[field.id] && (
-                        <span>{String(errors[field.id]?.message)}</span>
-                      )}
                     </div>
                   </div>
-                ))}
 
-                <div className="sm:col-span-6">
-                  <label
-                    htmlFor="country"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Country
-                  </label>
-                  <div className="mt-1">
-                    <select
-                      {...register("country")}
-                      autoComplete="country-name"
+                  <div className="sm:col-span-2">
+                    <label
+                      htmlFor="city"
+                      className="block text-sm font-medium text-gray-700"
                     >
-                      <option>Australia</option>
-                    </select>
+                      City
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        {...register("city")}
+                        type="text"
+                        autoComplete="address-level2"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div className="sm:col-span-6">
-                  <label
-                    htmlFor="street-address"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Street address
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      {...register("streetAddress")}
-                      type="text"
-                      autoComplete="street-address"
-                    />
+                  <div className="sm:col-span-2">
+                    <label
+                      htmlFor="region"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      State / Province
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        {...register("region")}
+                        type="text"
+                        autoComplete="address-level1"
+                      />
+                    </div>
                   </div>
-                </div>
 
-                <div className="sm:col-span-2">
-                  <label
-                    htmlFor="city"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    City
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      {...register("city")}
-                      type="text"
-                      autoComplete="address-level2"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-2">
-                  <label
-                    htmlFor="region"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    State / Province
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      {...register("region")}
-                      type="text"
-                      autoComplete="address-level1"
-                    />
-                  </div>
-                </div>
-
-                <div className="sm:col-span-2">
-                  <label
-                    htmlFor="postal-code"
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    ZIP / Postal code
-                  </label>
-                  <div className="mt-1">
-                    <input
-                      {...register("postalCode")}
-                      type="text"
-                      autoComplete="postal-code"
-                    />
+                  <div className="sm:col-span-2">
+                    <label
+                      htmlFor="postal-code"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      ZIP / Postal code
+                    </label>
+                    <div className="mt-1">
+                      <input
+                        {...register("postalCode")}
+                        type="text"
+                        autoComplete="postal-code"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </Role>
 
             {/* Account Details */}
             <div>
