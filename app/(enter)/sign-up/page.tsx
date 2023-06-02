@@ -4,6 +4,7 @@ import { EnterHeader } from "@/app/(enter)/EnterHeader"
 import { Container } from "@/components/Container"
 import { Role } from "@/components/Roles"
 import { auth, db } from "@/lib/firebase"
+import { DocumentArrowUpIcon } from "@heroicons/react/24/outline"
 import { FirebaseError } from "firebase/app"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { addDoc, collection } from "firebase/firestore"
@@ -105,6 +106,57 @@ const accountsForm = [
     id: "confirmPassword",
     label: "Confirm Password",
     type: "password",
+    autoComplete: "",
+  },
+]
+
+const documentsForm = [
+  {
+    required: "Your ID or Passport is required",
+    name: "passport",
+    id: "passport",
+    label: "ID / Passport",
+    type: "text",
+    autoComplete: "",
+  },
+  {
+    required: "",
+    name: "White Card",
+    id: "whiteCard",
+    label: "White Card",
+    type: "text",
+    autoComplete: "",
+  },
+  {
+    required: "",
+    name: "Forklift License",
+    id: "forkliftLicense",
+    label: "Forklift License (FL)",
+    type: "text",
+    autoComplete: "",
+  },
+  {
+    required: "",
+    name: "Forklift License",
+    id: "forkliftLicense",
+    label: "Forklift License (FL)",
+    type: "text",
+    autoComplete: "",
+  },
+  {
+    required: "",
+    name: "Order Picker License",
+    id: "orderPickerLicense",
+    label: "Order Picker License (LO)",
+    type: "text",
+    autoComplete: "",
+  },
+  {
+    required: "",
+    name: "Other",
+    id: "other",
+    label: "Other",
+    type: "text",
     autoComplete: "",
   },
 ]
@@ -223,8 +275,8 @@ export default function SignUpPage() {
             </div>
 
             {/* Business Information */}
-            <Role role="client">
-              <div className="pt-8">
+            <div className="py-4">
+              <Role role="client">
                 <div>
                   <h3 className="text-lg font-medium leading-6 text-gray-900">
                     Business Information
@@ -339,8 +391,48 @@ export default function SignUpPage() {
                     </div>
                   </div>
                 </div>
-              </div>
-            </Role>
+              </Role>
+            </div>
+
+            {/* Additional Documents */}
+            <div>
+              <Role role="worker">
+                <div className="pt-8">
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">
+                    Additional Documents
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">
+                    More documents to verify your account
+                  </p>
+                </div>
+
+                <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
+                  {documentsForm.map((field, index) => (
+                    <div key={index} className="sm:col-span-6">
+                      <label
+                        htmlFor={field.id}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        {field.label}
+                        {field.required && (
+                          <span className="text-red-500">*</span>
+                        )}
+                      </label>
+                      <div className="mt-1">
+                        <input
+                          type={field.type}
+                          autoComplete={field.autoComplete}
+                          {...register(field.id, { required: field.required })}
+                        />
+                        {errors[field.id] && (
+                          <span>{String(errors[field.id]?.message)}</span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Role>
+            </div>
 
             {/* Account Details */}
             <div>
@@ -377,6 +469,32 @@ export default function SignUpPage() {
                     </div>
                   </div>
                 ))}
+              </div>
+            </div>
+
+            {/* Signature */}
+            <div>
+              <div className="pt-8">
+                <h3 className="text-lg font-medium leading-6 text-gray-900">
+                  Signature
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">
+                  Give us your autograph
+                </p>
+              </div>
+
+              <div className="mt-6 grid w-full grid-cols-1 justify-center gap-x-4 gap-y-6">
+                <button
+                  type="button"
+                  className="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                >
+                  <div className="flex flex-col content-center items-center justify-center">
+                    <DocumentArrowUpIcon className="h-12 w-12 text-gray-400" />
+                    <span className="mt-2 block text-sm font-semibold text-gray-900">
+                      Upload your signature
+                    </span>
+                  </div>
+                </button>
               </div>
             </div>
           </div>

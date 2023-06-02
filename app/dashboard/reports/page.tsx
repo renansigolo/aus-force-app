@@ -3,6 +3,7 @@ import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { cn } from "@/lib/helpers"
 import { UserIcon } from "@heroicons/react/20/solid"
+import { FunnelIcon } from "@heroicons/react/24/outline"
 
 const reports = [
   {
@@ -38,6 +39,25 @@ export default function ReportsPage() {
     <SectionWrapper>
       <Role role="client">
         <SectionHeading title="Reports" buttonLabel="Download PDF" />
+
+        {/* Filter */}
+        <div className="mt-6">
+          <div className="flex gap-2">
+            <FunnelIcon className="h-6 w-6" />
+            Filter your reports
+          </div>
+          <div className="flex gap-2">
+            <div className="w-full">
+              <label htmlFor="startDate">Start Date</label>
+              <input type="date" name="startDate" id="startDate" />
+            </div>
+            <div className="w-full">
+              <label htmlFor="finishDate">Finish Date</label>
+              <input type="date" name="finishDate" id="finishDate" />
+            </div>
+          </div>
+        </div>
+
         <section className="py-8">
           <h2 className="heading-3 pl-4">Company ABC</h2>
           {/* Activity list (smallest breakpoint only) */}

@@ -10,7 +10,7 @@ import NiceModal from "@ebay/nice-modal-react"
 export default function JobRequestsPage() {
   const showModal = () =>
     NiceModal.show(Modal, {
-      title: "New Site",
+      title: "New Job",
       children: <JobRequestsContent />,
     })
 
