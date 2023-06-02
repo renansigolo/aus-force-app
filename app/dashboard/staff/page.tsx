@@ -10,7 +10,7 @@ import NiceModal from "@ebay/nice-modal-react"
 export default function StaffPage() {
   const showModal = () =>
     NiceModal.show(Modal, {
-      title: "New Site",
+      title: "New Staff",
       children: <StaffContent />,
     })
 
