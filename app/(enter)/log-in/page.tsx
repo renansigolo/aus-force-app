@@ -3,15 +3,11 @@
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
 import { FormInputError } from "@/components/FormInputError"
 import { FormInputWrapper } from "@/components/FormInputWrapper"
-import { auth } from "@/lib/firebase"
 import { LoginFormSchema, LoginFormSchemaType } from "@/lib/schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { FirebaseError } from "firebase/app"
-import { signInWithEmailAndPassword } from "firebase/auth"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
-import toast from "react-hot-toast"
 
 export default function LogInPage() {
   const router = useRouter()
@@ -28,13 +24,15 @@ export default function LogInPage() {
   const login = (formData: LoginFormSchemaType) => {
     setSubmitting(true)
 
-    signInWithEmailAndPassword(auth, formData.email, formData.password)
-      .then((userCredential) => {
-        router.push("/dashboard")
-        toast.success(`Welcome back, ${userCredential.user.email}`)
-      })
-      .catch((error: FirebaseError) => toast.error(error.message))
-      .finally(() => setSubmitting(false))
+    return router.push("/dashboard")
+
+    // signInWithEmailAndPassword(auth, formData.email, formData.password)
+    //   .then((userCredential) => {
+    //     router.push("/dashboard")
+    //     toast.success(`Welcome back, ${userCredential.user.email}`)
+    //   })
+    //   .catch((error: FirebaseError) => toast.error(error.message))
+    //   .finally(() => setSubmitting(false))
   }
 
   return (
