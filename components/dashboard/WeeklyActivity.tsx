@@ -5,7 +5,7 @@ import Link from "next/link"
 const cards = [
   {
     name: "Hours Worked",
-    href: "/dashboard/timesheets",
+    href: "/dashboard/shifts",
     icon: ClockIcon,
     amount: "48h",
   },
