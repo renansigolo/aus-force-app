@@ -2,7 +2,6 @@
 
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
 import { SignatureForm } from "@/app/(enter)/sign-up/Signature"
-import { Container } from "@/components/Container"
 import { Role } from "@/components/Roles"
 import { auth, db } from "@/lib/firebase"
 import { Disclosure } from "@headlessui/react"
@@ -202,7 +201,7 @@ export default function SignUpPage() {
   }
 
   return (
-    <Container>
+    <>
       <div className="min-h-full bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
         <EnterHeader
           title="Sign Up"
@@ -646,6 +645,6 @@ export default function SignUpPage() {
           </div>
         </form>
       </div>
-    </Container>
+    </>
   )
 }
