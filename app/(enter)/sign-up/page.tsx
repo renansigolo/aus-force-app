@@ -1,6 +1,7 @@
 "use client"
 
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
+import { SignatureForm } from "@/app/(enter)/sign-up/Signature"
 import { Container } from "@/components/Container"
 import { Role } from "@/components/Roles"
 import { auth, db } from "@/lib/firebase"
@@ -136,7 +137,7 @@ const documentsForm = [
     required: "",
     name: "Forklift License",
     id: "forkliftLicense",
-    label: "Forklift License (FL)",
+    label: "Forklift License",
     type: "text",
     autoComplete: "",
   },
@@ -532,6 +533,7 @@ export default function SignUpPage() {
               </div>
 
               <div className="mt-6 grid w-full grid-cols-1 justify-center gap-x-4 gap-y-6">
+                <SignatureForm />
                 <button
                   type="button"
                   className="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
