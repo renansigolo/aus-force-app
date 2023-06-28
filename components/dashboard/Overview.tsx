@@ -35,13 +35,13 @@ const stats = [
 ]
 
 export function Overview() {
-  const showModal = () =>
+  const showModal = () => {
     NiceModal.show(Modal, {
       title: "Review Shift",
       description: "Please review the details and confirm your shift.",
       children: <ShiftApprovalModal />,
     })
-
+  }
   return (
     <div>
       <h2 className="heading-3 mb-3">Overview</h2>
@@ -52,11 +52,7 @@ export function Overview() {
               <dt className="flex justify-between text-lg font-semibold leading-8 text-gray-900">
                 {item.name}
                 {index === 0 && (
-                  <button
-                    type="button"
-                    className="btn"
-                    onClick={() => showModal()}
-                  >
+                  <button type="button" className="btn" onClick={showModal}>
                     Submit Shit
                   </button>
                 )}
