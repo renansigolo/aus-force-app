@@ -6,7 +6,11 @@ import { Container } from "@/components/Container"
 import { Role } from "@/components/Roles"
 import { auth, db } from "@/lib/firebase"
 import { Disclosure } from "@headlessui/react"
-import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/outline"
+import {
+  DocumentArrowUpIcon,
+  MinusSmallIcon,
+  PlusSmallIcon,
+} from "@heroicons/react/24/outline"
 import { FirebaseError } from "firebase/app"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { addDoc, collection } from "firebase/firestore"
@@ -442,7 +446,7 @@ export default function SignUpPage() {
                             </Disclosure.Button>
                           </dt>
 
-                          <Disclosure.Panel as="dd" className="mt-2 pr-12">
+                          <Disclosure.Panel as="dd" className="mt-2">
                             <p className="text-base leading-7 text-gray-600">
                               <div key={index} className="sm:col-span-6">
                                 <label
@@ -468,6 +472,102 @@ export default function SignUpPage() {
                                     </span>
                                   )}
                                 </div>
+
+                                <div className="mt-2">
+                                  <label
+                                    htmlFor={field.id}
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Number
+                                  </label>
+                                  <input
+                                    type={field.type}
+                                    autoComplete={field.autoComplete}
+                                    {...register(field.id, {
+                                      required: field.required,
+                                    })}
+                                  />
+                                  {errors[field.id] && (
+                                    <span>
+                                      {String(errors[field.id]?.message)}
+                                    </span>
+                                  )}
+                                </div>
+
+                                <div className="mt-2">
+                                  <label
+                                    htmlFor={field.id}
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Date of Issue
+                                  </label>
+                                  <input
+                                    type="date"
+                                    autoComplete={field.autoComplete}
+                                    {...register(field.id, {
+                                      required: field.required,
+                                    })}
+                                  />
+                                  {errors[field.id] && (
+                                    <span>
+                                      {String(errors[field.id]?.message)}
+                                    </span>
+                                  )}
+                                </div>
+
+                                <div className="mt-2">
+                                  <label
+                                    htmlFor={field.id}
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Expire Date
+                                  </label>
+                                  <input
+                                    type="date"
+                                    autoComplete={field.autoComplete}
+                                    {...register(field.id, {
+                                      required: field.required,
+                                    })}
+                                  />
+                                  {errors[field.id] && (
+                                    <span>
+                                      {String(errors[field.id]?.message)}
+                                    </span>
+                                  )}
+                                </div>
+
+                                <div className="mt-2">
+                                  <label
+                                    htmlFor={field.id}
+                                    className="block text-sm font-medium text-gray-700"
+                                  >
+                                    Class / Type
+                                  </label>
+                                  <input
+                                    type="text"
+                                    autoComplete={field.autoComplete}
+                                    {...register(field.id, {
+                                      required: field.required,
+                                    })}
+                                  />
+                                  {errors[field.id] && (
+                                    <span>
+                                      {String(errors[field.id]?.message)}
+                                    </span>
+                                  )}
+                                </div>
+
+                                <button
+                                  type="button"
+                                  className="relative mt-2 block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                                >
+                                  <div className="flex flex-col content-center items-center justify-center">
+                                    <DocumentArrowUpIcon className="h-12 w-12 text-gray-400" />
+                                    <span className="mt-2 block text-sm font-semibold text-gray-900">
+                                      Upload Image
+                                    </span>
+                                  </div>
+                                </button>
                               </div>
                             </p>
                           </Disclosure.Panel>

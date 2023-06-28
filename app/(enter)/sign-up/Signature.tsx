@@ -6,13 +6,13 @@ export const SignatureForm = () => {
 
   const handleClear = () => signatureRef.current && signatureRef.current.clear()
 
-  const handleSave = () => {
-    if (signatureRef.current) {
-      const signatureData = signatureRef.current.toDataURL()
-      // Do something with the signature data (e.g., save it to a database)
-      console.log(signatureData)
-    }
-  }
+  // const handleSave = () => {
+  //   if (signatureRef.current) {
+  //     const signatureData = signatureRef.current.toDataURL()
+  //     // Do something with the signature data (e.g., save it to a database)
+  //     console.log(signatureData)
+  //   }
+  // }
 
   useEffect(() => {
     const resizeCanvas = () => {
@@ -45,9 +45,9 @@ export const SignatureForm = () => {
         <button className="btn" onClick={handleClear}>
           Clear
         </button>
-        <button className="btn" onClick={handleSave}>
+        {/* <button className="btn" onClick={handleSave}>
           Save
-        </button>
+        </button> */}
       </div>
     </div>
   )
