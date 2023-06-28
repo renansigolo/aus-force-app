@@ -6,11 +6,7 @@ import { Container } from "@/components/Container"
 import { Role } from "@/components/Roles"
 import { auth, db } from "@/lib/firebase"
 import { Disclosure } from "@headlessui/react"
-import {
-  DocumentArrowUpIcon,
-  MinusSmallIcon,
-  PlusSmallIcon,
-} from "@heroicons/react/24/outline"
+import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/outline"
 import { FirebaseError } from "firebase/app"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { addDoc, collection } from "firebase/firestore"
@@ -534,17 +530,6 @@ export default function SignUpPage() {
 
               <div className="mt-6 grid w-full grid-cols-1 justify-center gap-x-4 gap-y-6">
                 <SignatureForm />
-                <button
-                  type="button"
-                  className="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                  <div className="flex flex-col content-center items-center justify-center">
-                    <DocumentArrowUpIcon className="h-12 w-12 text-gray-400" />
-                    <span className="mt-2 block text-sm font-semibold text-gray-900">
-                      Upload your signature
-                    </span>
-                  </div>
-                </button>
               </div>
             </div>
           </div>
@@ -564,61 +549,3 @@ export default function SignUpPage() {
     </Container>
   )
 }
-
-// const faqs = [
-//   {
-//     question: "ID / Passport",
-//     answer:
-//       "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-//   },
-//   {
-//     question: "White Card",
-//     answer:
-//       "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-//   },
-//   {
-//     question: "Forklift License",
-//     answer:
-//       "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-//   },
-//   {
-//     question: "Order Picker License (LO)",
-//     answer:
-//       "I don't know, but the flag is a big plus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas cupiditate laboriosam fugiat.",
-//   },
-// ]
-
-// export function Accordion() {
-//   return (
-//     <dl className="mt-10 space-y-6 divide-y divide-gray-900/10">
-//       {documentsForm.map((faq) => (
-//         <Disclosure as="div" key={faq.label} className="pt-6">
-//           {({ open }) => (
-//             <>
-//               <dt>
-//                 <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
-//                   <span className="text-base font-semibold leading-7">
-//                     {faq.label}
-//                   </span>
-//                   <span className="ml-6 flex h-7 items-center">
-//                     {open ? (
-//                       <MinusSmallIcon className="h-6 w-6" aria-hidden="true" />
-//                     ) : (
-//                       <PlusSmallIcon className="h-6 w-6" aria-hidden="true" />
-//                     )}
-//                   </span>
-//                 </Disclosure.Button>
-//               </dt>
-
-//               <Disclosure.Panel as="dd" className="mt-2 pr-12">
-//                 <p className="text-base leading-7 text-gray-600">
-//                   {faq.name} [FORM GOES HERE]
-//                 </p>
-//               </Disclosure.Panel>
-//             </>
-//           )}
-//         </Disclosure>
-//       ))}
-//     </dl>
-//   )
-// }

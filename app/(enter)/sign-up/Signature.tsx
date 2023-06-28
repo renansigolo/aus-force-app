@@ -28,9 +28,7 @@ export const SignatureForm = () => {
     resizeCanvas()
 
     // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", resizeCanvas)
-    }
+    return () => window.removeEventListener("resize", resizeCanvas)
   }, [])
 
   return (
@@ -43,12 +41,14 @@ export const SignatureForm = () => {
           className: "border border-dark rounded w-full",
         }}
       />
-      <button className="btn" onClick={handleClear}>
-        Clear
-      </button>
-      <button className="btn" onClick={handleSave}>
-        Save
-      </button>
+      <div className="mt-2 flex gap-2">
+        <button className="btn" onClick={handleClear}>
+          Clear
+        </button>
+        <button className="btn" onClick={handleSave}>
+          Save
+        </button>
+      </div>
     </div>
   )
 }
