@@ -117,30 +117,6 @@ const accountsForm = [
 
 const documentsForm = [
   {
-    required: "Your ID or Passport is required",
-    name: "passport",
-    id: "passport",
-    label: "ID / Passport",
-    type: "text",
-    autoComplete: "",
-  },
-  {
-    required: "",
-    name: "White Card",
-    id: "whiteCard",
-    label: "White Card",
-    type: "text",
-    autoComplete: "",
-  },
-  {
-    required: "",
-    name: "Forklift License",
-    id: "forkliftLicense",
-    label: "Forklift License",
-    type: "text",
-    autoComplete: "",
-  },
-  {
     required: "",
     name: "Forklift License",
     id: "forkliftLicense",
@@ -153,6 +129,38 @@ const documentsForm = [
     name: "Order Picker License",
     id: "orderPickerLicense",
     label: "Order Picker License (LO)",
+    type: "text",
+    autoComplete: "",
+  },
+  {
+    required: "",
+    name: "High Risk License",
+    id: "highRiskLicense",
+    label: "High Risk License (HRWL)",
+    type: "text",
+    autoComplete: "",
+  },
+  {
+    required: "",
+    name: "Traffic Controller",
+    id: "trafficController",
+    label: "Traffic Controller",
+    type: "text",
+    autoComplete: "",
+  },
+  {
+    required: "",
+    name: "THS Operator",
+    id: "thsOperator",
+    label: "THS Operator",
+    type: "text",
+    autoComplete: "",
+  },
+  {
+    required: "",
+    name: "Plant Operator",
+    id: "plantOperator",
+    label: "Plant Operator",
     type: "text",
     autoComplete: "",
   },
@@ -401,25 +409,216 @@ export default function SignUpPage() {
 
             {/* Additional Documents */}
             <div>
-              <Role role="worker">
-                <div className="pt-8">
-                  <h3 className="text-lg font-medium leading-6 text-gray-900">
-                    Additional Documents
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">
-                    More documents to verify your account
-                  </p>
-                </div>
+              <div className="pt-8">
+                <h3 className="text-lg font-medium leading-6 text-gray-900">
+                  Additional Documents
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">
+                  More documents to verify your account
+                </p>
+              </div>
 
-                {/* <button className="btn btn-primary">Add New Document</button> */}
-                {/* <select id="license" name="license">
-                  <option>High Risk License</option>
-                  <option>Traffic Controller</option>
-                  <option>THS Operator</option>
-                  <option>Plant Operator</option>
-                </select> */}
+              <dl className="mt-10 space-y-6 divide-y divide-gray-900/10">
+                {/* Passport */}
+                <Disclosure as="div" className="pt-6">
+                  {({ open }) => (
+                    <>
+                      <dt>
+                        <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
+                          <span className="text-base font-semibold leading-7">
+                            Passport
+                          </span>
+                          <span className="ml-6 flex h-7 items-center">
+                            {open ? (
+                              <MinusSmallIcon
+                                className="h-6 w-6"
+                                aria-hidden="true"
+                              />
+                            ) : (
+                              <PlusSmallIcon
+                                className="h-6 w-6"
+                                aria-hidden="true"
+                              />
+                            )}
+                          </span>
+                        </Disclosure.Button>
+                      </dt>
 
-                <dl className="mt-10 space-y-6 divide-y divide-gray-900/10">
+                      <Disclosure.Panel as="dd" className="mt-2">
+                        <p className="text-base leading-7 text-gray-600">
+                          <div className="sm:col-span-6">
+                            <label
+                              htmlFor="passportNumber"
+                              className="block text-sm font-medium text-gray-700"
+                            >
+                              Number
+                              <span className="text-red-500">*</span>
+                            </label>
+                            <div className="mt-1">
+                              <input
+                                type="text"
+                                autoComplete="passport"
+                                {...register("passportNumber", {
+                                  required: true,
+                                })}
+                              />
+                              {errors["passportNumber"] && (
+                                <span>
+                                  {String(errors["passportNumber"]?.message)}
+                                </span>
+                              )}
+                            </div>
+
+                            <div className="flex gap-2">
+                              <div className="mt-2 w-full">
+                                <label
+                                  htmlFor="dateIssued"
+                                  className="block text-sm font-medium text-gray-700"
+                                >
+                                  Date of Issue
+                                  <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                  type="date"
+                                  {...register("dateIssued", {
+                                    required: true,
+                                  })}
+                                />
+                                {errors["dateIssued"] && (
+                                  <span>
+                                    {String(errors["dateIssued"]?.message)}
+                                  </span>
+                                )}
+                              </div>
+
+                              <div className="mt-2 w-full">
+                                <label
+                                  htmlFor="expiryDate"
+                                  className="block text-sm font-medium text-gray-700"
+                                >
+                                  Expire Date
+                                  <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                  type="date"
+                                  {...register("expiryDate", {
+                                    required: true,
+                                  })}
+                                />
+                                {errors["expiryDate"] && (
+                                  <span>
+                                    {String(errors["expiryDate"]?.message)}
+                                  </span>
+                                )}
+                              </div>
+                            </div>
+
+                            <button
+                              type="button"
+                              className="relative mt-2 block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                            >
+                              <div className="flex flex-col content-center items-center justify-center">
+                                <DocumentArrowUpIcon className="h-12 w-12 text-gray-400" />
+                                <span className="mt-2 block text-sm font-semibold text-gray-900">
+                                  Upload Image
+                                </span>
+                              </div>
+                            </button>
+                          </div>
+                        </p>
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
+
+                <Role role="worker">
+                  {/* White Card */}
+                  <Disclosure as="div" className="pt-6">
+                    {({ open }) => (
+                      <>
+                        <dt>
+                          <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
+                            <span className="text-base font-semibold leading-7">
+                              White Card
+                            </span>
+                            <span className="ml-6 flex h-7 items-center">
+                              {open ? (
+                                <MinusSmallIcon
+                                  className="h-6 w-6"
+                                  aria-hidden="true"
+                                />
+                              ) : (
+                                <PlusSmallIcon
+                                  className="h-6 w-6"
+                                  aria-hidden="true"
+                                />
+                              )}
+                            </span>
+                          </Disclosure.Button>
+                        </dt>
+
+                        <Disclosure.Panel as="dd" className="mt-2">
+                          <p className="text-base leading-7 text-gray-600">
+                            <div className="sm:col-span-6">
+                              <label
+                                htmlFor="whiteCardNumber"
+                                className="block text-sm font-medium text-gray-700"
+                              >
+                                Number
+                              </label>
+                              <div className="mt-1">
+                                <input
+                                  type="text"
+                                  {...register("whiteCardNumber", {
+                                    required: false,
+                                  })}
+                                />
+                                {errors["whiteCardNumber"] && (
+                                  <span>
+                                    {String(errors["whiteCardNumber"]?.message)}
+                                  </span>
+                                )}
+                              </div>
+
+                              <div className="mt-2">
+                                <label
+                                  htmlFor="dateIssued"
+                                  className="block text-sm font-medium text-gray-700"
+                                >
+                                  Date of Issue
+                                </label>
+                                <input
+                                  type="date"
+                                  {...register("whiteCardIssueDate", {
+                                    required: false,
+                                  })}
+                                />
+                                {errors["whiteCardIssueDate"] && (
+                                  <span>
+                                    {String(
+                                      errors["whiteCardIssueDate"]?.message
+                                    )}
+                                  </span>
+                                )}
+                              </div>
+
+                              <button
+                                type="button"
+                                className="relative mt-2 block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                              >
+                                <div className="flex flex-col content-center items-center justify-center">
+                                  <DocumentArrowUpIcon className="h-12 w-12 text-gray-400" />
+                                  <span className="mt-2 block text-sm font-semibold text-gray-900">
+                                    Upload Image
+                                  </span>
+                                </div>
+                              </button>
+                            </div>
+                          </p>
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
                   {documentsForm.map((field, index) => (
                     <Disclosure as="div" key={field.label} className="pt-6">
                       {({ open }) => (
@@ -448,30 +647,6 @@ export default function SignUpPage() {
                           <Disclosure.Panel as="dd" className="mt-2">
                             <p className="text-base leading-7 text-gray-600">
                               <div key={index} className="sm:col-span-6">
-                                <label
-                                  htmlFor={field.id}
-                                  className="block text-sm font-medium text-gray-700"
-                                >
-                                  {field.label}
-                                  {field.required && (
-                                    <span className="text-red-500">*</span>
-                                  )}
-                                </label>
-                                <div className="mt-1">
-                                  <input
-                                    type={field.type}
-                                    autoComplete={field.autoComplete}
-                                    {...register(field.id, {
-                                      required: field.required,
-                                    })}
-                                  />
-                                  {errors[field.id] && (
-                                    <span>
-                                      {String(errors[field.id]?.message)}
-                                    </span>
-                                  )}
-                                </div>
-
                                 <div className="mt-2">
                                   <label
                                     htmlFor={field.id}
@@ -481,48 +656,6 @@ export default function SignUpPage() {
                                   </label>
                                   <input
                                     type={field.type}
-                                    autoComplete={field.autoComplete}
-                                    {...register(field.id, {
-                                      required: field.required,
-                                    })}
-                                  />
-                                  {errors[field.id] && (
-                                    <span>
-                                      {String(errors[field.id]?.message)}
-                                    </span>
-                                  )}
-                                </div>
-
-                                <div className="mt-2">
-                                  <label
-                                    htmlFor={field.id}
-                                    className="block text-sm font-medium text-gray-700"
-                                  >
-                                    Date of Issue
-                                  </label>
-                                  <input
-                                    type="date"
-                                    autoComplete={field.autoComplete}
-                                    {...register(field.id, {
-                                      required: field.required,
-                                    })}
-                                  />
-                                  {errors[field.id] && (
-                                    <span>
-                                      {String(errors[field.id]?.message)}
-                                    </span>
-                                  )}
-                                </div>
-
-                                <div className="mt-2">
-                                  <label
-                                    htmlFor={field.id}
-                                    className="block text-sm font-medium text-gray-700"
-                                  >
-                                    Expire Date
-                                  </label>
-                                  <input
-                                    type="date"
                                     autoComplete={field.autoComplete}
                                     {...register(field.id, {
                                       required: field.required,
@@ -556,6 +689,50 @@ export default function SignUpPage() {
                                   )}
                                 </div>
 
+                                <div className="flex gap-2">
+                                  <div className="mt-2 w-full">
+                                    <label
+                                      htmlFor={field.id}
+                                      className="block text-sm font-medium text-gray-700"
+                                    >
+                                      Date of Issue
+                                    </label>
+                                    <input
+                                      type="date"
+                                      autoComplete={field.autoComplete}
+                                      {...register(field.id, {
+                                        required: field.required,
+                                      })}
+                                    />
+                                    {errors[field.id] && (
+                                      <span>
+                                        {String(errors[field.id]?.message)}
+                                      </span>
+                                    )}
+                                  </div>
+
+                                  <div className="mt-2 w-full">
+                                    <label
+                                      htmlFor={field.id}
+                                      className="block text-sm font-medium text-gray-700"
+                                    >
+                                      Expire Date
+                                    </label>
+                                    <input
+                                      type="date"
+                                      autoComplete={field.autoComplete}
+                                      {...register(field.id, {
+                                        required: field.required,
+                                      })}
+                                    />
+                                    {errors[field.id] && (
+                                      <span>
+                                        {String(errors[field.id]?.message)}
+                                      </span>
+                                    )}
+                                  </div>
+                                </div>
+
                                 <button
                                   type="button"
                                   className="relative mt-2 block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
@@ -574,8 +751,8 @@ export default function SignUpPage() {
                       )}
                     </Disclosure>
                   ))}
-                </dl>
-              </Role>
+                </Role>
+              </dl>
             </div>
 
             {/* Account Details */}
