@@ -469,46 +469,48 @@ export default function SignUpPage() {
                               )}
                             </div>
 
-                            <div className="mt-2">
-                              <label
-                                htmlFor="dateIssued"
-                                className="block text-sm font-medium text-gray-700"
-                              >
-                                Date of Issue
-                                <span className="text-red-500">*</span>
-                              </label>
-                              <input
-                                type="date"
-                                {...register("dateIssued", {
-                                  required: true,
-                                })}
-                              />
-                              {errors["dateIssued"] && (
-                                <span>
-                                  {String(errors["dateIssued"]?.message)}
-                                </span>
-                              )}
-                            </div>
+                            <div className="flex gap-2">
+                              <div className="mt-2 w-full">
+                                <label
+                                  htmlFor="dateIssued"
+                                  className="block text-sm font-medium text-gray-700"
+                                >
+                                  Date of Issue
+                                  <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                  type="date"
+                                  {...register("dateIssued", {
+                                    required: true,
+                                  })}
+                                />
+                                {errors["dateIssued"] && (
+                                  <span>
+                                    {String(errors["dateIssued"]?.message)}
+                                  </span>
+                                )}
+                              </div>
 
-                            <div className="mt-2">
-                              <label
-                                htmlFor="expiryDate"
-                                className="block text-sm font-medium text-gray-700"
-                              >
-                                Expire Date
-                                <span className="text-red-500">*</span>
-                              </label>
-                              <input
-                                type="date"
-                                {...register("expiryDate", {
-                                  required: true,
-                                })}
-                              />
-                              {errors["expiryDate"] && (
-                                <span>
-                                  {String(errors["expiryDate"]?.message)}
-                                </span>
-                              )}
+                              <div className="mt-2 w-full">
+                                <label
+                                  htmlFor="expiryDate"
+                                  className="block text-sm font-medium text-gray-700"
+                                >
+                                  Expire Date
+                                  <span className="text-red-500">*</span>
+                                </label>
+                                <input
+                                  type="date"
+                                  {...register("expiryDate", {
+                                    required: true,
+                                  })}
+                                />
+                                {errors["expiryDate"] && (
+                                  <span>
+                                    {String(errors["expiryDate"]?.message)}
+                                  </span>
+                                )}
+                              </div>
                             </div>
 
                             <button
@@ -671,48 +673,6 @@ export default function SignUpPage() {
                                     htmlFor={field.id}
                                     className="block text-sm font-medium text-gray-700"
                                   >
-                                    Date of Issue
-                                  </label>
-                                  <input
-                                    type="date"
-                                    autoComplete={field.autoComplete}
-                                    {...register(field.id, {
-                                      required: field.required,
-                                    })}
-                                  />
-                                  {errors[field.id] && (
-                                    <span>
-                                      {String(errors[field.id]?.message)}
-                                    </span>
-                                  )}
-                                </div>
-
-                                <div className="mt-2">
-                                  <label
-                                    htmlFor={field.id}
-                                    className="block text-sm font-medium text-gray-700"
-                                  >
-                                    Expire Date
-                                  </label>
-                                  <input
-                                    type="date"
-                                    autoComplete={field.autoComplete}
-                                    {...register(field.id, {
-                                      required: field.required,
-                                    })}
-                                  />
-                                  {errors[field.id] && (
-                                    <span>
-                                      {String(errors[field.id]?.message)}
-                                    </span>
-                                  )}
-                                </div>
-
-                                <div className="mt-2">
-                                  <label
-                                    htmlFor={field.id}
-                                    className="block text-sm font-medium text-gray-700"
-                                  >
                                     Class / Type
                                   </label>
                                   <input
@@ -727,6 +687,50 @@ export default function SignUpPage() {
                                       {String(errors[field.id]?.message)}
                                     </span>
                                   )}
+                                </div>
+
+                                <div className="flex gap-2">
+                                  <div className="mt-2 w-full">
+                                    <label
+                                      htmlFor={field.id}
+                                      className="block text-sm font-medium text-gray-700"
+                                    >
+                                      Date of Issue
+                                    </label>
+                                    <input
+                                      type="date"
+                                      autoComplete={field.autoComplete}
+                                      {...register(field.id, {
+                                        required: field.required,
+                                      })}
+                                    />
+                                    {errors[field.id] && (
+                                      <span>
+                                        {String(errors[field.id]?.message)}
+                                      </span>
+                                    )}
+                                  </div>
+
+                                  <div className="mt-2 w-full">
+                                    <label
+                                      htmlFor={field.id}
+                                      className="block text-sm font-medium text-gray-700"
+                                    >
+                                      Expire Date
+                                    </label>
+                                    <input
+                                      type="date"
+                                      autoComplete={field.autoComplete}
+                                      {...register(field.id, {
+                                        required: field.required,
+                                      })}
+                                    />
+                                    {errors[field.id] && (
+                                      <span>
+                                        {String(errors[field.id]?.message)}
+                                      </span>
+                                    )}
+                                  </div>
                                 </div>
 
                                 <button
