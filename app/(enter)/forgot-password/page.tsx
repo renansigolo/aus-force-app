@@ -36,10 +36,7 @@ export default function ForgotPasswordPage() {
 
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email address
             </label>
             <div className="mt-1">
@@ -55,10 +52,7 @@ export default function ForgotPasswordPage() {
           </div>
 
           <div>
-            <button
-              disabled={submitting}
-              className="btn btn-primary flex w-full justify-center"
-            >
+            <button disabled={submitting} className="btn btn-primary flex w-full justify-center">
               {submitting ? "Submitting..." : "Reset Password"}
             </button>
           </div>

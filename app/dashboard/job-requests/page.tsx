@@ -17,11 +17,7 @@ export default function JobRequestsPage() {
   return (
     <SectionWrapper>
       <Role role="client">
-        <SectionHeading
-          title="Job Requests"
-          buttonLabel="New Job"
-          buttonAction={showModal}
-        />
+        <SectionHeading title="Job Requests" buttonLabel="New Job" buttonAction={showModal} />
         <section className="py-8">
           <Empty title="job requests" />
         </section>
@@ -36,10 +32,7 @@ function JobRequestsContent() {
       <form className="my-12 space-y-8 divide-y divide-gray-200">
         <div className="mt-6 grid grid-cols-1 gap-4">
           <div className="col-span-1">
-            <label
-              htmlFor="site-name"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="site-name" className="block text-sm font-medium text-gray-700">
               Job Site
             </label>
             <div className="mt-1">
@@ -48,10 +41,7 @@ function JobRequestsContent() {
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="role"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
               Job position
             </label>
             <div className="mt-1">
@@ -63,34 +53,20 @@ function JobRequestsContent() {
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="start-datetime"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="start-datetime" className="block text-sm font-medium text-gray-700">
               Start Time
             </label>
             <div className="mt-1">
-              <input
-                type="datetime-local"
-                name="start-datetime"
-                id="start-datetime"
-              />
+              <input type="datetime-local" name="start-datetime" id="start-datetime" />
             </div>
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="end-datetime"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="end-datetime" className="block text-sm font-medium text-gray-700">
               End Time
             </label>
             <div className="mt-1">
-              <input
-                type="datetime-local"
-                name="end-datetime"
-                id="end-datetime"
-              />
+              <input type="datetime-local" name="end-datetime" id="end-datetime" />
             </div>
           </div>
 
@@ -114,10 +90,7 @@ function JobRequestsContent() {
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="additional-notes"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="additional-notes" className="block text-sm font-medium text-gray-700">
               Additional Notes
             </label>
             <div className="mt-1">
@@ -126,10 +99,7 @@ function JobRequestsContent() {
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="supplier"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="supplier" className="block text-sm font-medium text-gray-700">
               Select Supplier
             </label>
             <div className="mt-1">

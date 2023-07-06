@@ -17,11 +17,7 @@ export default function StaffPage() {
   return (
     <SectionWrapper>
       <Role role="client">
-        <SectionHeading
-          title="Staff"
-          buttonLabel="New Staff"
-          buttonAction={showModal}
-        />
+        <SectionHeading title="Staff" buttonLabel="New Staff" buttonAction={showModal} />
         <section className="py-8">
           <Empty title="staff" />
         </section>
@@ -36,28 +32,16 @@ function StaffContent() {
       <form className="my-12 space-y-8 divide-y divide-gray-200">
         <div className="mt-6 grid grid-cols-1 gap-4">
           <div className="col-span-1">
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
               Email address
             </label>
             <div className="mt-1">
-              <input
-                required
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-              />
+              <input required id="email" name="email" type="email" autoComplete="email" />
             </div>
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="role"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
               Role
             </label>
             <div className="mt-1">
@@ -69,10 +53,7 @@ function StaffContent() {
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="job-site"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="job-site" className="block text-sm font-medium text-gray-700">
               Job Site
             </label>
             <div className="mt-1">

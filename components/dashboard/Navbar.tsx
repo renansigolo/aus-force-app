@@ -88,10 +88,7 @@ export function Navbar() {
                   />
 
                   {/* Desktop - Authenticated Navigation Links */}
-                  <nav
-                    className="hidden pl-12 lg:flex lg:space-x-8"
-                    aria-label="Global"
-                  >
+                  <nav className="hidden pl-12 lg:flex lg:space-x-8" aria-label="Global">
                     {navigation.map((item) => (
                       <Link
                         key={item.name}
@@ -131,9 +128,7 @@ export function Navbar() {
                         <img
                           className="h-8 w-8 rounded-full"
                           alt="Profile Image"
-                          src={
-                            user?.photoURL || "/images/profile-placeholder.png"
-                          }
+                          src={user?.photoURL || "/images/profile-placeholder.png"}
                         />
                       </Menu.Button>
                     </div>
@@ -187,9 +182,7 @@ export function Navbar() {
                         aria-current={isActive(item.href) ? "page" : undefined}
                         onClick={() => close()}
                         className={cn(
-                          isActive(item.href)
-                            ? "bg-gray-100 text-gray-900"
-                            : "hover:bg-gray-50",
+                          isActive(item.href) ? "bg-gray-100 text-gray-900" : "hover:bg-gray-50",
                           "block rounded-md px-3 py-2 text-base font-medium"
                         )}
                       >
@@ -204,18 +197,14 @@ export function Navbar() {
                         <img
                           className="h-10 w-10 rounded-full"
                           alt="Profile Image"
-                          src={
-                            user?.photoURL || "/images/profile-placeholder.png"
-                          }
+                          src={user?.photoURL || "/images/profile-placeholder.png"}
                         />
                       </div>
                       <div className="ml-3">
                         <div className="text-base font-medium text-gray-800">
                           {user?.displayName || ""}
                         </div>
-                        <div className="text-sm font-medium text-gray-500">
-                          {user?.email || ""}
-                        </div>
+                        <div className="text-sm font-medium text-gray-500">{user?.email || ""}</div>
                       </div>
                       <button
                         type="button"

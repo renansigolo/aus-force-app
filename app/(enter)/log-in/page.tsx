@@ -40,11 +40,7 @@ export default function LogInPage() {
       <div className="min-h-full bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
         <div className="flex h-full flex-col justify-center">
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
-            <EnterHeader
-              title="Log in to your account"
-              description="Or "
-              page="log-in"
-            />
+            <EnterHeader title="Log in to your account" description="Or " page="log-in" />
 
             <form className="space-y-6" onSubmit={handleSubmit(login)}>
               <div>
@@ -78,10 +74,7 @@ export default function LogInPage() {
                 </div>
               </div>
 
-              <button
-                disabled={submitting}
-                className="btn btn-primary flex w-full justify-center"
-              >
+              <button disabled={submitting} className="btn btn-primary flex w-full justify-center">
                 Log in
               </button>
             </form>

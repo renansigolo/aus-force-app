@@ -58,8 +58,6 @@ exports.sendEmail = functions
     }
 
     return gmailTransporter.sendMail(mailOptions, (err) =>
-      err
-        ? res.status(500).send(err)
-        : res.status(200).send({ message: "success" })
+      err ? res.status(500).send(err) : res.status(200).send({ message: "success" })
     )
   })
