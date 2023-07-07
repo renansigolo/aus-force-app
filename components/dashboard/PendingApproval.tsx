@@ -7,7 +7,7 @@ import { Disclosure } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
 import { toast } from "react-hot-toast"
 
-const accordionShifts = [
+const accordionItems = [
   {
     title: "Shift 02/06/23",
     content:
@@ -205,7 +205,7 @@ function Accordion({ approveShift, showModal }: any) {
       <div className="mx-auto px-2 pb-6">
         <div className="mx-auto divide-gray-900/10">
           <dl className="space-y-6 divide-y divide-gray-900/10">
-            {accordionShifts.map((item) => (
+            {accordionItems.map((item) => (
               <Disclosure as="div" key={item.title} className="pt-6">
                 {({ open }) => (
                   <>

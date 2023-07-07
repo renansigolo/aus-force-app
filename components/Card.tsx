@@ -4,13 +4,15 @@ import { ReactNode } from "react"
 
 type CardProps = {
   children: ReactNode
+  title: string
+  buttonLabel: string
   buttonAction: () => void
 }
 
-export function Card({ children, buttonAction }: CardProps) {
+export function Card({ children, title, buttonLabel, buttonAction }: CardProps) {
   return (
     <div className="overflow-hidden rounded-lg bg-white shadow">
-      <CardHeading title="Shift #123" buttonLabel="Approve Shift" buttonAction={buttonAction} />
+      <CardHeading title={title} buttonLabel={buttonLabel} buttonAction={buttonAction} />
       <div className="px-4 py-5 sm:p-6">{children}</div>
     </div>
   )
