@@ -18,15 +18,11 @@ export function WelcomePanel() {
                 />
               </div>
               <div className="mt-4 text-center sm:mt-0 sm:pt-1 sm:text-left">
-                <p className="text-sm font-medium text-gray-600">
-                  Welcome back,
-                </p>
+                <p className="text-sm font-medium text-gray-600">Welcome back,</p>
                 <p className="text-xl font-bold text-gray-900 sm:text-2xl">
                   {mockUser.displayName}
                 </p>
-                <p className="text-sm font-medium text-gray-600">
-                  {mockUser.jobTitle}
-                </p>
+                <p className="text-sm font-medium text-gray-600">{mockUser.jobTitle}</p>
               </div>
             </div>
           </div>

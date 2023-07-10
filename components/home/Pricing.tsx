@@ -14,47 +14,35 @@ const frequencies = [
 
 const tiers = [
   {
-    name: "Hobby",
-    id: "tier-hobby",
+    name: "Basic",
+    id: "tier-basic",
     href: "#",
     price: { monthly: "$100", annually: "$1000" },
     description: "The essentials to provide your best work for clients.",
-    features: [
-      "5 owener's accounts",
-      "Up to 10 client's accounts",
-      "Basic app support",
-    ],
+    features: ["5 owener's accounts", "Up to 10 client's accounts", "Basic app support"],
     mostPopular: false,
   },
   {
-    name: "Freelancer",
-    id: "tier-freelancer",
+    name: "Intermediate",
+    id: "tier-intermediate",
     href: "#",
     price: { monthly: "$150", annually: "$1500" },
     description: "The essentials to provide your best work for clients.",
-    features: [
-      "10 owener's accounts",
-      "Up to 20 client's accounts",
-      "Basic app support",
-    ],
+    features: ["10 owener's accounts", "Up to 20 client's accounts", "Basic app support"],
     mostPopular: false,
   },
   {
-    name: "Startup",
-    id: "tier-startup",
+    name: "Advanced",
+    id: "tier-advanced",
     href: "#",
     price: { monthly: "$200", annually: "$2000" },
     description: "A plan that scales with your rapidly growing business.",
-    features: [
-      "20 owener's accounts",
-      "Up to 40 client's accounts",
-      "Advanced app support",
-    ],
+    features: ["20 owener's accounts", "Up to 40 client's accounts", "Advanced app support"],
     mostPopular: true,
   },
   {
-    name: "Enterprise",
-    id: "tier-enterprise",
+    name: "Ultimate",
+    id: "tier-ultimate",
     href: "#",
     price: { monthly: "$400", annually: "$4000" } as any,
     description: "Dedicated support and infrastructure for your company.",
@@ -84,8 +72,8 @@ export function Pricing() {
           </p>
         </div>
         <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-600">
-          Choose an affordable plan that is packed with the best features for
-          engaging your audience, creating customer loyalty, and driving sales.
+          Choose an affordable plan that is packed with the best features for engaging your
+          audience, creating customer loyalty, and driving sales.
         </p>
         <div className="mt-16 flex justify-center">
           <RadioGroup
@@ -93,9 +81,7 @@ export function Pricing() {
             onChange={setFrequency}
             className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200"
           >
-            <RadioGroup.Label className="sr-only">
-              Payment frequency
-            </RadioGroup.Label>
+            <RadioGroup.Label className="sr-only">Payment frequency</RadioGroup.Label>
             {frequencies.map((option) => (
               <RadioGroup.Option
                 key={option.value}
@@ -117,9 +103,7 @@ export function Pricing() {
             <div
               key={tier.id}
               className={cn(
-                tier.mostPopular
-                  ? "ring-2 ring-indigo-600"
-                  : "ring-1 ring-gray-200",
+                tier.mostPopular ? "ring-2 ring-indigo-600" : "ring-1 ring-gray-200",
                 "rounded-3xl p-8"
               )}
             >
@@ -132,9 +116,7 @@ export function Pricing() {
               >
                 {tier.name}
               </h3>
-              <p className="mt-4 text-sm leading-6 text-gray-600">
-                {tier.description}
-              </p>
+              <p className="mt-4 text-sm leading-6 text-gray-600">{tier.description}</p>
               <p className="mt-6 flex items-baseline gap-x-1">
                 <span className="text-4xl font-bold tracking-tight text-gray-900">
                   {tier.price[frequency.value]}
@@ -155,16 +137,10 @@ export function Pricing() {
               >
                 Buy plan
               </Link>
-              <ul
-                role="list"
-                className="mt-8 space-y-3 text-sm leading-6 text-gray-600"
-              >
+              <ul role="list" className="mt-8 space-y-3 text-sm leading-6 text-gray-600">
                 {tier.features.map((feature) => (
                   <li key={feature} className="flex gap-x-3">
-                    <CheckIcon
-                      className="h-6 w-5 flex-none text-indigo-600"
-                      aria-hidden="true"
-                    />
+                    <CheckIcon className="h-6 w-5 flex-none text-indigo-600" aria-hidden="true" />
                     {feature}
                   </li>
                 ))}

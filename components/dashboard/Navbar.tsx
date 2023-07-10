@@ -34,16 +34,32 @@ const navigation = [
     href: "/dashboard/staff",
   },
   {
-    name: "Reports",
-    href: "/dashboard/reports",
-  },
-  {
     name: "Job Requests",
     href: "/dashboard/job-requests",
   },
   {
     name: "Job Sites",
     href: "/dashboard/job-sites",
+  },
+  {
+    name: "Reports",
+    href: "/dashboard/reports",
+  },
+  {
+    name: "Clients",
+    href: "/dashboard/clients",
+  },
+  {
+    name: "Workers",
+    href: "/dashboard/workers",
+  },
+  {
+    name: "Payroll",
+    href: "/dashboard/payroll",
+  },
+  {
+    name: "Invoices",
+    href: "/dashboard/invoices",
   },
 ]
 
@@ -76,7 +92,7 @@ export function Navbar() {
       >
         {({ open }) => (
           <>
-            <div className="mx-auto max-w-7xl px-6">
+            <div className="mx-auto px-6">
               <div className="relative flex justify-between lg:gap-8">
                 {/* Left Desktop Navbar */}
                 <div className="flex flex-shrink-0 items-center">
@@ -88,10 +104,7 @@ export function Navbar() {
                   />
 
                   {/* Desktop - Authenticated Navigation Links */}
-                  <nav
-                    className="hidden pl-12 lg:flex lg:space-x-8"
-                    aria-label="Global"
-                  >
+                  <nav className="hidden flex-wrap pl-12 lg:flex lg:space-x-2" aria-label="Global">
                     {navigation.map((item) => (
                       <Link
                         key={item.name}
@@ -101,7 +114,7 @@ export function Navbar() {
                           isActive(item.href)
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-900 hover:bg-gray-50 hover:text-gray-900",
-                          "inline-flex items-center rounded-md p-3 text-sm font-medium"
+                          "inline-flex items-center rounded-md p-2 text-sm font-medium"
                         )}
                       >
                         {item.name}
@@ -124,16 +137,14 @@ export function Navbar() {
                 </div>
 
                 <div className="hidden lg:flex lg:items-center lg:justify-end">
-                  <Menu as="div" className="relative ml-5 flex-shrink-0">
+                  <Menu as="div" className="relative flex-shrink-0">
                     <div>
                       <Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
                           alt="Profile Image"
-                          src={
-                            user?.photoURL || "/images/profile-placeholder.png"
-                          }
+                          src={user?.photoURL || "/images/profile-placeholder.png"}
                         />
                       </Menu.Button>
                     </div>
@@ -187,9 +198,7 @@ export function Navbar() {
                         aria-current={isActive(item.href) ? "page" : undefined}
                         onClick={() => close()}
                         className={cn(
-                          isActive(item.href)
-                            ? "bg-gray-100 text-gray-900"
-                            : "hover:bg-gray-50",
+                          isActive(item.href) ? "bg-gray-100 text-gray-900" : "hover:bg-gray-50",
                           "block rounded-md px-3 py-2 text-base font-medium"
                         )}
                       >
@@ -204,18 +213,14 @@ export function Navbar() {
                         <img
                           className="h-10 w-10 rounded-full"
                           alt="Profile Image"
-                          src={
-                            user?.photoURL || "/images/profile-placeholder.png"
-                          }
+                          src={user?.photoURL || "/images/profile-placeholder.png"}
                         />
                       </div>
                       <div className="ml-3">
                         <div className="text-base font-medium text-gray-800">
                           {user?.displayName || ""}
                         </div>
-                        <div className="text-sm font-medium text-gray-500">
-                          {user?.email || ""}
-                        </div>
+                        <div className="text-sm font-medium text-gray-500">{user?.email || ""}</div>
                       </div>
                       <button
                         type="button"

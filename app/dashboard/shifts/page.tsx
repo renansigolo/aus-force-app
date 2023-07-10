@@ -68,10 +68,7 @@ function Shifts() {
           >
             {transactions.map((transaction) => (
               <li key={transaction.id}>
-                <a
-                  href={transaction.href}
-                  className="block bg-white px-4 py-4 hover:bg-gray-50"
-                >
+                <a href={transaction.href} className="block bg-white px-4 py-4 hover:bg-gray-50">
                   <span className="flex items-center space-x-4">
                     <span className="flex flex-1 space-x-2 truncate">
                       <BanknotesIcon
@@ -81,14 +78,10 @@ function Shifts() {
                       <span className="flex flex-col truncate text-sm text-gray-500">
                         <span className="truncate">{transaction.name}</span>
                         <span>
-                          <span className="font-medium text-gray-900">
-                            {transaction.amount}
-                          </span>{" "}
+                          <span className="font-medium text-gray-900">{transaction.amount}</span>{" "}
                           {transaction.currency}
                         </span>
-                        <time dateTime={transaction.datetime}>
-                          {transaction.date}
-                        </time>
+                        <time dateTime={transaction.datetime}>{transaction.date}</time>
                       </span>
                     </span>
                     <span
@@ -158,9 +151,7 @@ function Shifts() {
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                        <span className="font-medium text-gray-900">
-                          {transaction.amount}
-                        </span>
+                        <span className="font-medium text-gray-900">{transaction.amount}</span>
                         {transaction.currency}
                       </td>
                       <td className="hidden whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block">
@@ -174,9 +165,7 @@ function Shifts() {
                         </span>
                       </td>
                       <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                        <time dateTime={transaction.datetime}>
-                          {transaction.date}
-                        </time>
+                        <time dateTime={transaction.datetime}>{transaction.date}</time>
                       </td>
                     </tr>
                   ))}

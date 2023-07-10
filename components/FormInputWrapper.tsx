@@ -8,12 +8,7 @@ type FormInputWrapperProps = {
   type: string
 }
 
-export function FormInputWrapper({
-  register,
-  id,
-  name,
-  type,
-}: FormInputWrapperProps) {
+export function FormInputWrapper({ register, id, name, type }: FormInputWrapperProps) {
   return (
     <div>
       <label htmlFor={id} className="form-label">

@@ -6,6 +6,37 @@ import { Empty } from "@/components/Empty"
 import Modal from "@/components/Modal"
 import { Role } from "@/components/Roles"
 import NiceModal from "@ebay/nice-modal-react"
+import { ExclamationTriangleIcon, XCircleIcon } from "@heroicons/react/24/outline"
+
+const items = [
+  {
+    title: "Job Request 1",
+    jobPosition: "General Labour",
+    startTime: new Date().toDateString(),
+    endTime: new Date().toDateString(),
+    break: true,
+    additionalNotes: "lorem ipsum dolor sit amet",
+    supplier: "Supplier A",
+  },
+  {
+    title: "Job Request 2",
+    jobPosition: "Traffic Controller",
+    startTime: new Date().toDateString(),
+    endTime: new Date().toDateString(),
+    break: false,
+    additionalNotes: "lorem ipsum dolor sit amet",
+    supplier: "Supplier B",
+  },
+  {
+    title: "Job Request 3",
+    jobPosition: "LO Operator",
+    startTime: new Date().toDateString(),
+    endTime: new Date().toDateString(),
+    break: true,
+    additionalNotes: "lorem ipsum dolor sit amet",
+    supplier: "Supplier C",
+  },
+]
 
 export default function JobRequestsPage() {
   const showModal = () =>
@@ -17,13 +48,13 @@ export default function JobRequestsPage() {
   return (
     <SectionWrapper>
       <Role role="client">
-        <SectionHeading
-          title="Job Requests"
-          buttonLabel="New Job"
-          buttonAction={showModal}
-        />
+        <SectionHeading title="Job Requests" buttonLabel="New Job" buttonAction={showModal} />
         <section className="py-8">
           <Empty title="job requests" />
+        </section>
+
+        <section className="py-8">
+          <JobRequestList />
         </section>
       </Role>
     </SectionWrapper>
@@ -36,61 +67,66 @@ function JobRequestsContent() {
       <form className="my-12 space-y-8 divide-y divide-gray-200">
         <div className="mt-6 grid grid-cols-1 gap-4">
           <div className="col-span-1">
-            <label
-              htmlFor="site-name"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="jobSite" className="block text-sm font-medium text-gray-700">
               Job Site
             </label>
             <div className="mt-1">
-              <input required id="site-name" name="site-name" type="text" />
-            </div>
-          </div>
-
-          <div className="col-span-1">
-            <label
-              htmlFor="role"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Job position
-            </label>
-            <div className="mt-1">
-              <select id="role" name="role">
-                <option>Supervisor</option>
-                <option>Manager</option>
+              <select id="jobSite" name="jobSite">
+                <option>Job Site A</option>
+                <option>Job Site B</option>
               </select>
             </div>
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="start-datetime"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Start Time
+            <label htmlFor="jobPosition" className="block text-sm font-medium text-gray-700">
+              Job position
             </label>
             <div className="mt-1">
-              <input
-                type="datetime-local"
-                name="start-datetime"
-                id="start-datetime"
-              />
+              <select id="jobPosition" name="jobPosition">
+                <option>General Labour</option>
+                <option>Skill Labour</option>
+                <option>Traffic Controller</option>
+                <option>Forklift Operator</option>
+                <option>LO Operator</option>
+                <option>Picker/Packer</option>
+                <option>Dogman</option>
+                <option>Crane Operator</option>
+                <option>Rigger</option>
+                <option>Escavator Operator</option>
+                <option>Trade Assistant</option>
+                <option>Carpenter</option>
+                <option>Steel Fixer</option>
+                <option>Formworker</option>
+                <option>Manitou Operator</option>
+              </select>
             </div>
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="end-datetime"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
+              Quantity
+            </label>
+            <div className="mt-1">
+              <input type="number" name="quantity" id="quantity" />
+            </div>
+          </div>
+
+          <div className="col-span-1">
+            <label htmlFor="start-datetime" className="block text-sm font-medium text-gray-700">
+              Start Time
+            </label>
+            <div className="mt-1">
+              <input type="datetime-local" name="start-datetime" id="start-datetime" />
+            </div>
+          </div>
+
+          <div className="col-span-1">
+            <label htmlFor="end-datetime" className="block text-sm font-medium text-gray-700">
               End Time
             </label>
             <div className="mt-1">
-              <input
-                type="datetime-local"
-                name="end-datetime"
-                id="end-datetime"
-              />
+              <input type="datetime-local" name="end-datetime" id="end-datetime" />
             </div>
           </div>
 
@@ -114,10 +150,7 @@ function JobRequestsContent() {
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="additional-notes"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="additional-notes" className="block text-sm font-medium text-gray-700">
               Additional Notes
             </label>
             <div className="mt-1">
@@ -126,10 +159,7 @@ function JobRequestsContent() {
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="supplier"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="supplier" className="block text-sm font-medium text-gray-700">
               Select Supplier
             </label>
             <div className="mt-1">
@@ -143,5 +173,39 @@ function JobRequestsContent() {
         </div>
       </form>
     </>
+  )
+}
+
+function JobRequestList() {
+  return (
+    <div className="grid grid-cols-1 gap-2">
+      {items.map((item) => (
+        <div
+          key={item.title}
+          className="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm"
+        >
+          <div className="min-w-0 flex-1">
+            <span className="absolute inset-0" aria-hidden="true" />
+            <p className="text-sm font-medium text-gray-900">{item.title}</p>
+            <p className="text-sm text-gray-500">{item.jobPosition}</p>
+            <p className="text-sm text-gray-500">
+              {item.startTime} - {item.endTime}
+            </p>
+            <p className="text-sm text-gray-500">{item.break ? "With" : "No"} Break</p>
+            <p className="text-sm text-gray-500">{item.additionalNotes}</p>
+            <p className="text-sm text-gray-500">{item.supplier}</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-2">
+            <span className="inline-flex items-center gap-2 rounded-md bg-yellow-50 px-2 py-1 text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
+              <ExclamationTriangleIcon className="h-6 w-6" /> Waiting Allocation
+            </span>
+            <button type="button" className="btn gap-2">
+              <XCircleIcon className="h-6 w-6" /> Cancel Request
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
   )
 }

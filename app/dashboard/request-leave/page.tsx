@@ -12,10 +12,7 @@ export default function RequestLeavePage() {
           <form className="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl md:col-span-2">
             <div className="px-4 py-6 sm:p-7">
               <div className="mb-4">
-                <label
-                  htmlFor="reason"
-                  className="block text-sm font-medium text-gray-700"
-                >
+                <label htmlFor="reason" className="block text-sm font-medium text-gray-700">
                   Reason
                 </label>
                 <select
@@ -65,10 +62,7 @@ export default function RequestLeavePage() {
                 </div>
               </div>
 
-              <label
-                htmlFor="comment"
-                className="block text-sm font-medium text-gray-700"
-              >
+              <label htmlFor="comment" className="block text-sm font-medium text-gray-700">
                 Notes
               </label>
               <div className="mt-1">

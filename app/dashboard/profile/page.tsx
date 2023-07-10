@@ -105,12 +105,8 @@ export default function ProfilePage() {
       <div className="px-4 sm:px-6 md:px-0">
         <section className="mt-10 divide-y divide-gray-200">
           <div className="space-y-1">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">
-              Profile
-            </h3>
-            <p className="max-w-2xl text-sm text-gray-500">
-              Your personal details.
-            </p>
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Profile</h3>
+            <p className="max-w-2xl text-sm text-gray-500">Your personal details.</p>
           </div>
           <div className="mt-6">
             <dl className="divide-y divide-gray-200">
@@ -141,12 +137,8 @@ export default function ProfilePage() {
 
         <section className="mt-10 divide-y divide-gray-200">
           <div className="space-y-1">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">
-              Bank Details
-            </h3>
-            <p className="max-w-2xl text-sm text-gray-500">
-              Your bank details.
-            </p>
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Bank Details</h3>
+            <p className="max-w-2xl text-sm text-gray-500">Your bank details.</p>
           </div>
           <div className="mt-6">
             <dl className="divide-y divide-gray-200">
@@ -159,12 +151,8 @@ export default function ProfilePage() {
 
         <section className="mt-10 divide-y divide-gray-200">
           <div className="space-y-1">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">
-              Additional Documents
-            </h3>
-            <p className="max-w-2xl text-sm text-gray-500">
-              Some additional documents.
-            </p>
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Additional Documents</h3>
+            <p className="max-w-2xl text-sm text-gray-500">Some additional documents.</p>
           </div>
           <div className="mt-6">
             <dl className="divide-y divide-gray-200">
