@@ -11,7 +11,7 @@ import { FirebaseError } from "firebase/app"
 import { createUserWithEmailAndPassword } from "firebase/auth"
 import { addDoc, collection } from "firebase/firestore"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { ChangeEvent, KeyboardEvent, useState } from "react"
 import { useForm } from "react-hook-form"
 import { toast } from "react-hot-toast"
 
@@ -987,6 +987,16 @@ export default function SignUpPage() {
             </div>
           </div>
 
+          <Role role="worker">
+            <div className="pt-8">
+              <h3 className="text-lg font-medium leading-6 text-gray-900">Qualifications</h3>
+              <p className="mt-1 text-sm text-gray-500">
+                Add words to describe your qualifications
+              </p>
+            </div>
+            <WordInputChips />
+          </Role>
+
           <div className="pt-5">
             <div className="flex justify-end">
               <button className="btn btn-primary" disabled={isSubmitting || !isDirty}>
@@ -997,5 +1007,51 @@ export default function SignUpPage() {
         </form>
       </div>
     </>
+  )
+}
+
+function WordInputChips() {
+  const [inputValue, setInputValue] = useState("")
+  const [words, setWords] = useState<string[]>([])
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value)
+  }
+
+  const handleInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter" && inputValue.trim()) {
+      setWords([...words, inputValue.trim()])
+      setInputValue("")
+    }
+  }
+
+  const handleChipRemove = (index: number) => {
+    const updatedWords = [...words]
+    updatedWords.splice(index, 1)
+    setWords(updatedWords)
+  }
+
+  return (
+    <div className="flex flex-wrap">
+      {words.map((word, index) => (
+        <div key={index} className="m-1 flex items-center rounded-full bg-gray-200 px-3 py-1">
+          <span>{word}</span>
+          <button
+            onClick={() => handleChipRemove(index)}
+            className="ml-2 text-gray-500 hover:text-gray-700 focus:outline-none"
+          >
+            &times;
+          </button>
+        </div>
+      ))}
+      <input
+        type="text"
+        className="m-1 rounded border border-gray-300 px-3 py-1"
+        placeholder="Enter words"
+        value={inputValue}
+        onChange={handleInputChange}
+        onKeyDown={handleInputKeyDown}
+      />
+    </div>
   )
 }
