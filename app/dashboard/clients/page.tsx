@@ -84,7 +84,7 @@ function Accordion({ approveShift, showModal }: any) {
         <div className="mx-auto divide-gray-900/10">
           <dl className="space-y-6 divide-y divide-gray-900/10">
             {accordionItems.map((item) => (
-              <Disclosure as="div" key={item.title} className="pt-6">
+              <Disclosure key={item.title} as="div" className="pt-6">
                 {({ open }) => (
                   <>
                     <dt>

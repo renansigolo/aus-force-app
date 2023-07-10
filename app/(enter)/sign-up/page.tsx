@@ -427,7 +427,7 @@ export default function SignUpPage() {
 
               <dl className="mt-10 space-y-6 divide-y divide-gray-900/10">
                 {personalForm.map((field, index) => (
-                  <Disclosure as="div" className="pt-6" key={index}>
+                  <Disclosure key={index} as="div" className="pt-6">
                     {({ open }) => (
                       <>
                         <dt>
@@ -612,7 +612,7 @@ export default function SignUpPage() {
                     )}
                   </Disclosure>
                   {documentsForm.map((field, index) => (
-                    <Disclosure as="div" key={field.label} className="pt-6">
+                    <Disclosure key={field.label} as="div" className="pt-6">
                       {({ open }) => (
                         <>
                           <dt>
@@ -781,6 +781,7 @@ export default function SignUpPage() {
                         <>
                           <span className="flex items-center text-sm">
                             <span
+                              aria-hidden="true"
                               className={classNames(
                                 checked
                                   ? "border-transparent bg-indigo-600"
@@ -788,7 +789,6 @@ export default function SignUpPage() {
                                 active ? "ring-2 ring-indigo-600 ring-offset-2" : "",
                                 "flex h-4 w-4 items-center justify-center rounded-full border"
                               )}
-                              aria-hidden="true"
                             >
                               <span className="h-1.5 w-1.5 rounded-full bg-white" />
                             </span>
