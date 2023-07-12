@@ -11,7 +11,7 @@ export default function JobSitesPage() {
   const showModal = () =>
     NiceModal.show(Modal, {
       title: "New Site",
-      children: <JobSitesContent />,
+      children: <JobSiteModal />,
     })
 
   return (
@@ -27,7 +27,7 @@ export default function JobSitesPage() {
   )
 }
 
-function JobSitesContent() {
+function JobSiteModal() {
   return (
     <>
       <form className="my-12 space-y-8 divide-y divide-gray-200">

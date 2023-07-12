@@ -46,6 +46,10 @@ const navigation = [
     href: "/dashboard/reports",
   },
   {
+    name: "Allocations",
+    href: "/dashboard/allocations",
+  },
+  {
     name: "Clients",
     href: "/dashboard/clients",
   },
