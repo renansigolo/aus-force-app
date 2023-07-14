@@ -175,6 +175,9 @@ function Accordion({ approveShift, showModal }: any) {
                             {item.title}
                           </span>
                         </span>
+                        <span className="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-purple-800">
+                          Select All
+                        </span>
                       </Disclosure.Button>
                     </dt>
                     <Disclosure.Panel as="dd" className="mt-2 px-2">
