@@ -148,7 +148,7 @@ function ShiftTable({ approveShift, showModal }: any) {
                   scope="col"
                   className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
                 >
-                  End Date
+                  Start Date
                 </th>
 
                 <th scope="col" className="relative py-3.5 pl-3 pr-4">
@@ -166,7 +166,7 @@ function ShiftTable({ approveShift, showModal }: any) {
                       <dd className="mt-1 truncate text-gray-700">{tableItem.jobSite}</dd>
                       <dt className="sr-only sm:hidden">End Time</dt>
                       <dd className="mt-1 truncate text-gray-500 sm:hidden">
-                        End date: {tableItem.endDate}
+                        Start date: {tableItem.endDate}
                       </dd>
                     </dl>
                   </td>
@@ -179,7 +179,7 @@ function ShiftTable({ approveShift, showModal }: any) {
 
                   <td className="flex flex-col-reverse gap-2 py-4 pl-3 pr-4 text-right text-sm font-medium lg:flex-row">
                     <span className="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
-                      14 Days Left
+                      14 Days Worked
                     </span>
                   </td>
                 </tr>
