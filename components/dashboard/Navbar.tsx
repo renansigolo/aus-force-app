@@ -90,7 +90,7 @@ export function Navbar() {
         className={({ open }) =>
           cn(
             open ? "fixed inset-0 z-40 overflow-y-auto" : "",
-            "bg-white py-4 shadow-sm lg:static lg:overflow-y-visible"
+            "bg-white py-4 shadow-sm lg:static lg:overflow-y-visible",
           )
         }
       >
@@ -118,7 +118,7 @@ export function Navbar() {
                           isActive(item.href)
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-900 hover:bg-gray-50 hover:text-gray-900",
-                          "inline-flex items-center rounded-md p-2 text-sm font-medium"
+                          "inline-flex items-center rounded-md p-2 text-sm font-medium",
                         )}
                       >
                         {item.name}
@@ -169,7 +169,7 @@ export function Navbar() {
                                 href={item.href}
                                 className={cn(
                                   active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700"
+                                  "block px-4 py-2 text-sm text-gray-700",
                                 )}
                               >
                                 {item.name}
@@ -203,7 +203,7 @@ export function Navbar() {
                         onClick={() => close()}
                         className={cn(
                           isActive(item.href) ? "bg-gray-100 text-gray-900" : "hover:bg-gray-50",
-                          "block rounded-md px-3 py-2 text-base font-medium"
+                          "block rounded-md px-3 py-2 text-base font-medium",
                         )}
                       >
                         {item.name}

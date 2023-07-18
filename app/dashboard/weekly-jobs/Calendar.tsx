@@ -189,7 +189,7 @@ export function Calendar() {
                 key={day.date}
                 className={cn(
                   day.isCurrentMonth ? "bg-white" : "bg-gray-50 text-gray-500",
-                  "relative px-3 py-2"
+                  "relative px-3 py-2",
                 )}
               >
                 <time
@@ -239,7 +239,7 @@ export function Calendar() {
                   !day.isSelected && day.isToday && "text-indigo-600",
                   !day.isSelected && day.isCurrentMonth && !day.isToday && "text-gray-900",
                   !day.isSelected && !day.isCurrentMonth && !day.isToday && "text-gray-500",
-                  "flex h-14 flex-col px-3 py-2 hover:bg-gray-100 focus:z-10"
+                  "flex h-14 flex-col px-3 py-2 hover:bg-gray-100 focus:z-10",
                 )}
               >
                 <time
@@ -249,7 +249,7 @@ export function Calendar() {
                       ("flex h-6 w-6 items-center justify-center rounded-full" as any),
                     day.isSelected && day.isToday && "bg-indigo-600",
                     day.isSelected && !day.isToday && "bg-gray-900",
-                    "ml-auto"
+                    "ml-auto",
                   )}
                 >
                   {day.date.split("-").pop()?.replace(/^0/, "")}

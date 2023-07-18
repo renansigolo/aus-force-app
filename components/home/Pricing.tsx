@@ -89,7 +89,7 @@ export function Pricing() {
                 className={({ checked }) =>
                   cn(
                     checked ? "bg-indigo-600 text-white" : "text-gray-500",
-                    "cursor-pointer rounded-full px-2.5 py-1"
+                    "cursor-pointer rounded-full px-2.5 py-1",
                   )
                 }
               >
@@ -104,14 +104,14 @@ export function Pricing() {
               key={tier.id}
               className={cn(
                 tier.mostPopular ? "ring-2 ring-indigo-600" : "ring-1 ring-gray-200",
-                "rounded-3xl p-8"
+                "rounded-3xl p-8",
               )}
             >
               <h3
                 id={tier.id}
                 className={cn(
                   tier.mostPopular ? "text-indigo-600" : "text-gray-900",
-                  "text-lg font-semibold leading-8"
+                  "text-lg font-semibold leading-8",
                 )}
               >
                 {tier.name}
@@ -132,7 +132,7 @@ export function Pricing() {
                   tier.mostPopular
                     ? "bg-indigo-600 text-white shadow-sm hover:bg-indigo-500"
                     : "text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300",
-                  "mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                  "mt-6 block rounded-md px-3 py-2 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600",
                 )}
               >
                 Buy plan

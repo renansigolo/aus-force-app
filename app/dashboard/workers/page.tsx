@@ -116,7 +116,7 @@ function WorkersList({ category }: WorkersListProps) {
                   <span
                     className={cn(
                       statusStyles[item.status],
-                      "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize"
+                      "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize",
                     )}
                   >
                     {item.status}
@@ -242,7 +242,7 @@ function WorkersList({ category }: WorkersListProps) {
                       <span
                         className={cn(
                           statusStyles[item.status],
-                          "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize"
+                          "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize",
                         )}
                       >
                         {item.status}

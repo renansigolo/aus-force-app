@@ -77,7 +77,7 @@ function Payments() {
                     <span
                       className={cn(
                         statusStyles[transaction.status],
-                        "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize"
+                        "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize",
                       )}
                     >
                       {transaction.status}
@@ -148,7 +148,7 @@ function Payments() {
                         <span
                           className={cn(
                             statusStyles[transaction.status],
-                            "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize"
+                            "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize",
                           )}
                         >
                           {transaction.status}

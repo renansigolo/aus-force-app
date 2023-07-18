@@ -21,7 +21,7 @@ exports.saveRegistration = functions.https.onRequest((req, res) =>
         email: req.body.email,
       })
       .then(() => res.send("Email saved"))
-  })
+  }),
 )
 
 /** Send an email with the details from the Contact Form on the website */
@@ -58,6 +58,6 @@ exports.sendEmail = functions
     }
 
     return gmailTransporter.sendMail(mailOptions, (err) =>
-      err ? res.status(500).send(err) : res.status(200).send({ message: "success" })
+      err ? res.status(500).send(err) : res.status(200).send({ message: "success" }),
     )
   })
