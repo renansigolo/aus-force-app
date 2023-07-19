@@ -1,10 +1,11 @@
-import { useEffect, useRef } from "react"
-import SignatureCanvas from "react-signature-canvas"
+import { useEffect, useRef } from "react";
+import SignatureCanvas from "react-signature-canvas";
 
 export const SignatureForm = () => {
-  const signatureRef = useRef<SignatureCanvas>(null)
+  const signatureRef = useRef<SignatureCanvas>(null);
 
-  const handleClear = () => signatureRef.current && signatureRef.current.clear()
+  const handleClear = () =>
+    signatureRef.current && signatureRef.current.clear();
 
   // const handleSave = () => {
   //   if (signatureRef.current) {
@@ -17,19 +18,19 @@ export const SignatureForm = () => {
   useEffect(() => {
     const resizeCanvas = () => {
       if (signatureRef.current) {
-        const canvas = signatureRef.current.getCanvas()
-        const containerWidth = canvas.parentElement?.clientWidth
-        canvas.width = Number(containerWidth)
+        const canvas = signatureRef.current.getCanvas();
+        const containerWidth = canvas.parentElement?.clientWidth;
+        canvas.width = Number(containerWidth);
       }
-    }
+    };
 
     // Call the resizeCanvas function when the window is resized
-    window.addEventListener("resize", resizeCanvas)
-    resizeCanvas()
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
 
     // Clean up the event listener on component unmount
-    return () => window.removeEventListener("resize", resizeCanvas)
-  }, [])
+    return () => window.removeEventListener("resize", resizeCanvas);
+  }, []);
 
   return (
     <div style={{ width: "100%", maxWidth: "580px" }}>
@@ -50,5 +51,5 @@ export const SignatureForm = () => {
         </button> */}
       </div>
     </div>
-  )
-}
+  );
+};

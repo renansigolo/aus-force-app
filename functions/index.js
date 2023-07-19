@@ -1,16 +1,16 @@
-const functions = require("firebase-functions")
-const { initializeApp } = require("firebase-admin/app")
-const { getFirestore } = require("firebase-admin/firestore")
-const { defineSecret } = require("firebase-functions/params")
-const nodemailer = require("nodemailer")
-const cors = require("cors")({ origin: true })
+const functions = require("firebase-functions");
+const { initializeApp } = require("firebase-admin/app");
+const { getFirestore } = require("firebase-admin/firestore");
+const { defineSecret } = require("firebase-functions/params");
+const nodemailer = require("nodemailer");
+const cors = require("cors")({ origin: true });
 
-initializeApp()
+initializeApp();
 
-const db = getFirestore()
+const db = getFirestore();
 
-const gmailUser = defineSecret("GMAIL_USER")
-const gmailPass = defineSecret("GMAIL_PASS")
+const gmailUser = defineSecret("GMAIL_USER");
+const gmailPass = defineSecret("GMAIL_PASS");
 
 exports.saveRegistration = functions.https.onRequest((req, res) =>
   cors(req, res, async () => {
@@ -20,16 +20,16 @@ exports.saveRegistration = functions.https.onRequest((req, res) =>
       .set({
         email: req.body.email,
       })
-      .then(() => res.send("Email saved"))
+      .then(() => res.send("Email saved"));
   }),
-)
+);
 
 /** Send an email with the details from the Contact Form on the website */
 exports.sendEmail = functions
   .runWith({ secrets: [gmailUser, gmailPass] })
   .firestore.document("registered-interest/{id}")
   .onCreate((snap, context) => {
-    const docData = snap.data()
+    const docData = snap.data();
 
     const gmailTransporter = nodemailer.createTransport({
       service: "gmail",
@@ -40,7 +40,7 @@ exports.sendEmail = functions
         user: gmailUser.value(),
         pass: gmailPass.value(),
       },
-    })
+    });
 
     const mailOptions = {
       from: "AUS Force <support@ausforce.com>",
@@ -55,9 +55,11 @@ exports.sendEmail = functions
         <p>Best Regards,</p>
         <p>AUS Force team</p>
         `,
-    }
+    };
 
     return gmailTransporter.sendMail(mailOptions, (err) =>
-      err ? res.status(500).send(err) : res.status(200).send({ message: "success" }),
-    )
-  })
+      err
+        ? res.status(500).send(err)
+        : res.status(200).send({ message: "success" }),
+    );
+  });

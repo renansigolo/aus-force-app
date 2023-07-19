@@ -2,4 +2,4 @@
 module.exports = {
   siteUrl: "https://aus-force-app.vercel.app",
   generateRobotsTxt: true,
-}
+};

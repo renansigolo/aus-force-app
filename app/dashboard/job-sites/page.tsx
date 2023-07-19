@@ -1,30 +1,34 @@
-"use client"
+"use client";
 
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
-import { Empty } from "@/components/Empty"
-import Modal from "@/components/Modal"
-import { Role } from "@/components/Roles"
-import NiceModal from "@ebay/nice-modal-react"
+import { SectionHeading } from "@/components/dashboard/SectionHeading";
+import { SectionWrapper } from "@/components/dashboard/SectionWrapper";
+import { Empty } from "@/components/Empty";
+import Modal from "@/components/Modal";
+import { Role } from "@/components/Roles";
+import NiceModal from "@ebay/nice-modal-react";
 
 export default function JobSitesPage() {
   const showModal = () =>
     NiceModal.show(Modal, {
       title: "New Site",
       children: <JobSiteModal />,
-    })
+    });
 
   return (
     <SectionWrapper>
       <Role role="client">
-        <SectionHeading title="Job Sites" buttonLabel="New Site" buttonAction={showModal} />
+        <SectionHeading
+          title="Job Sites"
+          buttonLabel="New Site"
+          buttonAction={showModal}
+        />
 
         <section className="py-8">
           <Empty title="job sites" />
         </section>
       </Role>
     </SectionWrapper>
-  )
+  );
 }
 
 function JobSiteModal() {
@@ -33,7 +37,10 @@ function JobSiteModal() {
       <form className="my-12 space-y-8 divide-y divide-gray-200">
         <div className="mt-6 grid grid-cols-1 gap-4">
           <div className="col-span-1">
-            <label htmlFor="site-name" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="site-name"
+              className="block text-sm font-medium text-gray-700"
+            >
               Site Name
             </label>
             <div className="mt-1">
@@ -42,7 +49,10 @@ function JobSiteModal() {
           </div>
 
           <div className="col-span-1">
-            <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="address"
+              className="block text-sm font-medium text-gray-700"
+            >
               Address
             </label>
             <div className="mt-1">
@@ -70,7 +80,10 @@ function JobSiteModal() {
           </div>
 
           <div className="col-span-1">
-            <label htmlFor="additional-notes" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="additional-notes"
+              className="block text-sm font-medium text-gray-700"
+            >
               Additional Notes
             </label>
             <div className="mt-1">
@@ -108,5 +121,5 @@ function JobSiteModal() {
         </div>
       </form>
     </>
-  )
+  );
 }
