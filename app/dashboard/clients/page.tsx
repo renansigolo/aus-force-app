@@ -1,15 +1,23 @@
-"use client"
+"use client";
 
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
-import { Empty } from "@/components/Empty"
-import Modal from "@/components/Modal"
-import { Role } from "@/components/Roles"
-import NiceModal from "@ebay/nice-modal-react"
-import { Disclosure } from "@headlessui/react"
-import { ChevronDownIcon, ChevronRightIcon, EllipsisVerticalIcon } from "@heroicons/react/20/solid"
+import { SectionHeading } from "@/components/dashboard/SectionHeading";
+import { SectionWrapper } from "@/components/dashboard/SectionWrapper";
+import { Empty } from "@/components/Empty";
+import Modal from "@/components/Modal";
+import { Role } from "@/components/Roles";
+import NiceModal from "@ebay/nice-modal-react";
+import { Disclosure } from "@headlessui/react";
+import {
+  ChevronDownIcon,
+  ChevronRightIcon,
+  EllipsisVerticalIcon,
+} from "@heroicons/react/20/solid";
 
-const accordionItems = [{ title: "Job Site A" }, { title: "Job Site B" }, { title: "Job Site C" }]
+const accordionItems = [
+  { title: "Job Site A" },
+  { title: "Job Site B" },
+  { title: "Job Site C" },
+];
 const tableItems = [
   {
     status: "ongoing",
@@ -28,19 +36,23 @@ const tableItems = [
 
     endDate: "24/07 - 3:30pm",
   },
-]
+];
 
 export default function ClientsPage() {
   const showModal = () =>
     NiceModal.show(Modal, {
       title: "New Client",
       children: <AddNewClientModal />,
-    })
+    });
 
   return (
     <SectionWrapper>
       <Role role="business">
-        <SectionHeading title="Clients" buttonLabel="Add New Client" buttonAction={showModal} />
+        <SectionHeading
+          title="Clients"
+          buttonLabel="Add New Client"
+          buttonAction={showModal}
+        />
         <section className="py-8">
           <Empty title="clients" />
         </section>
@@ -51,7 +63,9 @@ export default function ClientsPage() {
             <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
               <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
                 <div className="ml-4 mt-2">
-                  <h3 className="text-lg font-medium leading-6 text-gray-900">Client 01</h3>
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">
+                    Client 01
+                  </h3>
                 </div>
 
                 <div className="ml-4 mt-2 flex-shrink-0">
@@ -60,7 +74,10 @@ export default function ClientsPage() {
                     className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
                     <span className="sr-only">Open options</span>
-                    <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
+                    <EllipsisVerticalIcon
+                      className="h-5 w-5"
+                      aria-hidden="true"
+                    />
                   </button>
                 </div>
               </div>
@@ -74,7 +91,7 @@ export default function ClientsPage() {
         </section>
       </Role>
     </SectionWrapper>
-  )
+  );
 }
 
 function Accordion({ approveShift, showModal }: any) {
@@ -91,9 +108,15 @@ function Accordion({ approveShift, showModal }: any) {
                       <Disclosure.Button className="flex w-full items-center justify-between text-left text-gray-900">
                         <span className="flex h-7 items-center">
                           {open ? (
-                            <ChevronDownIcon className="h-6 w-6" aria-hidden="true" />
+                            <ChevronDownIcon
+                              className="h-6 w-6"
+                              aria-hidden="true"
+                            />
                           ) : (
-                            <ChevronRightIcon className="h-6 w-6" aria-hidden="true" />
+                            <ChevronRightIcon
+                              className="h-6 w-6"
+                              aria-hidden="true"
+                            />
                           )}
                           <span className="ml-2 text-base font-semibold leading-7">
                             {item.title}
@@ -102,7 +125,10 @@ function Accordion({ approveShift, showModal }: any) {
                       </Disclosure.Button>
                     </dt>
                     <Disclosure.Panel as="dd" className="mt-2 px-2">
-                      <ShiftTable approveShift={approveShift} showModal={showModal} />
+                      <ShiftTable
+                        approveShift={approveShift}
+                        showModal={showModal}
+                      />
                     </Disclosure.Panel>
                   </>
                 )}
@@ -112,7 +138,7 @@ function Accordion({ approveShift, showModal }: any) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function ShiftTable({ approveShift, showModal }: any) {
@@ -163,7 +189,9 @@ function ShiftTable({ approveShift, showModal }: any) {
                     {tableItem.name}
                     <dl className="font-normal lg:hidden">
                       <dt className="sr-only">Job Site</dt>
-                      <dd className="mt-1 truncate text-gray-700">{tableItem.jobSite}</dd>
+                      <dd className="mt-1 truncate text-gray-700">
+                        {tableItem.jobSite}
+                      </dd>
                       <dt className="sr-only sm:hidden">End Time</dt>
                       <dd className="mt-1 truncate text-gray-500 sm:hidden">
                         Start date: {tableItem.endDate}
@@ -234,7 +262,9 @@ function ShiftTable({ approveShift, showModal }: any) {
                     {tableItem.name}
                     <dl className="font-normal lg:hidden">
                       <dt className="sr-only">Job Site</dt>
-                      <dd className="mt-1 truncate text-gray-700">{tableItem.jobSite}</dd>
+                      <dd className="mt-1 truncate text-gray-700">
+                        {tableItem.jobSite}
+                      </dd>
                       <dt className="sr-only sm:hidden">End Time</dt>
                       <dd className="mt-1 truncate text-gray-500 sm:hidden">
                         End date: {tableItem.endDate}
@@ -260,7 +290,7 @@ function ShiftTable({ approveShift, showModal }: any) {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function AddNewClientModal() {
@@ -269,7 +299,10 @@ function AddNewClientModal() {
       <form className="my-12 space-y-8 divide-y divide-gray-200">
         <div className="mt-6 grid gap-4">
           <div>
-            <label htmlFor="clientName" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="clientName"
+              className="block text-sm font-medium text-gray-700"
+            >
               Client Name
             </label>
             <div className="mt-1">
@@ -278,7 +311,10 @@ function AddNewClientModal() {
           </div>
 
           <div>
-            <label htmlFor="clientEmail" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="clientEmail"
+              className="block text-sm font-medium text-gray-700"
+            >
               Email
             </label>
             <div className="mt-1">
@@ -288,5 +324,5 @@ function AddNewClientModal() {
         </div>
       </form>
     </>
-  )
+  );
 }

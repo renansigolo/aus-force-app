@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { auth } from "@/lib/firebase"
-import NiceModal from "@ebay/nice-modal-react"
-import { createContext, ReactNode } from "react"
-import { useAuthState } from "react-firebase-hooks/auth"
-import { Toaster } from "react-hot-toast"
+import { auth } from "@/lib/firebase";
+import NiceModal from "@ebay/nice-modal-react";
+import { createContext, ReactNode } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Toaster } from "react-hot-toast";
 
-export const UserContext = createContext({ user: null })
+export const UserContext = createContext({ user: null });
 
 type ProvidersProps = {
-  children: ReactNode
-}
+  children: ReactNode;
+};
 export function Providers({ children }: ProvidersProps) {
-  const [user] = useAuthState(auth)
+  const [user] = useAuthState(auth);
 
   return (
     <>
@@ -21,5 +21,5 @@ export function Providers({ children }: ProvidersProps) {
         <Toaster position="top-right" reverseOrder={true} />
       </UserContext.Provider>
     </>
-  )
+  );
 }

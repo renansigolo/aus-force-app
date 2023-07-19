@@ -1,4 +1,4 @@
-const year = new Date().getFullYear()
+const year = new Date().getFullYear();
 
 export function Footer() {
   return (
@@ -9,5 +9,5 @@ export function Footer() {
         </p>
       </div>
     </footer>
-  )
+  );
 }

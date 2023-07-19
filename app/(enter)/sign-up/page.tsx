@@ -1,28 +1,32 @@
-"use client"
+"use client";
 
-import { EnterHeader } from "@/app/(enter)/EnterHeader"
-import { SignatureForm } from "@/app/(enter)/sign-up/Signature"
-import { Role } from "@/components/Roles"
-import { auth, db } from "@/lib/firebase"
-import { cn } from "@/lib/helpers"
-import { Disclosure, RadioGroup } from "@headlessui/react"
-import { DocumentArrowUpIcon, MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/outline"
-import { FirebaseError } from "firebase/app"
-import { createUserWithEmailAndPassword } from "firebase/auth"
-import { addDoc, collection } from "firebase/firestore"
-import { useRouter } from "next/navigation"
-import { ChangeEvent, KeyboardEvent, useState } from "react"
-import { useForm } from "react-hook-form"
-import { toast } from "react-hot-toast"
+import { EnterHeader } from "@/app/(enter)/EnterHeader";
+import { SignatureForm } from "@/app/(enter)/sign-up/Signature";
+import { Role } from "@/components/Roles";
+import { auth, db } from "@/lib/firebase";
+import { cn } from "@/lib/helpers";
+import { Disclosure, RadioGroup } from "@headlessui/react";
+import {
+  DocumentArrowUpIcon,
+  MinusSmallIcon,
+  PlusSmallIcon,
+} from "@heroicons/react/24/outline";
+import { FirebaseError } from "firebase/app";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { addDoc, collection } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+import { ChangeEvent, KeyboardEvent, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-hot-toast";
 
 function classNames(...classes: any[]) {
-  return classes.filter(Boolean).join(" ")
+  return classes.filter(Boolean).join(" ");
 }
 
 const frequencies = [
   { value: "monthly", label: "Monthly", priceSuffix: "/month" },
   { value: "annually", label: "Annually", priceSuffix: "/year" },
-]
+];
 
 const plans = [
   {
@@ -50,7 +54,7 @@ const plans = [
     priceYearly: 4000,
     limit: "Unlimited owener's and client's",
   },
-]
+];
 
 const profileForm = [
   {
@@ -85,7 +89,7 @@ const profileForm = [
     type: "date",
     autoComplete: "bday",
   },
-]
+];
 
 const businessForm = [
   {
@@ -120,7 +124,7 @@ const businessForm = [
     type: "number",
     autoComplete: "",
   },
-]
+];
 
 const accountsForm = [
   {
@@ -147,7 +151,7 @@ const accountsForm = [
     type: "password",
     autoComplete: "",
   },
-]
+];
 
 const personalForm = [
   {
@@ -174,7 +178,7 @@ const personalForm = [
     type: "text",
     autoComplete: "",
   },
-]
+];
 
 const documentsForm = [
   // {
@@ -233,24 +237,28 @@ const documentsForm = [
     type: "text",
     autoComplete: "",
   },
-]
+];
 
 export default function SignUpPage() {
-  const router = useRouter()
-  const [picture, setPicture] = useState("/images/profile-placeholder.png")
-  const [selected, setSelected] = useState(plans[0])
-  const [frequency, setFrequency] = useState(frequencies[0])
+  const router = useRouter();
+  const [picture, setPicture] = useState("/images/profile-placeholder.png");
+  const [selected, setSelected] = useState(plans[0]);
+  const [frequency, setFrequency] = useState(frequencies[0]);
 
   const {
     register,
     handleSubmit,
     formState: { errors, isDirty, isValid, isSubmitting },
-  } = useForm()
+  } = useForm();
 
   const signUp = async (formData: any) => {
-    console.log("🚀 ~ signUp ~ formData:", formData)
+    console.log("🚀 ~ signUp ~ formData:", formData);
 
-    await createUserWithEmailAndPassword(auth, formData.email, formData.password)
+    await createUserWithEmailAndPassword(
+      auth,
+      formData.email,
+      formData.password,
+    )
       .then(
         async (userCredential) =>
           await addDoc(collection(db, "users"), {
@@ -258,12 +266,14 @@ export default function SignUpPage() {
             uid: userCredential.user.uid,
             displayName: `${formData.firstName} ${formData.lastName}`,
           }).then(() => {
-            router.push("/dashboard")
-            toast.success(`Account created successfully, welcome ${userCredential.user.email}`)
+            router.push("/dashboard");
+            toast.success(
+              `Account created successfully, welcome ${userCredential.user.email}`,
+            );
           }),
       )
-      .catch((error: FirebaseError) => toast.error(error.message))
-  }
+      .catch((error: FirebaseError) => toast.error(error.message));
+  };
 
   return (
     <>
@@ -273,12 +283,17 @@ export default function SignUpPage() {
           description="Enter your details below to sign-up for a new account"
         />
 
-        <form className="my-12 space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit(signUp)}>
+        <form
+          className="my-12 space-y-8 divide-y divide-gray-200"
+          onSubmit={handleSubmit(signUp)}
+        >
           <div className="space-y-8 divide-y divide-gray-200">
             {/* Profile Details */}
             <div>
               <div>
-                <h3 className="text-lg font-medium leading-6 text-gray-900">Profile</h3>
+                <h3 className="text-lg font-medium leading-6 text-gray-900">
+                  Profile
+                </h3>
                 <p className="mt-1 text-sm text-gray-500">
                   This information will be displayed as your profile.
                 </p>
@@ -286,7 +301,10 @@ export default function SignUpPage() {
 
               <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
                 <div className="sm:col-span-6">
-                  <label htmlFor="photo" className="block text-sm font-medium text-gray-700">
+                  <label
+                    htmlFor="photo"
+                    className="block text-sm font-medium text-gray-700"
+                  >
                     Photo
                   </label>
                   <div className="mt-1 flex items-center">
@@ -301,8 +319,8 @@ export default function SignUpPage() {
                       className="btn ml-4 w-full"
                       accept="image/x-png,image/gif,image/jpeg"
                       onChange={(e) => {
-                        if (!e.target.files) return
-                        setPicture(URL.createObjectURL(e.target.files[0]))
+                        if (!e.target.files) return;
+                        setPicture(URL.createObjectURL(e.target.files[0]));
                       }}
                     />
                   </div>
@@ -312,9 +330,14 @@ export default function SignUpPage() {
               <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
                 {profileForm.map((field, index) => (
                   <div key={index} className="sm:col-span-3">
-                    <label htmlFor={field.id} className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor={field.id}
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       {field.label}
-                      {field.required && <span className="text-red-500">*</span>}
+                      {field.required && (
+                        <span className="text-red-500">*</span>
+                      )}
                     </label>
                     <div className="mt-1">
                       <input
@@ -322,7 +345,9 @@ export default function SignUpPage() {
                         autoComplete={field.autoComplete}
                         {...register(field.id, { required: field.required })}
                       />
-                      {errors[field.id] && <span>{String(errors[field.id]?.message)}</span>}
+                      {errors[field.id] && (
+                        <span>{String(errors[field.id]?.message)}</span>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -336,14 +361,21 @@ export default function SignUpPage() {
                   <h3 className="text-lg font-medium leading-6 text-gray-900">
                     Business Information
                   </h3>
-                  <p className="mt-1 text-sm text-gray-500">Enter the details of your business.</p>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Enter the details of your business.
+                  </p>
                 </div>
                 <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
                   {businessForm.map((field, index) => (
                     <div key={index} className="sm:col-span-3">
-                      <label htmlFor={field.id} className="block text-sm font-medium text-gray-700">
+                      <label
+                        htmlFor={field.id}
+                        className="block text-sm font-medium text-gray-700"
+                      >
                         {field.label}
-                        {field.required && <span className="text-red-500">*</span>}
+                        {field.required && (
+                          <span className="text-red-500">*</span>
+                        )}
                       </label>
                       <div className="mt-1">
                         <input
@@ -351,17 +383,25 @@ export default function SignUpPage() {
                           autoComplete={field.autoComplete}
                           {...register(field.id, { required: field.required })}
                         />
-                        {errors[field.id] && <span>{String(errors[field.id]?.message)}</span>}
+                        {errors[field.id] && (
+                          <span>{String(errors[field.id]?.message)}</span>
+                        )}
                       </div>
                     </div>
                   ))}
 
                   <div className="sm:col-span-6">
-                    <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="country"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       Country
                     </label>
                     <div className="mt-1">
-                      <select {...register("country")} autoComplete="country-name">
+                      <select
+                        {...register("country")}
+                        autoComplete="country-name"
+                      >
                         <option>Australia</option>
                       </select>
                     </div>
@@ -384,20 +424,34 @@ export default function SignUpPage() {
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="city"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       City
                     </label>
                     <div className="mt-1">
-                      <input {...register("city")} type="text" autoComplete="address-level2" />
+                      <input
+                        {...register("city")}
+                        type="text"
+                        autoComplete="address-level2"
+                      />
                     </div>
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label htmlFor="region" className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor="region"
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       State / Province
                     </label>
                     <div className="mt-1">
-                      <input {...register("region")} type="text" autoComplete="address-level1" />
+                      <input
+                        {...register("region")}
+                        type="text"
+                        autoComplete="address-level1"
+                      />
                     </div>
                   </div>
 
@@ -409,7 +463,11 @@ export default function SignUpPage() {
                       ZIP / Postal code
                     </label>
                     <div className="mt-1">
-                      <input {...register("postalCode")} type="text" autoComplete="postal-code" />
+                      <input
+                        {...register("postalCode")}
+                        type="text"
+                        autoComplete="postal-code"
+                      />
                     </div>
                   </div>
                 </div>
@@ -419,7 +477,9 @@ export default function SignUpPage() {
             {/* Personal Documents */}
             <div>
               <div className="pt-8">
-                <h3 className="text-lg font-medium leading-6 text-gray-900">Personal Documents</h3>
+                <h3 className="text-lg font-medium leading-6 text-gray-900">
+                  Personal Documents
+                </h3>
                 <p className="mt-1 text-sm text-gray-500">
                   Personal documents to verify your account
                 </p>
@@ -432,12 +492,20 @@ export default function SignUpPage() {
                       <>
                         <dt>
                           <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
-                            <span className="text-base font-semibold leading-7">{field.label}</span>
+                            <span className="text-base font-semibold leading-7">
+                              {field.label}
+                            </span>
                             <span className="ml-6 flex h-7 items-center">
                               {open ? (
-                                <MinusSmallIcon className="h-6 w-6" aria-hidden="true" />
+                                <MinusSmallIcon
+                                  className="h-6 w-6"
+                                  aria-hidden="true"
+                                />
                               ) : (
-                                <PlusSmallIcon className="h-6 w-6" aria-hidden="true" />
+                                <PlusSmallIcon
+                                  className="h-6 w-6"
+                                  aria-hidden="true"
+                                />
                               )}
                             </span>
                           </Disclosure.Button>
@@ -462,7 +530,9 @@ export default function SignUpPage() {
                                   })}
                                 />
                                 {errors["passportNumber"] && (
-                                  <span>{String(errors["passportNumber"]?.message)}</span>
+                                  <span>
+                                    {String(errors["passportNumber"]?.message)}
+                                  </span>
                                 )}
                               </div>
 
@@ -482,7 +552,9 @@ export default function SignUpPage() {
                                     })}
                                   />
                                   {errors["dateIssued"] && (
-                                    <span>{String(errors["dateIssued"]?.message)}</span>
+                                    <span>
+                                      {String(errors["dateIssued"]?.message)}
+                                    </span>
                                   )}
                                 </div>
 
@@ -501,7 +573,9 @@ export default function SignUpPage() {
                                     })}
                                   />
                                   {errors["expiryDate"] && (
-                                    <span>{String(errors["expiryDate"]?.message)}</span>
+                                    <span>
+                                      {String(errors["expiryDate"]?.message)}
+                                    </span>
                                   )}
                                 </div>
                               </div>
@@ -533,7 +607,9 @@ export default function SignUpPage() {
                 <h3 className="text-lg font-medium leading-6 text-gray-900">
                   Additional Documents
                 </h3>
-                <p className="mt-1 text-sm text-gray-500">More documents to verify your account</p>
+                <p className="mt-1 text-sm text-gray-500">
+                  More documents to verify your account
+                </p>
               </div>
 
               <dl className="mt-10 space-y-6 divide-y divide-gray-900/10">
@@ -544,12 +620,20 @@ export default function SignUpPage() {
                       <>
                         <dt>
                           <Disclosure.Button className="flex w-full items-start justify-between text-left text-gray-900">
-                            <span className="text-base font-semibold leading-7">White Card</span>
+                            <span className="text-base font-semibold leading-7">
+                              White Card
+                            </span>
                             <span className="ml-6 flex h-7 items-center">
                               {open ? (
-                                <MinusSmallIcon className="h-6 w-6" aria-hidden="true" />
+                                <MinusSmallIcon
+                                  className="h-6 w-6"
+                                  aria-hidden="true"
+                                />
                               ) : (
-                                <PlusSmallIcon className="h-6 w-6" aria-hidden="true" />
+                                <PlusSmallIcon
+                                  className="h-6 w-6"
+                                  aria-hidden="true"
+                                />
                               )}
                             </span>
                           </Disclosure.Button>
@@ -572,7 +656,9 @@ export default function SignUpPage() {
                                   })}
                                 />
                                 {errors["whiteCardNumber"] && (
-                                  <span>{String(errors["whiteCardNumber"]?.message)}</span>
+                                  <span>
+                                    {String(errors["whiteCardNumber"]?.message)}
+                                  </span>
                                 )}
                               </div>
 
@@ -590,7 +676,11 @@ export default function SignUpPage() {
                                   })}
                                 />
                                 {errors["whiteCardIssueDate"] && (
-                                  <span>{String(errors["whiteCardIssueDate"]?.message)}</span>
+                                  <span>
+                                    {String(
+                                      errors["whiteCardIssueDate"]?.message,
+                                    )}
+                                  </span>
                                 )}
                               </div>
 
@@ -622,9 +712,15 @@ export default function SignUpPage() {
                               </span>
                               <span className="ml-6 flex h-7 items-center">
                                 {open ? (
-                                  <MinusSmallIcon className="h-6 w-6" aria-hidden="true" />
+                                  <MinusSmallIcon
+                                    className="h-6 w-6"
+                                    aria-hidden="true"
+                                  />
                                 ) : (
-                                  <PlusSmallIcon className="h-6 w-6" aria-hidden="true" />
+                                  <PlusSmallIcon
+                                    className="h-6 w-6"
+                                    aria-hidden="true"
+                                  />
                                 )}
                               </span>
                             </Disclosure.Button>
@@ -649,7 +745,9 @@ export default function SignUpPage() {
                                       })}
                                     />
                                     {errors[field.id] && (
-                                      <span>{String(errors[field.id]?.message)}</span>
+                                      <span>
+                                        {String(errors[field.id]?.message)}
+                                      </span>
                                     )}
                                   </div>
                                 )}
@@ -669,7 +767,9 @@ export default function SignUpPage() {
                                     })}
                                   />
                                   {errors[field.id] && (
-                                    <span>{String(errors[field.id]?.message)}</span>
+                                    <span>
+                                      {String(errors[field.id]?.message)}
+                                    </span>
                                   )}
                                 </div>
 
@@ -688,7 +788,9 @@ export default function SignUpPage() {
                                     })}
                                   />
                                   {errors[field.id] && (
-                                    <span>{String(errors[field.id]?.message)}</span>
+                                    <span>
+                                      {String(errors[field.id]?.message)}
+                                    </span>
                                   )}
                                 </div>
 
@@ -708,7 +810,9 @@ export default function SignUpPage() {
                                       })}
                                     />
                                     {errors[field.id] && (
-                                      <span>{String(errors[field.id]?.message)}</span>
+                                      <span>
+                                        {String(errors[field.id]?.message)}
+                                      </span>
                                     )}
                                   </div>
 
@@ -727,7 +831,9 @@ export default function SignUpPage() {
                                       })}
                                     />
                                     {errors[field.id] && (
-                                      <span>{String(errors[field.id]?.message)}</span>
+                                      <span>
+                                        {String(errors[field.id]?.message)}
+                                      </span>
                                     )}
                                   </div>
                                 </div>
@@ -757,12 +863,18 @@ export default function SignUpPage() {
             {/* Plan Details */}
             <Role role="business">
               <div className="py-8">
-                <h3 className="text-lg font-medium leading-6 text-gray-900">Plan Details</h3>
-                <p className="mt-1 text-sm text-gray-500">The details for the plan selected</p>
+                <h3 className="text-lg font-medium leading-6 text-gray-900">
+                  Plan Details
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">
+                  The details for the plan selected
+                </p>
               </div>
 
               <RadioGroup value={selected} onChange={setSelected}>
-                <RadioGroup.Label className="sr-only">Pricing plans</RadioGroup.Label>
+                <RadioGroup.Label className="sr-only">
+                  Pricing plans
+                </RadioGroup.Label>
                 <div className="relative -space-y-px rounded-md bg-white">
                   {plans.map((plan, planIdx) => (
                     <RadioGroup.Option
@@ -771,8 +883,12 @@ export default function SignUpPage() {
                       className={({ checked }) =>
                         classNames(
                           planIdx === 0 ? "rounded-tl-md rounded-tr-md" : "",
-                          planIdx === plans.length - 1 ? "rounded-bl-md rounded-br-md" : "",
-                          checked ? "z-10 border-indigo-200 bg-indigo-50" : "border-gray-200",
+                          planIdx === plans.length - 1
+                            ? "rounded-bl-md rounded-br-md"
+                            : "",
+                          checked
+                            ? "z-10 border-indigo-200 bg-indigo-50"
+                            : "border-gray-200",
                           "relative flex cursor-pointer flex-col border p-4 focus:outline-none md:grid md:grid-cols-3 md:pl-4 md:pr-6",
                         )
                       }
@@ -786,7 +902,9 @@ export default function SignUpPage() {
                                 checked
                                   ? "border-transparent bg-indigo-600"
                                   : "border-gray-300 bg-white",
-                                active ? "ring-2 ring-indigo-600 ring-offset-2" : "",
+                                active
+                                  ? "ring-2 ring-indigo-600 ring-offset-2"
+                                  : "",
                                 "flex h-4 w-4 items-center justify-center rounded-full border",
                               )}
                             >
@@ -814,7 +932,11 @@ export default function SignUpPage() {
                             >
                               ${plan.priceMonthly} / mo
                             </span>{" "}
-                            <span className={checked ? "text-indigo-700" : "text-gray-500"}>
+                            <span
+                              className={
+                                checked ? "text-indigo-700" : "text-gray-500"
+                              }
+                            >
                               (${plan.priceYearly} / yr)
                             </span>
                           </RadioGroup.Description>
@@ -843,14 +965,18 @@ export default function SignUpPage() {
                   onChange={setFrequency}
                   className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200"
                 >
-                  <RadioGroup.Label className="sr-only">Payment frequency</RadioGroup.Label>
+                  <RadioGroup.Label className="sr-only">
+                    Payment frequency
+                  </RadioGroup.Label>
                   {frequencies.map((option) => (
                     <RadioGroup.Option
                       key={option.value}
                       value={option}
                       className={({ checked }) =>
                         cn(
-                          checked ? "bg-indigo-600 text-white" : "text-gray-500",
+                          checked
+                            ? "bg-indigo-600 text-white"
+                            : "text-gray-500",
                           "cursor-pointer rounded-full px-2.5 py-1",
                         )
                       }
@@ -881,7 +1007,10 @@ export default function SignUpPage() {
                     </div>
                     <div className="flex -space-x-px">
                       <div className="w-1/2 min-w-0 flex-1">
-                        <label htmlFor="card-expiration-date" className="sr-only">
+                        <label
+                          htmlFor="card-expiration-date"
+                          className="sr-only"
+                        >
                           Expiration date
                         </label>
                         <input
@@ -948,7 +1077,9 @@ export default function SignUpPage() {
             {/* Account Details */}
             <div>
               <div className="pt-8">
-                <h3 className="text-lg font-medium leading-6 text-gray-900">Account Details</h3>
+                <h3 className="text-lg font-medium leading-6 text-gray-900">
+                  Account Details
+                </h3>
                 <p className="mt-1 text-sm text-gray-500">
                   You&apos;ll use this details to login to your account.
                 </p>
@@ -957,9 +1088,14 @@ export default function SignUpPage() {
               <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
                 {accountsForm.map((field, index) => (
                   <div key={index} className="sm:col-span-6">
-                    <label htmlFor={field.id} className="block text-sm font-medium text-gray-700">
+                    <label
+                      htmlFor={field.id}
+                      className="block text-sm font-medium text-gray-700"
+                    >
                       {field.label}
-                      {field.required && <span className="text-red-500">*</span>}
+                      {field.required && (
+                        <span className="text-red-500">*</span>
+                      )}
                     </label>
                     <div className="mt-1">
                       <input
@@ -967,7 +1103,9 @@ export default function SignUpPage() {
                         autoComplete={field.autoComplete}
                         {...register(field.id, { required: field.required })}
                       />
-                      {errors[field.id] && <span>{String(errors[field.id]?.message)}</span>}
+                      {errors[field.id] && (
+                        <span>{String(errors[field.id]?.message)}</span>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -977,8 +1115,12 @@ export default function SignUpPage() {
             {/* Signature */}
             <div>
               <div className="pt-8">
-                <h3 className="text-lg font-medium leading-6 text-gray-900">Signature</h3>
-                <p className="mt-1 text-sm text-gray-500">Give us your autograph</p>
+                <h3 className="text-lg font-medium leading-6 text-gray-900">
+                  Signature
+                </h3>
+                <p className="mt-1 text-sm text-gray-500">
+                  Give us your autograph
+                </p>
               </div>
 
               <div className="mt-6 grid w-full grid-cols-1 justify-center gap-x-4 gap-y-6">
@@ -989,7 +1131,9 @@ export default function SignUpPage() {
 
           <Role role="worker">
             <div className="pt-8">
-              <h3 className="text-lg font-medium leading-6 text-gray-900">Qualifications</h3>
+              <h3 className="text-lg font-medium leading-6 text-gray-900">
+                Qualifications
+              </h3>
               <p className="mt-1 text-sm text-gray-500">
                 Add words to describe your qualifications
               </p>
@@ -999,7 +1143,10 @@ export default function SignUpPage() {
 
           <div className="pt-5">
             <div className="flex justify-end">
-              <button className="btn btn-primary" disabled={isSubmitting || !isDirty}>
+              <button
+                className="btn btn-primary"
+                disabled={isSubmitting || !isDirty}
+              >
                 Register with email
               </button>
             </div>
@@ -1007,34 +1154,37 @@ export default function SignUpPage() {
         </form>
       </div>
     </>
-  )
+  );
 }
 
 function WordInputChips() {
-  const [inputValue, setInputValue] = useState("")
-  const [words, setWords] = useState<string[]>([])
+  const [inputValue, setInputValue] = useState("");
+  const [words, setWords] = useState<string[]>([]);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value)
-  }
+    setInputValue(e.target.value);
+  };
 
   const handleInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && inputValue.trim()) {
-      setWords([...words, inputValue.trim()])
-      setInputValue("")
+      setWords([...words, inputValue.trim()]);
+      setInputValue("");
     }
-  }
+  };
 
   const handleChipRemove = (index: number) => {
-    const updatedWords = [...words]
-    updatedWords.splice(index, 1)
-    setWords(updatedWords)
-  }
+    const updatedWords = [...words];
+    updatedWords.splice(index, 1);
+    setWords(updatedWords);
+  };
 
   return (
     <div className="flex flex-wrap">
       {words.map((word, index) => (
-        <div key={index} className="m-1 flex items-center rounded-full bg-gray-200 px-3 py-1">
+        <div
+          key={index}
+          className="m-1 flex items-center rounded-full bg-gray-200 px-3 py-1"
+        >
           <span>{word}</span>
           <button
             onClick={() => handleChipRemove(index)}
@@ -1053,5 +1203,5 @@ function WordInputChips() {
         onKeyDown={handleInputKeyDown}
       />
     </div>
-  )
+  );
 }

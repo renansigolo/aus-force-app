@@ -1,30 +1,121 @@
-"use client"
+"use client";
 
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
-import { Empty } from "@/components/Empty"
-import Modal from "@/components/Modal"
-import { Role } from "@/components/Roles"
-import NiceModal from "@ebay/nice-modal-react"
+import { SectionHeading } from "@/components/dashboard/SectionHeading";
+import { SectionWrapper } from "@/components/dashboard/SectionWrapper";
+import { Empty } from "@/components/Empty";
+import Modal from "@/components/Modal";
+import { Role } from "@/components/Roles";
+import NiceModal from "@ebay/nice-modal-react";
+import {
+  BuildingOffice2Icon,
+  CloudArrowDownIcon,
+} from "@heroicons/react/24/outline";
+
+type JobSitesListDataProps = {
+  siteName: string;
+  siteAddress: string;
+  hasParking: boolean;
+  additionalNotes: string;
+  policyAndProceduresUrl: string;
+};
+const jobSitesListData: JobSitesListDataProps[] = [
+  {
+    siteName: "Job Site A",
+    siteAddress: "377/12 Church Avenue, Mascot NSW 2020",
+    hasParking: true,
+    additionalNotes:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis ipsam accusamus qui quibusdam ducimus provident illum ullam et itaque beatae minus, pariatur quasi alias deserunt? Perspiciatis alias corrupti officia error!",
+    policyAndProceduresUrl: "",
+  },
+  {
+    siteName: "Job Site B",
+    siteAddress: "132/35 La La Land, Bondi Junction NSW 2021",
+    hasParking: false,
+    additionalNotes:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis ipsam accusamus qui quibusdam ducimus provident illum ullam et itaque beatae minus, pariatur quasi alias deserunt? Perspiciatis alias corrupti officia error!",
+    policyAndProceduresUrl: "#",
+  },
+  {
+    siteName: "Job Site C",
+    siteAddress: "1325 Le Factory, Cooggee NSW 2030",
+    hasParking: false,
+    additionalNotes: "",
+    policyAndProceduresUrl: "#",
+  },
+];
 
 export default function JobSitesPage() {
   const showModal = () =>
     NiceModal.show(Modal, {
       title: "New Site",
       children: <JobSiteModal />,
-    })
+    });
 
   return (
     <SectionWrapper>
       <Role role="client">
-        <SectionHeading title="Job Sites" buttonLabel="New Site" buttonAction={showModal} />
+        <SectionHeading
+          title="Job Sites"
+          buttonLabel="New Site"
+          buttonAction={showModal}
+        />
 
         <section className="py-8">
           <Empty title="job sites" />
         </section>
+
+        <section className="py-8">
+          {jobSitesListData.map((item) => (
+            <JobSitesList {...item} key={item.siteName} />
+          ))}
+        </section>
       </Role>
     </SectionWrapper>
-  )
+  );
+}
+
+function JobSitesList(props: JobSitesListDataProps) {
+  return (
+    <div className="mb-2 rounded-md border border-gray-200 bg-white px-4 py-5 sm:px-6">
+      <div className="-ml-4 -mt-4 flex flex-wrap items-center justify-between sm:flex-nowrap">
+        <div className="ml-4 mt-4">
+          <div className="flex items-center">
+            <div className="flex-shrink-0">
+              <BuildingOffice2Icon className="h-12 w-12" />
+            </div>
+            <div className="ml-4">
+              <h3 className="text-base font-semibold leading-6 text-gray-900">
+                {props.siteName}
+              </h3>
+
+              <div className="mt-1 mb-2">
+                <p className="text-sm text-gray-500">{props.siteAddress}</p>
+                <p className="text-sm text-gray-500">
+                  {props.hasParking ? "🚘 Parking Available" : "X No Parking"}
+                </p>
+              </div>
+
+              <p className="text-sm text-gray-500">{props.additionalNotes}</p>
+            </div>
+          </div>
+        </div>
+        <div className="ml-4 mt-4 flex flex-shrink-0">
+          <a href={props.policyAndProceduresUrl}>
+            <button
+              type="button"
+              className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            >
+              <CloudArrowDownIcon
+                className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
+                aria-hidden="true"
+              />
+              <span>Policy And Procedures</span>
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function JobSiteModal() {
@@ -33,7 +124,10 @@ function JobSiteModal() {
       <form className="my-12 space-y-8 divide-y divide-gray-200">
         <div className="mt-6 grid grid-cols-1 gap-4">
           <div className="col-span-1">
-            <label htmlFor="site-name" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="site-name"
+              className="block text-sm font-medium text-gray-700"
+            >
               Site Name
             </label>
             <div className="mt-1">
@@ -42,7 +136,10 @@ function JobSiteModal() {
           </div>
 
           <div className="col-span-1">
-            <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="address"
+              className="block text-sm font-medium text-gray-700"
+            >
               Address
             </label>
             <div className="mt-1">
@@ -70,7 +167,10 @@ function JobSiteModal() {
           </div>
 
           <div className="col-span-1">
-            <label htmlFor="additional-notes" className="block text-sm font-medium text-gray-700">
+            <label
+              htmlFor="additional-notes"
+              className="block text-sm font-medium text-gray-700"
+            >
               Additional Notes
             </label>
             <div className="mt-1">
@@ -108,5 +208,5 @@ function JobSiteModal() {
         </div>
       </form>
     </>
-  )
+  );
 }

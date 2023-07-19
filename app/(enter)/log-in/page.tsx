@@ -1,17 +1,17 @@
-"use client"
+"use client";
 
-import { EnterHeader } from "@/app/(enter)/EnterHeader"
-import { FormInputError } from "@/components/FormInputError"
-import { FormInputWrapper } from "@/components/FormInputWrapper"
-import { LoginFormSchema, LoginFormSchemaType } from "@/lib/schemas"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { useForm } from "react-hook-form"
+import { EnterHeader } from "@/app/(enter)/EnterHeader";
+import { FormInputError } from "@/components/FormInputError";
+import { FormInputWrapper } from "@/components/FormInputWrapper";
+import { LoginFormSchema, LoginFormSchemaType } from "@/lib/schemas";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 export default function LogInPage() {
-  const router = useRouter()
-  const [submitting, setSubmitting] = useState(false)
+  const router = useRouter();
+  const [submitting, setSubmitting] = useState(false);
 
   const {
     register,
@@ -19,12 +19,12 @@ export default function LogInPage() {
     formState: { errors },
   } = useForm<LoginFormSchemaType>({
     resolver: zodResolver(LoginFormSchema),
-  })
+  });
 
   const login = (formData: LoginFormSchemaType) => {
-    setSubmitting(true)
+    setSubmitting(true);
 
-    return router.push("/dashboard")
+    return router.push("/dashboard");
 
     // signInWithEmailAndPassword(auth, formData.email, formData.password)
     //   .then((userCredential) => {
@@ -33,14 +33,18 @@ export default function LogInPage() {
     //   })
     //   .catch((error: FirebaseError) => toast.error(error.message))
     //   .finally(() => setSubmitting(false))
-  }
+  };
 
   return (
     <div className="min-h-full sm:mx-auto sm:w-full sm:max-w-2xl">
       <div className="min-h-full bg-white px-4 py-8 shadow sm:rounded-lg sm:px-10">
         <div className="flex h-full flex-col justify-center">
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
-            <EnterHeader title="Log in to your account" description="Or " page="log-in" />
+            <EnterHeader
+              title="Log in to your account"
+              description="Or "
+              page="log-in"
+            />
 
             <form className="space-y-6" onSubmit={handleSubmit(login)}>
               <div>
@@ -74,7 +78,10 @@ export default function LogInPage() {
                 </div>
               </div>
 
-              <button disabled={submitting} className="btn btn-primary flex w-full justify-center">
+              <button
+                disabled={submitting}
+                className="btn btn-primary flex w-full justify-center"
+              >
                 Log in
               </button>
             </form>
@@ -82,5 +89,5 @@ export default function LogInPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
