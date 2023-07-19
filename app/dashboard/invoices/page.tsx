@@ -6,15 +6,9 @@ import { Role } from "@/components/Roles";
 import { Disclosure } from "@headlessui/react";
 
 const accordionItems = [
-  {
-    title: "Company ABC",
-  },
-  {
-    title: "Company XYZ",
-  },
-  {
-    title: "Company ABCDEF",
-  },
+  { title: "Company ABC" },
+  { title: "Company XYZ" },
+  { title: "Company ABCDEF" },
 ];
 
 export default function InvoicesPage() {

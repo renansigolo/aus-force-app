@@ -2,9 +2,7 @@
 
 import { SectionHeading } from "@/components/dashboard/SectionHeading";
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper";
-import Modal from "@/components/Modal";
 import { Role } from "@/components/Roles";
-import NiceModal from "@ebay/nice-modal-react";
 import { Disclosure } from "@headlessui/react";
 import {
   ChevronDownIcon,
@@ -53,12 +51,6 @@ const tableItems = [
 ];
 
 export default function PayrollPage() {
-  const showModal = () =>
-    NiceModal.show(Modal, {
-      title: "New Client",
-      children: <AddNewClientModal />,
-    });
-
   return (
     <SectionWrapper>
       <Role role="business">
@@ -204,16 +196,10 @@ function Accordion({ approveShift, showModal }: any) {
                             {item.title}
                           </span>
                         </span>
-                        <span className="inline-flex items-center rounded-md px-2 py-1 text-xs font-medium text-purple-800">
-                          Select All
-                        </span>
                       </Disclosure.Button>
                     </dt>
                     <Disclosure.Panel as="dd" className="mt-2 px-2">
-                      <ShiftTable
-                        approveShift={approveShift}
-                        showModal={showModal}
-                      />
+                      <ClientTable />
                     </Disclosure.Panel>
                   </>
                 )}
@@ -226,7 +212,7 @@ function Accordion({ approveShift, showModal }: any) {
   );
 }
 
-function ShiftTable({ approveShift, showModal }: any) {
+function ClientTable() {
   return (
     <div className="px-4 sm:px-0">
       <div className="-mx-4 mt-4 sm:-mx-0">
@@ -243,7 +229,15 @@ function ShiftTable({ approveShift, showModal }: any) {
                 <th
                   scope="col"
                   className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
-                ></th>
+                >
+                  <input
+                    id="selectAll"
+                    aria-describedby="select-all-checkbox"
+                    name="selectAll"
+                    type="checkbox"
+                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                  />
+                </th>
                 <th
                   scope="col"
                   className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
@@ -323,39 +317,5 @@ function ShiftTable({ approveShift, showModal }: any) {
         </div>
       </div>
     </div>
-  );
-}
-
-function AddNewClientModal() {
-  return (
-    <>
-      <form className="my-12 space-y-8 divide-y divide-gray-200">
-        <div className="mt-6 grid gap-4">
-          <div>
-            <label
-              htmlFor="clientName"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Client Name
-            </label>
-            <div className="mt-1">
-              <input type="text" name="clientName" id="clientName" />
-            </div>
-          </div>
-
-          <div>
-            <label
-              htmlFor="clientEmail"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Email
-            </label>
-            <div className="mt-1">
-              <input type="email" name="clientEmail" id="clientEmail" />
-            </div>
-          </div>
-        </div>
-      </form>
-    </>
   );
 }
