@@ -58,7 +58,7 @@ function Accordion() {
   return (
     <>
       {accordionItems.map((item) => (
-        <div className="rounded-lg bg-white shadow mb-2" key={item.title}>
+        <div key={item.title} className="rounded-lg bg-white shadow mb-2">
           <div className="mx-auto px-2 pb-6">
             <div className="mx-auto divide-gray-900/10">
               <dl className="space-y-6 divide-y divide-gray-900/10">

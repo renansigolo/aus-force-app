@@ -100,7 +100,7 @@ function InvoicesList() {
   );
 }
 
-function Accordion({ approveShift, showModal }: any) {
+function Accordion() {
   return (
     <div className="rounded-lg bg-white shadow">
       <div className="mx-auto px-2 pb-6">
