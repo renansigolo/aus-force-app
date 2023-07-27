@@ -6,96 +6,185 @@ import { Empty } from "@/components/Empty";
 import Modal from "@/components/Modal";
 import { Role } from "@/components/Roles";
 import NiceModal from "@ebay/nice-modal-react";
-import { CurrencyDollarIcon } from "@heroicons/react/24/outline";
+import { UserPlusIcon } from "@heroicons/react/24/outline";
+
+const items = [
+  {
+    title: "Job Request 1",
+    jobPosition: "General Labour",
+    startTime: new Date().toDateString(),
+    endTime: new Date().toDateString(),
+    break: true,
+    additionalNotes: "lorem ipsum dolor sit amet",
+    supplier: "Supplier A",
+  },
+  {
+    title: "Job Request 2",
+    jobPosition: "Traffic Controller",
+    startTime: new Date().toDateString(),
+    endTime: new Date().toDateString(),
+    break: false,
+    additionalNotes: "lorem ipsum dolor sit amet",
+    supplier: "Supplier B",
+  },
+  {
+    title: "Job Request 3",
+    jobPosition: "LO Operator",
+    startTime: new Date().toDateString(),
+    endTime: new Date().toDateString(),
+    break: true,
+    additionalNotes: "lorem ipsum dolor sit amet",
+    supplier: "Supplier C",
+  },
+];
 
 export default function AllocationsPage() {
   const showModal = () =>
     NiceModal.show(Modal, {
-      title: "New Allocation",
+      title: "Allocate Worker",
       children: <AllocationModal />,
     });
 
   return (
     <SectionWrapper>
       <Role role="business">
-        <SectionHeading
-          title="Allocations"
-          buttonLabel="New Allocation"
-          buttonAction={showModal}
-        />
+        <SectionHeading title="Allocations" />
         <section className="py-8">
           <Empty title="allocations" />
+        </section>
+
+        <section className="py-8">
+          <JobRequestList showModal={showModal} />
         </section>
       </Role>
     </SectionWrapper>
   );
 }
 
+function JobRequestList(props: any) {
+  return (
+    <div className="grid grid-cols-1 gap-2">
+      {items.map((item) => (
+        <div
+          key={item.title}
+          className="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm"
+        >
+          <div className="min-w-0 flex-1">
+            <p className="text-sm font-medium text-gray-900">{item.title}</p>
+            <p className="text-sm text-gray-500">{item.jobPosition}</p>
+            <p className="text-sm text-gray-500">
+              {item.startTime} - {item.endTime}
+            </p>
+            <p className="text-sm text-gray-500">
+              {item.break ? "With" : "No"} Break
+            </p>
+            <p className="text-sm text-gray-500">{item.additionalNotes}</p>
+            <p className="text-sm text-gray-500">{item.supplier}</p>
+          </div>
+
+          <div className="flex flex-col items-center gap-2">
+            <button
+              type="button"
+              className="btn gap-2 hover:cursor-pointer"
+              onClick={props.showModal}
+            >
+              <UserPlusIcon className="h-6 w-6" />
+              Allocate Worker
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+const people = [
+  {
+    name: "Leslie Alexander",
+    role: "Co-Founder / CEO",
+    imageUrl:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  },
+  {
+    name: "Michael Foster",
+    role: "Co-Founder / CTO",
+    imageUrl:
+      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  },
+  {
+    name: "Dries Vincent",
+    role: "Business Relations",
+    imageUrl:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  },
+  {
+    name: "Lindsay Walton",
+    role: "Front-end Developer",
+    imageUrl:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  },
+  {
+    name: "Courtney Henry",
+    role: "Designer",
+    imageUrl:
+      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  },
+  {
+    name: "Tom Cook",
+    role: "Director of Product",
+    imageUrl:
+      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+  },
+];
+
 function AllocationModal() {
   return (
     <>
-      <form className="my-12 space-y-8 divide-y divide-gray-200">
-        <div className="mt-6 grid grid-cols-1 gap-4">
-          <div className="col-span-1">
-            <label
-              htmlFor="allocation-name"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Allocation Name
-            </label>
-            <div className="mt-1">
-              <input
-                required
-                id="allocation-name"
-                name="allocation-name"
-                type="text"
-              />
-            </div>
-          </div>
-
-          <div className="col-span-1">
-            <label
-              htmlFor="rate"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Rate (per hour)
-            </label>
-            <div className="relative mt-2 rounded-md shadow-sm">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <CurrencyDollarIcon
-                  className="h-5 w-5 text-gray-400"
-                  aria-hidden="true"
-                />
-              </div>
-              <input type="number" name="rate" id="rate" className="pl-10" />
-            </div>
-          </div>
-
-          <div className="col-span-1">
-            <label
-              htmlFor="rate"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Start Time
-            </label>
-            <div className="mt-1">
-              <input type="datetime-local" name="" id="" />
-            </div>
-          </div>
-
-          <div className="col-span-1">
-            <label
-              htmlFor="rate"
-              className="block text-sm font-medium text-gray-700"
-            >
-              End Time
-            </label>
-            <div className="mt-1">
-              <input type="datetime-local" name="" id="" />
-            </div>
-          </div>
+      <div className="relative mt-2 flex items-center">
+        <input
+          type="text"
+          name="search"
+          id="search"
+          className="block w-full rounded-md border-0 py-1.5 pr-14 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+          placeholder="Search"
+        />
+        <div className="absolute inset-y-0 right-0 flex py-1.5 pr-1.5">
+          <kbd className="inline-flex items-center rounded border border-gray-200 px-1 font-sans text-xs text-gray-400">
+            Enter
+          </kbd>
         </div>
-      </form>
+      </div>
+      <ul role="list" className="divide-y divide-gray-100">
+        {people.map((person) => (
+          <li key={person.name} className="flex justify-between gap-x-6 py-5">
+            <div className="flex gap-x-4">
+              <img
+                className="h-12 w-12 flex-none rounded-full bg-gray-50"
+                src={person.imageUrl}
+                alt=""
+              />
+              <div className="min-w-0 flex-auto">
+                <p className="text-sm font-semibold leading-6 text-gray-900">
+                  {person.name}
+                </p>
+                <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                  {person.role}
+                </p>
+              </div>
+            </div>
+            <div className="hidden sm:flex sm:flex-col sm:items-end">
+              <button
+                type="button"
+                className="btn gap-2 hover:cursor-pointer"
+                onClick={() => console.log("Allocated")}
+              >
+                <UserPlusIcon className="h-6 w-6" />
+                Allocate
+              </button>
+            </div>
+          </li>
+        ))}
+      </ul>
     </>
   );
 }
