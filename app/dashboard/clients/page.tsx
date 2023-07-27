@@ -105,7 +105,20 @@ export default function ClientsPage() {
                                 onClick={() => console.log("Button Clicked")}
                                 className={cn(
                                   active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm text-gray-700",
+                                  "block px-4 py-2 text-sm text-gray-700 w-full text-left",
+                                )}
+                              >
+                                Manage Rates
+                              </button>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <button
+                                onClick={() => console.log("Button Clicked")}
+                                className={cn(
+                                  active ? "bg-gray-100" : "",
+                                  "block px-4 py-2 text-sm text-gray-700 w-full text-left",
                                 )}
                               >
                                 Delete
