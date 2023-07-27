@@ -102,11 +102,11 @@ export default function ClientsPage() {
                           <Menu.Item>
                             {({ active }) => (
                               <button
+                                onClick={() => console.log("Button Clicked")}
                                 className={cn(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700",
                                 )}
-                                onClick={() => console.log("Button Clicked")}
                               >
                                 Delete
                               </button>
@@ -433,10 +433,10 @@ function ConfirmationModal() {
                     Deactivate
                   </button>
                   <button
+                    ref={cancelButtonRef}
                     type="button"
                     className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
                     onClick={() => setOpen(false)}
-                    ref={cancelButtonRef}
                   >
                     Cancel
                   </button>
