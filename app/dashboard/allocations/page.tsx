@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { SectionHeading } from "@/components/dashboard/SectionHeading";
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper";
-import { Empty } from "@/components/Empty";
-import Modal from "@/components/Modal";
-import { Role } from "@/components/Roles";
-import NiceModal from "@ebay/nice-modal-react";
-import { UserPlusIcon } from "@heroicons/react/24/outline";
+import { SectionHeading } from "@/components/dashboard/SectionHeading"
+import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
+import { Empty } from "@/components/Empty"
+import Modal from "@/components/Modal"
+import { Role } from "@/components/Roles"
+import NiceModal from "@ebay/nice-modal-react"
+import { UserPlusIcon } from "@heroicons/react/24/outline"
 
 const items = [
   {
@@ -36,14 +36,14 @@ const items = [
     additionalNotes: "lorem ipsum dolor sit amet",
     supplier: "Supplier C",
   },
-];
+]
 
 export default function AllocationsPage() {
   const showModal = () =>
     NiceModal.show(Modal, {
       title: "Allocate Worker",
       children: <AllocationModal />,
-    });
+    })
 
   return (
     <SectionWrapper>
@@ -58,7 +58,7 @@ export default function AllocationsPage() {
         </section>
       </Role>
     </SectionWrapper>
-  );
+  )
 }
 
 function JobRequestList(props: any) {
@@ -75,9 +75,7 @@ function JobRequestList(props: any) {
             <p className="text-sm text-gray-500">
               {item.startTime} - {item.endTime}
             </p>
-            <p className="text-sm text-gray-500">
-              {item.break ? "With" : "No"} Break
-            </p>
+            <p className="text-sm text-gray-500">{item.break ? "With" : "No"} Break</p>
             <p className="text-sm text-gray-500">{item.additionalNotes}</p>
             <p className="text-sm text-gray-500">{item.supplier}</p>
           </div>
@@ -95,7 +93,7 @@ function JobRequestList(props: any) {
         </div>
       ))}
     </div>
-  );
+  )
 }
 
 const people = [
@@ -135,7 +133,7 @@ const people = [
     imageUrl:
       "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
   },
-];
+]
 
 function AllocationModal() {
   return (
@@ -164,12 +162,8 @@ function AllocationModal() {
                 alt=""
               />
               <div className="min-w-0 flex-auto">
-                <p className="text-sm font-semibold leading-6 text-gray-900">
-                  {person.name}
-                </p>
-                <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                  {person.role}
-                </p>
+                <p className="text-sm font-semibold leading-6 text-gray-900">{person.name}</p>
+                <p className="mt-1 truncate text-xs leading-5 text-gray-500">{person.role}</p>
               </div>
             </div>
             <div className="hidden sm:flex sm:flex-col sm:items-end">
@@ -186,5 +180,5 @@ function AllocationModal() {
         ))}
       </ul>
     </>
-  );
+  )
 }

@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { SectionHeading } from "@/components/dashboard/SectionHeading";
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper";
-import { Role } from "@/components/Roles";
-import { cn } from "@/lib/helpers";
-import { UserCircleIcon } from "@heroicons/react/24/outline";
+import { SectionHeading } from "@/components/dashboard/SectionHeading"
+import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
+import { Role } from "@/components/Roles"
+import { cn } from "@/lib/helpers"
+import { UserCircleIcon } from "@heroicons/react/24/outline"
 
 const items = [
   {
@@ -49,13 +49,13 @@ const items = [
     age: "27y",
     qualifications: ["RSA", "RSG", "First Aid", "White Card"],
   },
-];
+]
 
 const statusStyles: any = {
   active: "bg-green-100 text-green-800",
   holidays: "bg-yellow-100 text-yellow-800",
   fired: "bg-red-100 text-red-800",
-};
+}
 
 export default function WorkersPage() {
   return (
@@ -70,12 +70,12 @@ export default function WorkersPage() {
         </section>
       </Role>
     </SectionWrapper>
-  );
+  )
 }
 
 type WorkersListProps = {
-  category: string;
-};
+  category: string
+}
 function WorkersList({ category }: WorkersListProps) {
   return (
     <div className="pb-6">
@@ -88,10 +88,7 @@ function WorkersList({ category }: WorkersListProps) {
         >
           {items.map((item) => (
             <li key={item.id}>
-              <a
-                href={item.href}
-                className="block bg-white px-4 py-4 hover:bg-gray-50"
-              >
+              <a href={item.href} className="block bg-white px-4 py-4 hover:bg-gray-50">
                 <span className="flex items-center space-x-4">
                   <span className="flex flex-1 space-x-2 truncate">
                     <UserCircleIcon
@@ -105,9 +102,7 @@ function WorkersList({ category }: WorkersListProps) {
                       <span>{item.email}</span>
                       <span>{item.phone}</span>
                       <span>
-                        <span className="font-medium text-gray-900">
-                          {item.rate}
-                        </span>{" "}
+                        <span className="font-medium text-gray-900">{item.rate}</span>{" "}
                       </span>
                       <time dateTime={item.hoursWorked}>{item.startDate}</time>
                       <span>Worked: {item.hoursWorked}</span>
@@ -206,52 +201,35 @@ function WorkersList({ category }: WorkersListProps) {
                   <tr key={item.id} className="bg-white">
                     <td className="w-full whitespace-nowrap px-6 py-4 text-sm text-gray-900">
                       <div className="flex">
-                        <a
-                          href={item.href}
-                          className="group inline-flex space-x-2 text-sm"
-                        >
+                        <a href={item.href} className="group inline-flex space-x-2 text-sm">
                           <UserCircleIcon
                             className="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                             aria-hidden="true"
                           />
-                          <p className="text-gray-500 group-hover:text-gray-900">
-                            {item.name}
-                          </p>
+                          <p className="text-gray-500 group-hover:text-gray-900">{item.name}</p>
                         </a>
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                      <span className="font-medium text-gray-900">
-                        {item.dob}
-                      </span>
+                      <span className="font-medium text-gray-900">{item.dob}</span>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                      <span className="font-medium text-gray-900">
-                        {item.age}
-                      </span>
+                      <span className="font-medium text-gray-900">{item.age}</span>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                      <span className="font-medium text-gray-900">
-                        {item.email}
-                      </span>
+                      <span className="font-medium text-gray-900">{item.email}</span>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                      <span className="font-medium text-gray-900">
-                        {item.phone}
-                      </span>
+                      <span className="font-medium text-gray-900">{item.phone}</span>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                      <span className="font-medium text-gray-900">
-                        {item.rate}
-                      </span>
+                      <span className="font-medium text-gray-900">{item.rate}</span>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
                       <time dateTime={item.hoursWorked}>{item.startDate}</time>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                      <time dateTime={item.hoursWorked}>
-                        {item.hoursWorked}
-                      </time>
+                      <time dateTime={item.hoursWorked}>{item.hoursWorked}</time>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
                       <span className="inline-flex flex-col items-center px-2.5 py-0.5 text-xs font-medium capitalize">
@@ -278,5 +256,5 @@ function WorkersList({ category }: WorkersListProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }

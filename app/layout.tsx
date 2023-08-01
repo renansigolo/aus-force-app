@@ -1,13 +1,13 @@
-import { Providers } from "@/app/Providers";
-import { Inter } from "next/font/google";
-import { ReactNode } from "react";
-import "./globals.css";
+import { Providers } from "@/app/Providers"
+import { Inter } from "next/font/google"
+import { ReactNode } from "react"
+import "./globals.css"
 
-const isProduction = process.env.NODE_ENV === "production";
+const isProduction = process.env.NODE_ENV === "production"
 
 const inter = Inter({
   subsets: ["latin"],
-});
+})
 
 export const metadata = {
   metadataBase: new URL("https://aus-force-app.vercel.app"),
@@ -53,11 +53,11 @@ export const metadata = {
     creatorId: "23168747",
     images: "https://aus-force-app.vercel.app/og.png",
   },
-};
+}
 
 type RootLayoutProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
@@ -67,5 +67,5 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Providers>{children}</Providers>
       </body>
     </html>
-  );
+  )
 }

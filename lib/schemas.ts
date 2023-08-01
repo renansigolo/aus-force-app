@@ -1,10 +1,10 @@
-import { z } from "zod";
+import { z } from "zod"
 
 export const LoginFormSchema = z.object({
   email: z.string().email(),
   password: z.string().nonempty().min(6),
-});
-export type LoginFormSchemaType = z.infer<typeof LoginFormSchema>;
+})
+export type LoginFormSchemaType = z.infer<typeof LoginFormSchema>
 
 export const RegisterFormSchema = z.object({
   firstName: z.string(),
@@ -13,5 +13,5 @@ export const RegisterFormSchema = z.object({
   email: z.string().email(),
   dob: z.number(),
   password: z.string().nonempty().min(6),
-});
-export type RegisterFormSchemaType = z.infer<typeof RegisterFormSchema>;
+})
+export type RegisterFormSchemaType = z.infer<typeof RegisterFormSchema>

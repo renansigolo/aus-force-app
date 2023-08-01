@@ -1,6 +1,6 @@
-"use client";
+"use client"
 
-import { Role } from "@/components/Roles";
+import { Role } from "@/components/Roles"
 
 const stats = [
   {
@@ -24,7 +24,7 @@ const stats = [
     time: "8am - 4pm",
     policies: "View Policies and Procedures Link",
   },
-];
+]
 
 const people = [
   {
@@ -57,7 +57,7 @@ const people = [
     lastSeen: "yesterday",
     lastSeenDateTime: "2023-01-23T13:23Z",
   },
-];
+]
 
 export function Birthdays() {
   return (
@@ -71,23 +71,20 @@ export function Birthdays() {
         </dl>
       </Role>
     </div>
-  );
+  )
 }
 
 type BirthdaysListProps = {
-  title: string;
-};
+  title: string
+}
 export function BirthdaysList(props: BirthdaysListProps) {
   return (
     <div className="px-4 py-5 sm:p-6">
       <div className="flex justify-between text-lg font-semibold leading-8 text-gray-900">
-        <ul role="list" className="divide-y divide-gray-100 w-full">
+        <ul role="list" className="w-full divide-y divide-gray-100">
           {props.title}
           {people.map((person) => (
-            <li
-              key={person.yearsOld}
-              className="flex justify-between gap-x-6 py-5 px-2 w-full"
-            >
+            <li key={person.yearsOld} className="flex w-full justify-between gap-x-6 px-2 py-5">
               <div className="flex gap-x-4">
                 <img
                   className="h-12 w-12 flex-none rounded-full bg-gray-50"
@@ -95,16 +92,14 @@ export function BirthdaysList(props: BirthdaysListProps) {
                   alt="User profile image"
                 />
                 <div className="min-w-0 flex-auto">
-                  <p className="text-sm font-semibold leading-6 text-gray-900 inline-flex align-middle">
+                  <p className="inline-flex align-middle text-sm font-semibold leading-6 text-gray-900">
                     {person.name} ({person.yearsOld})
                   </p>
                   <p className="mt-1 truncate text-xs leading-5 text-gray-500">
                     {person.role} at {person.company}
                   </p>
                   <p className="mt-1 text-xs leading-5 text-gray-500">
-                    <time dateTime={person.lastSeenDateTime}>
-                      {person.lastSeen}
-                    </time>
+                    <time dateTime={person.lastSeenDateTime}>{person.lastSeen}</time>
                   </p>
                 </div>
               </div>
@@ -113,5 +108,5 @@ export function BirthdaysList(props: BirthdaysListProps) {
         </ul>
       </div>
     </div>
-  );
+  )
 }

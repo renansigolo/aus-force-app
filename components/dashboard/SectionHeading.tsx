@@ -1,16 +1,12 @@
-"use client";
+"use client"
 
 type SectionHeadingProps = {
-  title: string;
-  buttonLabel?: string;
-  buttonAction?: () => void;
-};
+  title: string
+  buttonLabel?: string
+  buttonAction?: () => void
+}
 
-export function SectionHeading({
-  title,
-  buttonLabel,
-  buttonAction,
-}: SectionHeadingProps) {
+export function SectionHeading({ title, buttonLabel, buttonAction }: SectionHeadingProps) {
   return (
     <div className="flex items-center justify-between">
       <h2 className="heading-2">{title}</h2>
@@ -20,5 +16,5 @@ export function SectionHeading({
         </button>
       )}
     </div>
-  );
+  )
 }

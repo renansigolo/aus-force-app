@@ -1,17 +1,17 @@
-"use client";
+"use client"
 
-import Modal from "@/components/Modal";
-import { Role } from "@/components/Roles";
-import NiceModal from "@ebay/nice-modal-react";
-import { Disclosure } from "@headlessui/react";
-import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/20/solid";
-import { toast } from "react-hot-toast";
+import Modal from "@/components/Modal"
+import { Role } from "@/components/Roles"
+import NiceModal from "@ebay/nice-modal-react"
+import { Disclosure } from "@headlessui/react"
+import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
+import { toast } from "react-hot-toast"
 
 const accordionItems = [
   { title: "Shift 02/06/23" },
   { title: "Shift 03/06/23" },
   { title: "Shift 04/06/23" },
-];
+]
 
 const person = [
   {
@@ -41,23 +41,23 @@ const person = [
     normalHours: "30",
     overtimeHours: "0.5",
   },
-];
+]
 
 export function PendingApproval() {
-  const approveShift = () => toast.success("Shift approved!");
+  const approveShift = () => toast.success("Shift approved!")
   const showModal = () =>
     NiceModal.show(Modal, {
       title: "Review Shift",
       description: "Please review the details and confirm your shift.",
       children: <ShiftApprovalModal />,
-    });
+    })
 
   return (
     <Role role="client">
       <h2 className="heading-3 mb-3">Shift Approval</h2>
       <Accordion approveShift={approveShift} showModal={showModal} />
     </Role>
-  );
+  )
 }
 
 function ShiftTable({ approveShift, showModal }: any) {
@@ -128,9 +128,7 @@ function ShiftTable({ approveShift, showModal }: any) {
                     {person.name}
                     <dl className="font-normal lg:hidden">
                       <dt className="sr-only">Job Site</dt>
-                      <dd className="mt-1 truncate text-gray-700">
-                        {person.jobSite}
-                      </dd>
+                      <dd className="mt-1 truncate text-gray-700">{person.jobSite}</dd>
                       <dt className="sr-only sm:hidden">Start Time</dt>
                       <dd className="mt-1 truncate text-gray-500 sm:hidden">
                         Start time: {person.startTime}
@@ -175,10 +173,7 @@ function ShiftTable({ approveShift, showModal }: any) {
                     <button className="btn w-full" onClick={showModal}>
                       Edit<span className="sr-only">, {person.name}</span>
                     </button>
-                    <button
-                      className="btn btn-primary w-full"
-                      onClick={approveShift}
-                    >
+                    <button className="btn btn-primary w-full" onClick={approveShift}>
                       Approve<span className="sr-only">, {person.name}</span>
                     </button>
                   </td>
@@ -189,7 +184,7 @@ function ShiftTable({ approveShift, showModal }: any) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function Accordion({ approveShift, showModal }: any) {
@@ -206,15 +201,9 @@ function Accordion({ approveShift, showModal }: any) {
                       <Disclosure.Button className="flex w-full items-center justify-between text-left text-gray-900">
                         <span className="flex h-7 items-center">
                           {open ? (
-                            <ChevronDownIcon
-                              className="h-6 w-6"
-                              aria-hidden="true"
-                            />
+                            <ChevronDownIcon className="h-6 w-6" aria-hidden="true" />
                           ) : (
-                            <ChevronRightIcon
-                              className="h-6 w-6"
-                              aria-hidden="true"
-                            />
+                            <ChevronRightIcon className="h-6 w-6" aria-hidden="true" />
                           )}
                           <span className="ml-2 text-base font-semibold leading-7">
                             {item.title}
@@ -227,10 +216,7 @@ function Accordion({ approveShift, showModal }: any) {
                       </Disclosure.Button>
                     </dt>
                     <Disclosure.Panel as="dd" className="mt-2 px-2">
-                      <ShiftTable
-                        approveShift={approveShift}
-                        showModal={showModal}
-                      />
+                      <ShiftTable approveShift={approveShift} showModal={showModal} />
                     </Disclosure.Panel>
                   </>
                 )}
@@ -240,7 +226,7 @@ function Accordion({ approveShift, showModal }: any) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function ShiftApprovalModal() {
@@ -249,10 +235,7 @@ function ShiftApprovalModal() {
       <form className="my-12 space-y-8 divide-y divide-gray-200">
         <div className="mt-6 grid grid-cols-1 gap-4">
           <div className="col-span-1">
-            <label
-              htmlFor="site-name"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="site-name" className="block text-sm font-medium text-gray-700">
               Company
             </label>
             <div className="mt-1">
@@ -261,10 +244,7 @@ function ShiftApprovalModal() {
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="role"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
               Job site
             </label>
             <div className="mt-1">
@@ -276,82 +256,46 @@ function ShiftApprovalModal() {
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="start-datetime"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="start-datetime" className="block text-sm font-medium text-gray-700">
               Start Time
             </label>
             <div className="mt-1">
-              <input
-                type="datetime-local"
-                name="start-datetime"
-                id="start-datetime"
-              />
+              <input type="datetime-local" name="start-datetime" id="start-datetime" />
             </div>
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="end-datetime"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="end-datetime" className="block text-sm font-medium text-gray-700">
               End Time
             </label>
             <div className="mt-1">
-              <input
-                type="datetime-local"
-                name="end-datetime"
-                id="end-datetime"
-              />
+              <input type="datetime-local" name="end-datetime" id="end-datetime" />
             </div>
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="role"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
               Break (in minutes)
             </label>
             <input type="number" name="break" id="break" step="15" />
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="role"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
               Normal Hours
             </label>
-            <input
-              type="number"
-              name="normalHours"
-              id="normalHours"
-              step="0.5"
-            />
+            <input type="number" name="normalHours" id="normalHours" step="0.5" />
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="role"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
               Overtime Hours
             </label>
-            <input
-              type="number"
-              name="overtimeHours"
-              id="overtimeHours"
-              step="0.5"
-            />
+            <input type="number" name="overtimeHours" id="overtimeHours" step="0.5" />
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="additional-notes"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="additional-notes" className="block text-sm font-medium text-gray-700">
               Additional Notes
             </label>
             <div className="mt-1">
@@ -361,5 +305,5 @@ function ShiftApprovalModal() {
         </div>
       </form>
     </>
-  );
+  )
 }

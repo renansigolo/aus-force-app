@@ -1,30 +1,26 @@
-"use client";
+"use client"
 
-import { Empty } from "@/components/Empty";
-import Modal from "@/components/Modal";
-import { Role } from "@/components/Roles";
-import { SectionHeading } from "@/components/dashboard/SectionHeading";
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper";
-import NiceModal from "@ebay/nice-modal-react";
-import { Dialog, Transition } from "@headlessui/react";
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-import { Fragment, useRef, useState } from "react";
+import { Empty } from "@/components/Empty"
+import Modal from "@/components/Modal"
+import { Role } from "@/components/Roles"
+import { SectionHeading } from "@/components/dashboard/SectionHeading"
+import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
+import NiceModal from "@ebay/nice-modal-react"
+import { Dialog, Transition } from "@headlessui/react"
+import { ExclamationTriangleIcon } from "@heroicons/react/24/outline"
+import { Fragment, useRef, useState } from "react"
 
 export default function RatesPage() {
   const showModal = () =>
     NiceModal.show(Modal, {
       title: "New Rates",
       children: <AddNewRatesModal />,
-    });
+    })
 
   return (
     <SectionWrapper>
       <Role role="business">
-        <SectionHeading
-          title="Rates"
-          buttonLabel="Add New Rates"
-          buttonAction={showModal}
-        />
+        <SectionHeading title="Rates" buttonLabel="Add New Rates" buttonAction={showModal} />
         <section className="py-8">
           <Empty title="rates" />
         </section>
@@ -35,9 +31,7 @@ export default function RatesPage() {
             <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
               <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
                 <div className="ml-4 mt-2">
-                  <h3 className="text-lg font-medium leading-6 text-gray-900">
-                    Client 01
-                  </h3>
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">Client 01</h3>
                 </div>
               </div>
             </div>
@@ -50,7 +44,7 @@ export default function RatesPage() {
         </section>
       </Role>
     </SectionWrapper>
-  );
+  )
 }
 
 function AddNewRatesModal() {
@@ -59,17 +53,14 @@ function AddNewRatesModal() {
       <form className="my-12 space-y-8 divide-y divide-gray-200">
         <div className="mt-6 grid gap-4">
           <div>
-            <label
-              htmlFor="clientName"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="clientName" className="block text-sm font-medium text-gray-700">
               Client Name
             </label>
             <div className="mt-1">
               <select
                 id="clientName"
                 name="clientName"
-                className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
               >
                 <option>Client 01</option>
                 <option>Client 02</option>
@@ -86,22 +77,17 @@ function AddNewRatesModal() {
         </div>
       </form>
     </>
-  );
+  )
 }
 
 function ConfirmationModal() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(true)
 
-  const cancelButtonRef = useRef(null);
+  const cancelButtonRef = useRef(null)
 
   return (
     <Transition.Root show={open} as={Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-10"
-        initialFocus={cancelButtonRef}
-        onClose={setOpen}
-      >
+      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -128,10 +114,7 @@ function ConfirmationModal() {
               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                 <div className="sm:flex sm:items-start">
                   <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                    <ExclamationTriangleIcon
-                      className="h-6 w-6 text-red-600"
-                      aria-hidden="true"
-                    />
+                    <ExclamationTriangleIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
                   </div>
                   <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
                     <Dialog.Title
@@ -142,9 +125,8 @@ function ConfirmationModal() {
                     </Dialog.Title>
                     <div className="mt-2">
                       <p className="text-sm text-gray-500">
-                        Are you sure you want to deactivate your account? All of
-                        your data will be permanently removed from our servers
-                        forever. This action cannot be undone.
+                        Are you sure you want to deactivate your account? All of your data will be
+                        permanently removed from our servers forever. This action cannot be undone.
                       </p>
                     </div>
                   </div>
@@ -172,7 +154,7 @@ function ConfirmationModal() {
         </div>
       </Dialog>
     </Transition.Root>
-  );
+  )
 }
 
 function DayScheduleForm() {
@@ -219,15 +201,13 @@ function DayScheduleForm() {
       endTime: "",
       price: "",
     },
-  ]);
+  ])
 
   const handleDayChange = (index: number, field: string, value: string) => {
     setDays((prevDays) =>
-      prevDays.map((day, i) =>
-        i === index ? { ...day, [field]: value } : day,
-      ),
-    );
-  };
+      prevDays.map((day, i) => (i === index ? { ...day, [field]: value } : day)),
+    )
+  }
 
   return (
     <div>
@@ -248,16 +228,12 @@ function DayScheduleForm() {
             <input
               type="time"
               value={day.startTime}
-              onChange={(e) =>
-                handleDayChange(index, "startTime", e.target.value)
-              }
+              onChange={(e) => handleDayChange(index, "startTime", e.target.value)}
             />
             <input
               type="time"
               value={day.endTime}
-              onChange={(e) =>
-                handleDayChange(index, "endTime", e.target.value)
-              }
+              onChange={(e) => handleDayChange(index, "endTime", e.target.value)}
             />
             <div className="relative mt-2 rounded-md shadow-sm">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
@@ -271,9 +247,7 @@ function DayScheduleForm() {
                 placeholder="0"
                 aria-describedby="price-currency"
                 value={day.price}
-                onChange={(e) =>
-                  handleDayChange(index, "price", e.target.value)
-                }
+                onChange={(e) => handleDayChange(index, "price", e.target.value)}
               />
               <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
                 <span className="text-gray-500 sm:text-sm" id="price-currency">
@@ -285,7 +259,7 @@ function DayScheduleForm() {
         ))}
       </div>
     </div>
-  );
+  )
 }
 
 const HoursWorked = () => {
@@ -300,23 +274,19 @@ const HoursWorked = () => {
       endTime: "",
       rateMultiplier: "",
     },
-  ]);
+  ])
 
   const handleItemChange = (index: number, field: string, value: string) => {
     setItems((prevItems) =>
-      prevItems.map((item, i) =>
-        i === index ? { ...item, [field]: value } : item,
-      ),
-    );
-  };
+      prevItems.map((item, i) => (i === index ? { ...item, [field]: value } : item)),
+    )
+  }
 
   return (
     <div>
       <div className="pb-4">
         <h2 className="heading-3">Rate per range of hours worked</h2>
-        <p className="mt-1 text-sm text-gray-500">
-          You must complete the range of 24h
-        </p>
+        <p className="mt-1 text-sm text-gray-500">You must complete the range of 24h</p>
       </div>
       <div className="grid grid-cols-3 gap-3">
         <div className="font-bold">Range of worked hours</div>
@@ -330,9 +300,7 @@ const HoursWorked = () => {
               min={0}
               max={24}
               placeholder="Begin at"
-              onChange={(e) =>
-                handleItemChange(index, "startTime", e.target.value)
-              }
+              onChange={(e) => handleItemChange(index, "startTime", e.target.value)}
             />
             <input
               type="number"
@@ -340,22 +308,18 @@ const HoursWorked = () => {
               min={0}
               max={24}
               placeholder="End at"
-              onChange={(e) =>
-                handleItemChange(index, "endTime", e.target.value)
-              }
+              onChange={(e) => handleItemChange(index, "endTime", e.target.value)}
             />
             <input
               type="number"
               value={item.rateMultiplier}
               min={1}
               placeholder="x1.5"
-              onChange={(e) =>
-                handleItemChange(index, "rateMultiplier", e.target.value)
-              }
+              onChange={(e) => handleItemChange(index, "rateMultiplier", e.target.value)}
             />
           </Fragment>
         ))}
       </div>
     </div>
-  );
-};
+  )
+}

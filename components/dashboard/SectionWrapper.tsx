@@ -1,9 +1,9 @@
-import { Container } from "@/components/Container";
-import { ReactNode } from "react";
+import { Container } from "@/components/Container"
+import { ReactNode } from "react"
 
 type SectionWrapperProps = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 export function SectionWrapper({ children }: SectionWrapperProps) {
   return (
     <section className="flex-1">
@@ -11,5 +11,5 @@ export function SectionWrapper({ children }: SectionWrapperProps) {
         <Container>{children}</Container>
       </div>
     </section>
-  );
+  )
 }

@@ -1,7 +1,7 @@
-import { Calendar } from "@/app/dashboard/weekly-jobs/Calendar";
-import { Role } from "@/components/Roles";
-import { SectionHeading } from "@/components/dashboard/SectionHeading";
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper";
+import { Calendar } from "@/app/dashboard/weekly-jobs/Calendar"
+import { Role } from "@/components/Roles"
+import { SectionHeading } from "@/components/dashboard/SectionHeading"
+import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 
 export default function WeeklyJobsPage() {
   return (
@@ -11,5 +11,5 @@ export default function WeeklyJobsPage() {
         <Calendar />
       </Role>
     </SectionWrapper>
-  );
+  )
 }

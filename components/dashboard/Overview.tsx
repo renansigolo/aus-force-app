@@ -1,14 +1,14 @@
-"use client";
+"use client"
 
-import Modal from "@/components/Modal";
-import { Role } from "@/components/Roles";
-import NiceModal from "@ebay/nice-modal-react";
+import Modal from "@/components/Modal"
+import { Role } from "@/components/Roles"
+import NiceModal from "@ebay/nice-modal-react"
 import {
   BuildingOffice2Icon,
   ClockIcon,
   DocumentTextIcon,
   MapIcon,
-} from "@heroicons/react/24/outline";
+} from "@heroicons/react/24/outline"
 
 const stats = [
   {
@@ -32,7 +32,7 @@ const stats = [
     time: "8am - 4pm",
     policies: "View Policies and Procedures Link",
   },
-];
+]
 
 export function Overview() {
   const showModal = () => {
@@ -40,8 +40,8 @@ export function Overview() {
       title: "Review Shift",
       description: "Please review the details and confirm your shift.",
       children: <ShiftApprovalModal />,
-    });
-  };
+    })
+  }
   return (
     <div>
       <h2 className="heading-3 mb-3">Overview</h2>
@@ -58,10 +58,7 @@ export function Overview() {
                 )}
               </dt>
 
-              <ul
-                role="list"
-                className="mt-8 space-y-3 text-sm leading-6 text-gray-600"
-              >
+              <ul role="list" className="mt-8 space-y-3 text-sm leading-6 text-gray-600">
                 <li className="flex gap-x-3">
                   <BuildingOffice2Icon
                     className="h-6 w-5 flex-none text-indigo-600"
@@ -70,17 +67,11 @@ export function Overview() {
                   {item.company}
                 </li>
                 <li className="flex gap-x-3">
-                  <MapIcon
-                    className="h-6 w-5 flex-none text-indigo-600"
-                    aria-hidden="true"
-                  />
+                  <MapIcon className="h-6 w-5 flex-none text-indigo-600" aria-hidden="true" />
                   {item.address}
                 </li>
                 <li className="flex gap-x-3">
-                  <ClockIcon
-                    className="h-6 w-5 flex-none text-indigo-600"
-                    aria-hidden="true"
-                  />
+                  <ClockIcon className="h-6 w-5 flex-none text-indigo-600" aria-hidden="true" />
                   {item.time}
                 </li>
                 <li className="flex gap-x-3">
@@ -96,7 +87,7 @@ export function Overview() {
         </dl>
       </Role>
     </div>
-  );
+  )
 }
 
 function ShiftApprovalModal() {
@@ -105,10 +96,7 @@ function ShiftApprovalModal() {
       <form className="my-12 space-y-8 divide-y divide-gray-200">
         <div className="mt-6 grid grid-cols-1 gap-4">
           <div className="col-span-1">
-            <label
-              htmlFor="site-name"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="site-name" className="block text-sm font-medium text-gray-700">
               Company
             </label>
             <div className="mt-1">
@@ -117,10 +105,7 @@ function ShiftApprovalModal() {
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="role"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
               Job site
             </label>
             <div className="mt-1">
@@ -132,82 +117,46 @@ function ShiftApprovalModal() {
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="start-datetime"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="start-datetime" className="block text-sm font-medium text-gray-700">
               Start Time
             </label>
             <div className="mt-1">
-              <input
-                type="datetime-local"
-                name="start-datetime"
-                id="start-datetime"
-              />
+              <input type="datetime-local" name="start-datetime" id="start-datetime" />
             </div>
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="end-datetime"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="end-datetime" className="block text-sm font-medium text-gray-700">
               End Time
             </label>
             <div className="mt-1">
-              <input
-                type="datetime-local"
-                name="end-datetime"
-                id="end-datetime"
-              />
+              <input type="datetime-local" name="end-datetime" id="end-datetime" />
             </div>
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="role"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
               Break (in minutes)
             </label>
             <input type="number" name="break" id="break" step="15" />
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="role"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
               Normal Hours
             </label>
-            <input
-              type="number"
-              name="normalHours"
-              id="normalHours"
-              step="0.5"
-            />
+            <input type="number" name="normalHours" id="normalHours" step="0.5" />
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="role"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
               Overtime Hours
             </label>
-            <input
-              type="number"
-              name="overtimeHours"
-              id="overtimeHours"
-              step="0.5"
-            />
+            <input type="number" name="overtimeHours" id="overtimeHours" step="0.5" />
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="additional-notes"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="additional-notes" className="block text-sm font-medium text-gray-700">
               Additional Notes
             </label>
             <div className="mt-1">
@@ -217,5 +166,5 @@ function ShiftApprovalModal() {
         </div>
       </form>
     </>
-  );
+  )
 }

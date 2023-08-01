@@ -1,23 +1,20 @@
-"use client";
+"use client"
 
-import { SectionHeading } from "@/components/dashboard/SectionHeading";
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper";
-import { Empty } from "@/components/Empty";
-import Modal from "@/components/Modal";
-import { Role } from "@/components/Roles";
-import NiceModal from "@ebay/nice-modal-react";
-import {
-  BuildingOffice2Icon,
-  CloudArrowDownIcon,
-} from "@heroicons/react/24/outline";
+import { SectionHeading } from "@/components/dashboard/SectionHeading"
+import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
+import { Empty } from "@/components/Empty"
+import Modal from "@/components/Modal"
+import { Role } from "@/components/Roles"
+import NiceModal from "@ebay/nice-modal-react"
+import { BuildingOffice2Icon, CloudArrowDownIcon } from "@heroicons/react/24/outline"
 
 type JobSitesListDataProps = {
-  siteName: string;
-  siteAddress: string;
-  hasParking: boolean;
-  additionalNotes: string;
-  policyAndProceduresUrl: string;
-};
+  siteName: string
+  siteAddress: string
+  hasParking: boolean
+  additionalNotes: string
+  policyAndProceduresUrl: string
+}
 const jobSitesListData: JobSitesListDataProps[] = [
   {
     siteName: "Job Site A",
@@ -42,23 +39,19 @@ const jobSitesListData: JobSitesListDataProps[] = [
     additionalNotes: "",
     policyAndProceduresUrl: "#",
   },
-];
+]
 
 export default function JobSitesPage() {
   const showModal = () =>
     NiceModal.show(Modal, {
       title: "New Site",
       children: <JobSiteModal />,
-    });
+    })
 
   return (
     <SectionWrapper>
       <Role role="client">
-        <SectionHeading
-          title="Job Sites"
-          buttonLabel="New Site"
-          buttonAction={showModal}
-        />
+        <SectionHeading title="Job Sites" buttonLabel="New Site" buttonAction={showModal} />
 
         <section className="py-8">
           <Empty title="job sites" />
@@ -71,7 +64,7 @@ export default function JobSitesPage() {
         </section>
       </Role>
     </SectionWrapper>
-  );
+  )
 }
 
 function JobSitesList(props: JobSitesListDataProps) {
@@ -84,11 +77,9 @@ function JobSitesList(props: JobSitesListDataProps) {
               <BuildingOffice2Icon className="h-12 w-12" />
             </div>
             <div className="ml-4">
-              <h3 className="text-base font-semibold leading-6 text-gray-900">
-                {props.siteName}
-              </h3>
+              <h3 className="text-base font-semibold leading-6 text-gray-900">{props.siteName}</h3>
 
-              <div className="mt-1 mb-2">
+              <div className="mb-2 mt-1">
                 <p className="text-sm text-gray-500">{props.siteAddress}</p>
                 <p className="text-sm text-gray-500">
                   {props.hasParking ? "🚘 Parking Available" : "X No Parking"}
@@ -115,7 +106,7 @@ function JobSitesList(props: JobSitesListDataProps) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function JobSiteModal() {
@@ -124,10 +115,7 @@ function JobSiteModal() {
       <form className="my-12 space-y-8 divide-y divide-gray-200">
         <div className="mt-6 grid grid-cols-1 gap-4">
           <div className="col-span-1">
-            <label
-              htmlFor="site-name"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="site-name" className="block text-sm font-medium text-gray-700">
               Site Name
             </label>
             <div className="mt-1">
@@ -136,10 +124,7 @@ function JobSiteModal() {
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="address"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="address" className="block text-sm font-medium text-gray-700">
               Address
             </label>
             <div className="mt-1">
@@ -167,10 +152,7 @@ function JobSiteModal() {
           </div>
 
           <div className="col-span-1">
-            <label
-              htmlFor="additional-notes"
-              className="block text-sm font-medium text-gray-700"
-            >
+            <label htmlFor="additional-notes" className="block text-sm font-medium text-gray-700">
               Additional Notes
             </label>
             <div className="mt-1">
@@ -208,5 +190,5 @@ function JobSiteModal() {
         </div>
       </form>
     </>
-  );
+  )
 }

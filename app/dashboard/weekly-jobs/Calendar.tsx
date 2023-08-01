@@ -1,12 +1,8 @@
-"use client";
+"use client"
 
-import { cn } from "@/lib/helpers";
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  ClockIcon,
-} from "@heroicons/react/20/solid";
-import Link from "next/link";
+import { cn } from "@/lib/helpers"
+import { ChevronLeftIcon, ChevronRightIcon, ClockIcon } from "@heroicons/react/20/solid"
+import Link from "next/link"
 
 const days = [
   { date: "2021-12-27", events: [] },
@@ -126,8 +122,8 @@ const days = [
   { date: "2022-02-04", events: [] },
   { date: "2022-02-05", events: [] },
   { date: "2022-02-06", events: [] },
-];
-const selectedDay = days.find((day) => day.isSelected);
+]
+const selectedDay = days.find((day) => day.isSelected)
 
 export function Calendar() {
   return (
@@ -224,9 +220,7 @@ export function Calendar() {
                       </li>
                     ))}
                     {day.events.length > 2 && (
-                      <li className="text-gray-500">
-                        + {day.events.length - 2} more
-                      </li>
+                      <li className="text-gray-500">+ {day.events.length - 2} more</li>
                     )}
                   </ol>
                 )}
@@ -243,14 +237,8 @@ export function Calendar() {
                   (day.isSelected || day.isToday) && "font-semibold",
                   day.isSelected && "text-white",
                   !day.isSelected && day.isToday && "text-indigo-600",
-                  !day.isSelected &&
-                    day.isCurrentMonth &&
-                    !day.isToday &&
-                    "text-gray-900",
-                  !day.isSelected &&
-                    !day.isCurrentMonth &&
-                    !day.isToday &&
-                    "text-gray-500",
+                  !day.isSelected && day.isCurrentMonth && !day.isToday && "text-gray-900",
+                  !day.isSelected && !day.isCurrentMonth && !day.isToday && "text-gray-500",
                   "flex h-14 flex-col px-3 py-2 hover:bg-gray-100 focus:z-10",
                 )}
               >
@@ -286,20 +274,11 @@ export function Calendar() {
         <div className="px-4 py-10 sm:px-6">
           <ol className="divide-y divide-gray-100 overflow-hidden rounded-lg bg-white text-sm shadow ring-1 ring-black ring-opacity-5">
             {selectedDay?.events.map((event) => (
-              <li
-                key={event.id}
-                className="group flex p-4 pr-6 focus-within:bg-gray-50"
-              >
+              <li key={event.id} className="group flex p-4 pr-6 focus-within:bg-gray-50">
                 <div className="flex-auto">
                   <p className="font-semibold text-gray-900">{event.name}</p>
-                  <time
-                    dateTime={event.datetime}
-                    className="mt-2 flex items-center text-gray-700"
-                  >
-                    <ClockIcon
-                      className="mr-2 h-5 w-5 text-gray-400"
-                      aria-hidden="true"
-                    />
+                  <time dateTime={event.datetime} className="mt-2 flex items-center text-gray-700">
+                    <ClockIcon className="mr-2 h-5 w-5 text-gray-400" aria-hidden="true" />
                     {event.time}
                   </time>
                 </div>
@@ -309,5 +288,5 @@ export function Calendar() {
         </div>
       )}
     </div>
-  );
+  )
 }

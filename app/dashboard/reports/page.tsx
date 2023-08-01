@@ -1,9 +1,9 @@
-import { Role } from "@/components/Roles";
-import { SectionHeading } from "@/components/dashboard/SectionHeading";
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper";
-import { cn } from "@/lib/helpers";
-import { UserIcon } from "@heroicons/react/20/solid";
-import { FunnelIcon } from "@heroicons/react/24/outline";
+import { Role } from "@/components/Roles"
+import { SectionHeading } from "@/components/dashboard/SectionHeading"
+import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
+import { cn } from "@/lib/helpers"
+import { UserIcon } from "@heroicons/react/20/solid"
+import { FunnelIcon } from "@heroicons/react/24/outline"
 
 const reports = [
   {
@@ -26,13 +26,13 @@ const reports = [
     date: "July 11, 2021",
     datetime: "2020-07-11",
   },
-];
+]
 
 const statusStyles: any = {
   success: "bg-green-100 text-green-800",
   processing: "bg-yellow-100 text-yellow-800",
   failed: "bg-gray-100 text-gray-800",
-};
+}
 
 export default function ReportsPage() {
   return (
@@ -68,10 +68,7 @@ export default function ReportsPage() {
             >
               {reports.map((report) => (
                 <li key={report.id}>
-                  <a
-                    href={report.href}
-                    className="block bg-white px-4 py-4 hover:bg-gray-50"
-                  >
+                  <a href={report.href} className="block bg-white px-4 py-4 hover:bg-gray-50">
                     <span className="flex items-center space-x-4">
                       <span className="flex flex-1 space-x-2 truncate">
                         <UserIcon
@@ -81,9 +78,7 @@ export default function ReportsPage() {
                         <span className="flex flex-col truncate text-sm text-gray-500">
                           <span className="truncate">{report.name}</span>
                           <span>
-                            <span className="font-medium text-gray-900">
-                              {report.amount}
-                            </span>{" "}
+                            <span className="font-medium text-gray-900">{report.amount}</span>{" "}
                             {report.currency}
                           </span>
                           <time dateTime={report.datetime}>{report.date}</time>
@@ -156,9 +151,7 @@ export default function ReportsPage() {
                           </div>
                         </td>
                         <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                          <span className="font-medium text-gray-900">
-                            {report.amount}
-                          </span>
+                          <span className="font-medium text-gray-900">{report.amount}</span>
                           {report.currency}
                         </td>
                         <td className="hidden whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block">
@@ -184,5 +177,5 @@ export default function ReportsPage() {
         </section>
       </Role>
     </SectionWrapper>
-  );
+  )
 }

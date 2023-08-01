@@ -1,15 +1,15 @@
-"use client";
+"use client"
 
-import { auth } from "@/lib/firebase";
-import { cn } from "@/lib/helpers";
-import { Menu, Popover, Transition } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid";
-import { BellIcon } from "@heroicons/react/24/outline";
-import { signOut } from "firebase/auth";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Fragment } from "react";
-import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/lib/firebase"
+import { cn } from "@/lib/helpers"
+import { Menu, Popover, Transition } from "@headlessui/react"
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid"
+import { BellIcon } from "@heroicons/react/24/outline"
+import { signOut } from "firebase/auth"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+import { Fragment } from "react"
+import { useAuthState } from "react-firebase-hooks/auth"
 
 const navigation = [
   { name: "Home", href: "/dashboard" },
@@ -69,22 +69,22 @@ const navigation = [
     name: "Invoices",
     href: "/dashboard/invoices",
   },
-];
+]
 
-const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }];
+const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }]
 
 export function Navbar() {
-  const [user] = useAuthState(auth);
-  const pathname = usePathname();
+  const [user] = useAuthState(auth)
+  const pathname = usePathname()
 
   const isActive = (href: string) => {
-    return pathname === href;
-  };
+    return pathname === href
+  }
 
   const signOutNow = () => {
-    signOut(auth);
-    window.location.reload();
-  };
+    signOut(auth)
+    window.location.reload()
+  }
 
   return (
     <nav className="bg-white shadow">
@@ -112,10 +112,7 @@ export function Navbar() {
                   />
 
                   {/* Desktop - Authenticated Navigation Links */}
-                  <nav
-                    className="hidden flex-wrap pl-12 lg:flex lg:space-x-2"
-                    aria-label="Global"
-                  >
+                  <nav className="hidden flex-wrap pl-12 lg:flex lg:space-x-2" aria-label="Global">
                     {navigation.map((item) => (
                       <Link
                         key={item.name}
@@ -155,9 +152,7 @@ export function Navbar() {
                         <img
                           className="h-8 w-8 rounded-full"
                           alt="Profile Image"
-                          src={
-                            user?.photoURL || "/images/profile-placeholder.png"
-                          }
+                          src={user?.photoURL || "/images/profile-placeholder.png"}
                         />
                       </Menu.Button>
                     </div>
@@ -211,9 +206,7 @@ export function Navbar() {
                         aria-current={isActive(item.href) ? "page" : undefined}
                         onClick={() => close()}
                         className={cn(
-                          isActive(item.href)
-                            ? "bg-gray-100 text-gray-900"
-                            : "hover:bg-gray-50",
+                          isActive(item.href) ? "bg-gray-100 text-gray-900" : "hover:bg-gray-50",
                           "block rounded-md px-3 py-2 text-base font-medium",
                         )}
                       >
@@ -228,18 +221,14 @@ export function Navbar() {
                         <img
                           className="h-10 w-10 rounded-full"
                           alt="Profile Image"
-                          src={
-                            user?.photoURL || "/images/profile-placeholder.png"
-                          }
+                          src={user?.photoURL || "/images/profile-placeholder.png"}
                         />
                       </div>
                       <div className="ml-3">
                         <div className="text-base font-medium text-gray-800">
                           {user?.displayName || ""}
                         </div>
-                        <div className="text-sm font-medium text-gray-500">
-                          {user?.email || ""}
-                        </div>
+                        <div className="text-sm font-medium text-gray-500">{user?.email || ""}</div>
                       </div>
                       <button
                         type="button"
@@ -275,5 +264,5 @@ export function Navbar() {
         )}
       </Popover>
     </nav>
-  );
+  )
 }

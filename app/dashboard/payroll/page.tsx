@@ -1,20 +1,12 @@
-"use client";
+"use client"
 
-import { SectionHeading } from "@/components/dashboard/SectionHeading";
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper";
-import { Role } from "@/components/Roles";
-import { Disclosure } from "@headlessui/react";
-import {
-  ChevronDownIcon,
-  ChevronRightIcon,
-  EllipsisVerticalIcon,
-} from "@heroicons/react/20/solid";
+import { SectionHeading } from "@/components/dashboard/SectionHeading"
+import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
+import { Role } from "@/components/Roles"
+import { Disclosure } from "@headlessui/react"
+import { ChevronDownIcon, ChevronRightIcon, EllipsisVerticalIcon } from "@heroicons/react/20/solid"
 
-const accordionItems = [
-  { title: "Client 1" },
-  { title: "Client 2" },
-  { title: "Client 3" },
-];
+const accordionItems = [{ title: "Client 1" }, { title: "Client 2" }, { title: "Client 3" }]
 const tableItems = [
   {
     status: "paid",
@@ -48,7 +40,7 @@ const tableItems = [
       accountNumber: "123456789",
     },
   },
-];
+]
 
 export default function PayrollPage() {
   return (
@@ -56,9 +48,7 @@ export default function PayrollPage() {
       <Role role="business">
         <SectionHeading title="Payroll" />
         <section className="py-8">
-          <p className="mb-2 text-lg font-semibold text-gray-900">
-            Overdue payments
-          </p>
+          <p className="mb-2 text-lg font-semibold text-gray-900">Overdue payments</p>
           <div className="overflow-hidden rounded-lg bg-white shadow">
             {/* Heading */}
             <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
@@ -75,10 +65,7 @@ export default function PayrollPage() {
                     className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
                     <span className="sr-only">Open options</span>
-                    <EllipsisVerticalIcon
-                      className="h-5 w-5"
-                      aria-hidden="true"
-                    />
+                    <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
                   </button>
                 </div>
               </div>
@@ -92,9 +79,7 @@ export default function PayrollPage() {
         </section>
 
         <section className="py-8">
-          <p className="mb-2 text-lg font-semibold text-gray-900">
-            Upcoming payments
-          </p>
+          <p className="mb-2 text-lg font-semibold text-gray-900">Upcoming payments</p>
           <div className="overflow-hidden rounded-lg bg-white shadow">
             {/* Heading */}
             <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
@@ -111,10 +96,7 @@ export default function PayrollPage() {
                     className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
                     <span className="sr-only">Open options</span>
-                    <EllipsisVerticalIcon
-                      className="h-5 w-5"
-                      aria-hidden="true"
-                    />
+                    <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
                   </button>
                 </div>
               </div>
@@ -129,9 +111,7 @@ export default function PayrollPage() {
 
         {/* Previously Payments */}
         <section className="py-8">
-          <p className="mb-2 text-lg font-semibold text-gray-900">
-            Previously payments
-          </p>
+          <p className="mb-2 text-lg font-semibold text-gray-900">Previously payments</p>
           <div className="overflow-hidden rounded-lg bg-white shadow">
             {/* Heading */}
             <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
@@ -148,10 +128,7 @@ export default function PayrollPage() {
                     className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                   >
                     <span className="sr-only">Open options</span>
-                    <EllipsisVerticalIcon
-                      className="h-5 w-5"
-                      aria-hidden="true"
-                    />
+                    <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
                   </button>
                 </div>
               </div>
@@ -165,7 +142,7 @@ export default function PayrollPage() {
         </section>
       </Role>
     </SectionWrapper>
-  );
+  )
 }
 
 function Accordion({ approveShift, showModal }: any) {
@@ -182,15 +159,9 @@ function Accordion({ approveShift, showModal }: any) {
                       <Disclosure.Button className="flex w-full items-center justify-between text-left text-gray-900">
                         <span className="flex h-7 items-center">
                           {open ? (
-                            <ChevronDownIcon
-                              className="h-6 w-6"
-                              aria-hidden="true"
-                            />
+                            <ChevronDownIcon className="h-6 w-6" aria-hidden="true" />
                           ) : (
-                            <ChevronRightIcon
-                              className="h-6 w-6"
-                              aria-hidden="true"
-                            />
+                            <ChevronRightIcon className="h-6 w-6" aria-hidden="true" />
                           )}
                           <span className="ml-2 text-base font-semibold leading-7">
                             {item.title}
@@ -209,7 +180,7 @@ function Accordion({ approveShift, showModal }: any) {
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 function ClientTable() {
@@ -286,9 +257,7 @@ function ClientTable() {
                     {tableItem.name}
                     <dl className="font-normal lg:hidden">
                       <dt className="sr-only">Name</dt>
-                      <dd className="mt-1 truncate text-gray-700">
-                        {tableItem.position}
-                      </dd>
+                      <dd className="mt-1 truncate text-gray-700">{tableItem.position}</dd>
                       <dt className="sr-only sm:hidden">Position</dt>
                       <dd className="mt-1 truncate text-gray-500 sm:hidden">
                         Amount {tableItem.amount}
@@ -317,5 +286,5 @@ function ClientTable() {
         </div>
       </div>
     </div>
-  );
+  )
 }
