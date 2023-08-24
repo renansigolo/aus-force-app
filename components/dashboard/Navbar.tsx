@@ -7,7 +7,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid"
 import { BellIcon } from "@heroicons/react/24/outline"
 import { signOut } from "firebase/auth"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { Fragment } from "react"
 import { useAuthState } from "react-firebase-hooks/auth"
 
@@ -76,14 +76,14 @@ const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }]
 export function Navbar() {
   const [user] = useAuthState(auth)
   const pathname = usePathname()
+  const router = useRouter()
 
   const isActive = (href: string) => {
     return pathname === href
   }
 
-  const signOutNow = () => {
-    signOut(auth)
-    window.location.reload()
+  const signOutAndRedirect = () => {
+    signOut(auth).then(() => router.push("/log-in"))
   }
 
   return (
@@ -183,7 +183,7 @@ export function Navbar() {
                         ))}
                         <button
                           className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
-                          onClick={signOutNow}
+                          onClick={signOutAndRedirect}
                         >
                           Logout
                         </button>
@@ -251,7 +251,7 @@ export function Navbar() {
                       ))}
                       <button
                         className="block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-                        onClick={signOutNow}
+                        onClick={signOutAndRedirect}
                       >
                         Logout
                       </button>
