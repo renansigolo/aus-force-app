@@ -192,7 +192,7 @@ function WorkerFields() {
     <>
       <div className="col-span-1">
         <label htmlFor="jobPosition" className="block text-sm font-medium text-gray-700">
-          Job position
+          Job Position
         </label>
         <div className="mt-1">
           <select id="jobPosition" name="jobPosition">
@@ -211,7 +211,18 @@ function WorkerFields() {
             <option>Steel Fixer</option>
             <option>Formworker</option>
             <option>Manitou Operator</option>
+            <option>Other</option>
           </select>
+        </div>
+      </div>
+
+      <div className="col-span-1">
+        {/* If the selection of job position is Other */}
+        <label htmlFor="quantity" className="block text-sm font-medium text-gray-700">
+          Job Position
+        </label>
+        <div className="mt-1">
+          <input type="text" name="jobPosition" id="jobPosition" />
         </div>
       </div>
       <div className="col-span-1">

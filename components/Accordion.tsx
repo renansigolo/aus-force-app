@@ -27,7 +27,7 @@ type AccordionItem = {
   children: ReactNode
 }
 
-function AccordionItem(item: AccordionItem) {
+function AccordionItem({ title, children }: AccordionItem) {
   return (
     <Disclosure as="div" className="pt-6">
       {({ open }) => (
@@ -40,13 +40,13 @@ function AccordionItem(item: AccordionItem) {
                 ) : (
                   <ChevronRightIcon className="h-6 w-6" aria-hidden="true" />
                 )}
-                <span className="ml-2 text-base font-semibold leading-7">{item.title}</span>
+                <span className="ml-2 text-base font-semibold leading-7">{title}</span>
               </span>
             </Disclosure.Button>
           </dt>
           <Disclosure.Panel as="dd" className="mt-2 px-2 ">
             {/* Content */}
-            {item.children}
+            {children}
           </Disclosure.Panel>
         </>
       )}
