@@ -1,15 +1,24 @@
 "use client"
 
-import { AddNewRatesModal } from "@/app/dashboard/rates/page"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Empty } from "@/components/Empty"
 import Modal from "@/components/Modal"
+import { AddNewRatesModal } from "@/components/Rates"
 import { Role } from "@/components/Roles"
 import NiceModal from "@ebay/nice-modal-react"
 import { ClockIcon, PencilIcon, UserPlusIcon } from "@heroicons/react/24/outline"
 
 const items = [
+  {
+    title: "Job Request 2",
+    jobPosition: "Traffic Controller",
+    startTime: new Date().toDateString(),
+    endTime: new Date().toDateString(),
+    break: false,
+    additionalNotes: "lorem ipsum dolor sit amet",
+    supplier: "Supplier B",
+  },
   {
     title: "Job Request 1",
     jobPosition: "General Labour",
@@ -42,15 +51,7 @@ const items = [
       hasAllocatedRates: false,
     },
   },
-  {
-    title: "Job Request 2",
-    jobPosition: "Traffic Controller",
-    startTime: new Date().toDateString(),
-    endTime: new Date().toDateString(),
-    break: false,
-    additionalNotes: "lorem ipsum dolor sit amet",
-    supplier: "Supplier B",
-  },
+
   {
     title: "Job Request 3",
     jobPosition: "LO Operator",

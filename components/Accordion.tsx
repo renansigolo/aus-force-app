@@ -1,5 +1,5 @@
-import { AddNewRatesModal } from "@/app/dashboard/rates/page"
 import Modal from "@/components/Modal"
+import { AddNewRatesModal } from "@/components/Rates"
 import NiceModal from "@ebay/nice-modal-react"
 import { Disclosure } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
