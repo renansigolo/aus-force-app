@@ -943,6 +943,32 @@ export default function SignUpPage() {
                   </div>
                 </fieldset>
               </div>
+
+              {/* Terms and Conditions */}
+              <div>
+                <div className="pt-8">
+                  <h3 className="text-lg font-medium leading-6 text-gray-900">
+                    Terms and Conditions
+                  </h3>
+                  <p className="mt-1 text-sm text-gray-500">
+                    Upload a contract to be accepeted by the workers
+                  </p>
+                </div>
+
+                <div className="mt-6 grid grid-cols-1">
+                  <button
+                    type="button"
+                    className="relative mt-2 block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                  >
+                    <div className="flex flex-col content-center items-center justify-center">
+                      <DocumentArrowUpIcon className="h-12 w-12 text-gray-400" />
+                      <span className="mt-2 block text-sm font-semibold text-gray-900">
+                        Upload Terms and Conditions
+                      </span>
+                    </div>
+                  </button>
+                </div>
+              </div>
             </Role>
 
             {/* Account Details */}

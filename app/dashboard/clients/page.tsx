@@ -10,6 +10,7 @@ import NiceModal from "@ebay/nice-modal-react"
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon, EllipsisVerticalIcon } from "@heroicons/react/20/solid"
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline"
+import { useRouter } from "next/navigation"
 import { Fragment, useRef, useState } from "react"
 
 const accordionItems = [{ title: "Job Site A" }, { title: "Job Site B" }, { title: "Job Site C" }]
@@ -34,17 +35,12 @@ const tableItems = [
 ]
 
 export default function ClientsPage() {
+  const router = useRouter()
   const showModal = () =>
     NiceModal.show(Modal, {
       title: "New Client",
       children: <AddNewClientModal />,
     })
-
-  // const confirmationModal = () =>
-  //   NiceModal.show(Modal, {
-  //     title: "Delete Client",
-  //     children: <ConfirmationModal />,
-  //   });
 
   return (
     <SectionWrapper>
@@ -85,13 +81,26 @@ export default function ClientsPage() {
                           <Menu.Item>
                             {({ active }) => (
                               <button
-                                onClick={() => console.log("Button Clicked")}
+                                onClick={() => router.push("/dashboard/rates")}
                                 className={cn(
                                   active ? "bg-gray-100" : "",
                                   "block w-full px-4 py-2 text-left text-sm text-gray-700",
                                 )}
                               >
                                 Manage Rates
+                              </button>
+                            )}
+                          </Menu.Item>
+                          <Menu.Item>
+                            {({ active }) => (
+                              <button
+                                onClick={() => showModal()}
+                                className={cn(
+                                  active ? "bg-gray-100" : "",
+                                  "block w-full px-4 py-2 text-left text-sm text-gray-700",
+                                )}
+                              >
+                                Edit
                               </button>
                             )}
                           </Menu.Item>

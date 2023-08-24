@@ -1,5 +1,6 @@
 import { Container } from "@/components/Container"
 import { Birthdays } from "@/components/dashboard/Birthdays"
+import { Leaves } from "@/components/dashboard/Leaves"
 import { Overview } from "@/components/dashboard/Overview"
 import { PendingApproval } from "@/components/dashboard/PendingApproval"
 import { WeeklyActivity } from "@/components/dashboard/WeeklyActivity"
@@ -26,6 +27,10 @@ export default function DashboardPage() {
 
           <section className="mt-8">
             <Birthdays />
+          </section>
+
+          <section className="mt-8">
+            <Leaves />
           </section>
         </section>
       </Container>

@@ -57,24 +57,23 @@ const people = [
   },
 ]
 
-export function Birthdays() {
+export function Leaves() {
   return (
     <div>
-      <h2 className="heading-3 mb-3">Birthdays</h2>
-
+      <h2 className="heading-3 mb-3">Leaves</h2>
       <dl className="grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-x md:divide-y-0">
-        <BirthdaysList title="Past" />
-        <BirthdaysList title="Today" />
-        <BirthdaysList title="Upcoming" />
+        <LeaveList title="Past" />
+        <LeaveList title="Today" />
+        <LeaveList title="Upcoming" />
       </dl>
     </div>
   )
 }
 
-type BirthdaysListProps = {
+type LeaveListProps = {
   title: string
 }
-export function BirthdaysList(props: BirthdaysListProps) {
+export function LeaveList(props: LeaveListProps) {
   return (
     <div className="px-4 py-5 sm:p-6">
       <div className="flex justify-between text-lg font-semibold leading-8 text-gray-900">

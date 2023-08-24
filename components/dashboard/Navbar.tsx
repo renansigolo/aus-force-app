@@ -16,58 +16,77 @@ const navigation = [
   {
     name: "Weekly Jobs",
     href: "/dashboard/weekly-jobs",
+    color: "text-orange-500",
   },
   {
     name: "Request Leave",
     href: "/dashboard/request-leave",
+    color: "text-orange-500",
   },
   {
     name: "Shifts",
     href: "/dashboard/shifts",
+    color: "text-orange-500",
   },
   {
     name: "Payments",
     href: "/dashboard/payments",
+    color: "text-orange-500",
   },
   {
     name: "Staff",
     href: "/dashboard/staff",
+    color: "text-blue-400",
   },
   {
     name: "Job Requests",
     href: "/dashboard/job-requests",
+    color: "text-blue-400",
   },
   {
     name: "Job Sites",
     href: "/dashboard/job-sites",
+    color: "text-blue-400",
   },
   {
     name: "Reports",
     href: "/dashboard/reports",
+    color: "text-blue-400",
   },
   {
     name: "Rates",
     href: "/dashboard/rates",
+    color: "text-pink-500",
   },
   {
     name: "Allocations",
     href: "/dashboard/allocations",
+    color: "text-pink-500",
   },
   {
     name: "Clients",
     href: "/dashboard/clients",
+    color: "text-pink-500",
   },
   {
     name: "Workers",
     href: "/dashboard/workers",
+    color: "text-pink-500",
   },
   {
     name: "Payroll",
     href: "/dashboard/payroll",
+    color: "text-pink-500",
   },
   {
     name: "Invoices",
     href: "/dashboard/invoices",
+    color: "text-pink-500",
+  },
+  {
+    name: "Timesheets",
+    href: "/dashboard/timesheets",
+    color: "text-pink-500",
   },
 ]
 
@@ -122,6 +141,7 @@ export function Navbar() {
                           isActive(item.href)
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-900 hover:bg-gray-50 hover:text-gray-900",
+                          item.color,
                           "inline-flex items-center rounded-md p-2 text-sm font-medium",
                         )}
                       >

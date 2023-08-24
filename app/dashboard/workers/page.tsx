@@ -63,10 +63,10 @@ export default function WorkersPage() {
       <Role role="business">
         <SectionHeading title="Workers" />
         <section className="py-8">
-          <WorkersList category="Allocated Positions" />
+          <WorkersList category="Allocated Workers" />
         </section>
         <section className="py-8">
-          <WorkersList category="Non Allocated Positions" />
+          <WorkersList category="Non Allocated Workers" />
         </section>
       </Role>
     </SectionWrapper>

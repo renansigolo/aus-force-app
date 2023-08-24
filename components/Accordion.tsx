@@ -1,5 +1,9 @@
+import { AddNewRatesModal } from "@/app/dashboard/rates/page"
+import Modal from "@/components/Modal"
+import NiceModal from "@ebay/nice-modal-react"
 import { Disclosure } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
+import { PencilSquareIcon } from "@heroicons/react/24/outline"
 import { ReactNode } from "react"
 
 type AccordionProps = {
@@ -32,8 +36,8 @@ function AccordionItem({ title, children }: AccordionItem) {
     <Disclosure as="div" className="pt-6">
       {({ open }) => (
         <>
-          <dt>
-            <Disclosure.Button className="flex w-full items-center justify-between text-left text-gray-900">
+          <dt className="flex w-full items-center justify-between text-left text-gray-900">
+            <Disclosure.Button className="w-full">
               <span className="flex h-7 items-center">
                 {open ? (
                   <ChevronDownIcon className="h-6 w-6" aria-hidden="true" />
@@ -43,9 +47,22 @@ function AccordionItem({ title, children }: AccordionItem) {
                 <span className="ml-2 text-base font-semibold leading-7">{title}</span>
               </span>
             </Disclosure.Button>
+            <button
+              type="button"
+              className="z-20 p-3 hover:cursor-pointer"
+              onClick={() =>
+                NiceModal.show(Modal, {
+                  title: "New Rates",
+                  children: <AddNewRatesModal />,
+                })
+              }
+            >
+              <PencilSquareIcon className="h-6 w-6 text-indigo-600 hover:text-indigo-500" />
+            </button>
           </dt>
+
+          {/* Content */}
           <Disclosure.Panel as="dd" className="mt-2 px-2 ">
-            {/* Content */}
             {children}
           </Disclosure.Panel>
         </>

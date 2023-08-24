@@ -46,6 +46,18 @@ export default function ReportsPage() {
             <FunnelIcon className="h-6 w-6" />
             Filter your reports
           </div>
+          <div className="col-span-1">
+            <label htmlFor="job-site" className="block text-sm font-medium text-gray-700">
+              Job Site
+            </label>
+            <div className="mt-1">
+              <select id="job-site" name="job-site">
+                <option>All Sites</option>
+                <option>Site 1</option>
+                <option>Site 2</option>
+              </select>
+            </div>
+          </div>
           <div className="flex gap-2">
             <div className="w-full">
               <label htmlFor="startDate">Start Date</label>

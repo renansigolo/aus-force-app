@@ -16,21 +16,21 @@ const stats = [
     company: "ACR",
     address: "377/12 Church Avenue",
     time: "7am - 3pm",
-    policies: "View Policies and Procedures Link",
+    policies: "View Policies and Procedures",
   },
   {
     name: "Tomorrow",
     company: "NSAC",
     address: "6 Mackenzie St.",
     time: "9am - 5pm",
-    policies: "View Policies and Procedures Link",
+    policies: "View Policies and Procedures",
   },
   {
     name: "Until 03 March",
     company: "CAPA",
     address: "333 George St",
     time: "8am - 4pm",
-    policies: "View Policies and Procedures Link",
+    policies: "View Policies and Procedures",
   },
 ]
 

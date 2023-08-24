@@ -24,18 +24,12 @@ export default function InvoicesPage() {
           <h2 className="heading-3 mx-2 my-6 pl-4">✅ Paid</h2>
           <Accordion />
         </section>
-        {/* <section className="flex flex-col gap-2 py-8">
-          <InvoicesList />
-          <InvoicesList />
-          <InvoicesList />
-          <InvoicesList />
-        </section> */}
       </Role>
     </SectionWrapper>
   )
 }
 
-import { ChevronDownIcon, ChevronRightIcon, EnvelopeIcon } from "@heroicons/react/20/solid"
+import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
 import { CloudArrowDownIcon, DocumentTextIcon } from "@heroicons/react/24/outline"
 
 function InvoicesList() {
@@ -68,13 +62,6 @@ function InvoicesList() {
               aria-hidden="true"
             />
             <span>Download</span>
-          </button>
-          <button
-            type="button"
-            className="relative ml-3 inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-          >
-            <EnvelopeIcon className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-            <span>Email</span>
           </button>
         </div>
       </div>

@@ -121,7 +121,7 @@ export default function RatesPage() {
   )
 }
 
-function AddNewRatesModal() {
+export function AddNewRatesModal() {
   return (
     <>
       <form className="my-12 space-y-8 divide-y divide-gray-200">
