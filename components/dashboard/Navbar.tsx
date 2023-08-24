@@ -7,7 +7,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid"
 import { BellIcon } from "@heroicons/react/24/outline"
 import { signOut } from "firebase/auth"
 import Link from "next/link"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { Fragment } from "react"
 import { useAuthState } from "react-firebase-hooks/auth"
 
@@ -16,58 +16,77 @@ const navigation = [
   {
     name: "Weekly Jobs",
     href: "/dashboard/weekly-jobs",
+    color: "text-orange-500",
   },
   {
     name: "Request Leave",
     href: "/dashboard/request-leave",
+    color: "text-orange-500",
   },
   {
     name: "Shifts",
     href: "/dashboard/shifts",
+    color: "text-orange-500",
   },
   {
     name: "Payments",
     href: "/dashboard/payments",
+    color: "text-orange-500",
   },
   {
     name: "Staff",
     href: "/dashboard/staff",
+    color: "text-blue-400",
   },
   {
     name: "Job Requests",
     href: "/dashboard/job-requests",
+    color: "text-blue-400",
   },
   {
     name: "Job Sites",
     href: "/dashboard/job-sites",
+    color: "text-blue-400",
   },
   {
     name: "Reports",
     href: "/dashboard/reports",
+    color: "text-blue-400",
   },
   {
     name: "Rates",
     href: "/dashboard/rates",
+    color: "text-pink-500",
   },
   {
     name: "Allocations",
     href: "/dashboard/allocations",
+    color: "text-pink-500",
   },
   {
     name: "Clients",
     href: "/dashboard/clients",
+    color: "text-pink-500",
   },
   {
     name: "Workers",
     href: "/dashboard/workers",
+    color: "text-pink-500",
   },
   {
     name: "Payroll",
     href: "/dashboard/payroll",
+    color: "text-pink-500",
   },
   {
     name: "Invoices",
     href: "/dashboard/invoices",
+    color: "text-pink-500",
+  },
+  {
+    name: "Timesheets",
+    href: "/dashboard/timesheets",
+    color: "text-pink-500",
   },
 ]
 
@@ -76,14 +95,14 @@ const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }]
 export function Navbar() {
   const [user] = useAuthState(auth)
   const pathname = usePathname()
+  const router = useRouter()
 
   const isActive = (href: string) => {
     return pathname === href
   }
 
-  const signOutNow = () => {
-    signOut(auth)
-    window.location.reload()
+  const signOutAndRedirect = () => {
+    signOut(auth).then(() => router.push("/log-in"))
   }
 
   return (
@@ -122,6 +141,7 @@ export function Navbar() {
                           isActive(item.href)
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-900 hover:bg-gray-50 hover:text-gray-900",
+                          item.color,
                           "inline-flex items-center rounded-md p-2 text-sm font-medium",
                         )}
                       >
@@ -183,7 +203,7 @@ export function Navbar() {
                         ))}
                         <button
                           className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
-                          onClick={signOutNow}
+                          onClick={signOutAndRedirect}
                         >
                           Logout
                         </button>
@@ -251,7 +271,7 @@ export function Navbar() {
                       ))}
                       <button
                         className="block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-900"
-                        onClick={signOutNow}
+                        onClick={signOutAndRedirect}
                       >
                         Logout
                       </button>

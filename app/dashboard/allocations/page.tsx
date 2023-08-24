@@ -4,20 +4,12 @@ import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Empty } from "@/components/Empty"
 import Modal from "@/components/Modal"
+import { AddNewRatesModal } from "@/components/Rates"
 import { Role } from "@/components/Roles"
 import NiceModal from "@ebay/nice-modal-react"
-import { UserPlusIcon } from "@heroicons/react/24/outline"
+import { ClockIcon, PencilIcon, UserPlusIcon } from "@heroicons/react/24/outline"
 
 const items = [
-  {
-    title: "Job Request 1",
-    jobPosition: "General Labour",
-    startTime: new Date().toDateString(),
-    endTime: new Date().toDateString(),
-    break: true,
-    additionalNotes: "lorem ipsum dolor sit amet",
-    supplier: "Supplier A",
-  },
   {
     title: "Job Request 2",
     jobPosition: "Traffic Controller",
@@ -27,6 +19,39 @@ const items = [
     additionalNotes: "lorem ipsum dolor sit amet",
     supplier: "Supplier B",
   },
+  {
+    title: "Job Request 1",
+    jobPosition: "General Labour",
+    startTime: new Date().toDateString(),
+    endTime: new Date().toDateString(),
+    break: true,
+    additionalNotes: "lorem ipsum dolor sit amet",
+    supplier: "Supplier A",
+    allocatedWorker: {
+      id: "leslie-alexander",
+      name: "Leslie Alexander",
+      role: "Co-Founder / CEO",
+      imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+      hasAllocatedRates: true,
+    },
+  },
+  {
+    title: "Job Request 1",
+    jobPosition: "General Labour",
+    startTime: new Date().toDateString(),
+    endTime: new Date().toDateString(),
+    break: true,
+    additionalNotes: "lorem ipsum dolor sit amet",
+    supplier: "Supplier A",
+    allocatedWorker: {
+      id: "leslie-alexander",
+      name: "Leslie Alexander",
+      role: "Co-Founder / CEO",
+      imageUrl: "https://images.unsplash.com/photo-1494790108377-be9c29b29330",
+      hasAllocatedRates: false,
+    },
+  },
+
   {
     title: "Job Request 3",
     jobPosition: "LO Operator",
@@ -81,14 +106,64 @@ function JobRequestList(props: any) {
           </div>
 
           <div className="flex flex-col items-center gap-2">
-            <button
-              type="button"
-              className="btn gap-2 hover:cursor-pointer"
-              onClick={props.showModal}
-            >
-              <UserPlusIcon className="h-6 w-6" />
-              Allocate Worker
-            </button>
+            {item.allocatedWorker ? (
+              <div className="flex flex-col items-center gap-y-2 text-center">
+                <div className="flex flex-col items-center">
+                  <img
+                    className="h-12 w-12 rounded-full bg-gray-50 object-cover"
+                    src={item.allocatedWorker.imageUrl}
+                    alt="Worker profile image"
+                  />
+                  <div className="min-w-0 flex-auto">
+                    <p className="text-sm font-semibold leading-6 text-gray-900">
+                      {item.allocatedWorker.name}
+                    </p>
+                    <p className="truncate text-xs leading-5 text-gray-500">
+                      {item.allocatedWorker.role}
+                    </p>
+                  </div>
+                </div>
+
+                {item.allocatedWorker.hasAllocatedRates ? (
+                  <button
+                    type="button"
+                    className="btn w-44 gap-2 hover:cursor-pointer"
+                    onClick={() =>
+                      NiceModal.show(Modal, {
+                        title: "New Rates",
+                        children: <AddNewRatesModal />,
+                      })
+                    }
+                  >
+                    <ClockIcon className="h-6 w-6" />
+                    Allocate Rates
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    className="btn w-44 gap-2 hover:cursor-pointer"
+                    onClick={() =>
+                      NiceModal.show(Modal, {
+                        title: "New Rates",
+                        children: <AddNewRatesModal />,
+                      })
+                    }
+                  >
+                    <PencilIcon className="h-6 w-6" />
+                    Edit Rates
+                  </button>
+                )}
+              </div>
+            ) : (
+              <button
+                type="button"
+                className="btn w-44 gap-2 hover:cursor-pointer "
+                onClick={props.showModal}
+              >
+                <UserPlusIcon className="h-6 w-6" />
+                Allocate Worker
+              </button>
+            )}
           </div>
         </div>
       ))}

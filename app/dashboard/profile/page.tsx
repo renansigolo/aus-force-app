@@ -101,7 +101,7 @@ const additionalDocuments = [
 export default function ProfilePage() {
   return (
     <SectionWrapper>
-      <SectionHeading title="Account Details" buttonLabel="New Job" />
+      <SectionHeading title="Account Details" />
       <div className="px-4 sm:px-6 md:px-0">
         <section className="mt-10 divide-y divide-gray-200">
           <div className="space-y-1">
