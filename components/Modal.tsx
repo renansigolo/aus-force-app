@@ -14,12 +14,7 @@ export default NiceModal.create(({ title, description, children }: ModalProps) =
   const cancelButtonRef = useRef(null)
   const modal = useModal()
 
-  const handleResolve = () => {
-    console.log("Came back")
-    modal.resolve({ description: "lalala" })
-    modal.resolveHide({ description: "lalala" })
-    modal.hide()
-  }
+  const handleResolve = () => modal.resolve({ resolved: true })
 
   const closeModal = () => modal.remove()
 
