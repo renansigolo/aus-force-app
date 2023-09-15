@@ -23,7 +23,7 @@ export default function LogInPage() {
     resolver: zodResolver(LoginFormSchema),
   })
 
-  const login = (data: TLoginFormSchema) => {
+  const onSubmit = (data: TLoginFormSchema) => {
     // If we're in development, just redirect to the dashboard bypassing the authentication
     if (process.env.NODE_ENV === "development") {
       router.push("/dashboard")
@@ -44,7 +44,7 @@ export default function LogInPage() {
           <div className="sm:mx-auto sm:w-full sm:max-w-md">
             <EnterHeader title="Log in to your account" description="Or " page="log-in" />
 
-            <form className="space-y-6" onSubmit={handleSubmit(login)}>
+            <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <div>
                 <label htmlFor="email" className="form-label">
                   Email
@@ -79,7 +79,7 @@ export default function LogInPage() {
                 {isSubmitting ? (
                   <>
                     <Loader show />
-                    <span className="ml-2">Submitting</span>
+                    <span>Submitting</span>
                   </>
                 ) : (
                   "Log in"
