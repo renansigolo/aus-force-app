@@ -6,13 +6,13 @@ export const SignatureForm = () => {
 
   const handleClear = () => signatureRef.current && signatureRef.current.clear()
 
-  // const handleSave = () => {
-  //   if (signatureRef.current) {
-  //     const signatureData = signatureRef.current.toDataURL()
-  //     // Do something with the signature data (e.g., save it to a database)
-  //     console.log(signatureData)
-  //   }
-  // }
+  const handleSave = () => {
+    if (signatureRef.current) {
+      const signatureData = signatureRef.current.toDataURL()
+      // Do something with the signature data (e.g., save it to a database)
+      console.log(signatureData)
+    }
+  }
 
   useEffect(() => {
     const resizeCanvas = () => {
@@ -32,22 +32,22 @@ export const SignatureForm = () => {
   }, [])
 
   return (
-    <div style={{ width: "100%", maxWidth: "580px" }}>
-      <SignatureCanvas
-        ref={signatureRef}
-        canvasProps={{
-          width: "100%",
-          height: 260,
-          className: "border border-dark rounded w-full",
-        }}
-      />
-      <div className="mt-2 flex gap-2">
-        <button className="btn" onClick={handleClear}>
-          Clear
-        </button>
-        {/* <button className="btn" onClick={handleSave}>
-          Save
-        </button> */}
+    <div className="mt-6 grid w-full grid-cols-1 justify-center gap-x-4 gap-y-6">
+      <div className="w-full max-w-xl">
+        <SignatureCanvas
+          ref={signatureRef}
+          onEnd={handleSave}
+          canvasProps={{
+            width: "100%",
+            height: 260,
+            className: "border border-dark rounded w-full",
+          }}
+        />
+        <div className="mt-2 flex gap-2">
+          <button className="btn" onClick={handleClear}>
+            Clear
+          </button>
+        </div>
       </div>
     </div>
   )
