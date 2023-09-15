@@ -49,7 +49,7 @@ export default function LogInPage() {
                 <label htmlFor="email" className="form-label">
                   Email
                 </label>
-                <input {...register("email")} className="form-input" type="email" />
+                <input {...register("email")} type="email" />
                 <FormInputError message={errors.email?.message} />
               </div>
 
@@ -57,7 +57,7 @@ export default function LogInPage() {
                 <label htmlFor="password" className="form-label">
                   Password
                 </label>
-                <input {...register("password")} className="form-input" type="password" />
+                <input {...register("password")} type="password" />
                 <FormInputError message={errors.password?.message} />
               </div>
 
