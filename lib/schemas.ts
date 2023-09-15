@@ -4,7 +4,7 @@ export const LoginFormSchema = z.object({
   email: z.string().email(),
   password: z.string().nonempty().min(6),
 })
-export type LoginFormSchemaType = z.infer<typeof LoginFormSchema>
+export type TLoginFormSchema = z.infer<typeof LoginFormSchema>
 
 export const RegisterFormSchema = z.object({
   firstName: z.string(),
