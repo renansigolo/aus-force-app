@@ -75,19 +75,21 @@ export default function SignUpPage() {
   const onSubmit = async (data: TRegisterFormSchema) => {
     console.log("🚀 ~ onSubmit ~ data:", data)
 
-    await createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then(
-        async (userCredential) =>
-          await addDoc(collection(db, "users"), {
-            ...data,
-            uid: userCredential.user.uid,
-            displayName: `${data.firstName} ${data.lastName}`,
-          }).then(() => {
-            router.push("/dashboard")
-            toast.success(`Account created successfully, welcome ${userCredential.user.email}`)
-          }),
-      )
-      .catch((error: FirebaseError) => toast.error(error.message))
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
+
+      await addDoc(collection(db, "users"), {
+        ...data,
+        uid: userCredential.user.uid,
+        displayName: `${data.firstName} ${data.lastName}`,
+      })
+
+      router.push("/dashboard")
+      toast.success(`Account created successfully, welcome ${userCredential.user.email}`)
+    } catch (error) {
+      const errorMessage = (error as FirebaseError)?.message || "An error occurred"
+      toast.error(errorMessage)
+    }
   }
 
   return (
