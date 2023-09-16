@@ -6,15 +6,15 @@ import { FormSectionHeading } from "@/app/(enter)/sign-up/FormSectionHeading"
 import { SignatureForm } from "@/app/(enter)/sign-up/Signature"
 import { FormInputError } from "@/components/FormInputError"
 import { Loader } from "@/components/Loader"
-import { auth, db } from "@/lib/firebase"
+import { auth, db, storage } from "@/lib/firebase"
 import { TRegisterFormSchema } from "@/lib/schemas"
 import { Disclosure } from "@headlessui/react"
 import { DocumentArrowUpIcon, MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/20/solid"
 import { FirebaseError } from "firebase/app"
-import { createUserWithEmailAndPassword } from "firebase/auth"
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { addDoc, collection } from "firebase/firestore"
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { useRouter } from "next/navigation"
-import { useState } from "react"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
@@ -47,7 +47,6 @@ const personalForm = [
 
 export default function SignUpPage() {
   const router = useRouter()
-  const [previewImage, setPreviewImage] = useState("/images/profile-placeholder.png")
 
   const {
     register,
@@ -60,9 +59,9 @@ export default function SignUpPage() {
     defaultValues: {
       firstName: "",
       lastName: "",
-      phone: "",
+      phoneNumber: "",
       dob: "",
-      profileImage: "",
+      profileImageFile: null,
       passportNumber: "",
       passportIssued: "",
       passportExpiry: "",
@@ -72,22 +71,38 @@ export default function SignUpPage() {
     },
   })
 
-  const onSubmit = async (data: TRegisterFormSchema) => {
-    console.log("🚀 ~ onSubmit ~ data:", data)
+  const imageValue = getValues("profileImageFile")
 
+  const onSubmit = async (data: TRegisterFormSchema) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
 
-      await addDoc(collection(db, "users"), {
-        ...data,
+      let imageSnapshot = null
+
+      if (data.profileImageFile) {
+        // Upload image to firebase storage
+        const storageRef = ref(storage, `users/${userCredential.user.uid}/profile.png`)
+        imageSnapshot = await uploadBytes(storageRef, data.profileImageFile)
+      }
+
+      // delete data.profileImageFile from the data object
+      delete data.profileImageFile
+
+      const userPayload = {
         uid: userCredential.user.uid,
         displayName: `${data.firstName} ${data.lastName}`,
-      })
+        photoURL: await getDownloadURL(ref(storage, imageSnapshot?.ref.fullPath || "")),
+      }
+
+      // Update fields in firebase auth and firestore
+      await updateProfile(userCredential.user, userPayload)
+      await addDoc(collection(db, "users"), { ...data, ...userPayload })
 
       router.push("/dashboard")
       toast.success(`Account created successfully, welcome ${userCredential.user.email}`)
     } catch (error) {
       const errorMessage = (error as FirebaseError)?.message || "An error occurred"
+      console.error("🚀 ~ onSubmit ~ errorMessage:", errorMessage)
       toast.error(errorMessage)
     }
   }
@@ -99,7 +114,7 @@ export default function SignUpPage() {
         description="Enter your details below to sign-up for a new account"
       />
 
-      <form className="my-12 space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           {/* Profile Details */}
           <div>
@@ -115,13 +130,16 @@ export default function SignUpPage() {
                 </label>
                 <div className="mt-1 flex items-center">
                   <img
-                    src={previewImage}
+                    src={
+                      (imageValue && URL.createObjectURL(imageValue)) ||
+                      "/images/profile-placeholder.png"
+                    }
                     alt="Profile Image"
                     className="aspect-square h-12 w-12 rounded-full object-fill"
                   />
 
                   <Controller
-                    name="profileImage" // This should match the name of your form field
+                    name="profileImageFile" // This should match the name of your form field
                     control={control}
                     render={({ field: { onChange, name } }) => (
                       <input
@@ -132,9 +150,9 @@ export default function SignUpPage() {
                         onChange={(event) => {
                           onChange(event)
                           if (!event.target.files) return
-                          const fileUrl = URL.createObjectURL(event.target.files[0])
-                          setValue("profileImage", fileUrl)
-                          setPreviewImage(fileUrl)
+                          const imageFile = event.target.files[0]
+                          console.log("🚀 ~ SignUpPage ~ imageFile:", imageFile)
+                          setValue("profileImageFile", imageFile)
                         }}
                       />
                     )}
@@ -169,15 +187,15 @@ export default function SignUpPage() {
               </div>
 
               <div className="sm:col-span-3">
-                <label htmlFor="phone" className="form-label">
+                <label htmlFor="phoneNumber" className="form-label">
                   Phone Number
                   <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="tel"
-                  {...register("phone", { required: "Phone number is required" })}
+                  {...register("phoneNumber", { required: "Phone number is required" })}
                 />
-                <FormInputError message={errors.phone?.message} />
+                <FormInputError message={errors.phoneNumber?.message} />
               </div>
 
               <div className="sm:col-span-3">

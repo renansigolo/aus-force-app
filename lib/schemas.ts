@@ -29,10 +29,10 @@ export const RegisterFormSchema = z
   })
 // export type TRegisterFormSchema = z.infer<typeof RegisterFormSchema>
 export type TRegisterFormSchema = {
-  profileImage?: string
+  profileImageFile?: Blob | null
   firstName: string
   lastName: string
-  phone: string
+  phoneNumber: string
   dob: string
   passportNumber?: string
   passportIssued?: string
