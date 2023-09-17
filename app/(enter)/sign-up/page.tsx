@@ -68,6 +68,7 @@ export default function SignUpPage() {
       )
 
       let imageSnapshot = null
+      let signatureSnapshot = null
 
       if (data.profileImageFile) {
         // Upload image to firebase storage
@@ -75,8 +76,11 @@ export default function SignUpPage() {
         imageSnapshot = await uploadBytes(storageRef, data.profileImageFile)
       }
 
-      // delete data.profileImageFile from the data object
-      delete data.profileImageFile
+      if (data.signatureFile) {
+        // Upload image to firebase storage
+        const storageRef = ref(storage, `users/${userCredential.user.uid}/signature.png`)
+        signatureSnapshot = await uploadBytes(storageRef, data.signatureFile)
+      }
 
       const userPayload = {
         uid: userCredential.user.uid,
@@ -86,7 +90,16 @@ export default function SignUpPage() {
 
       // Update fields in firebase auth and firestore
       await updateProfile(userCredential.user, userPayload)
-      await setDoc(doc(db, "users", userCredential.user.uid), { ...data, ...userPayload })
+      await setDoc(doc(db, "users", userCredential.user.uid), {
+        firstName: data.firstName,
+        lastName: data.lastName,
+        phoneNumber: data.phoneNumber,
+        dob: data.dob,
+        email: data.email,
+        signatureURL: await getDownloadURL(ref(storage, signatureSnapshot?.ref.fullPath || "")),
+        role: "client",
+        ...userPayload,
+      })
 
       router.push("/dashboard")
       toast.success(`Account created successfully, welcome ${userCredential.user.email}`)
@@ -385,7 +398,7 @@ export default function SignUpPage() {
               title="Signature"
               description="Use your mouse or finger to draw your signature below"
             />
-            <SignatureForm />
+            <SignatureForm setValue={setValue} />
           </div>
         </div>
 

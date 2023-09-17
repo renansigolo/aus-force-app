@@ -43,7 +43,7 @@ export const RegisterFormDefaultValues = {
   confirmPassword: "",
 }
 export type TRegisterFormSchema = {
-  profileImageFile?: Blob | null
+  profileImageFile: Blob | null
   firstName: string
   lastName: string
   phoneNumber: string
@@ -55,4 +55,5 @@ export type TRegisterFormSchema = {
   email: string
   newPassword: string
   confirmPassword: string
+  signatureFile: Blob | null
 }

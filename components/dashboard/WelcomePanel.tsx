@@ -21,7 +21,7 @@ export function WelcomePanel() {
                 <p className="text-xl font-bold text-gray-900 sm:text-2xl">
                   {auth.currentUser?.displayName}
                 </p>
-                {/* <p className="text-sm font-medium text-gray-600">{mockUser.jobTitle}</p> */}
+                {/* <p className="text-sm font-medium text-gray-600">{auth.currentUser?.jobTitle}</p> */}
               </div>
             </div>
           </div>

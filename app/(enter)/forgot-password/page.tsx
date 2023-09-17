@@ -31,12 +31,10 @@ export default function ForgotPasswordPage() {
 
         <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="form-label">
               Email address
             </label>
-            <div className="mt-1">
-              <input {...register("email")} type="email" disabled={isSubmitting} />
-            </div>
+            <input {...register("email")} autoComplete="" type="email" disabled={isSubmitting} />
           </div>
 
           <div>

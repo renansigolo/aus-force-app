@@ -1,16 +1,22 @@
+import { TRegisterFormSchema } from "@/lib/schemas"
 import { useEffect, useRef } from "react"
+import { UseFormSetValue } from "react-hook-form"
 import SignatureCanvas from "react-signature-canvas"
 
-export const SignatureForm = () => {
+type SignatureFormProps = {
+  setValue: UseFormSetValue<TRegisterFormSchema>
+}
+export const SignatureForm = ({ setValue }: SignatureFormProps) => {
   const signatureRef = useRef<SignatureCanvas>(null)
 
   const handleClear = () => signatureRef.current && signatureRef.current.clear()
 
   const handleSave = () => {
     if (signatureRef.current) {
-      const signatureData = signatureRef.current.toDataURL()
-      // Do something with the signature data (e.g., save it to a database)
-      console.log(signatureData)
+      signatureRef.current.getTrimmedCanvas().toBlob((blob) => {
+        const file = new File([blob as Blob], "signature.png", { type: "image/png" })
+        setValue("signatureFile", file)
+      })
     }
   }
 

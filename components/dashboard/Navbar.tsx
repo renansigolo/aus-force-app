@@ -1,7 +1,6 @@
 "use client"
 
 import { auth } from "@/lib/firebase"
-// import { auth } from "@/lib/firebase"
 import { cn } from "@/lib/helpers"
 import { Menu, Popover, Transition } from "@headlessui/react"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid"

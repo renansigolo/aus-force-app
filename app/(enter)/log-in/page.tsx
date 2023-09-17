@@ -25,16 +25,13 @@ export default function LogInPage() {
 
   const onSubmit = (data: TLoginFormSchema) => {
     // If we're in development, just redirect to the dashboard bypassing the authentication
-    if (process.env.NODE_ENV === "development") {
-      router.push("/dashboard")
-    } else {
-      signInWithEmailAndPassword(auth, data.email, data.password)
-        .then((userCredential) => {
-          toast.success(`Welcome back, ${userCredential.user.email}`)
-          router.push("/dashboard")
-        })
-        .catch((error: FirebaseError) => toast.error(error.message))
-    }
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then((userCredential) => {
+        console.log("🚀 ~ .then ~ userCredential:", userCredential)
+        toast.success(`Welcome back, ${userCredential.user.email}`)
+        router.push("/dashboard")
+      })
+      .catch((error: FirebaseError) => toast.error(error.message))
   }
 
   return (

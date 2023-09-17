@@ -1,3 +1,5 @@
+"use client"
+
 import { Divider } from "@/app/(enter)/sign-up/Divider"
 import { AdditionalDocumentsForm } from "@/app/dashboard/profile/AdditionalDocumentsForm"
 import { BankForm } from "@/app/dashboard/profile/BankForm"
@@ -46,26 +48,8 @@ export default async function ProfilePage() {
           <h2 className="text-base font-semibold leading-7">Additional Documents</h2>
           <p className="mt-1 text-sm leading-6 text-gray-500">Some additional documents</p>
         </div>
-        <AdditionalDocumentsForm />
+        <AdditionalDocumentsForm {...data} />
       </section>
-
-      {/* <section className="mt-10 divide-y divide-gray-200">
-          <div className="space-y-1">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">
-              Business Details
-            </h3>
-            <p className="max-w-2xl text-sm text-gray-500">
-              Manage how information is displayed on your account.
-            </p>
-          </div>
-          <div className="mt-6">
-            <dl className="divide-y divide-gray-200">
-              {businessDetails.map((item) => (
-                <FormRow {...item} key={item.title} />
-              ))}
-            </dl>
-          </div>
-        </section> */}
     </SectionWrapper>
   )
 }
