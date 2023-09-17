@@ -170,7 +170,12 @@ type Inputs = {
 }
 function StaffModal(form: UseFormReturn<Inputs>) {
   return (
-    <form className="my-12 space-y-8 divide-y divide-gray-200">
+    <form
+      className="my-12 space-y-8 divide-y divide-gray-200"
+      onSubmit={() => {
+        console.log("In the form")
+      }}
+    >
       <div className="mt-6 grid grid-cols-1 gap-4">
         <div className="col-span-1">
           <label htmlFor="job-site" className="block text-sm font-medium text-gray-700">

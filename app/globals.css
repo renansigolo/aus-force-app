@@ -36,7 +36,7 @@ textarea {
 }
 
 .form-label {
-  @apply mb-1 block text-sm font-medium text-gray-700;
+  @apply mb-1 block text-sm font-medium leading-6 text-gray-900;
 }
 .form-input {
   @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
@@ -97,11 +97,3 @@ button:disabled {
 .btn-xl {
   @apply px-6 py-3 text-base;
 }
-
-/* Golbal Styles for React JSON Schema Form */
-/* .rjsf fieldset {
-  @apply mb-6 space-y-6;
-}
-.rjsf button {
-  @apply border-transparent bg-indigo-600 text-white hover:bg-indigo-700;
-} */

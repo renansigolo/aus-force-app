@@ -7,12 +7,12 @@ import { SignatureForm } from "@/app/(enter)/sign-up/Signature"
 import { FormInputError } from "@/components/FormInputError"
 import { Loader } from "@/components/Loader"
 import { auth, db, storage } from "@/lib/firebase"
-import { TRegisterFormSchema } from "@/lib/schemas"
+import { RegisterFormDefaultValues, TRegisterFormSchema } from "@/lib/schemas"
 import { Disclosure } from "@headlessui/react"
 import { DocumentArrowUpIcon, MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/20/solid"
 import { FirebaseError } from "firebase/app"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
-import { addDoc, collection } from "firebase/firestore"
+import { doc, setDoc } from "firebase/firestore"
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { useRouter } from "next/navigation"
 import { Controller, useForm } from "react-hook-form"
@@ -55,27 +55,17 @@ export default function SignUpPage() {
     getValues,
     control,
     formState: { errors, isDirty, isSubmitting },
-  } = useForm<TRegisterFormSchema>({
-    defaultValues: {
-      firstName: "",
-      lastName: "",
-      phoneNumber: "",
-      dob: "",
-      profileImageFile: null,
-      passportNumber: "",
-      passportIssued: "",
-      passportExpiry: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    },
-  })
+  } = useForm<TRegisterFormSchema>({ defaultValues: RegisterFormDefaultValues })
 
   const imageValue = getValues("profileImageFile")
 
   const onSubmit = async (data: TRegisterFormSchema) => {
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password)
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.newPassword,
+      )
 
       let imageSnapshot = null
 
@@ -96,7 +86,7 @@ export default function SignUpPage() {
 
       // Update fields in firebase auth and firestore
       await updateProfile(userCredential.user, userPayload)
-      await addDoc(collection(db, "users"), { ...data, ...userPayload })
+      await setDoc(doc(db, "users", userCredential.user.uid), { ...data, ...userPayload })
 
       router.push("/dashboard")
       toast.success(`Account created successfully, welcome ${userCredential.user.email}`)
@@ -151,7 +141,6 @@ export default function SignUpPage() {
                           onChange(event)
                           if (!event.target.files) return
                           const imageFile = event.target.files[0]
-                          console.log("🚀 ~ SignUpPage ~ imageFile:", imageFile)
                           setValue("profileImageFile", imageFile)
                         }}
                       />
@@ -164,11 +153,12 @@ export default function SignUpPage() {
             <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
               <div className="sm:col-span-3">
                 <label htmlFor="firstName" className="form-label">
-                  First Name
+                  First name
                   <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
+                  autoComplete="given-name"
                   {...register("firstName", { required: "First name is required" })}
                 />
                 <FormInputError message={errors.firstName?.message} />
@@ -176,11 +166,12 @@ export default function SignUpPage() {
 
               <div className="sm:col-span-3">
                 <label htmlFor="lastName" className="form-label">
-                  Last Name
+                  Last name
                   <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
+                  autoComplete="family-name"
                   {...register("lastName", { required: "Last name is required" })}
                 />
                 <FormInputError message={errors.lastName?.message} />
@@ -188,11 +179,12 @@ export default function SignUpPage() {
 
               <div className="sm:col-span-3">
                 <label htmlFor="phoneNumber" className="form-label">
-                  Phone Number
+                  Phone number
                   <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="tel"
+                  autoComplete="tel"
                   {...register("phoneNumber", { required: "Phone number is required" })}
                 />
                 <FormInputError message={errors.phoneNumber?.message} />
@@ -216,6 +208,18 @@ export default function SignUpPage() {
                 />
                 <FormInputError message={errors.dob?.message} />
               </div>
+
+              {/* <div className="col-span-full">
+                <label htmlFor="email" className="form-label">
+                  Job title
+                  <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  autoComplete="organization-title"
+                  {...register("jobTitle", { required: "Job title is required" })}
+                />
+              </div> */}
             </div>
           </div>
 
@@ -327,7 +331,11 @@ export default function SignUpPage() {
                   Email
                   <span className="text-red-500">*</span>
                 </label>
-                <input type="email" {...register("email", { required: "Email is required" })} />
+                <input
+                  type="email"
+                  autoComplete="email"
+                  {...register("email", { required: "Email is required" })}
+                />
                 <FormInputError message={errors.email?.message} />
               </div>
 
@@ -338,7 +346,8 @@ export default function SignUpPage() {
                 </label>
                 <input
                   type="password"
-                  {...register("password", {
+                  autoComplete="new-password"
+                  {...register("newPassword", {
                     required: "Password is required",
                     minLength: {
                       value: 6,
@@ -346,20 +355,21 @@ export default function SignUpPage() {
                     },
                   })}
                 />
-                <FormInputError message={errors.password?.message} />
+                <FormInputError message={errors.newPassword?.message} />
               </div>
 
               <div>
                 <label htmlFor="confirmPassword" className="form-label">
-                  Confirm Password
+                  Confirm password
                   <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="password"
+                  autoComplete="new-password"
                   {...register("confirmPassword", {
                     required: "Confirm password is required",
                     validate: (value) =>
-                      value === getValues("password") || "Passwords do not match",
+                      value === getValues("newPassword") || "Passwords do not match",
                   })}
                 />
                 <FormInputError message={errors.confirmPassword?.message} />
