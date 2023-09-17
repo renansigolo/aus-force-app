@@ -1,6 +1,7 @@
 import { Providers } from "@/app/Providers"
 import { Inter } from "next/font/google"
 import { ReactNode } from "react"
+import "../lib/firebase"
 import "./globals.css"
 
 const isProduction = process.env.NODE_ENV === "production"

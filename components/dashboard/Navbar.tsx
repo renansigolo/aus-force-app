@@ -1,15 +1,14 @@
 "use client"
 
 import { auth } from "@/lib/firebase"
+// import { auth } from "@/lib/firebase"
 import { cn } from "@/lib/helpers"
 import { Menu, Popover, Transition } from "@headlessui/react"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid"
 import { BellIcon } from "@heroicons/react/24/outline"
-import { signOut } from "firebase/auth"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { Fragment } from "react"
-import { useAuthState } from "react-firebase-hooks/auth"
 
 const navigation = [
   { name: "Home", href: "/dashboard" },
@@ -93,8 +92,8 @@ const navigation = [
 const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }]
 
 export function Navbar() {
-  const [user] = useAuthState(auth)
-  console.log("🚀 ~ Navbar ~ user:", user)
+  const { currentUser, signOut } = auth
+
   const pathname = usePathname()
   const router = useRouter()
 
@@ -102,9 +101,7 @@ export function Navbar() {
     return pathname === href
   }
 
-  const signOutAndRedirect = () => {
-    signOut(auth).then(() => router.push("/log-in"))
-  }
+  const signOutAndRedirect = () => signOut().then(() => router.push("/log-in"))
 
   return (
     <nav className="bg-white shadow">
@@ -173,7 +170,7 @@ export function Navbar() {
                         <img
                           className="h-8 w-8 rounded-full"
                           alt="Profile Image"
-                          src={user?.photoURL || "/images/profile-placeholder.png"}
+                          src={currentUser?.photoURL || "/images/profile-placeholder.png"}
                         />
                       </Menu.Button>
                     </div>
@@ -242,14 +239,16 @@ export function Navbar() {
                         <img
                           className="h-10 w-10 rounded-full"
                           alt="Profile Image"
-                          src={user?.photoURL || "/images/profile-placeholder.png"}
+                          src={currentUser?.photoURL || "/images/profile-placeholder.png"}
                         />
                       </div>
                       <div className="ml-3">
                         <div className="text-base font-medium text-gray-800">
-                          {user?.displayName || ""}
+                          {currentUser?.displayName || ""}
                         </div>
-                        <div className="text-sm font-medium text-gray-500">{user?.email || ""}</div>
+                        <div className="text-sm font-medium text-gray-500">
+                          {currentUser?.email || ""}
+                        </div>
                       </div>
                       <button
                         type="button"

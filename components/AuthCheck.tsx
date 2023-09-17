@@ -1,16 +1,18 @@
 "use client"
 
-import { UserContext } from "@/app/Providers"
-import { useContext } from "react"
+import { auth } from "@/lib/firebase"
+import { redirect } from "next/navigation"
+import { ReactNode } from "react"
 
-const mockUser = {
-  displayName: "Renan",
-  email: "renan.sigolo@gmail.com",
+type AuthCheckProps = {
+  children: ReactNode
+  fallback?: ReactNode
 }
 
 /** Component's children only shown to logged-in users */
-export function AuthCheck(props: any) {
-  const user = useContext(UserContext)
-  return props.children
-  // return user ? props.children : props.fallback || redirect("/log-in")
+export function AuthCheck(props: AuthCheckProps) {
+  console.log("🚀 ~ AuthCheck ~ auth:", auth)
+  const { currentUser } = auth
+  console.log("🚀 ~ AuthCheck ~ currentUser:", currentUser)
+  return currentUser ? props.children : props.fallback || redirect("/log-in")
 }
