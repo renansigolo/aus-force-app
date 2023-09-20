@@ -1,6 +1,7 @@
 import { Providers } from "@/app/Providers"
 import { Inter } from "next/font/google"
 import { ReactNode } from "react"
+import { Toaster } from "react-hot-toast"
 import "../lib/firebase"
 import "./globals.css"
 
@@ -65,7 +66,10 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" className={inter.className}>
       <head />
       <body>
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <Toaster position="top-right" reverseOrder={true} />
+        </Providers>
       </body>
     </html>
   )

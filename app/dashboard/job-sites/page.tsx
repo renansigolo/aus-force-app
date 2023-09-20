@@ -3,10 +3,12 @@
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Empty } from "@/components/Empty"
+import { FormInputError } from "@/components/FormInputError"
 import Modal from "@/components/Modal"
 import { Role } from "@/components/Roles"
 import NiceModal from "@ebay/nice-modal-react"
 import { BuildingOffice2Icon, CloudArrowDownIcon } from "@heroicons/react/24/outline"
+import { useForm } from "react-hook-form"
 
 type JobSitesListDataProps = {
   siteName: string
@@ -15,6 +17,7 @@ type JobSitesListDataProps = {
   additionalNotes: string
   policyAndProceduresUrl: string
 }
+
 const jobSitesListData: JobSitesListDataProps[] = [
   {
     siteName: "Job Site A",
@@ -42,10 +45,18 @@ const jobSitesListData: JobSitesListDataProps[] = [
 ]
 
 export default function JobSitesPage() {
+  const form = useForm({
+    mode: "onBlur",
+  })
+
   const showModal = () =>
     NiceModal.show(Modal, {
       title: "New Site",
-      children: <JobSiteModal />,
+      children: <JobSiteModal {...form} />,
+    }).then((result) => {
+      // get the form data
+      const data = form.getValues()
+      console.log("🚀 ~ JobSitesPage ~ data:", data)
     })
 
   return (
@@ -109,7 +120,9 @@ function JobSitesList(props: JobSitesListDataProps) {
   )
 }
 
-function JobSiteModal() {
+function JobSiteModal(props) {
+  console.log("🚀 ~ JobSiteModal ~ props:", props)
+
   return (
     <>
       <form className="my-12 space-y-8 divide-y divide-gray-200">
@@ -119,7 +132,11 @@ function JobSiteModal() {
               Site Name
             </label>
             <div className="mt-1">
-              <input required id="site-name" name="site-name" type="text" />
+              <input
+                {...props.register("siteName", { required: "Site name is required" })}
+                type="text"
+              />
+              <FormInputError message={props.formState.errors.siteName?.message} />
             </div>
           </div>
 

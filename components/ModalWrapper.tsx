@@ -1,32 +1,24 @@
 "use client"
 
-import NiceModal, { useModal } from "@ebay/nice-modal-react"
 import { Dialog, Transition } from "@headlessui/react"
-import { Fragment, ReactNode, useRef } from "react"
+import { useRouter } from "next/navigation"
+import { Fragment, ReactNode } from "react"
 
-type ModalProps = {
+type ModalWrapperProps = {
   title: string
   description?: string
   children?: ReactNode
+  showModal: boolean
 }
 
-export default NiceModal.create(({ title, description, children }: ModalProps) => {
-  const cancelButtonRef = useRef(null)
-  const modal = useModal()
+export function ModalWrapper({ title, description, children, showModal }: ModalWrapperProps) {
+  const router = useRouter()
 
-  const handleResolve = () => {
-    modal.resolve({ resolved: true })
-  }
-  const closeModal = () => modal.remove()
+  const hideModal = () => router.push("?showModal=false")
 
   return (
-    <Transition.Root show={modal.visible} as={Fragment}>
-      <Dialog
-        as="div"
-        className="relative z-10"
-        initialFocus={cancelButtonRef}
-        onClose={closeModal}
-      >
+    <Transition.Root show={showModal} as={Fragment}>
+      <Dialog as="div" className="relative z-10" onClose={hideModal}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -66,23 +58,6 @@ export default NiceModal.create(({ title, description, children }: ModalProps) =
                     <div className="mt-2">{children}</div>
                   </div>
                 </div>
-                <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                  <button
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={handleResolve}
-                  >
-                    Submit
-                  </button>
-                  <button
-                    ref={cancelButtonRef}
-                    type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm"
-                    onClick={closeModal}
-                  >
-                    Cancel
-                  </button>
-                </div>
               </Dialog.Panel>
             </Transition.Child>
           </div>
@@ -90,4 +65,4 @@ export default NiceModal.create(({ title, description, children }: ModalProps) =
       </Dialog>
     </Transition.Root>
   )
-})
+}

@@ -46,7 +46,12 @@ export default function LogInPage() {
                 <label htmlFor="email" className="form-label">
                   Email
                 </label>
-                <input {...register("email")} type="email" disabled={isSubmitting} />
+                <input
+                  {...register("email", { required: "Email is required" })}
+                  type="email"
+                  autoComplete="email"
+                  disabled={isSubmitting}
+                />
                 <FormInputError message={errors.email?.message} />
               </div>
 
@@ -54,7 +59,12 @@ export default function LogInPage() {
                 <label htmlFor="password" className="form-label">
                   Password
                 </label>
-                <input {...register("password")} type="password" disabled={isSubmitting} />
+                <input
+                  {...register("password", { required: "Password required" })}
+                  type="password"
+                  autoComplete="current-password"
+                  disabled={isSubmitting}
+                />
                 <FormInputError message={errors.password?.message} />
               </div>
 

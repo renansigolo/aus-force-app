@@ -1,22 +1,22 @@
 "use client"
 
+import { StaffForm } from "@/app/dashboard/staff/StaffForm"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Empty } from "@/components/Empty"
-import Modal from "@/components/Modal"
+import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
-import { useModal } from "@ebay/nice-modal-react"
 import { Disclosure } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
 import { UserCircleIcon } from "@heroicons/react/24/outline"
-import { useForm, UseFormReturn } from "react-hook-form"
+import { useRouter } from "next/navigation"
 
 type StaffListDataProps = {
   email: string
   role: "Supervisor" | "Manager"
 }
 
-type AccordionProps = {
+export type AccordionProps = {
   title: string
   staff: StaffListDataProps[]
 }
@@ -47,52 +47,31 @@ const accordionData: AccordionProps[] = [
   },
 ]
 
-export default function StaffPage() {
-  const form = useForm<Inputs>()
+type StaffPageProps = {
+  searchParams: { [key: string]: string | string[] | undefined }
+}
 
-  const modal = useModal(Modal)
-  const showModal = () =>
-    modal
-      .show({
-        title: "New Staff",
-        children: <StaffModal {...form} />,
-      })
-      .then((modalResponse: any) => {
-        if (modalResponse.resolved && form.formState.isValid) {
-          const formValues = form.getValues()
-          accordionData.push({
-            ...accordionData,
-            title: formValues.jobSite,
-            staff: [
-              {
-                email: formValues.email,
-                role: formValues.role,
-              },
-            ],
-          })
-        } else {
-          throw new Error("Form is invalid")
-        }
-      })
-      .then(() => {
-        form.reset()
-        modal.remove()
-      })
+export default async function StaffPage({ searchParams }: StaffPageProps) {
+  const router = useRouter()
+  const showModal = searchParams.showModal === "true"
 
   return (
     <>
       <SectionWrapper>
         <Role role="client">
-          <SectionHeading title="Staff" buttonLabel="New Staff" buttonAction={() => showModal()} />
-
+          <SectionHeading
+            title="Staff"
+            buttonLabel="New Staff"
+            buttonAction={() => router.push("?showModal=true")}
+          />
           <section className="py-8">
-            <Empty title="staff" />
-          </section>
-
-          <section className="py-8">
-            <Accordion />
+            {accordionData ? <Accordion /> : <Empty title="staff" />}
           </section>
         </Role>
+
+        <ModalWrapper title="New Staff" showModal={showModal}>
+          <StaffForm accordionData={accordionData} />
+        </ModalWrapper>
       </SectionWrapper>
     </>
   )
@@ -160,58 +139,5 @@ function StaffList(props: StaffListDataProps) {
         </div>
       </div>
     </div>
-  )
-}
-
-type Inputs = {
-  email: string
-  role: "Supervisor" | "Manager"
-  jobSite: string
-}
-function StaffModal(form: UseFormReturn<Inputs>) {
-  return (
-    <form
-      className="my-12 space-y-8 divide-y divide-gray-200"
-      onSubmit={() => {
-        console.log("In the form")
-      }}
-    >
-      <div className="mt-6 grid grid-cols-1 gap-4">
-        <div className="col-span-1">
-          <label htmlFor="job-site" className="block text-sm font-medium text-gray-700">
-            Job Site
-          </label>
-          <div className="mt-1">
-            <select {...form.register("jobSite")}>
-              <option>Site 1</option>
-              <option>Site 2</option>
-              <option>Site 3</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="col-span-1">
-          <label htmlFor="role" className="block text-sm font-medium text-gray-700">
-            Role
-          </label>
-          <div className="mt-1">
-            <select {...form.register("role")}>
-              <option>Supervisor</option>
-              <option>Manager</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="col-span-1">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-            Email address
-          </label>
-          <div className="mt-1">
-            <input className="form-input" {...form.register("email")} required />
-            {form.formState.errors.email && <span>This field is required</span>}
-          </div>
-        </div>
-      </div>
-    </form>
   )
 }
