@@ -1,6 +1,7 @@
 "use client"
 
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
+import { useUserContext } from "@/app/Providers"
 import { FormInputError } from "@/components/FormInputError"
 import { Loader } from "@/components/Loader"
 import { auth } from "@/lib/firebase"
@@ -14,6 +15,7 @@ import toast from "react-hot-toast"
 
 export default function LogInPage() {
   const router = useRouter()
+  const { setUser } = useUserContext()
 
   const {
     register,
@@ -27,6 +29,7 @@ export default function LogInPage() {
     // If we're in development, just redirect to the dashboard bypassing the authentication
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
+        setUser(userCredential.user)
         toast.success(`Welcome back, ${userCredential.user.email}`)
         router.push("/dashboard")
       })

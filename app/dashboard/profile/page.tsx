@@ -1,17 +1,20 @@
 "use client"
 
+import { useUserContext } from "@/app/Providers"
 import { AdditionalDocumentsForm } from "@/app/dashboard/profile/AdditionalDocumentsForm"
 import { BankForm } from "@/app/dashboard/profile/BankForm"
 import { ProfileForm } from "@/app/dashboard/profile/ProfileForm"
 import { Divider } from "@/components/Divider"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
-import { auth, db } from "@/lib/firebase"
+import { db } from "@/lib/firebase"
 import { doc, getDoc } from "firebase/firestore"
 
 export default async function ProfilePage() {
   // Get the user's data using the Firebase SDK in firestore
-  const docRef = doc(db, `users/${auth.currentUser?.uid}`)
+  const { user } = useUserContext()
+
+  const docRef = doc(db, `users/${user?.uid}`)
   const docSnap = await getDoc(docRef)
   const data = docSnap.data()
 
