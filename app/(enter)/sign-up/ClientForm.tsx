@@ -40,10 +40,7 @@ const businessForm = [
 ]
 
 export function ClientForm() {
-  const {
-    register,
-    formState: { errors },
-  } = useForm()
+  const { register } = useForm()
 
   return (
     <>

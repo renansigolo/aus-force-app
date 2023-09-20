@@ -3,8 +3,8 @@
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Role } from "@/components/Roles"
-import { cn } from "@/lib/helpers"
 import { UserCircleIcon } from "@heroicons/react/24/outline"
+import { twMerge } from "tailwind-merge"
 
 const items = [
   {
@@ -114,7 +114,7 @@ function WorkersList({ category }: WorkersListProps) {
                     ))}
                   </span>
                   <span
-                    className={cn(
+                    className={twMerge(
                       statusStyles[item.status],
                       "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize",
                     )}
@@ -240,7 +240,7 @@ function WorkersList({ category }: WorkersListProps) {
                     </td>
                     <td className="hidden whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block">
                       <span
-                        className={cn(
+                        className={twMerge(
                           statusStyles[item.status],
                           "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize",
                         )}

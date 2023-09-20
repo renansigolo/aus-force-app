@@ -1,14 +1,16 @@
 "use client"
 
 import { AccordionProps } from "@/app/dashboard/staff/page"
+import { FormInputError } from "@/components/FormInputError"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 
-type Inputs = {
+type FormInputs = {
   email: string
   role: "Supervisor" | "Manager"
   jobSite: string
 }
+
 type StaffModalProps = {
   accordionData: AccordionProps[]
 }
@@ -19,16 +21,12 @@ export function StaffForm({ accordionData }: StaffModalProps) {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isValid },
-  } = useForm<Inputs>({
-    shouldUseNativeValidation: true,
-  })
+  } = useForm<FormInputs>({ shouldUseNativeValidation: true })
 
   const hideModal = () => router.push("?showModal=false")
 
-  const onSubmit = (data: Inputs) => {
-    console.log(data)
-    // Save data to firebase
-
+  const onSubmit = (data: FormInputs) => {
+    // TODO: Save data to firebase
     accordionData.push({
       ...accordionData,
       title: data.jobSite,
@@ -44,42 +42,36 @@ export function StaffForm({ accordionData }: StaffModalProps) {
   }
 
   return (
-    <form className="my-12 space-y-8" onSubmit={handleSubmit(onSubmit)}>
-      <div className="mt-6 grid grid-cols-1 gap-4">
-        <div className="col-span-1">
-          <label htmlFor="job-site" className="block text-sm font-medium text-gray-700">
-            Job Site
-          </label>
-          <div className="mt-1">
-            <select {...register("jobSite")}>
-              <option>Site 1</option>
-              <option>Site 2</option>
-              <option>Site 3</option>
-            </select>
-          </div>
-        </div>
+    <form className="my-8 grid gap-4" onSubmit={handleSubmit(onSubmit)}>
+      <div>
+        <label htmlFor="job-site" className="form-label">
+          Job Site
+        </label>
+        <select {...register("jobSite")}>
+          <option>Site 1</option>
+          <option>Site 2</option>
+          <option>Site 3</option>
+        </select>
+        <FormInputError message={errors.jobSite?.message} />
+      </div>
 
-        <div className="col-span-1">
-          <label htmlFor="role" className="block text-sm font-medium text-gray-700">
-            Role
-          </label>
-          <div className="mt-1">
-            <select {...register("role")}>
-              <option>Supervisor</option>
-              <option>Manager</option>
-            </select>
-          </div>
-        </div>
+      <div>
+        <label htmlFor="role" className="form-label">
+          Role
+        </label>
+        <select {...register("role")}>
+          <option>Supervisor</option>
+          <option>Manager</option>
+        </select>
+        <FormInputError message={errors.role?.message} />
+      </div>
 
-        <div className="col-span-1">
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-            Email address
-          </label>
-          <div className="mt-1">
-            <input className="form-input" {...register("email")} required />
-            {errors.email && <span>This field is required</span>}
-          </div>
-        </div>
+      <div>
+        <label htmlFor="email" className="form-label">
+          Email address
+        </label>
+        <input className="form-input" {...register("email", { required: "Email is required" })} />
+        <FormInputError message={errors.email?.message} />
       </div>
 
       <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">

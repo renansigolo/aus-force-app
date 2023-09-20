@@ -1,10 +1,8 @@
 "use client"
 
-import Image from "next/image"
 import { useForm } from "react-hook-form"
 
 export function AdditionalDocumentsForm(props: any) {
-  console.log("🚀 ~ AdditionalDocumentsForm ~ props:", props)
   const { register, handleSubmit } = useForm()
 
   const onSubmit = (data: any) => {
@@ -24,7 +22,6 @@ export function AdditionalDocumentsForm(props: any) {
               {...register("passport", { required: "Passport number is required" })}
             />
           </div>
-
           <div className="col-span-full">
             <label htmlFor="whiteCard" className="form-label">
               White Card
@@ -34,18 +31,15 @@ export function AdditionalDocumentsForm(props: any) {
               {...register("whiteCard", { required: "White card number is required" })}
             />
           </div>
-
           <div className="col-span-full">
             <label htmlFor="signature" className="form-label">
               Signature
             </label>
-            <Image
-              src={props.signatureURL}
-              alt="Signature"
-              width={500}
-              height={300}
-              className="rounded-md border border-gray-200 bg-white p-6 opacity-90 hover:cursor-not-allowed"
-            />
+            {props.signatureURL && (
+              <div className="rounded-md border border-gray-200 bg-white p-6 hover:cursor-not-allowed">
+                <img src={props.signatureURL} alt="Signature" width={500} height={300} />
+              </div>
+            )}
           </div>
         </div>
 

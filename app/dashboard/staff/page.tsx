@@ -6,6 +6,7 @@ import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
+import { SearchParams } from "@/lib/schemas"
 import { Disclosure } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
 import { UserCircleIcon } from "@heroicons/react/24/outline"
@@ -20,6 +21,7 @@ export type AccordionProps = {
   title: string
   staff: StaffListDataProps[]
 }
+
 const accordionData: AccordionProps[] = [
   {
     title: "Job Site A",
@@ -47,11 +49,9 @@ const accordionData: AccordionProps[] = [
   },
 ]
 
-type StaffPageProps = {
-  searchParams: { [key: string]: string | string[] | undefined }
-}
+type StaffPageProps = { searchParams: SearchParams }
 
-export default async function StaffPage({ searchParams }: StaffPageProps) {
+export default function StaffPage({ searchParams }: StaffPageProps) {
   const router = useRouter()
   const showModal = searchParams.showModal === "true"
 

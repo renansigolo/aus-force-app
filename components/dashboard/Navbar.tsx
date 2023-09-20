@@ -1,13 +1,13 @@
 "use client"
 
 import { auth } from "@/lib/firebase"
-import { cn } from "@/lib/helpers"
 import { Menu, Popover, Transition } from "@headlessui/react"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid"
 import { BellIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 import { Fragment } from "react"
+import { twMerge } from "tailwind-merge"
 
 const navigation = [
   { name: "Home", href: "/dashboard" },
@@ -108,7 +108,7 @@ export function Navbar() {
       <Popover
         as="header"
         className={({ open }) =>
-          cn(
+          twMerge(
             open ? "fixed inset-0 z-40 overflow-y-auto" : "",
             "bg-white py-4 shadow-sm lg:static lg:overflow-y-visible",
           )
@@ -134,7 +134,7 @@ export function Navbar() {
                         key={item.name}
                         href={item.href}
                         aria-current={isActive(item.href) ? "page" : undefined}
-                        className={cn(
+                        className={twMerge(
                           isActive(item.href)
                             ? "bg-gray-100 text-gray-900"
                             : "text-gray-900 hover:bg-gray-50 hover:text-gray-900",
@@ -188,7 +188,7 @@ export function Navbar() {
                             {({ active }) => (
                               <Link
                                 href={item.href}
-                                className={cn(
+                                className={twMerge(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700",
                                 )}
@@ -222,7 +222,7 @@ export function Navbar() {
                         href={item.href}
                         aria-current={isActive(item.href) ? "page" : undefined}
                         onClick={() => close()}
-                        className={cn(
+                        className={twMerge(
                           isActive(item.href) ? "bg-gray-100 text-gray-900" : "hover:bg-gray-50",
                           "block rounded-md px-3 py-2 text-base font-medium",
                         )}

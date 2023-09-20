@@ -1,9 +1,9 @@
 "use client"
 
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
-import { Divider } from "@/app/(enter)/sign-up/Divider"
 import { FormSectionHeading } from "@/app/(enter)/sign-up/FormSectionHeading"
 import { SignatureForm } from "@/app/(enter)/sign-up/Signature"
+import { Divider } from "@/components/Divider"
 import { FormInputError } from "@/components/FormInputError"
 import { Loader } from "@/components/Loader"
 import { auth, db, storage } from "@/lib/firebase"
@@ -133,12 +133,12 @@ export default function SignUpPage() {
                 </label>
                 <div className="mt-1 flex items-center">
                   <img
+                    alt="Profile Image"
+                    className="aspect-square h-12 w-12 rounded-full object-fill"
                     src={
                       (imageValue && URL.createObjectURL(imageValue)) ||
                       "/images/profile-placeholder.png"
                     }
-                    alt="Profile Image"
-                    className="aspect-square h-12 w-12 rounded-full object-fill"
                   />
 
                   <Controller

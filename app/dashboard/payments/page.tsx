@@ -1,8 +1,8 @@
 import { Role } from "@/components/Roles"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
-import { cn } from "@/lib/helpers"
 import { BanknotesIcon } from "@heroicons/react/20/solid"
+import { twMerge } from "tailwind-merge"
 
 const transactions = [
   {
@@ -75,7 +75,7 @@ function Payments() {
                       </span>
                     </span>
                     <span
-                      className={cn(
+                      className={twMerge(
                         statusStyles[transaction.status],
                         "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize",
                       )}
@@ -146,7 +146,7 @@ function Payments() {
                       </td>
                       <td className="hidden whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block">
                         <span
-                          className={cn(
+                          className={twMerge(
                             statusStyles[transaction.status],
                             "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize",
                           )}

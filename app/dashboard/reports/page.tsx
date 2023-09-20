@@ -1,9 +1,9 @@
 import { Role } from "@/components/Roles"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
-import { cn } from "@/lib/helpers"
 import { UserIcon } from "@heroicons/react/20/solid"
 import { FunnelIcon } from "@heroicons/react/24/outline"
+import { twMerge } from "tailwind-merge"
 
 const reports = [
   {
@@ -97,7 +97,7 @@ export default function ReportsPage() {
                         </span>
                       </span>
                       <span
-                        className={cn(
+                        className={twMerge(
                           statusStyles[report.status],
                           "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize",
                         )}
@@ -168,7 +168,7 @@ export default function ReportsPage() {
                         </td>
                         <td className="hidden whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block">
                           <span
-                            className={cn(
+                            className={twMerge(
                               statusStyles[report.status],
                               "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize",
                             )}

@@ -5,13 +5,13 @@ import Modal from "@/components/Modal"
 import { Role } from "@/components/Roles"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
-import { cn } from "@/lib/helpers"
 import NiceModal from "@ebay/nice-modal-react"
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon, EllipsisVerticalIcon } from "@heroicons/react/20/solid"
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline"
 import { useRouter } from "next/navigation"
 import { Fragment, useRef, useState } from "react"
+import { twMerge } from "tailwind-merge"
 
 const accordionItems = [{ title: "Job Site A" }, { title: "Job Site B" }, { title: "Job Site C" }]
 const tableItems = [
@@ -82,7 +82,7 @@ export default function ClientsPage() {
                             {({ active }) => (
                               <button
                                 onClick={() => router.push("/dashboard/rates")}
-                                className={cn(
+                                className={twMerge(
                                   active ? "bg-gray-100" : "",
                                   "block w-full px-4 py-2 text-left text-sm text-gray-700",
                                 )}
@@ -95,7 +95,7 @@ export default function ClientsPage() {
                             {({ active }) => (
                               <button
                                 onClick={() => showModal()}
-                                className={cn(
+                                className={twMerge(
                                   active ? "bg-gray-100" : "",
                                   "block w-full px-4 py-2 text-left text-sm text-gray-700",
                                 )}
@@ -108,7 +108,7 @@ export default function ClientsPage() {
                             {({ active }) => (
                               <button
                                 onClick={() => console.log("Button Clicked")}
-                                className={cn(
+                                className={twMerge(
                                   active ? "bg-gray-100" : "",
                                   "block w-full px-4 py-2 text-left text-sm text-gray-700",
                                 )}

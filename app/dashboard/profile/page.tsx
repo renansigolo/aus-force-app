@@ -1,13 +1,12 @@
 "use client"
 
-import { Divider } from "@/app/(enter)/sign-up/Divider"
 import { AdditionalDocumentsForm } from "@/app/dashboard/profile/AdditionalDocumentsForm"
 import { BankForm } from "@/app/dashboard/profile/BankForm"
 import { ProfileForm } from "@/app/dashboard/profile/ProfileForm"
+import { Divider } from "@/components/Divider"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { auth, db } from "@/lib/firebase"
-import { PencilSquareIcon } from "@heroicons/react/24/outline"
 import { doc, getDoc } from "firebase/firestore"
 
 export default async function ProfilePage() {
@@ -51,25 +50,5 @@ export default async function ProfilePage() {
         <AdditionalDocumentsForm {...data} />
       </section>
     </SectionWrapper>
-  )
-}
-
-type FormRowProps = {
-  title: string
-  value: string
-}
-function FormRow({ title, value }: FormRowProps) {
-  return (
-    <div className="py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:py-5">
-      <dt className="text-sm font-medium text-gray-500">{title}</dt>
-      <dd className="mt-1 flex text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-        <span className="flex-grow">{value}</span>
-        <span className="ml-4 flex-shrink-0">
-          <button type="button">
-            <PencilSquareIcon className="h-5 w-5 text-indigo-600 hover:text-indigo-500" />
-          </button>
-        </span>
-      </dd>
-    </div>
   )
 }

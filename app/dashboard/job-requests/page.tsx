@@ -5,10 +5,10 @@ import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Empty } from "@/components/Empty"
 import Modal from "@/components/Modal"
 import { Role } from "@/components/Roles"
-import { cn } from "@/lib/helpers"
 import NiceModal from "@ebay/nice-modal-react"
 import { Tab } from "@headlessui/react"
 import { ExclamationTriangleIcon, XCircleIcon } from "@heroicons/react/24/outline"
+import { twMerge } from "tailwind-merge"
 
 const items = [
   {
@@ -149,7 +149,7 @@ function Tabs() {
         <Tab.List className="flex space-x-1 rounded-xl bg-indigo-900/20 p-1">
           <Tab
             className={({ selected }) =>
-              cn(
+              twMerge(
                 "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-indigo-700",
                 "ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2",
                 selected
@@ -162,7 +162,7 @@ function Tabs() {
           </Tab>
           <Tab
             className={({ selected }) =>
-              cn(
+              twMerge(
                 "w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-indigo-700",
                 "ring-white ring-opacity-60 ring-offset-2 ring-offset-indigo-400 focus:outline-none focus:ring-2",
                 selected

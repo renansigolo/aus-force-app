@@ -1,8 +1,8 @@
 "use client"
 
-import { cn } from "@/lib/helpers"
 import { ChevronLeftIcon, ChevronRightIcon, ClockIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
+import { twMerge } from "tailwind-merge"
 
 const days = [
   { date: "2021-12-27", events: [] },
@@ -187,7 +187,7 @@ export function Calendar() {
             {days.map((day) => (
               <div
                 key={day.date}
-                className={cn(
+                className={twMerge(
                   day.isCurrentMonth ? "bg-white" : "bg-gray-50 text-gray-500",
                   "relative px-3 py-2",
                 )}
@@ -232,7 +232,7 @@ export function Calendar() {
               <button
                 key={day.date}
                 type="button"
-                className={cn(
+                className={twMerge(
                   day.isCurrentMonth ? "bg-white" : "bg-gray-50",
                   (day.isSelected || day.isToday) && "font-semibold",
                   day.isSelected && "text-white",
@@ -244,7 +244,7 @@ export function Calendar() {
               >
                 <time
                   dateTime={day.date}
-                  className={cn(
+                  className={twMerge(
                     day.isSelected &&
                       ("flex h-6 w-6 items-center justify-center rounded-full" as any),
                     day.isSelected && day.isToday && "bg-indigo-600",

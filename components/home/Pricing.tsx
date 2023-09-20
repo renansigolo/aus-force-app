@@ -1,11 +1,11 @@
 "use client"
 
 /* This example requires Tailwind CSS v3.0+ */
-import { cn } from "@/lib/helpers"
 import { RadioGroup } from "@headlessui/react"
 import { CheckIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
 import { useState } from "react"
+import { twMerge } from "tailwind-merge"
 
 const frequencies = [
   { value: "monthly", label: "Monthly", priceSuffix: "/month" },
@@ -87,7 +87,7 @@ export function Pricing() {
                 key={option.value}
                 value={option}
                 className={({ checked }) =>
-                  cn(
+                  twMerge(
                     checked ? "bg-indigo-600 text-white" : "text-gray-500",
                     "cursor-pointer rounded-full px-2.5 py-1",
                   )
@@ -102,14 +102,14 @@ export function Pricing() {
           {tiers.map((tier) => (
             <div
               key={tier.id}
-              className={cn(
+              className={twMerge(
                 tier.mostPopular ? "ring-2 ring-indigo-600" : "ring-1 ring-gray-200",
                 "rounded-3xl p-8",
               )}
             >
               <h3
                 id={tier.id}
-                className={cn(
+                className={twMerge(
                   tier.mostPopular ? "text-indigo-600" : "text-gray-900",
                   "text-lg font-semibold leading-8",
                 )}
@@ -128,7 +128,7 @@ export function Pricing() {
               <Link
                 href={tier.href as any}
                 aria-describedby={tier.id}
-                className={cn(
+                className={twMerge(
                   tier.mostPopular
                     ? "bg-indigo-600 text-white shadow-sm hover:bg-indigo-500"
                     : "text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:ring-indigo-300",
