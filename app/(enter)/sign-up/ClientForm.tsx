@@ -54,66 +54,55 @@ export function ClientForm() {
         <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
           {businessForm.map((field, index) => (
             <div key={index} className="sm:col-span-3">
-              <label htmlFor={field.id} className="block text-sm font-medium text-gray-700">
+              <label htmlFor={field.id} className="form-label">
                 {field.label}
                 {field.required && <span className="text-red-500">*</span>}
               </label>
-              <div className="mt-1">
-                <input
-                  type={field.type}
-                  autoComplete={field.autoComplete}
-                  {...register(field.id as any, { required: field.required })}
-                />
-                {/* <FormInputError message={errors[field.id] || ""} /> */}
-              </div>
+
+              <input
+                type={field.type}
+                autoComplete={field.autoComplete}
+                {...register(field.id as any, { required: field.required })}
+              />
+              {/* <FormInputError message={errors[field.id] || ""} /> */}
             </div>
           ))}
 
           <div className="sm:col-span-6">
-            <label htmlFor="country" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="country" className="form-label">
               Country
             </label>
-            <div className="mt-1">
-              <select {...register("country")} autoComplete="country-name">
-                <option>Australia</option>
-              </select>
-            </div>
+            <select {...register("country")} autoComplete="country-name">
+              <option>Australia</option>
+            </select>
           </div>
 
           <div className="sm:col-span-6">
-            <label htmlFor="street-address" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="street-address" className="form-label">
               Street address
             </label>
-            <div className="mt-1">
-              <input {...register("streetAddress")} type="text" autoComplete="street-address" />
-            </div>
+            <input {...register("streetAddress")} type="text" autoComplete="street-address" />
           </div>
 
           <div className="sm:col-span-2">
-            <label htmlFor="city" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="city" className="form-label">
               City
             </label>
-            <div className="mt-1">
-              <input {...register("city")} type="text" autoComplete="address-level2" />
-            </div>
+            <input {...register("city")} type="text" autoComplete="address-level2" />
           </div>
 
           <div className="sm:col-span-2">
-            <label htmlFor="region" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="region" className="form-label">
               State / Province
             </label>
-            <div className="mt-1">
-              <input {...register("region")} type="text" autoComplete="address-level1" />
-            </div>
+            <input {...register("region")} type="text" autoComplete="address-level1" />
           </div>
 
           <div className="sm:col-span-2">
-            <label htmlFor="postal-code" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="postal-code" className="form-label">
               ZIP / Postal code
             </label>
-            <div className="mt-1">
-              <input {...register("postalCode")} type="text" autoComplete="postal-code" />
-            </div>
+            <input {...register("postalCode")} type="text" autoComplete="postal-code" />
           </div>
         </div>
       </Role>

@@ -8,7 +8,6 @@ export default function RequestLeavePage() {
     <SectionWrapper>
       <Role role="worker">
         <SectionHeading title="Request Leave" />
-
         <section className="py-8">
           <RequestLeaveForm />
         </section>

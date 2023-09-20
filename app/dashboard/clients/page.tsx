@@ -1,16 +1,16 @@
 "use client"
 
+import { ClientsForm } from "@/app/dashboard/clients/ClientsForm"
 import { Empty } from "@/components/Empty"
-import Modal from "@/components/Modal"
+import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
-import NiceModal from "@ebay/nice-modal-react"
-import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react"
+import { SearchParams } from "@/lib/schemas"
+import { Disclosure, Menu, Transition } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon, EllipsisVerticalIcon } from "@heroicons/react/20/solid"
-import { ExclamationTriangleIcon } from "@heroicons/react/24/outline"
-import router from "next/router"
-import { Fragment, useRef, useState } from "react"
+import Link from "next/link"
+import { Fragment } from "react"
 import { twMerge } from "tailwind-merge"
 
 const accordionData = [{ title: "Job Site A" }, { title: "Job Site B" }, { title: "Job Site C" }]
@@ -33,28 +33,29 @@ const data = [
     endDate: "24/07 - 3:30pm",
   },
 ]
+type ClientsPageProps = { searchParams: SearchParams }
 
-export default function ClientsPage() {
-  const showModal = () =>
-    NiceModal.show(Modal, {
-      title: "New Client",
-      children: <AddNewClientModal />,
-    })
+export default function ClientsPage({ searchParams }: ClientsPageProps) {
+  const showModal = searchParams.showModal === "true"
 
   return (
     <SectionWrapper>
       <Role role="business">
-        <SectionHeading title="Clients" buttonLabel="Add New Client" buttonAction={showModal} />
+        <SectionHeading title="Clients" buttonLabel="Add New Client" />
 
         <section className="py-8">
-          {accordionData.length > 0 ? <Client showModal={showModal} /> : <Empty title="clients" />}
+          {accordionData.length > 0 ? <Client /> : <Empty title="clients" />}
         </section>
+
+        <ModalWrapper title="New Staff" showModal={showModal}>
+          <ClientsForm />
+        </ModalWrapper>
       </Role>
     </SectionWrapper>
   )
 }
 
-function Client({ showModal }: any) {
+function Client() {
   return (
     <div className="overflow-hidden rounded-lg bg-white shadow">
       {/* Heading */}
@@ -85,28 +86,28 @@ function Client({ showModal }: any) {
                   <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <Menu.Item>
                       {({ active }) => (
-                        <button
-                          onClick={() => router.push("/dashboard/rates")}
+                        <Link
+                          href="/dashboard/rates"
                           className={twMerge(
                             active ? "bg-gray-100" : "",
                             "block w-full px-4 py-2 text-left text-sm text-gray-700",
                           )}
                         >
                           Manage Rates
-                        </button>
+                        </Link>
                       )}
                     </Menu.Item>
                     <Menu.Item>
                       {({ active }) => (
-                        <button
-                          onClick={() => showModal()}
+                        <Link
+                          href="?showModal=true"
                           className={twMerge(
                             active ? "bg-gray-100" : "",
                             "block w-full px-4 py-2 text-left text-sm text-gray-700",
                           )}
                         >
                           Edit
-                        </button>
+                        </Link>
                       )}
                     </Menu.Item>
                     <Menu.Item>
@@ -324,107 +325,79 @@ function ShiftTable({ approveShift, showModal }: any) {
   )
 }
 
-function AddNewClientModal() {
-  return (
-    <>
-      <form className="my-12 space-y-8 divide-y divide-gray-200">
-        <div className="mt-6 grid gap-4">
-          <div>
-            <label htmlFor="clientName" className="block text-sm font-medium text-gray-700">
-              Client Name
-            </label>
-            <div className="mt-1">
-              <input type="text" name="clientName" id="clientName" />
-            </div>
-          </div>
+// function ConfirmationModal() {
+//   const [open, setOpen] = useState(true)
 
-          <div>
-            <label htmlFor="clientEmail" className="block text-sm font-medium text-gray-700">
-              Email
-            </label>
-            <div className="mt-1">
-              <input type="email" name="clientEmail" id="clientEmail" />
-            </div>
-          </div>
-        </div>
-      </form>
-    </>
-  )
-}
+//   const cancelButtonRef = useRef(null)
 
-function ConfirmationModal() {
-  const [open, setOpen] = useState(true)
+//   return (
+//     <Transition.Root show={open} as={Fragment}>
+//       <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
+//         <Transition.Child
+//           as={Fragment}
+//           enter="ease-out duration-300"
+//           enterFrom="opacity-0"
+//           enterTo="opacity-100"
+//           leave="ease-in duration-200"
+//           leaveFrom="opacity-100"
+//           leaveTo="opacity-0"
+//         >
+//           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+//         </Transition.Child>
 
-  const cancelButtonRef = useRef(null)
-
-  return (
-    <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
-        <Transition.Child
-          as={Fragment}
-          enter="ease-out duration-300"
-          enterFrom="opacity-0"
-          enterTo="opacity-100"
-          leave="ease-in duration-200"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-        </Transition.Child>
-
-        <div className="fixed inset-0 z-10 overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
-            <Transition.Child
-              as={Fragment}
-              enter="ease-out duration-300"
-              enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-              enterTo="opacity-100 translate-y-0 sm:scale-100"
-              leave="ease-in duration-200"
-              leaveFrom="opacity-100 translate-y-0 sm:scale-100"
-              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-            >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
-                <div className="sm:flex sm:items-start">
-                  <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-                    <ExclamationTriangleIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
-                  </div>
-                  <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
-                    <Dialog.Title
-                      as="h3"
-                      className="text-base font-semibold leading-6 text-gray-900"
-                    >
-                      Deactivate account
-                    </Dialog.Title>
-                    <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        Are you sure you want to deactivate your account? All of your data will be
-                        permanently removed from our servers forever. This action cannot be undone.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                  <button
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                    onClick={() => setOpen(false)}
-                  >
-                    Deactivate
-                  </button>
-                  <button
-                    ref={cancelButtonRef}
-                    type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
-                    onClick={() => setOpen(false)}
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </Dialog.Panel>
-            </Transition.Child>
-          </div>
-        </div>
-      </Dialog>
-    </Transition.Root>
-  )
-}
+//         <div className="fixed inset-0 z-10 overflow-y-auto">
+//           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+//             <Transition.Child
+//               as={Fragment}
+//               enter="ease-out duration-300"
+//               enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+//               enterTo="opacity-100 translate-y-0 sm:scale-100"
+//               leave="ease-in duration-200"
+//               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+//               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+//             >
+//               <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
+//                 <div className="sm:flex sm:items-start">
+//                   <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+//                     <ExclamationTriangleIcon className="h-6 w-6 text-red-600" aria-hidden="true" />
+//                   </div>
+//                   <div className="mt-3 text-center sm:ml-4 sm:mt-0 sm:text-left">
+//                     <Dialog.Title
+//                       as="h3"
+//                       className="text-base font-semibold leading-6 text-gray-900"
+//                     >
+//                       Deactivate account
+//                     </Dialog.Title>
+//                     <div className="mt-2">
+//                       <p className="text-sm text-gray-500">
+//                         Are you sure you want to deactivate your account? All of your data will be
+//                         permanently removed from our servers forever. This action cannot be undone.
+//                       </p>
+//                     </div>
+//                   </div>
+//                 </div>
+//                 <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+//                   <button
+//                     type="button"
+//                     className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+//                     onClick={() => setOpen(false)}
+//                   >
+//                     Deactivate
+//                   </button>
+//                   <button
+//                     ref={cancelButtonRef}
+//                     type="button"
+//                     className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
+//                     onClick={() => setOpen(false)}
+//                   >
+//                     Cancel
+//                   </button>
+//                 </div>
+//               </Dialog.Panel>
+//             </Transition.Child>
+//           </div>
+//         </div>
+//       </Dialog>
+//     </Transition.Root>
+//   )
+// }

@@ -1,5 +1,3 @@
-"use client"
-
 import { JobRequestsForm } from "@/app/dashboard/job-requests/JobRequestsForm"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
@@ -8,7 +6,6 @@ import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
 import { SearchParams } from "@/lib/schemas"
 import { ExclamationTriangleIcon, XCircleIcon } from "@heroicons/react/24/outline"
-import { useRouter } from "next/navigation"
 
 const data = [
   {
@@ -43,17 +40,12 @@ const data = [
 type JobRequestsPageProps = { searchParams: SearchParams }
 
 export default function JobRequestsPage({ searchParams }: JobRequestsPageProps) {
-  const router = useRouter()
   const showModal = searchParams.showModal === "true"
 
   return (
     <SectionWrapper>
       <Role role="client">
-        <SectionHeading
-          title="Job Requests"
-          buttonLabel="New Job"
-          buttonAction={() => router.push("?showModal=true")}
-        />
+        <SectionHeading title="Job Requests" buttonLabel="New Job" />
 
         <section className="py-8">
           {data ? <JobRequestList /> : <Empty title="job requests" />}

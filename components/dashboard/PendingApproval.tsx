@@ -235,7 +235,7 @@ function ShiftApprovalModal() {
       <form className="my-12 space-y-8 divide-y divide-gray-200">
         <div className="mt-6 grid grid-cols-1 gap-4">
           <div className="col-span-1">
-            <label htmlFor="site-name" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="site-name" className="form-label">
               Company
             </label>
             <div className="mt-1">
@@ -244,7 +244,7 @@ function ShiftApprovalModal() {
           </div>
 
           <div className="col-span-1">
-            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="role" className="form-label">
               Job site
             </label>
             <div className="mt-1">
@@ -256,7 +256,7 @@ function ShiftApprovalModal() {
           </div>
 
           <div className="col-span-1">
-            <label htmlFor="start-datetime" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="start-datetime" className="form-label">
               Start Time
             </label>
             <div className="mt-1">
@@ -265,7 +265,7 @@ function ShiftApprovalModal() {
           </div>
 
           <div className="col-span-1">
-            <label htmlFor="end-datetime" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="end-datetime" className="form-label">
               End Time
             </label>
             <div className="mt-1">
@@ -274,28 +274,28 @@ function ShiftApprovalModal() {
           </div>
 
           <div className="col-span-1">
-            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="role" className="form-label">
               Break (in minutes)
             </label>
             <input type="number" name="break" id="break" step="15" />
           </div>
 
           <div className="col-span-1">
-            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="role" className="form-label">
               Normal Hours
             </label>
             <input type="number" name="normalHours" id="normalHours" step="0.5" />
           </div>
 
           <div className="col-span-1">
-            <label htmlFor="role" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="role" className="form-label">
               Overtime Hours
             </label>
             <input type="number" name="overtimeHours" id="overtimeHours" step="0.5" />
           </div>
 
           <div className="col-span-1">
-            <label htmlFor="additional-notes" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="additional-notes" className="form-label">
               Additional Notes
             </label>
             <div className="mt-1">

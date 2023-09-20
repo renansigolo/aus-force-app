@@ -70,7 +70,11 @@ export function StaffForm({ accordionData }: StaffModalProps) {
         <label htmlFor="email" className="form-label">
           Email address
         </label>
-        <input className="form-input" {...register("email", { required: "Email is required" })} />
+        <input
+          className="form-input"
+          {...register("email", { required: "Email is required" })}
+          placeholder="email@example.com"
+        />
         <FormInputError message={errors.email?.message} />
       </div>
 

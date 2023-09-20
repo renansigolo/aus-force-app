@@ -1,5 +1,3 @@
-"use client"
-
 import { JobSiteForm } from "@/app/dashboard/job-sites/JobSiteForm"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
@@ -13,7 +11,6 @@ import {
   NoSymbolIcon,
   TruckIcon,
 } from "@heroicons/react/24/outline"
-import { useRouter } from "next/navigation"
 
 export type JobSitesListDataProps = {
   siteName: string
@@ -52,17 +49,12 @@ const jobSitesListData: JobSitesListDataProps[] = [
 type JobSitesPageProps = { searchParams: SearchParams }
 
 export default function JobSitesPage({ searchParams }: JobSitesPageProps) {
-  const router = useRouter()
   const showModal = searchParams.showModal === "true"
 
   return (
     <SectionWrapper>
       <Role role="client">
-        <SectionHeading
-          title="Job Sites"
-          buttonLabel="New Site"
-          buttonAction={() => router.push("?showModal=true")}
-        />
+        <SectionHeading title="Job Sites" buttonLabel="New Site" />
         <section className="py-8">
           {jobSitesListData ? (
             jobSitesListData.map((item) => <JobSitesList {...item} key={item.siteName} />)

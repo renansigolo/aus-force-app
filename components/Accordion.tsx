@@ -1,5 +1,7 @@
+"use client"
+
+import { RatesForm } from "@/app/dashboard/rates/RatesForm"
 import Modal from "@/components/Modal"
-import { AddNewRatesModal } from "@/components/Rates"
 import NiceModal from "@ebay/nice-modal-react"
 import { Disclosure } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
@@ -53,7 +55,7 @@ function AccordionItem({ title, children }: AccordionItem) {
               onClick={() =>
                 NiceModal.show(Modal, {
                   title: "New Rates",
-                  children: <AddNewRatesModal />,
+                  children: <RatesForm />,
                 })
               }
             >

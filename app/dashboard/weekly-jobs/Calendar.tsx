@@ -1,5 +1,3 @@
-"use client"
-
 import { ChevronLeftIcon, ChevronRightIcon, ClockIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
 import { twMerge } from "tailwind-merge"

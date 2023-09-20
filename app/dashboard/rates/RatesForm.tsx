@@ -1,3 +1,5 @@
+"use client"
+
 import { Fragment, useState } from "react"
 
 const hoursWorkedData = [
@@ -13,50 +15,46 @@ const hoursWorkedData = [
   },
 ]
 
-export function AddNewRatesModal() {
+export function RatesForm() {
   return (
     <form className="my-12 space-y-8 divide-y divide-gray-200">
       <div className="mt-6 grid gap-4">
         <div>
-          <label htmlFor="clientName" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="clientName" className="form-label">
             Client Name
           </label>
-          <div className="mt-1">
-            <select
-              id="clientName"
-              name="clientName"
-              className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-            >
-              <option>Client 01</option>
-              <option>Client 02</option>
-              <option>Client 03</option>
-            </select>
-          </div>
+          <select
+            id="clientName"
+            name="clientName"
+            className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+          >
+            <option>Client 01</option>
+            <option>Client 02</option>
+            <option>Client 03</option>
+          </select>
         </div>
 
         <div>
-          <label htmlFor="jobPosition" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="jobPosition" className="form-label">
             Job position
           </label>
-          <div className="mt-1">
-            <select id="jobPosition" name="jobPosition">
-              <option>General Labour</option>
-              <option>Skill Labour</option>
-              <option>Traffic Controller</option>
-              <option>Forklift Operator</option>
-              <option>LO Operator</option>
-              <option>Picker/Packer</option>
-              <option>Dogman</option>
-              <option>Crane Operator</option>
-              <option>Rigger</option>
-              <option>Escavator Operator</option>
-              <option>Trade Assistant</option>
-              <option>Carpenter</option>
-              <option>Steel Fixer</option>
-              <option>Formworker</option>
-              <option>Manitou Operator</option>
-            </select>
-          </div>
+          <select id="jobPosition" name="jobPosition">
+            <option>General Labour</option>
+            <option>Skill Labour</option>
+            <option>Traffic Controller</option>
+            <option>Forklift Operator</option>
+            <option>LO Operator</option>
+            <option>Picker/Packer</option>
+            <option>Dogman</option>
+            <option>Crane Operator</option>
+            <option>Rigger</option>
+            <option>Escavator Operator</option>
+            <option>Trade Assistant</option>
+            <option>Carpenter</option>
+            <option>Steel Fixer</option>
+            <option>Formworker</option>
+            <option>Manitou Operator</option>
+          </select>
         </div>
 
         <div>

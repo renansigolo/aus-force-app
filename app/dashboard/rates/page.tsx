@@ -1,13 +1,11 @@
-"use client"
-
+import { RatesForm } from "@/app/dashboard/rates/RatesForm"
 import { Accordion } from "@/components/Accordion"
 import { Empty } from "@/components/Empty"
-import Modal from "@/components/Modal"
-import { AddNewRatesModal } from "@/components/Rates"
+import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
-import NiceModal from "@ebay/nice-modal-react"
+import { SearchParams } from "@/lib/schemas"
 
 const data = [
   {
@@ -68,18 +66,14 @@ const accordionData = [
     children: <RatesList />,
   },
 ]
-
-export default function RatesPage() {
-  const showModal = () =>
-    NiceModal.show(Modal, {
-      title: "New Rates",
-      children: <AddNewRatesModal />,
-    })
+type RatesPageProps = { searchParams: SearchParams }
+export default function RatesPage({ searchParams }: RatesPageProps) {
+  const showModal = searchParams.showModal === "true"
 
   return (
     <SectionWrapper>
       <Role role="business">
-        <SectionHeading title="Rates" buttonLabel="Add New Rates" buttonAction={showModal} />
+        <SectionHeading title="Rates" buttonLabel="Add New Rates" />
 
         <section className="py-8">
           {accordionData.length > 0 ? (
@@ -102,6 +96,10 @@ export default function RatesPage() {
             <Empty title="rates" />
           )}
         </section>
+
+        <ModalWrapper title="New Rates" showModal={showModal}>
+          <RatesForm />
+        </ModalWrapper>
       </Role>
     </SectionWrapper>
   )

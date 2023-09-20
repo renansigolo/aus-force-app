@@ -1,19 +1,23 @@
 "use client"
 
+import Link from "next/link"
+import { useRouter } from "next/navigation"
+
 type SectionHeadingProps = {
   title: string
   buttonLabel?: string
-  buttonAction?: () => void
 }
 
-export function SectionHeading({ title, buttonLabel, buttonAction }: SectionHeadingProps) {
+export function SectionHeading({ title, buttonLabel }: SectionHeadingProps) {
+  const router = useRouter()
+
   return (
     <div className="flex items-center justify-between">
       <h2 className="heading-2">{title}</h2>
       {buttonLabel && (
-        <button className="btn btn-primary" onClick={buttonAction}>
+        <Link className="btn btn-primary" href={"?showModal=true"}>
           {buttonLabel}
-        </button>
+        </Link>
       )}
     </div>
   )

@@ -1,17 +1,17 @@
 "use client"
 
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
+import { RatesForm } from "@/app/dashboard/rates/RatesForm"
 import { Empty } from "@/components/Empty"
 import Modal from "@/components/Modal"
-import { AddNewRatesModal } from "@/components/Rates"
 import { Role } from "@/components/Roles"
+import { SectionHeading } from "@/components/dashboard/SectionHeading"
+import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import NiceModal from "@ebay/nice-modal-react"
 import { ClockIcon, PencilIcon, UserPlusIcon } from "@heroicons/react/24/outline"
 
 const data = [
   {
-    title: "Job Request 2",
+    title: "Job Request 1",
     jobPosition: "Traffic Controller",
     startTime: new Date().toDateString(),
     endTime: new Date().toDateString(),
@@ -20,7 +20,7 @@ const data = [
     supplier: "Supplier B",
   },
   {
-    title: "Job Request 1",
+    title: "Job Request 2",
     jobPosition: "General Labour",
     startTime: new Date().toDateString(),
     endTime: new Date().toDateString(),
@@ -36,7 +36,7 @@ const data = [
     },
   },
   {
-    title: "Job Request 1",
+    title: "Job Request 3",
     jobPosition: "General Labour",
     startTime: new Date().toDateString(),
     endTime: new Date().toDateString(),
@@ -53,7 +53,7 @@ const data = [
   },
 
   {
-    title: "Job Request 3",
+    title: "Job Request 4",
     jobPosition: "LO Operator",
     startTime: new Date().toDateString(),
     endTime: new Date().toDateString(),
@@ -132,7 +132,7 @@ function AllocationsList(props: any) {
                     onClick={() =>
                       NiceModal.show(Modal, {
                         title: "New Rates",
-                        children: <AddNewRatesModal />,
+                        children: <RatesForm />,
                       })
                     }
                   >
@@ -146,7 +146,7 @@ function AllocationsList(props: any) {
                     onClick={() =>
                       NiceModal.show(Modal, {
                         title: "New Rates",
-                        children: <AddNewRatesModal />,
+                        children: <RatesForm />,
                       })
                     }
                   >

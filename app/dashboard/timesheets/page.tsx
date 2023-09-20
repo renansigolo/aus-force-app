@@ -1,43 +1,42 @@
 "use client"
 
 import { Empty } from "@/components/Empty"
-import Modal from "@/components/Modal"
+import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
-import NiceModal from "@ebay/nice-modal-react"
+import { SearchParams } from "@/lib/schemas"
 import { Disclosure, Menu, Transition } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon, EllipsisVerticalIcon } from "@heroicons/react/20/solid"
 import { CloudArrowDownIcon, DocumentTextIcon } from "@heroicons/react/24/outline"
+import Link from "next/link"
 import { Fragment } from "react"
 import { twMerge } from "tailwind-merge"
 
 const accordionItems = [{ title: "Job Site A" }, { title: "Job Site B" }, { title: "Job Site C" }]
 
-export default function TimesheetsPage() {
-  const showModal = () =>
-    NiceModal.show(Modal, {
-      title: "Timesheet Settings",
-      children: <TimesheetModal />,
-    })
+type TimesheetsPageProps = { searchParams: SearchParams }
+
+export default function TimesheetsPage({ searchParams }: TimesheetsPageProps) {
+  const showModal = searchParams.showModal === "true"
 
   return (
     <SectionWrapper>
       <Role role="business">
         <SectionHeading title="Timesheets" />
         <section className="py-8">
-          {accordionItems.length > 0 ? (
-            <Client showModal={showModal} />
-          ) : (
-            <Empty title="timesheets" />
-          )}
+          {accordionItems.length > 0 ? <Client /> : <Empty title="timesheets" />}
         </section>
+
+        <ModalWrapper title="New Staff" showModal={showModal}>
+          <TimesheetForm />
+        </ModalWrapper>
       </Role>
     </SectionWrapper>
   )
 }
 
-function Client({ showModal }: { showModal: any }) {
+function Client() {
   return (
     <div className="overflow-hidden rounded-lg bg-white shadow">
       {/* Heading */}
@@ -69,15 +68,15 @@ function Client({ showModal }: { showModal: any }) {
                   <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <Menu.Item>
                       {({ active }) => (
-                        <button
-                          onClick={() => showModal()}
+                        <Link
+                          href="?showModal=true"
                           className={twMerge(
                             active ? "bg-gray-100" : "",
                             "block w-full px-4 py-2 text-left text-sm text-gray-700",
                           )}
                         >
                           Configure Cycle
-                        </button>
+                        </Link>
                       )}
                     </Menu.Item>
                   </Menu.Items>
@@ -90,13 +89,13 @@ function Client({ showModal }: { showModal: any }) {
 
       {/* Content */}
       <div className="px-4 py-5 sm:p-6">
-        <Accordion />
+        <TimesheetAccordion />
       </div>
     </div>
   )
 }
 
-function Accordion({ approveShift, showModal }: any) {
+function TimesheetAccordion() {
   return (
     <div className="rounded-lg bg-white shadow">
       <div className="mx-auto px-2 pb-6">
@@ -166,25 +165,24 @@ function TimesheetsList() {
   )
 }
 
-function TimesheetModal() {
+function TimesheetForm() {
   return (
     <form className="my-12 space-y-8 divide-y divide-gray-200">
       <div className="mt-6 grid gap-4">
         <div className="col-span-1">
-          <label htmlFor="startDay" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="startDay" className="form-label">
             Starting Day
           </label>
-          <div className="mt-1">
-            <select id="startDay" name="startDay">
-              <option>Monday</option>
-              <option>Tuesday</option>
-              <option>Wednesday</option>
-              <option>Thursday</option>
-              <option>Friday</option>
-              <option>Saturday</option>
-              <option>Sunday</option>
-            </select>
-          </div>
+
+          <select id="startDay" name="startDay">
+            <option>Monday</option>
+            <option>Tuesday</option>
+            <option>Wednesday</option>
+            <option>Thursday</option>
+            <option>Friday</option>
+            <option>Saturday</option>
+            <option>Sunday</option>
+          </select>
         </div>
       </div>
     </form>

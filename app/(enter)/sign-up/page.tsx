@@ -128,10 +128,10 @@ export default function SignUpPage() {
 
             <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
               <div className="sm:col-span-6">
-                <label htmlFor="photo" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="photo" className="form-label">
                   Photo
                 </label>
-                <div className="mt-1 flex items-center">
+                <div className="flex items-center">
                   <img
                     alt="Profile Image"
                     className="aspect-square h-12 w-12 rounded-full object-fill"
@@ -266,10 +266,7 @@ export default function SignUpPage() {
                       <Disclosure.Panel as="dd" className="mt-2">
                         <p className="text-base leading-7 text-gray-600">
                           <div className="sm:col-span-6">
-                            <label
-                              htmlFor="passportNumber"
-                              className="block text-sm font-medium text-gray-700"
-                            >
+                            <label htmlFor="passportNumber" className="form-label">
                               Number
                               <span className="text-red-500">*</span>
                             </label>
@@ -280,10 +277,7 @@ export default function SignUpPage() {
 
                             <div className="flex gap-2">
                               <div className="mt-2 w-full">
-                                <label
-                                  htmlFor="passportIssued"
-                                  className="block text-sm font-medium text-gray-700"
-                                >
+                                <label htmlFor="passportIssued" className="form-label">
                                   Date of Issue
                                   <span className="text-red-500">*</span>
                                 </label>
@@ -292,10 +286,7 @@ export default function SignUpPage() {
                               </div>
 
                               <div className="mt-2 w-full">
-                                <label
-                                  htmlFor="passportExpiry"
-                                  className="block text-sm font-medium text-gray-700"
-                                >
+                                <label htmlFor="passportExpiry" className="form-label">
                                   Expiry Date
                                   <span className="text-red-500">*</span>
                                 </label>
