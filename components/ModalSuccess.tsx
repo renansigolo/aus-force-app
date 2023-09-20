@@ -6,10 +6,12 @@ import { useRouter } from "next/navigation"
 import { Fragment } from "react"
 
 type ModalSuccessProps = {
+  title: string
+  description?: string
   showModal: boolean
 }
 
-export function ModalSuccess({ showModal }: ModalSuccessProps) {
+export function ModalSuccess({ title, description, showModal }: ModalSuccessProps) {
   const router = useRouter()
   const redirectToLogin = () => {
     router.push("/log-in")
@@ -53,13 +55,10 @@ export function ModalSuccess({ showModal }: ModalSuccessProps) {
                       as="h3"
                       className="text-base font-semibold leading-6 text-gray-900"
                     >
-                      Email sent successfully
+                      {title}
                     </Dialog.Title>
                     <div className="mt-2">
-                      <p className="text-sm text-gray-500">
-                        We sent you an email with a link to reset your password. If you do not see
-                        the email, please check your spam folder.
-                      </p>
+                      <p className="text-sm text-gray-500">{description}</p>
                     </div>
                   </div>
                 </div>

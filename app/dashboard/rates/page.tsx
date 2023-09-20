@@ -9,7 +9,7 @@ import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import NiceModal from "@ebay/nice-modal-react"
 
-const ratesData = [
+const data = [
   {
     day: "Monday",
     startTime: "",
@@ -54,7 +54,7 @@ const ratesData = [
   },
 ]
 
-const accordionItemsDefault = [
+const accordionData = [
   {
     title: "General Labour",
     children: <RatesList />,
@@ -80,26 +80,27 @@ export default function RatesPage() {
     <SectionWrapper>
       <Role role="business">
         <SectionHeading title="Rates" buttonLabel="Add New Rates" buttonAction={showModal} />
-        <section className="py-8">
-          <Empty title="rates" />
-        </section>
 
         <section className="py-8">
-          <div className="overflow-hidden rounded-lg bg-white shadow">
-            {/* Heading */}
-            <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-              <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
-                <div className="ml-4 mt-2">
-                  <h3 className="text-lg font-medium leading-6 text-gray-900">Client 01</h3>
+          {accordionData.length > 0 ? (
+            <div className="overflow-hidden rounded-lg bg-white shadow">
+              {/* Heading */}
+              <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+                <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
+                  <div className="ml-4 mt-2">
+                    <h3 className="text-lg font-medium leading-6 text-gray-900">Client 01</h3>
+                  </div>
                 </div>
               </div>
-            </div>
 
-            <div className="px-4 py-5 sm:p-6">
-              {/* Content */}
-              <Accordion items={accordionItemsDefault} />
+              <div className="px-4 py-5 sm:p-6">
+                {/* Content */}
+                <Accordion items={accordionData} />
+              </div>
             </div>
-          </div>
+          ) : (
+            <Empty title="rates" />
+          )}
         </section>
       </Role>
     </SectionWrapper>
@@ -110,7 +111,7 @@ function RatesList() {
   return (
     <div className="mt-6 border-t border-gray-100">
       <dl className="divide-y divide-gray-100">
-        {ratesData.map((item, index) => (
+        {data.map((item, index) => (
           <div key={index} className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt className="col-span-1 text-sm font-medium leading-6 text-gray-900">{item.day}</dt>
             <dd className="col-span-2 grid grid-cols-3">

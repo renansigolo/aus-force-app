@@ -52,7 +52,7 @@ export default NiceModal.create(({ title, description, children }: ModalProps) =
             >
               <Dialog.Panel className="relative w-full transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6">
                 <div className="sm:flex sm:items-start">
-                  <div className="mt-3 w-full sm:ml-4 sm:mt-0 sm:text-left">
+                  <div className="mt-3 w-full sm:mt-0 sm:text-left">
                     <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
                       {title}
                     </Dialog.Title>
@@ -66,6 +66,7 @@ export default NiceModal.create(({ title, description, children }: ModalProps) =
                     <div className="mt-2">{children}</div>
                   </div>
                 </div>
+
                 <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                   <button
                     type="button"

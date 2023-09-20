@@ -27,7 +27,6 @@ export default function LogInPage() {
     // If we're in development, just redirect to the dashboard bypassing the authentication
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((userCredential) => {
-        console.log("🚀 ~ .then ~ userCredential:", userCredential)
         toast.success(`Welcome back, ${userCredential.user.email}`)
         router.push("/dashboard")
       })

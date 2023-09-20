@@ -1,6 +1,6 @@
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
 import { ForgotPasswordForm } from "@/app/(enter)/forgot-password/ForgotPasswordForm"
-import { ModalSuccess } from "@/app/(enter)/forgot-password/ModalSuccess"
+import { ModalSuccess } from "@/components/ModalSuccess"
 import { SearchParams } from "@/lib/schemas"
 
 type ForgotPasswordPageProps = {
@@ -22,7 +22,11 @@ export default function ForgotPasswordPage({ searchParams }: ForgotPasswordPageP
         </div>
       </div>
 
-      <ModalSuccess showModal={showModal} />
+      <ModalSuccess
+        title="Email sent successfully"
+        description="We sent you an email with a link to reset your password. If you do not see the email, please check your spam folder."
+        showModal={showModal}
+      />
     </>
   )
 }

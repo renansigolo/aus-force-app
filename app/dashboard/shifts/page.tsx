@@ -1,3 +1,4 @@
+import { Empty } from "@/components/Empty"
 import { Role } from "@/components/Roles"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
@@ -5,7 +6,7 @@ import { BanknotesIcon } from "@heroicons/react/20/solid"
 import { BuildingOffice2Icon } from "@heroicons/react/24/outline"
 import { twMerge } from "tailwind-merge"
 
-const transactions = [
+const data = [
   {
     id: 1,
     name: "Shift #123",
@@ -49,13 +50,13 @@ export default function ShiftsPage() {
     <SectionWrapper>
       <SectionHeading title="Shifts" />
       <section className="py-8">
-        <Shifts />
+        {data.length > 0 ? <ShiftsList /> : <Empty title="shifts" />}
       </section>
     </SectionWrapper>
   )
 }
 
-function Shifts() {
+function ShiftsList() {
   return (
     <Role role="worker">
       <div className="pb-6">
@@ -66,7 +67,7 @@ function Shifts() {
             role="list"
             className="mt-2 divide-y divide-gray-200 overflow-hidden rounded-lg shadow sm:hidden"
           >
-            {transactions.map((transaction) => (
+            {data.map((transaction) => (
               <li key={transaction.id}>
                 <a href={transaction.href} className="block bg-white px-4 py-4 hover:bg-gray-50">
                   <span className="flex items-center space-x-4">
@@ -132,7 +133,7 @@ function Shifts() {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
-                  {transactions.map((transaction) => (
+                  {data.map((transaction) => (
                     <tr key={transaction.id} className="bg-white">
                       <td className="w-full max-w-0 whitespace-nowrap px-6 py-4 text-sm text-gray-900">
                         <div className="flex">

@@ -9,12 +9,12 @@ import NiceModal from "@ebay/nice-modal-react"
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon, EllipsisVerticalIcon } from "@heroicons/react/20/solid"
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline"
-import { useRouter } from "next/navigation"
+import router from "next/router"
 import { Fragment, useRef, useState } from "react"
 import { twMerge } from "tailwind-merge"
 
-const accordionItems = [{ title: "Job Site A" }, { title: "Job Site B" }, { title: "Job Site C" }]
-const tableItems = [
+const accordionData = [{ title: "Job Site A" }, { title: "Job Site B" }, { title: "Job Site C" }]
+const data = [
   {
     status: "ongoing",
     name: "Fabi",
@@ -35,7 +35,6 @@ const tableItems = [
 ]
 
 export default function ClientsPage() {
-  const router = useRouter()
   const showModal = () =>
     NiceModal.show(Modal, {
       title: "New Client",
@@ -46,93 +45,96 @@ export default function ClientsPage() {
     <SectionWrapper>
       <Role role="business">
         <SectionHeading title="Clients" buttonLabel="Add New Client" buttonAction={showModal} />
-        <section className="py-8">
-          <Empty title="clients" />
-        </section>
 
         <section className="py-8">
-          <div className="overflow-hidden rounded-lg bg-white shadow">
-            {/* Heading */}
-            <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-              <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
-                <div className="ml-4 mt-2">
-                  <h3 className="text-lg font-medium leading-6 text-gray-900">Client 01</h3>
-                </div>
-
-                <div className="ml-4 mt-2 flex-shrink-0">
-                  <div className="lg:flex lg:items-center lg:justify-end">
-                    <Menu as="div" className="relative flex-shrink-0">
-                      <div>
-                        <Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                          <span className="sr-only">Open options</span>
-                          <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
-                        </Menu.Button>
-                      </div>
-                      <Transition
-                        as={Fragment}
-                        enter="transition ease-out duration-100"
-                        enterFrom="transform opacity-0 scale-95"
-                        enterTo="transform opacity-100 scale-100"
-                        leave="transition ease-in duration-75"
-                        leaveFrom="transform opacity-100 scale-100"
-                        leaveTo="transform opacity-0 scale-95"
-                      >
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                onClick={() => router.push("/dashboard/rates")}
-                                className={twMerge(
-                                  active ? "bg-gray-100" : "",
-                                  "block w-full px-4 py-2 text-left text-sm text-gray-700",
-                                )}
-                              >
-                                Manage Rates
-                              </button>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                onClick={() => showModal()}
-                                className={twMerge(
-                                  active ? "bg-gray-100" : "",
-                                  "block w-full px-4 py-2 text-left text-sm text-gray-700",
-                                )}
-                              >
-                                Edit
-                              </button>
-                            )}
-                          </Menu.Item>
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                onClick={() => console.log("Button Clicked")}
-                                className={twMerge(
-                                  active ? "bg-gray-100" : "",
-                                  "block w-full px-4 py-2 text-left text-sm text-gray-700",
-                                )}
-                              >
-                                Delete
-                              </button>
-                            )}
-                          </Menu.Item>
-                        </Menu.Items>
-                      </Transition>
-                    </Menu>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="px-4 py-5 sm:p-6">
-              <Accordion />
-            </div>
-          </div>
+          {accordionData.length > 0 ? <Client showModal={showModal} /> : <Empty title="clients" />}
         </section>
       </Role>
     </SectionWrapper>
+  )
+}
+
+function Client({ showModal }: any) {
+  return (
+    <div className="overflow-hidden rounded-lg bg-white shadow">
+      {/* Heading */}
+      <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+        <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
+          <div className="ml-4 mt-2">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Client 01</h3>
+          </div>
+
+          <div className="ml-4 mt-2 flex-shrink-0">
+            <div className="lg:flex lg:items-center lg:justify-end">
+              <Menu as="div" className="relative flex-shrink-0">
+                <div>
+                  <Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    <span className="sr-only">Open options</span>
+                    <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
+                  </Menu.Button>
+                </div>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          onClick={() => router.push("/dashboard/rates")}
+                          className={twMerge(
+                            active ? "bg-gray-100" : "",
+                            "block w-full px-4 py-2 text-left text-sm text-gray-700",
+                          )}
+                        >
+                          Manage Rates
+                        </button>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          onClick={() => showModal()}
+                          className={twMerge(
+                            active ? "bg-gray-100" : "",
+                            "block w-full px-4 py-2 text-left text-sm text-gray-700",
+                          )}
+                        >
+                          Edit
+                        </button>
+                      )}
+                    </Menu.Item>
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          onClick={() => console.log("Button Clicked")}
+                          className={twMerge(
+                            active ? "bg-gray-100" : "",
+                            "block w-full px-4 py-2 text-left text-sm text-gray-700",
+                          )}
+                        >
+                          Delete
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="px-4 py-5 sm:p-6">
+        <Accordion />
+      </div>
+    </div>
   )
 }
 
@@ -142,7 +144,7 @@ function Accordion({ approveShift, showModal }: any) {
       <div className="mx-auto px-2 pb-6">
         <div className="mx-auto divide-gray-900/10">
           <dl className="space-y-6 divide-y divide-gray-900/10">
-            {accordionItems.map((item) => (
+            {accordionData.map((item) => (
               <Disclosure key={item.title} as="div" className="pt-6">
                 {({ open }) => (
                   <>
@@ -216,7 +218,7 @@ function ShiftTable({ approveShift, showModal }: any) {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
-              {tableItems.map((tableItem) => (
+              {data.map((tableItem) => (
                 <tr key={tableItem.name}>
                   <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none">
                     {tableItem.name}
@@ -287,7 +289,7 @@ function ShiftTable({ approveShift, showModal }: any) {
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-200 bg-white">
-              {tableItems.map((tableItem) => (
+              {data.map((tableItem) => (
                 <tr key={tableItem.name}>
                   <td className="w-full max-w-0 py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:w-auto sm:max-w-none">
                     {tableItem.name}

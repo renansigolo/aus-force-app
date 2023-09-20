@@ -26,67 +26,73 @@ export default function TimesheetsPage() {
       <Role role="business">
         <SectionHeading title="Timesheets" />
         <section className="py-8">
-          <Empty title="timesheets" />
-        </section>
-
-        <section className="py-8">
-          <div className="overflow-hidden rounded-lg bg-white shadow">
-            {/* Heading */}
-            <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-              <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
-                <div className="ml-4 mt-2">
-                  <h3 className="text-lg font-medium leading-6 text-gray-900">Client 01</h3>
-                  <p className="mt-1 truncate text-sm text-gray-500">Cycle starts on Monday</p>
-                </div>
-
-                <div className="ml-4 mt-2 flex-shrink-0">
-                  <div className="lg:flex lg:items-center lg:justify-end">
-                    <Menu as="div" className="relative flex-shrink-0">
-                      <div>
-                        <Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-                          <span className="sr-only">Open options</span>
-                          <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
-                        </Menu.Button>
-                      </div>
-                      <Transition
-                        as={Fragment}
-                        enter="transition ease-out duration-100"
-                        enterFrom="transform opacity-0 scale-95"
-                        enterTo="transform opacity-100 scale-100"
-                        leave="transition ease-in duration-75"
-                        leaveFrom="transform opacity-100 scale-100"
-                        leaveTo="transform opacity-0 scale-95"
-                      >
-                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                          <Menu.Item>
-                            {({ active }) => (
-                              <button
-                                onClick={() => showModal()}
-                                className={twMerge(
-                                  active ? "bg-gray-100" : "",
-                                  "block w-full px-4 py-2 text-left text-sm text-gray-700",
-                                )}
-                              >
-                                Configure Cycle
-                              </button>
-                            )}
-                          </Menu.Item>
-                        </Menu.Items>
-                      </Transition>
-                    </Menu>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="px-4 py-5 sm:p-6">
-              <Accordion />
-            </div>
-          </div>
+          {accordionItems.length > 0 ? (
+            <Client showModal={showModal} />
+          ) : (
+            <Empty title="timesheets" />
+          )}
         </section>
       </Role>
     </SectionWrapper>
+  )
+}
+
+function Client({ showModal }: { showModal: any }) {
+  return (
+    <div className="overflow-hidden rounded-lg bg-white shadow">
+      {/* Heading */}
+      <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
+        <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
+          <div className="ml-4 mt-2">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Client 01</h3>
+            <p className="mt-1 truncate text-sm text-gray-500">Cycle starts on Monday</p>
+          </div>
+
+          <div className="ml-4 mt-2 flex-shrink-0">
+            <div className="lg:flex lg:items-center lg:justify-end">
+              <Menu as="div" className="relative flex-shrink-0">
+                <div>
+                  <Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                    <span className="sr-only">Open options</span>
+                    <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
+                  </Menu.Button>
+                </div>
+                <Transition
+                  as={Fragment}
+                  enter="transition ease-out duration-100"
+                  enterFrom="transform opacity-0 scale-95"
+                  enterTo="transform opacity-100 scale-100"
+                  leave="transition ease-in duration-75"
+                  leaveFrom="transform opacity-100 scale-100"
+                  leaveTo="transform opacity-0 scale-95"
+                >
+                  <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                    <Menu.Item>
+                      {({ active }) => (
+                        <button
+                          onClick={() => showModal()}
+                          className={twMerge(
+                            active ? "bg-gray-100" : "",
+                            "block w-full px-4 py-2 text-left text-sm text-gray-700",
+                          )}
+                        >
+                          Configure Cycle
+                        </button>
+                      )}
+                    </Menu.Item>
+                  </Menu.Items>
+                </Transition>
+              </Menu>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="px-4 py-5 sm:p-6">
+        <Accordion />
+      </div>
+    </div>
   )
 }
 

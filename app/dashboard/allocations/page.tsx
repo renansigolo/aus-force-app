@@ -9,7 +9,7 @@ import { Role } from "@/components/Roles"
 import NiceModal from "@ebay/nice-modal-react"
 import { ClockIcon, PencilIcon, UserPlusIcon } from "@heroicons/react/24/outline"
 
-const items = [
+const data = [
   {
     title: "Job Request 2",
     jobPosition: "Traffic Controller",
@@ -74,22 +74,23 @@ export default function AllocationsPage() {
     <SectionWrapper>
       <Role role="business">
         <SectionHeading title="Allocations" />
-        <section className="py-8">
-          <Empty title="allocations" />
-        </section>
 
         <section className="py-8">
-          <JobRequestList showModal={showModal} />
+          {data.length > 0 ? (
+            <AllocationsList showModal={showModal} />
+          ) : (
+            <Empty title="allocations" />
+          )}
         </section>
       </Role>
     </SectionWrapper>
   )
 }
 
-function JobRequestList(props: any) {
+function AllocationsList(props: any) {
   return (
     <div className="grid grid-cols-1 gap-2">
-      {items.map((item) => (
+      {data.map((item) => (
         <div
           key={item.title}
           className="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm"
