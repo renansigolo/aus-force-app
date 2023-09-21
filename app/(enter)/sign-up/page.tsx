@@ -7,10 +7,10 @@ import { Divider } from "@/components/Divider"
 import { FormInputError } from "@/components/FormInputError"
 import { Loader } from "@/components/Loader"
 import { auth, db, storage } from "@/lib/firebase"
+import { showErrorMessage } from "@/lib/helpers"
 import { RegisterFormDefaultValues, TRegisterFormSchema } from "@/lib/schemas"
 import { Disclosure } from "@headlessui/react"
 import { DocumentArrowUpIcon, MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/20/solid"
-import { FirebaseError } from "firebase/app"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { doc, setDoc } from "firebase/firestore"
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
@@ -104,9 +104,7 @@ export default function SignUpPage() {
       router.push("/dashboard")
       toast.success(`Account created successfully, welcome ${userCredential.user.email}`)
     } catch (error) {
-      const errorMessage = (error as FirebaseError)?.message || "An error occurred"
-      console.error("🚀 ~ onSubmit ~ errorMessage:", errorMessage)
-      toast.error(errorMessage)
+      showErrorMessage(error)
     }
   }
 

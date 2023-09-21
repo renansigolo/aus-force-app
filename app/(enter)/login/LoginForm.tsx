@@ -4,9 +4,9 @@ import { useUserContext } from "@/app/Providers"
 import { FormInputError } from "@/components/FormInputError"
 import { Loader } from "@/components/Loader"
 import { auth } from "@/lib/firebase"
+import { showErrorMessage } from "@/lib/helpers"
 import { LoginFormSchema, TLoginFormSchema } from "@/lib/schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { FirebaseError } from "firebase/app"
 import { signInWithEmailAndPassword } from "firebase/auth"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -33,8 +33,7 @@ export function LoginForm() {
       toast.success(`Welcome back, ${user.email}`)
       router.push("/dashboard")
     } catch (error) {
-      const errorMessage = (error as FirebaseError)?.message || "An error occurred"
-      toast.error(errorMessage)
+      showErrorMessage(error)
     }
   }
 
