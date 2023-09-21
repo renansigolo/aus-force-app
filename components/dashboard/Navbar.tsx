@@ -100,7 +100,7 @@ export function Navbar() {
     return pathname === href
   }
 
-  const signOutAndRedirect = () => signOut().then(() => router.push("/log-in"))
+  const signOutAndRedirect = () => signOut().then(() => router.push("/login"))
 
   return (
     <nav className="bg-white shadow">

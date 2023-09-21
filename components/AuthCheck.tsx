@@ -12,5 +12,5 @@ type AuthCheckProps = {
 /** Component's children only shown to logged-in users */
 export function AuthCheck(props: AuthCheckProps) {
   const { user } = useUserContext()
-  return user ? props.children : props.fallback || redirect("/log-in")
+  return user ? props.children : props.fallback || redirect("/login")
 }

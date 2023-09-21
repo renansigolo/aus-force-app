@@ -14,7 +14,7 @@ type ModalSuccessProps = {
 export function ModalSuccess({ title, description, showModal }: ModalSuccessProps) {
   const router = useRouter()
   const redirectToLogin = () => {
-    router.push("/log-in")
+    router.push("/login")
   }
 
   const hideModal = () => router.push("?showModal=false")
