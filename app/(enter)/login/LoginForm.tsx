@@ -8,6 +8,7 @@ import { LoginFormSchema, TLoginFormSchema } from "@/lib/schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { FirebaseError } from "firebase/app"
 import { signInWithEmailAndPassword } from "firebase/auth"
+import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
@@ -23,15 +24,18 @@ export function LoginForm() {
     resolver: zodResolver(LoginFormSchema),
   })
 
-  const onSubmit = (data: TLoginFormSchema) => {
+  const onSubmit = async (data: TLoginFormSchema) => {
     // If we're in development, just redirect to the dashboard bypassing the authentication
-    signInWithEmailAndPassword(auth, data.email, data.password)
-      .then((userCredential) => {
-        setUser(userCredential.user)
-        toast.success(`Welcome back, ${userCredential.user.email}`)
-        router.push("/dashboard")
-      })
-      .catch((error: FirebaseError) => toast.error(error.message))
+    try {
+      const { user } = await signInWithEmailAndPassword(auth, data.email, data.password)
+
+      setUser(user)
+      toast.success(`Welcome back, ${user.email}`)
+      router.push("/dashboard")
+    } catch (error) {
+      const errorMessage = (error as FirebaseError)?.message || "An error occurred"
+      toast.error(errorMessage)
+    }
   }
 
   return (
@@ -64,9 +68,12 @@ export function LoginForm() {
 
       <div className="flex items-center justify-between">
         <div className="text-sm">
-          <a href="/forgot-password" className="font-medium text-indigo-600 hover:text-indigo-500">
+          <Link
+            href="/forgot-password"
+            className="font-medium text-indigo-600 hover:text-indigo-500"
+          >
             Forgot your password?
-          </a>
+          </Link>
         </div>
       </div>
 

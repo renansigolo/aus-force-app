@@ -78,7 +78,7 @@ export default function ReportsPage() {
             >
               {reports.map((report) => (
                 <li key={report.id}>
-                  <a href={report.href} className="block bg-white px-4 py-4 hover:bg-gray-50">
+                  <span className="block bg-white px-4 py-4 hover:bg-gray-50">
                     <span className="flex items-center space-x-4">
                       <span className="flex flex-1 space-x-2 truncate">
                         <UserIcon
@@ -103,7 +103,7 @@ export default function ReportsPage() {
                         {report.status}
                       </span>
                     </span>
-                  </a>
+                  </span>
                 </li>
               ))}
             </ul>

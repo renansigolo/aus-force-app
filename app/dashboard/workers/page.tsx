@@ -4,6 +4,7 @@ import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Role } from "@/components/Roles"
 import { UserCircleIcon } from "@heroicons/react/24/outline"
+import Link from "next/link"
 import { twMerge } from "tailwind-merge"
 
 const items = [
@@ -88,7 +89,7 @@ function WorkersList({ category }: WorkersListProps) {
         >
           {items.map((item) => (
             <li key={item.id}>
-              <a href={item.href} className="block bg-white px-4 py-4 hover:bg-gray-50">
+              <span className="block bg-white px-4 py-4">
                 <span className="flex items-center space-x-4">
                   <span className="flex flex-1 space-x-2 truncate">
                     <UserCircleIcon
@@ -122,7 +123,7 @@ function WorkersList({ category }: WorkersListProps) {
                     {item.status}
                   </span>
                 </span>
-              </a>
+              </span>
             </li>
           ))}
         </ul>
@@ -201,13 +202,13 @@ function WorkersList({ category }: WorkersListProps) {
                   <tr key={item.id} className="bg-white">
                     <td className="w-full whitespace-nowrap px-6 py-4 text-sm text-gray-900">
                       <div className="flex">
-                        <a href={item.href} className="group inline-flex space-x-2 text-sm">
+                        <Link href={item.href} className="group inline-flex space-x-2 text-sm">
                           <UserCircleIcon
                             className="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                             aria-hidden="true"
                           />
                           <p className="text-gray-500 group-hover:text-gray-900">{item.name}</p>
-                        </a>
+                        </Link>
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">

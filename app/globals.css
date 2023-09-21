@@ -42,6 +42,10 @@ textarea {
   @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm;
 }
 
+.form-error {
+  @apply py-2 text-sm font-medium text-red-800;
+}
+
 input[type="text"]:disabled,
 input[type="email"]:disabled,
 input[type="password"]:disabled,
