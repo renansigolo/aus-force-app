@@ -140,7 +140,7 @@ export default function SignUpPage() {
                   />
 
                   <Controller
-                    name="profileImageFile" // This should match the name of your form field
+                    name="profileImageFile"
                     control={control}
                     render={({ field: { onChange, name } }) => (
                       <input
@@ -396,7 +396,14 @@ export default function SignUpPage() {
             className="btn btn-primary disabled:opacity-60"
             disabled={isSubmitting || !isDirty}
           >
-            {isSubmitting && <Loader show />}Register
+            {isSubmitting ? (
+              <>
+                <Loader show />
+                <p>Registering...</p>
+              </>
+            ) : (
+              <p>Register</p>
+            )}
           </button>
         </div>
       </form>

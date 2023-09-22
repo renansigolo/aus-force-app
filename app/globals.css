@@ -101,3 +101,12 @@ button:disabled {
 .btn-xl {
   @apply px-6 py-3 text-base;
 }
+
+/* Table */
+.table-header {
+  @apply bg-gray-50 px-6 py-3 text-sm font-semibold text-gray-900;
+}
+
+.table-data {
+  @apply whitespace-nowrap px-6 py-4 text-sm text-gray-500;
+}

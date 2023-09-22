@@ -62,7 +62,7 @@ export function JobSiteForm({ data }: JobSiteFormProps) {
           <div className="flex h-5 items-center justify-center">
             <input
               {...register("hasParking")}
-              aria-describedby="parking-description"
+              aria-describedby="parking-availability"
               type="checkbox"
               className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
             />

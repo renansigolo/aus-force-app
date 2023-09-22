@@ -1,3 +1,5 @@
+"use client"
+
 import { StaffAccordion } from "@/app/dashboard/staff/StaffAccordion"
 import { StaffForm } from "@/app/dashboard/staff/StaffForm"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
@@ -18,30 +20,30 @@ export type AccordionProps = {
 }
 
 const accordionData: AccordionProps[] = [
-  {
-    title: "Job Site A",
-    staff: [
-      { email: "vini@outlook.com", role: "Manager" },
-      { email: "renan@gmail.com", role: "Supervisor" },
-      { email: "fabi@gmail.com", role: "Supervisor" },
-    ],
-  },
-  {
-    title: "Job Site B",
-    staff: [
-      { email: "vini@outlook.com", role: "Manager" },
-      { email: "renan@gmail.com", role: "Supervisor" },
-      { email: "fabi@gmail.com", role: "Supervisor" },
-    ],
-  },
-  {
-    title: "Job Site C",
-    staff: [
-      { email: "vini@outlook.com", role: "Manager" },
-      { email: "renan@gmail.com", role: "Supervisor" },
-      { email: "fabi@gmail.com", role: "Supervisor" },
-    ],
-  },
+  // {
+  //   title: "Job Site A",
+  //   staff: [
+  //     { email: "vini@outlook.com", role: "Manager" },
+  //     { email: "renan@gmail.com", role: "Supervisor" },
+  //     { email: "fabi@gmail.com", role: "Supervisor" },
+  //   ],
+  // },
+  // {
+  //   title: "Job Site B",
+  //   staff: [
+  //     { email: "vini@outlook.com", role: "Manager" },
+  //     { email: "renan@gmail.com", role: "Supervisor" },
+  //     { email: "fabi@gmail.com", role: "Supervisor" },
+  //   ],
+  // },
+  // {
+  //   title: "Job Site C",
+  //   staff: [
+  //     { email: "vini@outlook.com", role: "Manager" },
+  //     { email: "renan@gmail.com", role: "Supervisor" },
+  //     { email: "fabi@gmail.com", role: "Supervisor" },
+  //   ],
+  // },
 ]
 
 type StaffPageProps = { searchParams: SearchParams }
@@ -55,7 +57,7 @@ export default function StaffPage({ searchParams }: StaffPageProps) {
         <Role role="client">
           <SectionHeading title="Staff" buttonLabel="New Staff" />
           <section className="py-8">
-            {accordionData ? (
+            {accordionData.length ? (
               <StaffAccordion accordionData={accordionData} />
             ) : (
               <Empty title="staff" />

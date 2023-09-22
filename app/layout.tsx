@@ -3,7 +3,7 @@ import { Inter } from "next/font/google"
 import { ReactNode } from "react"
 import { Toaster } from "react-hot-toast"
 import "../lib/firebase"
-import { version } from "../package.json"
+import packageJson from "../package.json"
 import "./globals.css"
 
 const isProduction = process.env.NODE_ENV === "production"
@@ -70,7 +70,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Providers>
           <div className="fixed right-0 top-0">
             <span className="inline-flex items-center rounded-full bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">
-              v.{version}
+              v.{packageJson.version}
             </span>
           </div>
 

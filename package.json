@@ -1,12 +1,12 @@
 {
   "name": "aus-force-app",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": true,
   "homepage": "https://aus-force-app.vercel.app",
   "scripts": {
     "build": "next build",
     "clean": "rm -rf .next node_modules package-lock.json next-env.d.ts",
-    "dev": "next dev",
+    "dev": "next dev --hostname 192.168.0.228",
     "format:check": "prettier --check '**/*' --ignore-unknown",
     "format": "prettier --write '**/*' --ignore-unknown",
     "fix": "next lint --fix",

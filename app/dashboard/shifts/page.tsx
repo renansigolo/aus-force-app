@@ -79,8 +79,10 @@ function ShiftsList() {
                       <span className="flex flex-col truncate text-sm text-gray-500">
                         <span className="truncate">{transaction.name}</span>
                         <span>
-                          <span className="font-medium text-gray-900">{transaction.amount}</span>{" "}
                           {transaction.currency}
+                          <span className="font-medium text-gray-900">
+                            {transaction.amount}
+                          </span>{" "}
                         </span>
                         <time dateTime={transaction.datetime}>{transaction.date}</time>
                       </span>
@@ -106,28 +108,16 @@ function ShiftsList() {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead>
                   <tr>
-                    <th
-                      className="bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900"
-                      scope="col"
-                    >
+                    <th className="table-header text-left" scope="col">
                       Shifts
                     </th>
-                    <th
-                      className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
-                      scope="col"
-                    >
+                    <th className="table-header text-right" scope="col">
                       Amount
                     </th>
-                    <th
-                      className="hidden bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900 md:block"
-                      scope="col"
-                    >
+                    <th className="table-header hidden text-left md:block" scope="col">
                       Status
                     </th>
-                    <th
-                      className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
-                      scope="col"
-                    >
+                    <th className="table-header text-right" scope="col">
                       Date
                     </th>
                   </tr>
@@ -135,7 +125,7 @@ function ShiftsList() {
                 <tbody className="divide-y divide-gray-200 bg-white">
                   {data.map((transaction) => (
                     <tr key={transaction.id} className="bg-white">
-                      <td className="w-full max-w-0 whitespace-nowrap px-6 py-4 text-sm text-gray-900">
+                      <td className="table-data w-full max-w-0 text-sm text-gray-900">
                         <div className="flex">
                           <span className="group inline-flex space-x-2 truncate text-sm">
                             <BuildingOffice2Icon
@@ -146,11 +136,11 @@ function ShiftsList() {
                           </span>
                         </div>
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                        <span className="font-medium text-gray-900">{transaction.amount}</span>
+                      <td className="table-data text-right text-sm text-gray-500">
                         {transaction.currency}
+                        <span className="font-medium text-gray-900">{transaction.amount}</span>
                       </td>
-                      <td className="hidden whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block">
+                      <td className="table-data hidden text-sm text-gray-500 md:block">
                         <span
                           className={twMerge(
                             statusStyles[transaction.status],
@@ -160,7 +150,7 @@ function ShiftsList() {
                           {transaction.status}
                         </span>
                       </td>
-                      <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
+                      <td className="table-data text-right text-sm text-gray-500">
                         <time dateTime={transaction.datetime}>{transaction.date}</time>
                       </td>
                     </tr>

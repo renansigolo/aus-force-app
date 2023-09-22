@@ -1,31 +1,40 @@
 "use client"
 
+import { RequestLeaveData } from "@/app/dashboard/request-leave/page"
+import { createDocument } from "@/lib/firebase"
+import { showErrorMessage } from "@/lib/helpers"
 import { ErrorMessage } from "@hookform/error-message"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
-
-type TRequestLeaveForm = {
-  reason: string
-  startDate: string
-  endDate: string
-  additionalNotes: string
-}
 
 export function RequestLeaveForm() {
   const {
     register,
     getValues,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting, isValid },
-  } = useForm<TRequestLeaveForm>({
+  } = useForm<RequestLeaveData>({
     mode: "onChange",
   })
-  console.log("🚀 ~ RequestLeaveForm ~ isSubmitting:", isSubmitting)
 
-  const onSubmit = async (data: TRequestLeaveForm) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000))
-    console.log(data)
-    toast.success("Leave request submitted")
+  const onSubmit = async (values: RequestLeaveData) => {
+    console.log(values)
+
+    const payload = {
+      ...values,
+      // createdAt: serverTimestamp(),
+      status: "pending",
+      policyAndProceduresURL: "",
+    }
+
+    try {
+      await createDocument("requestLeave", payload)
+      toast.success("Leave request submitted")
+      reset()
+    } catch (error) {
+      showErrorMessage(error)
+    }
   }
 
   return (
@@ -42,9 +51,15 @@ export function RequestLeaveForm() {
             {...register("reason", { required: "Reason is required" })}
             disabled={isSubmitting}
           >
-            <option>Day Off</option>
-            <option>Holidays</option>
-            <option>Vacations</option>
+            <option>Day(s) off (unpaid)</option>
+            <option>Annual leave (unpaid)</option>
+            <option>Medical leave (unpaid)</option>
+            <option>Parental leave (unpaid)</option>
+            <option>Sick Leave </option>
+            <option>Long service leave </option>
+            <option>Annual leave </option>
+            <option>Community service leave </option>
+            <option>Other leave</option>
           </select>
           <p className="form-error">
             <ErrorMessage errors={errors} name="reason" />

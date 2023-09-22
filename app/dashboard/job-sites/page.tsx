@@ -1,3 +1,5 @@
+"use client"
+
 import { JobSiteForm } from "@/app/dashboard/job-sites/JobSiteForm"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"

@@ -25,18 +25,27 @@ export function StaffForm({ accordionData }: StaffModalProps) {
 
   const hideModal = () => router.push("?showModal=false")
 
-  const onSubmit = (data: FormInputs) => {
-    // TODO: Save data to firebase
-    accordionData.push({
-      ...accordionData,
-      title: data.jobSite,
-      staff: [
-        {
-          email: data.email,
-          role: data.role,
-        },
-      ],
-    })
+  const onSubmit = (values: FormInputs) => {
+    // Find the item in the accordionData array that matches the jobSite
+    const accordionItem = accordionData.find((item) => item.title === values.jobSite)
+
+    accordionItem
+      ? // If the item exists, push the new staff member to the staff array
+        accordionItem.staff.push({
+          email: values.email,
+          role: values.role,
+        })
+      : // Otherwise, create a new item with the staff array
+        accordionData.push({
+          ...accordionData,
+          title: values.jobSite,
+          staff: [
+            {
+              email: values.email,
+              role: values.role,
+            },
+          ],
+        })
 
     hideModal()
   }
@@ -72,7 +81,10 @@ export function StaffForm({ accordionData }: StaffModalProps) {
         </label>
         <input
           className="form-input"
-          {...register("email", { required: "Email is required" })}
+          {...register("email", {
+            required: "Email is required",
+            pattern: { value: /\S+@\S+\.\S+/, message: "Invalid email address" },
+          })}
           placeholder="email@example.com"
         />
         <FormInputError message={errors.email?.message} />

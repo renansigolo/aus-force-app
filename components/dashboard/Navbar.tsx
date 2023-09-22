@@ -1,5 +1,6 @@
 "use client"
 
+import { useUserContext } from "@/app/Providers"
 import { auth } from "@/lib/firebase"
 import { Menu, Popover, Transition } from "@headlessui/react"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid"
@@ -91,7 +92,8 @@ const navigation = [
 const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }]
 
 export function Navbar() {
-  const { currentUser, signOut } = auth
+  const { signOut } = auth
+  const { user, setUser } = useUserContext()
 
   const pathname = usePathname()
   const router = useRouter()
@@ -100,7 +102,10 @@ export function Navbar() {
     return pathname === href
   }
 
-  const signOutAndRedirect = () => signOut().then(() => router.push("/login"))
+  const signOutAndRedirect = () => {
+    setUser(null)
+    signOut().then(() => router.push("/login"))
+  }
 
   return (
     <nav className="bg-white shadow">
@@ -169,7 +174,7 @@ export function Navbar() {
                         <img
                           className="h-8 w-8 rounded-full"
                           alt="Profile Image"
-                          src={currentUser?.photoURL || "/images/profile-placeholder.png"}
+                          src={user?.photoURL || "/images/profile-placeholder.png"}
                         />
                       </Menu.Button>
                     </div>
@@ -238,16 +243,14 @@ export function Navbar() {
                         <img
                           className="h-10 w-10 rounded-full"
                           alt="Profile Image"
-                          src={currentUser?.photoURL || "/images/profile-placeholder.png"}
+                          src={user?.photoURL || "/images/profile-placeholder.png"}
                         />
                       </div>
                       <div className="ml-3">
                         <div className="text-base font-medium text-gray-800">
-                          {currentUser?.displayName || ""}
+                          {user?.displayName || ""}
                         </div>
-                        <div className="text-sm font-medium text-gray-500">
-                          {currentUser?.email || ""}
-                        </div>
+                        <div className="text-sm font-medium text-gray-500">{user?.email || ""}</div>
                       </div>
                       <button
                         type="button"

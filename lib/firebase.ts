@@ -1,7 +1,16 @@
 // Import the functions you need from the SDKs you need
 import { getApp, initializeApp } from "firebase/app"
 import { getAuth } from "firebase/auth"
-import { getFirestore } from "firebase/firestore"
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  updateDoc,
+} from "firebase/firestore"
 import { getStorage } from "firebase/storage"
 
 // Your web app's Firebase configuration
@@ -26,7 +35,6 @@ export const firebaseApp = createFirebaseApp()
 
 // Auth
 export const auth = getAuth(firebaseApp)
-// export const emailAuthProvider = new EmailAuthProvider()
 
 // Firestore
 export const db = getFirestore(firebaseApp)
@@ -41,3 +49,57 @@ export const storage = getStorage(firebaseApp)
 //   console.log("🚀 ~ getUserDoc ~ userDoc:", userDoc)
 //   return userDoc
 // }
+
+// export const getLiveDocument = async (collectionName: string, docId: string) => {
+//   const docRef = doc(db, collectionName, docId)
+//   const unsubscribe = onSnapshot(docRef, (doc) => {
+//     console.log("Current data: ", doc.data())
+//   })
+//   return unsubscribe
+// }
+
+// export const getCollectionStream = async (collectionName: string) => {
+//   const collectionRef = collection(db, collectionName)
+//   const q = query(collectionRef)
+//   const unsubscribe = onSnapshot(q, (querySnapshot) => {
+//     const documents = []
+//     querySnapshot.forEach((doc) => {
+//       documents.push(doc.data().name)
+//     })
+//     console.log("Current cities in CA: ", documents.join(", "))
+//   })
+//   return unsubscribe
+// }
+
+export const getCollection = async (collectionName: string) => {
+  const collectionRef = collection(db, collectionName)
+  const querySnapshot = await getDocs(collectionRef)
+  const data = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }))
+  return data
+}
+
+// Create firebase CRUD helpers
+export const createDocument = async (collectionName: string, data: any) => {
+  const collectionRef = collection(db, collectionName)
+  const docRef = await addDoc(collectionRef, data)
+  return docRef
+}
+
+export const readDocument = async (collectionName: string, docId: string) => {
+  const docRef = await getDoc(doc(db, collectionName, docId))
+  return docRef
+}
+
+export const updateDocument = async (collectionName: string, docId: string, data: any) => {
+  const docRef = doc(db, collectionName, docId)
+  const response = await updateDoc(docRef, data)
+  console.log("🚀 ~ updateDocument ~ response:", response)
+  return response
+}
+
+export const deleteDocument = async (collectionName: string, docId: string) => {
+  const docRef = doc(db, collectionName, docId)
+  const response = await deleteDoc(docRef)
+  console.log("🚀 ~ deleteDocument ~ response:", response)
+  return response
+}
