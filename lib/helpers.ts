@@ -17,3 +17,9 @@ export const showErrorMessage = (error: unknown): string => {
   toast.error(message)
   return message
 }
+
+/** Format the date as YYY-MM-DD */
+export const getISODate = (inputDate?: string): string => {
+  const date = inputDate ? new Date(inputDate) : new Date()
+  return date.toISOString().split("T")[0]
+}

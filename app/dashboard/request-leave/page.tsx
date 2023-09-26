@@ -19,7 +19,7 @@ export type RequestLeaveData = {
 
 export default async function RequestLeavePage() {
   const data = (await getCollection("requestLeave")) as RequestLeaveData[]
-  console.log("🚀 ~ RequestLeavePage ~ data:", data)
+  console.log(data)
 
   return (
     <SectionWrapper>
