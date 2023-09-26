@@ -97,7 +97,6 @@ const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }]
 
 export function Navbar() {
   const { user } = useAuthContext()
-
   const pathname = usePathname()
 
   const isActive = (href: string) => {

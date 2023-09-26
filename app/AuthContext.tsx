@@ -1,5 +1,6 @@
 "use client"
 
+import { Loader } from "@/components/Loader"
 import { auth } from "@/lib/firebase"
 import { User, onAuthStateChanged } from "firebase/auth"
 import {
@@ -42,15 +43,8 @@ export function AuthContextProvider({ children }: AuthContextProviderProps): JSX
   useEffect(() => {
     // Subscribe to the authentication state changes
     const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log("🚀 ~ INNNN:", user)
-        // User is signed in
-        setUser(user)
-      } else {
-        console.log("OUTTTT:", user)
-        // User is signed out
-        setUser(null)
-      }
+      // Update the user state with the new user if available
+      user ? setUser(user) : setUser(null)
       // Set loading to false once authentication state is determined
       setLoading(false)
     })
@@ -62,7 +56,16 @@ export function AuthContextProvider({ children }: AuthContextProviderProps): JSX
   // Provide the authentication context to child components
   return (
     <AuthContext.Provider value={{ user, setUser }}>
-      {loading ? <div>Loading...</div> : children}
+      {loading ? (
+        <div className="grid min-h-screen place-content-center">
+          <div className="flex flex-col items-center gap-2">
+            <Loader show />
+            <p>Loading...</p>
+          </div>
+        </div>
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   )
 }
