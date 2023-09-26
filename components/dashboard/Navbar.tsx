@@ -1,13 +1,17 @@
 "use client"
 
-import { useUserContext } from "@/app/Providers"
+import { useAuthContext } from "@/app/AuthContext"
 import { auth } from "@/lib/firebase"
+import { showErrorMessage } from "@/lib/helpers"
 import { Menu, Popover, Transition } from "@headlessui/react"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid"
 import { BellIcon } from "@heroicons/react/24/outline"
+import { FirebaseError } from "firebase/app"
+import { signOut } from "firebase/auth"
 import Link from "next/link"
-import { usePathname, useRouter } from "next/navigation"
-import { Fragment } from "react"
+import { redirect, usePathname } from "next/navigation"
+import { Fragment, useEffect } from "react"
+import toast from "react-hot-toast"
 import { twMerge } from "tailwind-merge"
 
 const navigation = [
@@ -92,19 +96,23 @@ const navigation = [
 const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }]
 
 export function Navbar() {
-  const { signOut } = auth
-  const { user, setUser } = useUserContext()
+  const { user } = useAuthContext()
 
   const pathname = usePathname()
-  const router = useRouter()
 
   const isActive = (href: string) => {
     return pathname === href
   }
 
+  useEffect(() => {
+    // Redirect to the home page if the user is not logged in
+    if (user === null) redirect("/")
+  }, [user])
+
   const signOutAndRedirect = () => {
-    setUser(null)
-    signOut().then(() => router.push("/login"))
+    signOut(auth)
+      .then(() => toast.success("Sign-out successful"))
+      .catch((error: FirebaseError) => showErrorMessage(error))
   }
 
   return (

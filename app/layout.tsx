@@ -1,3 +1,4 @@
+import { AuthContextProvider } from "@/app/AuthContext"
 import { Providers } from "@/app/Providers"
 import { Inter } from "next/font/google"
 import { ReactNode } from "react"
@@ -68,14 +69,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head />
       <body>
         <Providers>
-          <div className="fixed right-0 top-0">
-            <span className="inline-flex items-center rounded-full bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">
-              v.{packageJson.version}
-            </span>
-          </div>
+          <AuthContextProvider>
+            <div className="fixed right-0 top-0">
+              <span className="inline-flex items-center rounded-full bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">
+                v.{packageJson.version}
+              </span>
+            </div>
 
-          {children}
-          <Toaster position="top-right" reverseOrder={true} />
+            {children}
+            <Toaster position="top-right" reverseOrder={true} />
+          </AuthContextProvider>
         </Providers>
       </body>
     </html>
