@@ -19,8 +19,6 @@ export function RequestLeaveForm() {
   } = useForm<RequestLeaveData>({ mode: "onChange" })
 
   const onSubmit = async (values: RequestLeaveData) => {
-    console.log(values)
-
     const payload = {
       ...values,
       createdAt: serverTimestamp(),
