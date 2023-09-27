@@ -16,7 +16,7 @@ export function RequestLeaveForm() {
     getValues,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isSubmitting },
   } = useForm<RequestLeaveData>()
 
   const onSubmit = async (values: RequestLeaveData) => {

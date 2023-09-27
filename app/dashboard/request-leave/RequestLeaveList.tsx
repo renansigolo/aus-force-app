@@ -2,8 +2,13 @@
 
 import { RequestLeaveData } from "@/app/dashboard/request-leave/page"
 import { deleteDocument } from "@/lib/firebase"
-import { PencilIcon, SunIcon, TrashIcon } from "@heroicons/react/20/solid"
-import { CalendarDaysIcon, CalendarIcon } from "@heroicons/react/24/outline"
+import { SunIcon } from "@heroicons/react/20/solid"
+import {
+  CalendarDaysIcon,
+  CalendarIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { twMerge } from "tailwind-merge"
@@ -132,7 +137,7 @@ export function RequestLeaveList({ data }: RequestLeaveListProps) {
                     </td>
                     <td className="table-data mx-auto">
                       <div className="flex justify-between">
-                        <PencilIcon
+                        <PencilSquareIcon
                           className="h-5 w-5 text-gray-400 hover:cursor-pointer hover:text-indigo-500"
                           aria-hidden="true"
                         />
