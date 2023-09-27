@@ -31,14 +31,14 @@ export type CurrentUserProfile = {
 }
 
 export default async function ProfilePage() {
+  const styleSection = "grid grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8"
+
   // Get the user's data using the Firebase SDK in firestore
   const { user } = useAuthContext()
 
   const docRef = doc(db, `users/${user?.uid}`)
   const docSnap = await getDoc(docRef)
   const data = docSnap.data() as CurrentUserProfile
-
-  const styleSection = "grid grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8"
 
   return (
     <SectionWrapper>
