@@ -24,7 +24,6 @@ export function LeaveRequestsForm() {
       ...values,
       createdAt: serverTimestamp(),
       status: "pending",
-      policyAndProceduresURL: "",
     }
 
     try {

@@ -29,7 +29,7 @@ export function JobSiteForm({ data }: JobSiteFormProps) {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting, isValid },
-  } = useForm<FormValues>({ shouldUseNativeValidation: true })
+  } = useForm<FormValues>()
 
   const hideModal = () => router.push("?showModal=false")
 
@@ -39,23 +39,16 @@ export function JobSiteForm({ data }: JobSiteFormProps) {
       createdAt: serverTimestamp(),
       policyAndProceduresURL: "",
     }
-    // TODO: Save data to firebase
+
     try {
       await createDocument("jobSites", payload)
       router.refresh()
       toast.success("Job site submitted")
       reset()
+      hideModal()
     } catch (error) {
       showErrorMessage(error)
     }
-
-    console.log(data)
-    data.push({
-      ...values,
-      policyAndProceduresURL: "",
-    })
-
-    hideModal()
   }
 
   return (
