@@ -1,6 +1,6 @@
 "use client"
 
-import { RequestLeaveData } from "@/app/dashboard/request-leave/page"
+import { RequestLeaveData as LeaveRequestsData } from "@/app/dashboard/leave-requests/page"
 import { deleteDocument } from "@/lib/firebase"
 import { SunIcon } from "@heroicons/react/20/solid"
 import {
@@ -19,14 +19,14 @@ const statusStyles: any = {
   declined: "bg-red-100 text-red-800",
 }
 
-type RequestLeaveListProps = {
-  data: RequestLeaveData[]
+type LeaveRequestsListProps = {
+  data: LeaveRequestsData[]
 }
 
-export function RequestLeaveList({ data }: RequestLeaveListProps) {
+export function LeaveRequestsList({ data }: LeaveRequestsListProps) {
   const router = useRouter()
-  const deleteRequestLeave = async (id: string) => {
-    await deleteDocument("requestLeave", id)
+  const deleteLeaveRequest = async (id: string) => {
+    await deleteDocument("leaveRequests", id)
     router.refresh()
     toast.success("Leave request deleted")
   }
@@ -141,7 +141,7 @@ export function RequestLeaveList({ data }: RequestLeaveListProps) {
                           className="h-5 w-5 text-gray-400 hover:cursor-pointer hover:text-indigo-500"
                           aria-hidden="true"
                         />
-                        <button type="button" onClick={() => deleteRequestLeave(item.id)}>
+                        <button type="button" onClick={() => deleteLeaveRequest(item.id)}>
                           <TrashIcon
                             className="h-5 w-5 text-gray-400 hover:text-red-600"
                             aria-hidden="true"

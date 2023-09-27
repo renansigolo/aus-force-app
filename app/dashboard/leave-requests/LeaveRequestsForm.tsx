@@ -1,6 +1,6 @@
 "use client"
 
-import { RequestLeaveData } from "@/app/dashboard/request-leave/page"
+import { RequestLeaveData as LeaveRequestsData } from "@/app/dashboard/leave-requests/page"
 import { createDocument } from "@/lib/firebase"
 import { getISODate, showErrorMessage } from "@/lib/helpers"
 import { ErrorMessage } from "@hookform/error-message"
@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
-export function RequestLeaveForm() {
+export function LeaveRequestsForm() {
   const router = useRouter()
   const {
     register,
@@ -17,9 +17,9 @@ export function RequestLeaveForm() {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<RequestLeaveData>()
+  } = useForm<LeaveRequestsData>()
 
-  const onSubmit = async (values: RequestLeaveData) => {
+  const onSubmit = async (values: LeaveRequestsData) => {
     const payload = {
       ...values,
       createdAt: serverTimestamp(),
@@ -28,7 +28,7 @@ export function RequestLeaveForm() {
     }
 
     try {
-      await createDocument("requestLeave", payload)
+      await createDocument("leaveRequests", payload)
       router.refresh()
       toast.success("Leave request submitted")
       reset()

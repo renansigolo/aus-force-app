@@ -22,8 +22,8 @@ const navigation = [
     color: "text-orange-500",
   },
   {
-    name: "Request Leave",
-    href: "/dashboard/request-leave",
+    name: "Leave Requests",
+    href: "/dashboard/leave-requests",
     color: "text-orange-500",
   },
   {

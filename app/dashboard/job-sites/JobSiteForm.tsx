@@ -2,11 +2,15 @@
 
 import { JobSitesListDataProps } from "@/app/dashboard/job-sites/page"
 import { FormInputError } from "@/components/FormInputError"
+import { createDocument } from "@/lib/firebase"
+import { showErrorMessage } from "@/lib/helpers"
 import { DocumentArrowUpIcon } from "@heroicons/react/24/outline"
+import { serverTimestamp } from "firebase/firestore"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 
-type FormInputs = {
+type FormValues = {
   siteName: string
   siteAddress: string
   hasParking: boolean
@@ -23,13 +27,28 @@ export function JobSiteForm({ data }: JobSiteFormProps) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting, isValid },
-  } = useForm<FormInputs>({ shouldUseNativeValidation: true })
+  } = useForm<FormValues>({ shouldUseNativeValidation: true })
 
   const hideModal = () => router.push("?showModal=false")
 
-  const onSubmit = (values: FormInputs) => {
+  const onSubmit = async (values: FormValues) => {
+    const payload = {
+      ...values,
+      createdAt: serverTimestamp(),
+      policyAndProceduresURL: "",
+    }
     // TODO: Save data to firebase
+    try {
+      await createDocument("jobSites", payload)
+      router.refresh()
+      toast.success("Job site submitted")
+      reset()
+    } catch (error) {
+      showErrorMessage(error)
+    }
+
     console.log(data)
     data.push({
       ...values,
