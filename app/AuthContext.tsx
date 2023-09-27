@@ -3,6 +3,7 @@
 import { Loader } from "@/components/Loader"
 import { auth } from "@/lib/firebase"
 import { User, onAuthStateChanged } from "firebase/auth"
+import { usePathname, useRouter } from "next/navigation"
 import {
   Dispatch,
   ReactNode,
@@ -36,9 +37,26 @@ interface AuthContextProviderProps {
 }
 
 export function AuthContextProvider({ children }: AuthContextProviderProps): JSX.Element {
+  const pathname = usePathname()
+  const router = useRouter()
+
   // Set up state to track the authenticated user and loading status
   const [user, setUser] = useState<User | null>(null)
   const [loading, setLoading] = useState(true)
+
+  // Redirect to dashboard if user is logged in
+  useEffect(() => {
+    if (user) {
+      if (
+        pathname === "/" ||
+        pathname === "/login" ||
+        pathname === "/signup" ||
+        pathname === "/forgot-password"
+      ) {
+        router.push("/dashboard")
+      }
+    }
+  }, [user])
 
   useEffect(() => {
     // Subscribe to the authentication state changes
