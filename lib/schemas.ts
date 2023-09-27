@@ -54,6 +54,12 @@ export type TRegisterFormSchema = {
   passportNumber?: string
   passportIssued?: string
   passportExpiry?: string
+  driverLicenseNumber?: string
+  driverLicenseIssued?: string
+  driverLicenseExpiry?: string
+  identificationNumber?: string
+  identificationIssued?: string
+  identificationExpiry?: string
   email: string
   newPassword: string
   confirmPassword: string

@@ -15,33 +15,21 @@ import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { doc, setDoc } from "firebase/firestore"
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { useRouter } from "next/navigation"
-import { Controller, useForm } from "react-hook-form"
+import { Controller, UseFormReturn, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
 const personalForm = [
   {
-    required: "",
-    name: "Passport",
     id: "passport",
     label: "Passport",
-    type: "text",
-    autoComplete: "",
   },
   {
-    required: "",
-    name: "Driver License",
     id: "driverLicense",
     label: "Driver License",
-    type: "text",
-    autoComplete: "",
   },
   {
-    required: "",
-    name: "ID",
-    id: "personalId",
+    id: "identification",
     label: "ID",
-    type: "text",
-    autoComplete: "",
   },
 ]
 
@@ -60,6 +48,7 @@ export default function SignUpPage() {
   const imageValue = getValues("profileImageFile")
 
   const onSubmit = async (data: TRegisterFormSchema) => {
+    console.log("🚀 ~ onSubmit ~ data:", data)
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -91,6 +80,15 @@ export default function SignUpPage() {
       // Update fields in firebase auth and firestore
       await updateProfile(userCredential.user, userPayload)
       await setDoc(doc(db, "users", userCredential.user.uid), {
+        driverLicenseNumber: data.driverLicenseNumber,
+        driverLicenseIssued: data.driverLicenseIssued,
+        driverLicenseExpiry: data.driverLicenseExpiry,
+        identificationNumber: data.identificationNumber,
+        identificationIssued: data.identificationIssued,
+        identificationExpiry: data.identificationExpiry,
+        passportNumber: data.passportNumber,
+        passportIssued: data.passportIssued,
+        passportExpiry: data.passportExpiry,
         firstName: data.firstName,
         lastName: data.lastName,
         phoneNumber: data.phoneNumber,
@@ -262,50 +260,16 @@ export default function SignUpPage() {
                       </dt>
 
                       <Disclosure.Panel as="dd" className="mt-2">
-                        <p className="text-base leading-7 text-gray-600">
-                          <div className="sm:col-span-6">
-                            <label htmlFor="passportNumber" className="form-label">
-                              Number
-                              <span className="text-red-500">*</span>
-                            </label>
-                            <div className="mt-1">
-                              <input type="text" {...register("passportNumber")} />
-                              <FormInputError message={errors.passportNumber?.message} />
-                            </div>
-
-                            <div className="flex gap-2">
-                              <div className="mt-2 w-full">
-                                <label htmlFor="passportIssued" className="form-label">
-                                  Date of Issue
-                                  <span className="text-red-500">*</span>
-                                </label>
-                                <input type="date" {...register("passportIssued")} />
-                                <FormInputError message={errors.passportIssued?.message} />
-                              </div>
-
-                              <div className="mt-2 w-full">
-                                <label htmlFor="passportExpiry" className="form-label">
-                                  Expiry Date
-                                  <span className="text-red-500">*</span>
-                                </label>
-                                <input type="date" {...register("passportExpiry")} />
-                                <FormInputError message={errors.passportExpiry?.message} />
-                              </div>
-                            </div>
-
-                            <button
-                              type="button"
-                              className="relative mt-2 block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                            >
-                              <div className="flex flex-col content-center items-center justify-center">
-                                <DocumentArrowUpIcon className="h-12 w-12 text-gray-400" />
-                                <span className="mt-2 block text-sm font-semibold text-gray-900">
-                                  Upload Image
-                                </span>
-                              </div>
-                            </button>
-                          </div>
-                        </p>
+                        <Fields
+                          register={register}
+                          inputValues={
+                            {
+                              numberId: `${field.id}Number`,
+                              dateOfIssueId: `${field.id}Issued`,
+                              expiryDateId: `${field.id}Expiry`,
+                            } as any
+                          }
+                        />
                       </Disclosure.Panel>
                     </>
                   )}
@@ -408,5 +372,57 @@ export default function SignUpPage() {
         </div>
       </form>
     </div>
+  )
+}
+
+type FieldsProps = {
+  register: UseFormReturn<any>["register"]
+  inputValues: {
+    numberId: string
+    dateOfIssueId: string
+    expiryDateId: string
+  }
+}
+
+function Fields({ register, inputValues }: FieldsProps) {
+  console.log("🚀 ~ Fields ~ inputValues:", inputValues)
+  return (
+    <>
+      <div>
+        <label htmlFor={inputValues.numberId} className="form-label">
+          Number
+        </label>
+        <input type="text" {...register(inputValues.numberId)} />
+        {/* <FormInputError message={errors.inputValues.numberId?.message} /> */}
+      </div>
+
+      <div className="flex gap-2">
+        <div className="mt-2 w-full">
+          <label htmlFor={inputValues.dateOfIssueId} className="form-label">
+            Date of Issue
+          </label>
+          <input type="date" {...register(inputValues.dateOfIssueId)} />
+          {/* <FormInputError message={errors.inputValues.dateOfIssueId?.message} /> */}
+        </div>
+
+        <div className="mt-2 w-full">
+          <label htmlFor={inputValues.expiryDateId} className="form-label">
+            Expiry Date
+          </label>
+          <input type="date" {...register(inputValues.expiryDateId)} />
+          {/* <FormInputError message={errors.inputValues.expiryDateId?.message} /> */}
+        </div>
+      </div>
+
+      <button
+        type="button"
+        className="relative mt-2 block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+      >
+        <div className="flex flex-col content-center items-center justify-center">
+          <DocumentArrowUpIcon className="h-12 w-12 text-gray-400" />
+          <span className="mt-2 block text-sm font-semibold text-gray-900">Upload Image</span>
+        </div>
+      </button>
+    </>
   )
 }
