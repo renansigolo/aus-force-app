@@ -4,7 +4,7 @@ import { FormSectionHeading } from "@/app/(enter)/sign-up/FormSectionHeading"
 import { Role } from "@/components/Roles"
 import { useForm } from "react-hook-form"
 
-const businessForm = [
+const clientForm = [
   {
     required: "Legal Name is required",
     name: "legalName",
@@ -52,7 +52,7 @@ export function ClientForm() {
         />
 
         <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
-          {businessForm.map((field, index) => (
+          {clientForm.map((field, index) => (
             <div key={index} className="sm:col-span-3">
               <label htmlFor={field.id} className="form-label">
                 {field.label}

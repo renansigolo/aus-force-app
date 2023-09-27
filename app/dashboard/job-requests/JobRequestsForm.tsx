@@ -1,8 +1,13 @@
 "use client"
 
+import { JobRequest } from "@/app/dashboard/job-requests/page"
+import { createDocument } from "@/lib/firebase"
+import { showErrorMessage } from "@/lib/helpers"
 import { Tab } from "@headlessui/react"
+import { serverTimestamp } from "firebase/firestore"
 import { useRouter } from "next/navigation"
-import { useForm } from "react-hook-form"
+import { UseFormReturn, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 import { twMerge } from "tailwind-merge"
 
 export function JobRequestsForm() {
@@ -10,41 +15,65 @@ export function JobRequestsForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
-  } = useForm({ shouldUseNativeValidation: true })
+    reset,
+    formState: { isSubmitting, isValid },
+  } = useForm<JobRequest>({ shouldUseNativeValidation: true })
 
   const hideModal = () => router.push("?showModal=false")
 
+  const onSubmit = async (values: JobRequest) => {
+    const payload = {
+      ...values,
+      createdAt: serverTimestamp(),
+    }
+
+    try {
+      await createDocument("jobRequests", payload)
+      reset()
+      router.refresh()
+      toast.success("Job request submitted")
+      hideModal()
+    } catch (error) {
+      showErrorMessage(error)
+    }
+  }
+
   return (
-    <form className="my-8 grid grid-cols-1 gap-4">
-      <div className="col-span-1">
+    <form onSubmit={handleSubmit(onSubmit)} className="my-8 grid grid-cols-1 gap-4">
+      <div>
         <label htmlFor="jobSite" className="form-label">
           Job Site
         </label>
-        <select {...register("jobSite")}>
+        <select
+          {...register("jobSite", { required: "Job site is required" })}
+          disabled={isSubmitting}
+        >
           <option>Job Site A</option>
           <option>Job Site B</option>
         </select>
       </div>
 
-      <div className="col-span-1">
+      <div>
         <label htmlFor="supplier" className="form-label">
           Select Supplier
         </label>
-        <select {...register("suplier")}>
+        <select
+          {...register("supplier", { required: "Supplier id required" })}
+          disabled={isSubmitting}
+        >
           <option>Supplier 01</option>
           <option>Supplier 02</option>
           <option>Supplier 03</option>
         </select>
       </div>
 
-      <Tabs />
+      <Tabs register={register} />
 
-      <div className="col-span-1">
-        <label htmlFor="additional-notes" className="form-label">
+      <div>
+        <label htmlFor="additionalNotes" className="form-label">
           Additional Notes
         </label>
-        <textarea {...register("additionalNotes")} />
+        <textarea {...register("additionalNotes")} disabled={isSubmitting} />
       </div>
 
       <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
@@ -68,7 +97,11 @@ export function JobRequestsForm() {
   )
 }
 
-function Tabs() {
+type TabsProps = {
+  register: UseFormReturn<JobRequest>["register"]
+}
+
+function Tabs({ register }: TabsProps) {
   return (
     <div className="w-full sm:px-0">
       <Tab.Group>
@@ -103,10 +136,10 @@ function Tabs() {
 
         <Tab.Panels className="mt-2">
           <Tab.Panel className="grid grid-cols-1 gap-4">
-            <WorkerFields />
+            <WorkerFields register={register} />
           </Tab.Panel>
           <Tab.Panel className="grid grid-cols-1 gap-4">
-            <ServiceFields />
+            <ServiceFields register={register} />
           </Tab.Panel>
         </Tab.Panels>
       </Tab.Group>
@@ -114,14 +147,18 @@ function Tabs() {
   )
 }
 
-function WorkerFields() {
+type WorkerFieldsProps = {
+  register: UseFormReturn<JobRequest>["register"]
+}
+
+function WorkerFields({ register }: WorkerFieldsProps) {
   return (
     <>
-      <div className="col-span-1">
+      <div>
         <label htmlFor="jobPosition" className="form-label">
           Job Position
         </label>
-        <select id="jobPosition" name="jobPosition">
+        <select {...register("jobPosition")}>
           <option>General Labour</option>
           <option>Skill Labour</option>
           <option>Traffic Controller</option>
@@ -141,77 +178,88 @@ function WorkerFields() {
         </select>
       </div>
 
-      <div className="col-span-1">
-        {/* If the selection of job position is Other */}
-        <label htmlFor="quantity" className="form-label">
+      {/* If the selection of job position is Other */}
+      {/* <div>
+        <label htmlFor="jobPosition" className="form-label">
           Job Position
         </label>
-        <input type="text" name="jobPosition" id="jobPosition" />
-      </div>
+        <input type="text" name="jobPosition" />
+      </div> */}
 
-      <div className="col-span-1">
+      <div>
         <label htmlFor="quantity" className="form-label">
           Quantity
         </label>
-        <input type="number" name="quantity" id="quantity" />
+        <input
+          type="number"
+          {...register("quantity", { valueAsNumber: true, min: 0, minLength: 0 })}
+        />
       </div>
 
-      <div className="col-span-1">
-        <label htmlFor="start-datetime" className="form-label">
+      <div>
+        <label htmlFor="startDateTime" className="form-label">
           Start Time
         </label>
-
-        <input type="datetime-local" name="start-datetime" id="start-datetime" />
+        <input
+          type="datetime-local"
+          {...register("startDateTime", { required: "Start date and time is required" })}
+        />
       </div>
-      <div className="col-span-1">
-        <label htmlFor="end-datetime" className="form-label">
+
+      <div>
+        <label htmlFor="endDateTime" className="form-label">
           End Time
         </label>
-        <input type="datetime-local" name="end-datetime" id="end-datetime" />
+        <input type="datetime-local" {...register("endDateTime")} />
       </div>
 
-      <div className="col-span-1">
-        <div className="relative flex items-start">
-          <div className="flex h-5 items-center">
-            <input
-              id="break"
-              aria-describedby="break-description"
-              name="break"
-              type="checkbox"
-              className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-            />
-          </div>
-          <div className="ml-3 text-sm">
-            <label htmlFor="break" className="font-medium text-gray-700">
-              Break?
-            </label>
-          </div>
-        </div>
+      <div className="flex h-5 flex-row-reverse items-center justify-end gap-2">
+        <label htmlFor="break" className="text-sm font-medium text-gray-700">
+          Break?
+        </label>
+        <input
+          {...register("break")}
+          type="checkbox"
+          aria-describedby="break-description"
+          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+        />
       </div>
     </>
   )
 }
 
-function ServiceFields() {
+type ServiceFieldsProps = {
+  register: UseFormReturn<JobRequest>["register"]
+}
+
+function ServiceFields({ register }: ServiceFieldsProps) {
   return (
     <>
-      <div className="col-span-1">
-        <label htmlFor="service" className="form-label">
+      <div>
+        <label htmlFor="serviceDescription" className="form-label">
           Service Description
         </label>
-        <input type="text" name="service" id="service" />
+        <input type="text" {...register("serviceDescription")} />
       </div>
-      <div className="col-span-1">
+
+      <div>
         <label htmlFor="quantity" className="form-label">
           Quantity
         </label>
-        <input type="number" name="quantity" id="quantity" />
+        <input
+          {...register("quantity", { valueAsNumber: true, min: 0, minLength: 0 })}
+          type="number"
+        />
       </div>
-      <div className="col-span-1">
-        <label htmlFor="start-datetime" className="form-label">
+
+      <div>
+        <label htmlFor="startDateTime" className="form-label">
           Start Time
         </label>
-        <input type="datetime-local" name="start-datetime" id="start-datetime" />
+        <input
+          type="datetime-local"
+          {...register("startDateTime", { required: "Start date and time is required" })}
+        />
       </div>
     </>
   )

@@ -1,35 +1,34 @@
 "use client"
 
-import { RequestLeaveData } from "@/app/dashboard/request-leave/page"
+import { RequestLeaveData as LeaveRequestsData } from "@/app/dashboard/leave-requests/page"
 import { createDocument } from "@/lib/firebase"
-import { showErrorMessage } from "@/lib/helpers"
+import { getISODate, showErrorMessage } from "@/lib/helpers"
 import { ErrorMessage } from "@hookform/error-message"
+import { serverTimestamp } from "firebase/firestore"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
-export function RequestLeaveForm() {
+export function LeaveRequestsForm() {
+  const router = useRouter()
   const {
     register,
     getValues,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting, isValid },
-  } = useForm<RequestLeaveData>({
-    mode: "onChange",
-  })
+    formState: { errors, isSubmitting },
+  } = useForm<LeaveRequestsData>()
 
-  const onSubmit = async (values: RequestLeaveData) => {
-    console.log(values)
-
+  const onSubmit = async (values: LeaveRequestsData) => {
     const payload = {
       ...values,
-      // createdAt: serverTimestamp(),
+      createdAt: serverTimestamp(),
       status: "pending",
-      policyAndProceduresURL: "",
     }
 
     try {
-      await createDocument("requestLeave", payload)
+      await createDocument("leaveRequests", payload)
+      router.refresh()
       toast.success("Leave request submitted")
       reset()
     } catch (error) {
@@ -76,10 +75,10 @@ export function RequestLeaveForm() {
               disabled={isSubmitting}
               {...register("startDate", {
                 required: true,
-                // date cannot be in the past or higher than end date
                 validate: (value) =>
-                  (value >= new Date().toISOString().split("T")[0] &&
-                    value <= new Date(getValues("endDate")).toISOString().split("T")[0]) ||
+                  // date cannot be in the past or higher than end date
+                  (getISODate(value) >= getISODate() &&
+                    getISODate(value) <= getISODate(getValues("endDate"))) ||
                   "Start date cannot be in the past or higher than end date",
               })}
             />
@@ -97,10 +96,10 @@ export function RequestLeaveForm() {
               disabled={isSubmitting}
               {...register("endDate", {
                 required: true,
-                // date cannot be in the past or higher than end date
                 validate: (value) =>
-                  (value >= new Date().toISOString().split("T")[0] &&
-                    value >= new Date(getValues("startDate")).toISOString().split("T")[0]) ||
+                  // date cannot be in the past or lower than start date
+                  (getISODate(value) >= getISODate() &&
+                    getISODate(value) >= getISODate(getValues("startDate"))) ||
                   "End date cannot be in the past or lower than start date",
               })}
             />
@@ -122,7 +121,7 @@ export function RequestLeaveForm() {
       </div>
 
       <div className="flex items-center gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:justify-end sm:px-8">
-        <button type="submit" className="btn btn-primary" disabled={isSubmitting || !isValid}>
+        <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Submit"}
         </button>
       </div>

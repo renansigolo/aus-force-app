@@ -21,7 +21,7 @@ export function StaffForm({ accordionData }: StaffModalProps) {
     register,
     handleSubmit,
     formState: { errors, isSubmitting, isValid },
-  } = useForm<FormInputs>({ shouldUseNativeValidation: true })
+  } = useForm<FormInputs>()
 
   const hideModal = () => router.push("?showModal=false")
 

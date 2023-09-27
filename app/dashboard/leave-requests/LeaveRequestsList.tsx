@@ -1,8 +1,15 @@
 "use client"
 
-import { RequestLeaveData } from "@/app/dashboard/request-leave/page"
+import { RequestLeaveData as LeaveRequestsData } from "@/app/dashboard/leave-requests/page"
 import { deleteDocument } from "@/lib/firebase"
-import { PencilIcon, SunIcon, TrashIcon } from "@heroicons/react/20/solid"
+import { SunIcon } from "@heroicons/react/20/solid"
+import {
+  CalendarDaysIcon,
+  CalendarIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline"
+import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { twMerge } from "tailwind-merge"
 
@@ -12,13 +19,15 @@ const statusStyles: any = {
   declined: "bg-red-100 text-red-800",
 }
 
-type RequestLeaveListProps = {
-  data: RequestLeaveData[]
+type LeaveRequestsListProps = {
+  data: LeaveRequestsData[]
 }
 
-export function RequestLeaveList({ data }: RequestLeaveListProps) {
-  const deleteRequestLeave = async (id: string) => {
-    await deleteDocument("requestLeave", id)
+export function LeaveRequestsList({ data }: LeaveRequestsListProps) {
+  const router = useRouter()
+  const deleteLeaveRequest = async (id: string) => {
+    await deleteDocument("leaveRequests", id)
+    router.refresh()
     toast.success("Leave request deleted")
   }
 
@@ -35,7 +44,7 @@ export function RequestLeaveList({ data }: RequestLeaveListProps) {
           {data.map((item) => (
             <li key={item.id}>
               <span className="block bg-white px-4 py-4">
-                <span className="flex items-center space-x-4">
+                <span className="flex items-center justify-between space-x-4">
                   <span className="flex space-x-2">
                     <SunIcon
                       className="h-5 w-5 flex-shrink-0 font-medium text-gray-900"
@@ -45,8 +54,14 @@ export function RequestLeaveList({ data }: RequestLeaveListProps) {
                     <span className="flex flex-col text-sm text-gray-500">
                       <span className="font-medium text-gray-900">{item.reason}</span>
                       <span className="inline-flex flex-wrap">{item.additionalNotes}</span>
-                      <time dateTime={item.startDate}>{item.startDate}</time>
-                      <time dateTime={item.endDate}>{item.endDate}</time>
+                      <time dateTime={item.startDate} className="mt-2 flex items-center gap-1">
+                        <CalendarIcon className="inline-flex h-5 w-5 flex-shrink-0 items-center font-medium text-gray-900" />
+                        {item.startDate}
+                      </time>
+                      <time dateTime={item.endDate} className="flex items-center gap-1">
+                        <CalendarDaysIcon className="inline-flex h-5 w-5 flex-shrink-0 font-medium text-gray-900" />
+                        {item.endDate}
+                      </time>
                     </span>
                   </span>
 
@@ -65,7 +80,7 @@ export function RequestLeaveList({ data }: RequestLeaveListProps) {
         </ul>
       </div>
 
-      {/* Activity table (small breakpoint and up) */}
+      {/* Activity table (large breakpoint and up) */}
       <div className="hidden lg:block">
         <div className="mt-2 flex flex-col">
           <div className="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg">
@@ -93,14 +108,14 @@ export function RequestLeaveList({ data }: RequestLeaveListProps) {
               <tbody className="divide-y divide-gray-200 bg-white">
                 {data.map((item) => (
                   <tr key={item.id}>
-                    <td className="table-data w-full max-w-0">
+                    <td className="w-full max-w-0 px-6 py-4">
                       <div className="flex flex-shrink-0">
                         <span className="group inline-flex flex-col space-x-2 text-sm">
                           <div className="inline-flex gap-1 font-medium text-gray-900">
                             <SunIcon className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
                             <span>{item.reason}</span>
                           </div>
-                          <p className="whitespace-wrap text-gray-400">{item.additionalNotes}</p>
+                          <p className="text-gray-400">{item.additionalNotes}</p>
                         </span>
                       </div>
                     </td>
@@ -122,8 +137,11 @@ export function RequestLeaveList({ data }: RequestLeaveListProps) {
                     </td>
                     <td className="table-data mx-auto">
                       <div className="flex justify-between">
-                        <PencilIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                        <button type="button" onClick={() => deleteRequestLeave(item.id)}>
+                        <PencilSquareIcon
+                          className="h-5 w-5 text-gray-400 hover:cursor-pointer hover:text-indigo-500"
+                          aria-hidden="true"
+                        />
+                        <button type="button" onClick={() => deleteLeaveRequest(item.id)}>
                           <TrashIcon
                             className="h-5 w-5 text-gray-400 hover:text-red-600"
                             aria-hidden="true"

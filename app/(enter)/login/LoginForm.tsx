@@ -1,6 +1,5 @@
 "use client"
 
-import { useUserContext } from "@/app/Providers"
 import { FormInputError } from "@/components/FormInputError"
 import { Loader } from "@/components/Loader"
 import { auth } from "@/lib/firebase"
@@ -15,7 +14,7 @@ import toast from "react-hot-toast"
 
 export function LoginForm() {
   const router = useRouter()
-  const { setUser } = useUserContext()
+
   const {
     register,
     handleSubmit,
@@ -29,7 +28,6 @@ export function LoginForm() {
     try {
       const { user } = await signInWithEmailAndPassword(auth, data.email, data.password)
 
-      setUser(user)
       toast.success(`Welcome back, ${user.email}`)
       router.push("/dashboard")
     } catch (error) {

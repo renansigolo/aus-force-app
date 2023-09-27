@@ -1,10 +1,10 @@
 "use client"
 
-import { useUserContext } from "@/app/Providers"
+import { useAuthContext } from "@/app/AuthContext"
 import { UserAvatar } from "@/components/User"
 
 export function WelcomePanel() {
-  const { user } = useUserContext()
+  const { user } = useAuthContext()
 
   return (
     <section aria-labelledby="profile-overview-title">

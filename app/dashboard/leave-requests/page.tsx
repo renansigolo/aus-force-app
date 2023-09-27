@@ -1,10 +1,10 @@
-import { RequestLeaveForm } from "@/app/dashboard/request-leave/RequestLeaveForm"
-import { RequestLeaveList } from "@/app/dashboard/request-leave/RequestLeaveList"
+import { LeaveRequestsForm } from "@/app/dashboard/leave-requests/LeaveRequestsForm"
+import { LeaveRequestsList } from "@/app/dashboard/leave-requests/LeaveRequestsList"
 import { Empty } from "@/components/Empty"
 import { Role } from "@/components/Roles"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
-import { getCollection } from "@/lib/firebase"
+import { getCollectionQuery } from "@/lib/firebase"
 
 export type RequestLeaveData = {
   id: string
@@ -18,19 +18,18 @@ export type RequestLeaveData = {
 }
 
 export default async function RequestLeavePage() {
-  const data = (await getCollection("requestLeave")) as RequestLeaveData[]
-  console.log("🚀 ~ RequestLeavePage ~ data:", data)
+  const data = (await getCollectionQuery("leaveRequests", "createdAt")) as RequestLeaveData[]
 
   return (
     <SectionWrapper>
       <Role role="worker">
-        <SectionHeading title="Request Leave" />
+        <SectionHeading title="Leave Requests" />
 
         <section className="py-8">
-          <RequestLeaveForm />
+          <LeaveRequestsForm />
         </section>
 
-        {data.length > 0 ? <RequestLeaveList data={data} /> : <Empty title="request leave" />}
+        {data.length > 0 ? <LeaveRequestsList data={data} /> : <Empty title="leave requests" />}
       </Role>
     </SectionWrapper>
   )
