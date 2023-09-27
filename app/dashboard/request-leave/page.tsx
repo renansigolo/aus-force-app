@@ -4,7 +4,7 @@ import { Empty } from "@/components/Empty"
 import { Role } from "@/components/Roles"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
-import { getCollection } from "@/lib/firebase"
+import { getCollectionQuery } from "@/lib/firebase"
 
 export type RequestLeaveData = {
   id: string
@@ -18,7 +18,7 @@ export type RequestLeaveData = {
 }
 
 export default async function RequestLeavePage() {
-  const data = (await getCollection("requestLeave")) as RequestLeaveData[]
+  const data = (await getCollectionQuery("requestLeave", "createdAt")) as RequestLeaveData[]
 
   return (
     <SectionWrapper>

@@ -10,6 +10,8 @@ import {
   getDoc,
   getDocs,
   getFirestore,
+  orderBy,
+  query,
   updateDoc,
 } from "firebase/firestore"
 import { getStorage } from "firebase/storage"
@@ -43,6 +45,21 @@ export const db = getFirestore(firebaseApp)
 // Storage
 export const storage = getStorage(firebaseApp)
 
+// export const listenToCollection = (collectionName: string, callback: (data: any[]) => void) => {
+//   const query = collection(db, collectionName)
+
+//   const unsubscribe = onSnapshot(query, (snapshot) => {
+//     const data: any[] = []
+//     snapshot.forEach((doc) => {
+//       data.push({ id: doc.id, ...doc.data() })
+//     })
+//     callback(data)
+//   })
+
+//   // Return an unsubscribe function to stop listening when needed
+//   return unsubscribe
+// }
+
 /** Gets a users/{uid} document with username */
 // export async function getUserDoc(uid: string) {
 //   const q = query(collection(db, "users"), where("uid", "==", uid), limit(1))
@@ -50,6 +67,14 @@ export const storage = getStorage(firebaseApp)
 
 //   return userDoc
 // }
+
+export const getCollectionQuery = async (collectionName: string, orderByValue: string) => {
+  const ref = collection(db, collectionName)
+  const q = query(ref, orderBy(orderByValue, "desc"))
+  const data = (await getDocs(q)).docs.map(serializeDoc)
+
+  return data
+}
 
 export const getCollection = async (collectionName: string) => {
   const ref = collection(db, collectionName)

@@ -15,8 +15,9 @@ export function RequestLeaveForm() {
     register,
     getValues,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting, isValid },
-  } = useForm<RequestLeaveData>({ mode: "onChange" })
+  } = useForm<RequestLeaveData>()
 
   const onSubmit = async (values: RequestLeaveData) => {
     const payload = {
@@ -28,8 +29,9 @@ export function RequestLeaveForm() {
 
     try {
       await createDocument("requestLeave", payload)
-      router.push("/dashboard/request-leave")
+      router.refresh()
       toast.success("Leave request submitted")
+      reset()
     } catch (error) {
       showErrorMessage(error)
     }
@@ -120,7 +122,7 @@ export function RequestLeaveForm() {
       </div>
 
       <div className="flex items-center gap-x-6 border-t border-gray-900/10 px-4 py-4 sm:justify-end sm:px-8">
-        <button type="submit" className="btn btn-primary" disabled={isSubmitting || !isValid}>
+        <button type="submit" className="btn btn-primary" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Submit"}
         </button>
       </div>
