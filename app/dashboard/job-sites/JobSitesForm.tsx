@@ -42,9 +42,9 @@ export function JobSiteForm({ data }: JobSiteFormProps) {
 
     try {
       await createDocument("jobSites", payload)
+      reset()
       router.refresh()
       toast.success("Job site submitted")
-      reset()
       hideModal()
     } catch (error) {
       showErrorMessage(error)

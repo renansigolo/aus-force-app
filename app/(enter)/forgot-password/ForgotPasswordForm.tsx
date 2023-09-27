@@ -13,9 +13,7 @@ export function ForgotPasswordForm() {
     register,
     handleSubmit,
     formState: { isSubmitting, isValid },
-  } = useForm({
-    shouldUseNativeValidation: true,
-  })
+  } = useForm()
 
   function onSubmit({ email }: FieldValues) {
     // Send the password reset email
