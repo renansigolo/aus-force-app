@@ -260,7 +260,7 @@ export default function SignUpPage() {
                       </dt>
 
                       <Disclosure.Panel as="dd" className="mt-2">
-                        <Fields
+                        <AdditionalFields
                           register={register}
                           inputValues={
                             {
@@ -375,7 +375,7 @@ export default function SignUpPage() {
   )
 }
 
-type FieldsProps = {
+type AdditionalFieldsProps = {
   register: UseFormReturn<any>["register"]
   inputValues: {
     numberId: string
@@ -383,9 +383,7 @@ type FieldsProps = {
     expiryDateId: string
   }
 }
-
-function Fields({ register, inputValues }: FieldsProps) {
-  console.log("🚀 ~ Fields ~ inputValues:", inputValues)
+function AdditionalFields({ register, inputValues }: AdditionalFieldsProps) {
   return (
     <>
       <div>
