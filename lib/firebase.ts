@@ -68,6 +68,8 @@ export const storage = getStorage(firebaseApp)
 //   return userDoc
 // }
 
+type FirestoreCollectionName = "users" | "leaveRequests" | "jobSites" | "jobRequests"
+
 export const getCollectionQuery = async (collectionName: string, orderByValue: string) => {
   const ref = collection(db, collectionName)
   const q = query(ref, orderBy(orderByValue, "desc"))
@@ -76,7 +78,7 @@ export const getCollectionQuery = async (collectionName: string, orderByValue: s
   return data
 }
 
-export const getCollection = async (collectionName: string) => {
+export const getCollection = async (collectionName: FirestoreCollectionName) => {
   const ref = collection(db, collectionName)
   const data = (await getDocs(ref)).docs.map(serializeDoc)
 
@@ -84,25 +86,29 @@ export const getCollection = async (collectionName: string) => {
 }
 
 // Create firebase CRUD helpers
-export const createDocument = async (collectionName: string, data: any) => {
+export const createDocument = async (collectionName: FirestoreCollectionName, data: any) => {
   const ref = collection(db, collectionName)
   const docRef = await addDoc(ref, data)
   return docRef
 }
 
-export const readDocument = async (collectionName: string, docId: string) => {
+export const readDocument = async (collectionName: FirestoreCollectionName, docId: string) => {
   const ref = doc(db, collectionName, docId)
   const docSnap = await getDoc(ref)
   return serializeDoc(docSnap)
 }
 
-export const updateDocument = async (collectionName: string, docId: string, data: any) => {
+export const updateDocument = async (
+  collectionName: FirestoreCollectionName,
+  docId: string,
+  data: any,
+) => {
   const ref = doc(db, collectionName, docId)
   const response = await updateDoc(ref, data)
   return response
 }
 
-export const deleteDocument = async (collectionName: string, docId: string) => {
+export const deleteDocument = async (collectionName: FirestoreCollectionName, docId: string) => {
   const ref = doc(db, collectionName, docId)
   const response = await deleteDoc(ref)
   return response

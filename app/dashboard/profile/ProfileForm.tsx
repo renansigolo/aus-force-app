@@ -1,13 +1,41 @@
 "use client"
 
+import { CurrentUserProfile } from "@/app/dashboard/profile/page"
 import { UserAvatar } from "@/components/User"
+import { updateDocument } from "@/lib/firebase"
+import { showErrorMessage } from "@/lib/helpers"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 
-export function ProfileForm(props: any) {
-  const { register, handleSubmit } = useForm({ defaultValues: props })
+type ProfileFormProps = {
+  user: CurrentUserProfile
+}
 
-  const onSubmit = (data: any) => {
-    console.log(data)
+export function ProfileForm({ user }: ProfileFormProps) {
+  const router = useRouter()
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting },
+  } = useForm<CurrentUserProfile>({
+    defaultValues: {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      phoneNumber: user.phoneNumber,
+      dob: user.dob,
+      email: user.email,
+    },
+  })
+
+  const onSubmit = async (values: CurrentUserProfile) => {
+    try {
+      await updateDocument("users", user.uid, values)
+      router.refresh()
+      toast.success("Profile details submitted successfully")
+    } catch (error) {
+      showErrorMessage(error)
+    }
   }
 
   return (
@@ -25,10 +53,11 @@ export function ProfileForm(props: any) {
           </div>
 
           <div className="sm:col-span-3">
-            <label htmlFor="first-name" className="form-label">
+            <label htmlFor="firstName" className="form-label">
               First name
             </label>
             <input
+              disabled
               type="text"
               autoComplete="given-name"
               {...register("firstName", { required: "First name is required" })}
@@ -36,10 +65,11 @@ export function ProfileForm(props: any) {
           </div>
 
           <div className="sm:col-span-3">
-            <label htmlFor="last-name" className="form-label">
+            <label htmlFor="lastName" className="form-label">
               Last name
             </label>
             <input
+              disabled
               type="text"
               autoComplete="family-name"
               {...register("lastName", { required: "Last name is required" })}
@@ -53,6 +83,7 @@ export function ProfileForm(props: any) {
             <input
               type="tel"
               autoComplete="tel"
+              disabled={isSubmitting}
               {...register("phoneNumber", { required: "Phone number is required" })}
             />
           </div>
@@ -64,6 +95,7 @@ export function ProfileForm(props: any) {
             <input
               type="date"
               autoComplete="bday"
+              disabled={isSubmitting}
               {...register("dob", {
                 required: "Date of birthday is required",
                 validate: (value) =>
@@ -92,6 +124,7 @@ export function ProfileForm(props: any) {
             <input
               type="email"
               autoComplete="email"
+              disabled={isSubmitting}
               {...register("email", { required: "Email is required" })}
             />
           </div>
@@ -99,7 +132,7 @@ export function ProfileForm(props: any) {
 
         <div className="mt-8 flex">
           <button type="submit" className="btn btn-primary">
-            Save
+            {isSubmitting ? "Submitting..." : "Save"}
           </button>
         </div>
       </form>

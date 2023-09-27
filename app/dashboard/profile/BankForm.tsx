@@ -1,12 +1,47 @@
 "use client"
 
+import { CurrentUserProfile } from "@/app/dashboard/profile/page"
+import { FormInputError } from "@/components/FormInputError"
+import { updateDocument } from "@/lib/firebase"
+import { showErrorMessage } from "@/lib/helpers"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 
-export function BankForm() {
-  const { register, handleSubmit } = useForm()
+type BankFormValues = {
+  bankName: string
+  accountName: string
+  bsb: number
+  accountNumber: number
+}
 
-  const onSubmit = (data: any) => {
-    console.log(data)
+type BankFormProps = {
+  user: CurrentUserProfile
+}
+
+export function BankForm({ user }: BankFormProps) {
+  const router = useRouter()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<BankFormValues>({
+    defaultValues: {
+      bankName: user.bankName,
+      accountName: user.accountName,
+      bsb: user.bsb,
+      accountNumber: user.accountNumber,
+    },
+  })
+
+  const onSubmit = async (values: BankFormValues) => {
+    try {
+      await updateDocument("users", user.uid, values)
+      router.refresh()
+      toast.success("Bank details submitted successfully")
+    } catch (error) {
+      showErrorMessage(error)
+    }
   }
 
   return (
@@ -14,14 +49,13 @@ export function BankForm() {
       <form className="md:col-span-2" onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
           <div className="col-span-full">
-            <label htmlFor="bankName" className="block text-sm font-medium leading-6 text-gray-900">
+            <label htmlFor="bankName" className="form-label">
               Bank name
             </label>
             <select
-              id="bankName"
-              name="bankName"
-              className="mt-2 block w-full rounded-md border-0 py-1.5 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-indigo-600 sm:text-sm sm:leading-6"
-              defaultValue="ING"
+              {...register("bankName", { required: "Bank name is required" })}
+              defaultValue="UBank"
+              disabled={isSubmitting}
             >
               <option>Adelaide Bank</option>
               <option>AMP Bank Ltd</option>
@@ -37,12 +71,13 @@ export function BankForm() {
               <option>Macquarie Bank</option>
               <option>ME Bank</option>
               <option>NAB</option>
-              <option>Revolut </option>
+              <option>Revolut</option>
               <option>St. George Bank</option>
               <option>Suncorp Bank Bankwest</option>
               <option>UBank</option>
               <option>Westpac</option>
             </select>
+            <FormInputError message={errors.bankName?.message} />
           </div>
 
           <div className="col-span-full">
@@ -51,8 +86,10 @@ export function BankForm() {
             </label>
             <input
               type="text"
+              disabled={isSubmitting}
               {...register("accountName", { required: "Account name is required" })}
             />
+            <FormInputError message={errors.accountName?.message} />
           </div>
 
           <div className="sm:col-span-3">
@@ -61,12 +98,14 @@ export function BankForm() {
             </label>
             <input
               type="number"
+              disabled={isSubmitting}
               {...register("bsb", {
                 required: "BNB number is required",
-                minLength: 6,
-                maxLength: 6,
+                valueAsNumber: true,
+                validate: (value) => value.toString().length === 6 || "BSB must be 6 digits",
               })}
             />
+            <FormInputError message={errors.bsb?.message} />
           </div>
 
           <div className="sm:col-span-3">
@@ -75,18 +114,21 @@ export function BankForm() {
             </label>
             <input
               type="number"
+              disabled={isSubmitting}
               {...register("accountNumber", {
                 required: "Account number is required",
-                minLength: 9,
-                maxLength: 9,
+                valueAsNumber: true,
+                validate: (value) =>
+                  value.toString().length === 9 || "Account number must be 9 digits",
               })}
             />
+            <FormInputError message={errors.accountNumber?.message} />
           </div>
         </div>
 
         <div className="mt-8 flex">
           <button type="submit" className="btn btn-primary">
-            Save
+            {isSubmitting ? "Submitting..." : "Save"}
           </button>
         </div>
       </form>

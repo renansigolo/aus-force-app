@@ -6,13 +6,14 @@ import {
   NoSymbolIcon,
   TruckIcon,
 } from "@heroicons/react/24/outline"
+import Link from "next/link"
 
 export function JobSitesList(props: JobSitesListDataProps) {
   return (
     <div className="mb-2 rounded-md border border-gray-200 bg-white px-4 py-5 sm:px-6">
       <div className="-ml-4 -mt-4 flex flex-wrap items-center justify-between sm:flex-nowrap">
         <div className="ml-4 mt-4">
-          <div className="flex items-center">
+          <div className="flex">
             <div className="flex-shrink-0">
               <BuildingOffice2Icon className="h-12 w-12" />
             </div>
@@ -39,22 +40,21 @@ export function JobSitesList(props: JobSitesListDataProps) {
 
               <p className="text-sm text-gray-500">{props.additionalNotes}</p>
             </div>
+            <div className="flex">
+              <Link href={props.policyAndProceduresURL}>
+                <button
+                  type="button"
+                  className="relative inline-flex w-full items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                >
+                  <CloudArrowDownIcon
+                    className="mr-1.5 h-10 w-10 text-gray-400"
+                    aria-hidden="true"
+                  />
+                  <span>Policy And Procedures</span>
+                </button>
+              </Link>
+            </div>
           </div>
-        </div>
-
-        <div className="ml-4 mt-4 flex flex-shrink-0">
-          <a href={props.policyAndProceduresURL}>
-            <button
-              type="button"
-              className="relative inline-flex w-full items-center justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-            >
-              <CloudArrowDownIcon
-                className="-ml-0.5 mr-1.5 h-5 w-5 text-gray-400"
-                aria-hidden="true"
-              />
-              <span>Policy And Procedures</span>
-            </button>
-          </a>
         </div>
       </div>
     </div>

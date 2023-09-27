@@ -10,13 +10,33 @@ import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { db } from "@/lib/firebase"
 import { doc, getDoc } from "firebase/firestore"
 
+export type CurrentUserProfile = {
+  displayName: string
+  firstName: string
+  lastName: string
+  email: string
+  phoneNumber: string
+  photoURL: string
+  uid: string
+  dob: string
+  role: string
+  signatureURL: string
+  accountName: string
+  accountNumber: number
+  bsb: number
+  bankName: string
+  driverLicense: string
+  passport: string
+  whiteCard: string
+}
+
 export default async function ProfilePage() {
   // Get the user's data using the Firebase SDK in firestore
   const { user } = useAuthContext()
 
   const docRef = doc(db, `users/${user?.uid}`)
   const docSnap = await getDoc(docRef)
-  const data = docSnap.data()
+  const data = docSnap.data() as CurrentUserProfile
 
   return (
     <SectionWrapper>
@@ -29,7 +49,7 @@ export default async function ProfilePage() {
           </p>
         </div>
 
-        <ProfileForm {...data} />
+        <ProfileForm user={data} />
       </section>
 
       <Divider />
@@ -40,7 +60,7 @@ export default async function ProfilePage() {
           <p className="mt-1 text-sm leading-6 text-gray-500">Your bank details</p>
         </div>
 
-        <BankForm />
+        <BankForm user={data} />
       </section>
 
       <Divider />
@@ -50,7 +70,7 @@ export default async function ProfilePage() {
           <h2 className="text-base font-semibold leading-7">Additional Documents</h2>
           <p className="mt-1 text-sm leading-6 text-gray-500">Some additional documents</p>
         </div>
-        <AdditionalDocumentsForm {...data} />
+        <AdditionalDocumentsForm user={data} />
       </section>
     </SectionWrapper>
   )
