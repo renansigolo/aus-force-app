@@ -1,7 +1,7 @@
 "use client"
 
+import { Button } from "@/components/Button"
 import { FormInputError } from "@/components/FormInputError"
-import { Loader } from "@/components/Loader"
 import { auth } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
 import { LoginFormSchema, TLoginFormSchema } from "@/lib/schemas"
@@ -74,19 +74,9 @@ export function LoginForm() {
         </div>
       </div>
 
-      <button
-        disabled={isSubmitting}
-        className="btn btn-primary flex w-full justify-center disabled:opacity-60"
-      >
-        {isSubmitting ? (
-          <>
-            <Loader show />
-            <span>Submitting</span>
-          </>
-        ) : (
-          "Log in"
-        )}
-      </button>
+      <Button disabled={isSubmitting} className="w-full">
+        {isSubmitting ? "Submitting" : "Log in"}
+      </Button>
     </form>
   )
 }
