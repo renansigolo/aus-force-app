@@ -36,7 +36,7 @@ export function StaffAccordion({ accordionData }: StaffAccordionProps) {
 
                       <Disclosure.Panel as="dd" className="mt-2 px-2">
                         {item.staff.map((item) => (
-                          <StaffList {...item} key={item.email} />
+                          <StaffAccordionItem {...item} key={item.email} />
                         ))}
                       </Disclosure.Panel>
                     </>
@@ -51,7 +51,7 @@ export function StaffAccordion({ accordionData }: StaffAccordionProps) {
   )
 }
 
-function StaffList(props: StaffListDataProps) {
+function StaffAccordionItem(props: StaffListDataProps) {
   const { email, role } = props
 
   return (

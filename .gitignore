@@ -40,5 +40,6 @@ sitemap*
 public/robots.txt
 
 # firebase
+functions/firebase-debug.log
 firebase-debug.log
 ui-debug.log

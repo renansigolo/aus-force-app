@@ -19,32 +19,7 @@ export type AccordionProps = {
   staff: StaffListDataProps[]
 }
 
-const accordionData: AccordionProps[] = [
-  // {
-  //   title: "Job Site A",
-  //   staff: [
-  //     { email: "vini@outlook.com", role: "Manager" },
-  //     { email: "renan@gmail.com", role: "Supervisor" },
-  //     { email: "fabi@gmail.com", role: "Supervisor" },
-  //   ],
-  // },
-  // {
-  //   title: "Job Site B",
-  //   staff: [
-  //     { email: "vini@outlook.com", role: "Manager" },
-  //     { email: "renan@gmail.com", role: "Supervisor" },
-  //     { email: "fabi@gmail.com", role: "Supervisor" },
-  //   ],
-  // },
-  // {
-  //   title: "Job Site C",
-  //   staff: [
-  //     { email: "vini@outlook.com", role: "Manager" },
-  //     { email: "renan@gmail.com", role: "Supervisor" },
-  //     { email: "fabi@gmail.com", role: "Supervisor" },
-  //   ],
-  // },
-]
+const accordionData: AccordionProps[] = []
 
 type StaffPageProps = { searchParams: SearchParams }
 
@@ -57,7 +32,7 @@ export default function StaffPage({ searchParams }: StaffPageProps) {
         <Role role="client">
           <SectionHeading title="Staff" buttonLabel="New Staff" />
           <section className="py-8">
-            {accordionData.length ? (
+            {accordionData.length > 0 ? (
               <StaffAccordion accordionData={accordionData} />
             ) : (
               <Empty title="staff" />
