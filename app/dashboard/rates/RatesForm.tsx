@@ -1,5 +1,7 @@
 "use client"
 
+import { Button } from "@/components/Button"
+import { useRouter } from "next/navigation"
 import { Fragment, useState } from "react"
 
 const hoursWorkedData = [
@@ -16,8 +18,11 @@ const hoursWorkedData = [
 ]
 
 export function RatesForm() {
+  const router = useRouter()
+  const hideModal = () => router.push("?showModal=false")
+
   return (
-    <form className="my-12 space-y-8 divide-y divide-gray-200">
+    <form className="space-y-8 divide-y divide-gray-200">
       <div className="mt-6 grid gap-4">
         <div>
           <label htmlFor="clientName" className="form-label">
@@ -62,6 +67,20 @@ export function RatesForm() {
           <hr className="my-6" />
           <HoursWorked />
         </div>
+      </div>
+
+      <div className="gap-2 pt-5 sm:flex sm:flex-row-reverse sm:pt-4">
+        <Button type="submit" className="btn-success">
+          Submit
+        </Button>
+        <Button
+          type="button"
+          className="btn-secondary"
+          onClick={() => hideModal()}
+          // disabled={isSubmitting}
+        >
+          Cancel
+        </Button>
       </div>
     </form>
   )

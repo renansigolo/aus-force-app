@@ -26,8 +26,15 @@ export type CurrentUserProfile = {
   bsb: number
   bankName: string
   driverLicense: string
-  passport: string
-  whiteCard: string
+  driverLicenseIssued: string
+  driverLicenseExpiry: string
+  passportNumber: string
+  passportIssued: string
+  passportExpiry: string
+  identificationNumber: string
+  identificationIssued: string
+  identificationExpiry: string
+  whiteCardNumber: string
 }
 
 export default async function ProfilePage() {

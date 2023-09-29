@@ -10,7 +10,9 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
   return (
     <AuthCheck>
       <Navbar />
-      <main className="min-h-almost-full flex flex-1 flex-col bg-gray-100 py-4">{children}</main>
+      <main className="flex min-h-[calc(100vh-68px)] flex-1 flex-col bg-gray-100 py-4">
+        {children}
+      </main>
     </AuthCheck>
   )
 }

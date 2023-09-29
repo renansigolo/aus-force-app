@@ -20,12 +20,13 @@ export function StaffForm({ accordionData }: StaffModalProps) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting, isValid },
   } = useForm<FormInputs>()
 
   const hideModal = () => router.push("?showModal=false")
 
-  const onSubmit = (values: FormInputs) => {
+  const onSubmit = async (values: FormInputs) => {
     // Find the item in the accordionData array that matches the jobSite
     const accordionItem = accordionData.find((item) => item.title === values.jobSite)
 
@@ -47,6 +48,7 @@ export function StaffForm({ accordionData }: StaffModalProps) {
           ],
         })
 
+    reset()
     hideModal()
   }
 

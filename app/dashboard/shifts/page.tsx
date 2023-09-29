@@ -6,40 +6,55 @@ import { BanknotesIcon } from "@heroicons/react/20/solid"
 import { BuildingOffice2Icon } from "@heroicons/react/24/outline"
 import { twMerge } from "tailwind-merge"
 
-const data = [
-  {
-    id: 1,
-    name: "Shift #123",
-    href: "#",
-    amount: "$20,000",
-    currency: "AUD",
-    status: "approved",
-    date: "July 12, 2021",
-    datetime: "2020-07-11",
-  },
-  {
-    id: 2,
-    name: "Shift #456",
-    href: "#",
-    amount: "$20,000",
-    currency: "AUD",
-    status: "pending",
-    date: "July 11, 2021",
-    datetime: "2020-07-11",
-  },
-  {
-    id: 3,
-    name: "Shift #789",
-    href: "#",
-    amount: "$20,000",
-    currency: "AUD",
-    status: "declined",
-    date: "July 11, 2021",
-    datetime: "2020-07-11",
-  },
-]
+// const data = [
+//   {
+//     id: 1,
+//     name: "Shift #123",
+//     href: "#",
+//     amount: "$20,000",
+//     currency: "AUD",
+//     status: "approved",
+//     date: "July 12, 2021",
+//     datetime: "2020-07-11",
+//   },
+//   {
+//     id: 2,
+//     name: "Shift #456",
+//     href: "#",
+//     amount: "$20,000",
+//     currency: "AUD",
+//     status: "pending",
+//     date: "July 11, 2021",
+//     datetime: "2020-07-11",
+//   },
+//   {
+//     id: 3,
+//     name: "Shift #789",
+//     href: "#",
+//     amount: "$20,000",
+//     currency: "AUD",
+//     status: "declined",
+//     date: "July 11, 2021",
+//     datetime: "2020-07-11",
+//   },
+// ]
+type Status = "approved" | "pending" | "declined"
+type Shift = {
+  id: number
+  name: string
+  href: string
+  amount: string
+  currency: string
+  status: Status
+  date: string
+  datetime: string
+}
+const data: Shift[] = []
 
-const statusStyles: any = {
+type StatusStyles = {
+  [key in Status]: string
+}
+const statusStyles: StatusStyles = {
   approved: "bg-green-100 text-green-800",
   pending: "bg-yellow-100 text-yellow-800",
   declined: "bg-red-100 text-red-800",

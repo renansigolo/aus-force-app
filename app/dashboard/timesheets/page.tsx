@@ -28,7 +28,7 @@ export default function TimesheetsPage({ searchParams }: TimesheetsPageProps) {
           {accordionItems.length > 0 ? <Client /> : <Empty title="timesheets" />}
         </section>
 
-        <ModalWrapper title="New Staff" showModal={showModal}>
+        <ModalWrapper title="Edit Cycle" showModal={showModal}>
           <TimesheetForm />
         </ModalWrapper>
       </Role>
@@ -75,7 +75,7 @@ function Client() {
                             "block w-full px-4 py-2 text-left text-sm text-gray-700",
                           )}
                         >
-                          Configure Cycle
+                          Edit cycle
                         </Link>
                       )}
                     </Menu.Item>

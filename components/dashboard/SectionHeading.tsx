@@ -1,7 +1,6 @@
 "use client"
 
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 
 type SectionHeadingProps = {
   title: string
@@ -9,11 +8,9 @@ type SectionHeadingProps = {
 }
 
 export function SectionHeading({ title, buttonLabel }: SectionHeadingProps) {
-  const router = useRouter()
-
   return (
     <div className="flex items-center justify-between">
-      <h2 className="heading-2">{title}</h2>
+      <h2 className="md:text-3xl; text-2xl font-bold tracking-tight text-gray-900">{title}</h2>
       {buttonLabel && (
         <Link className="btn btn-primary" href={"?showModal=true"}>
           {buttonLabel}

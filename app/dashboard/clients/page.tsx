@@ -47,7 +47,7 @@ export default function ClientsPage({ searchParams }: ClientsPageProps) {
           {accordionData.length > 0 ? <Client /> : <Empty title="clients" />}
         </section>
 
-        <ModalWrapper title="New Staff" showModal={showModal}>
+        <ModalWrapper title="New Client" showModal={showModal}>
           <ClientsForm />
         </ModalWrapper>
       </Role>

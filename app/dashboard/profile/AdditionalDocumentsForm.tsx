@@ -17,13 +17,7 @@ export function AdditionalDocumentsForm({ user }: AdditionalDocumentsFormProps) 
     register,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<CurrentUserProfile>({
-    defaultValues: {
-      passport: user.passport,
-      driverLicense: user.driverLicense,
-      whiteCard: user.whiteCard,
-    },
-  })
+  } = useForm<CurrentUserProfile>({ defaultValues: user })
 
   const onSubmit = async (values: CurrentUserProfile) => {
     try {
@@ -39,14 +33,30 @@ export function AdditionalDocumentsForm({ user }: AdditionalDocumentsFormProps) 
     <form className="md:col-span-2" onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
         <div className="col-span-full">
-          <label htmlFor="passport" className="form-label">
+          <label htmlFor="passportNumber" className="form-label">
             ID / Passport
           </label>
           <input
             type="text"
             disabled={isSubmitting}
-            {...register("passport", { required: "Passport number is required" })}
+            {...register("passportNumber", { required: "Passport number is required" })}
           />
+
+          <div className="flex gap-2">
+            <div className="mt-2 w-full">
+              <label htmlFor="passportIssued" className="form-label">
+                Date of Issue
+              </label>
+              <input type="date" {...register("passportIssued")} />
+            </div>
+
+            <div className="mt-2 w-full">
+              <label htmlFor="passportExpiry" className="form-label">
+                Expiry Date
+              </label>
+              <input type="date" {...register("passportExpiry")} />
+            </div>
+          </div>
         </div>
 
         <div className="col-span-full">
@@ -61,16 +71,65 @@ export function AdditionalDocumentsForm({ user }: AdditionalDocumentsFormProps) 
               valueAsNumber: true,
             })}
           />
+
+          <div className="flex gap-2">
+            <div className="mt-2 w-full">
+              <label htmlFor="driverLicenseIssued" className="form-label">
+                Date of Issue
+              </label>
+              <input type="date" {...register("driverLicenseIssued")} />
+            </div>
+
+            <div className="mt-2 w-full">
+              <label htmlFor="driverLicenseExpiry" className="form-label">
+                Expiry Date
+              </label>
+              <input type="date" {...register("driverLicenseExpiry")} />
+            </div>
+          </div>
         </div>
 
         <div className="col-span-full">
-          <label htmlFor="whiteCard" className="form-label">
+          <label htmlFor="identification" className="form-label">
+            ID
+          </label>
+          <input
+            type="number"
+            disabled={isSubmitting}
+            {...register("identificationNumber", {
+              required: "ID is required",
+              valueAsNumber: true,
+            })}
+          />
+
+          <div className="flex gap-2">
+            <div className="mt-2 w-full">
+              <label htmlFor="identificationIssued" className="form-label">
+                Date of Issue
+              </label>
+              <input type="date" {...register("identificationIssued")} />
+            </div>
+
+            <div className="mt-2 w-full">
+              <label htmlFor="identificationExpiry" className="form-label">
+                Expiry Date
+              </label>
+              <input type="date" {...register("identificationExpiry")} />
+            </div>
+          </div>
+        </div>
+
+        <div className="col-span-full">
+          <label htmlFor="whiteCardNumber" className="form-label">
             White Card
           </label>
           <input
             type="number"
             disabled={isSubmitting}
-            {...register("whiteCard", { required: "White card is required", valueAsNumber: true })}
+            {...register("whiteCardNumber", {
+              required: "White card is required",
+              valueAsNumber: true,
+            })}
           />
         </div>
 

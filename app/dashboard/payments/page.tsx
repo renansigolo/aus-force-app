@@ -5,30 +5,46 @@ import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { BanknotesIcon } from "@heroicons/react/20/solid"
 import { twMerge } from "tailwind-merge"
 
-const data = [
-  {
-    id: 1,
-    name: "Payment from company ABC",
-    href: "#",
-    amount: "$20,000",
-    currency: "AUD",
-    status: "success",
-    date: "July 12, 2021",
-    datetime: "2020-07-11",
-  },
-  {
-    id: 2,
-    name: "Payment from company DEF",
-    href: "#",
-    amount: "$20,000",
-    currency: "AUD",
-    status: "success",
-    date: "July 11, 2021",
-    datetime: "2020-07-11",
-  },
-]
+// const data = [
+// {
+//   id: 1,
+//   name: "Payment from company ABC",
+//   href: "#",
+//   amount: "$20,000",
+//   currency: "AUD",
+//   status: "success",
+//   date: "July 12, 2021",
+//   datetime: "2020-07-11",
+// },
+//   {
+//     id: 2,
+//     name: "Payment from company DEF",
+//     href: "#",
+//     amount: "$20,000",
+//     currency: "AUD",
+//     status: "success",
+//     date: "July 11, 2021",
+//     datetime: "2020-07-11",
+//   },
+// ]
+type Status = "success" | "processing" | "failed"
+type Payment = {
+  id: string
+  createdAt: Date
+  name: string
+  href: string
+  amount: string
+  currency: string
+  status: Status
+  date: string
+  datetime: string
+}
+const data: Payment[] = []
 
-const statusStyles: any = {
+type StatusStyles = {
+  [key in Status]: string
+}
+const statusStyles: StatusStyles = {
   success: "bg-green-100 text-green-800",
   processing: "bg-yellow-100 text-yellow-800",
   failed: "bg-gray-100 text-gray-800",
