@@ -1,6 +1,7 @@
 "use client"
 
 import { RatesForm } from "@/app/dashboard/rates/RatesForm"
+import { Button } from "@/components/Button"
 import { Empty } from "@/components/Empty"
 import Modal from "@/components/Modal"
 import { Role } from "@/components/Roles"
@@ -126,9 +127,8 @@ function AllocationsList(props: any) {
                 </div>
 
                 {item.allocatedWorker.hasAllocatedRates ? (
-                  <button
-                    type="button"
-                    className="btn w-44 gap-2 hover:cursor-pointer"
+                  <Button
+                    className="btn-secondary w-44"
                     onClick={() =>
                       NiceModal.show(Modal, {
                         title: "New Rates",
@@ -138,11 +138,10 @@ function AllocationsList(props: any) {
                   >
                     <ClockIcon className="h-6 w-6" />
                     Allocate Rates
-                  </button>
+                  </Button>
                 ) : (
-                  <button
-                    type="button"
-                    className="btn w-44 gap-2 hover:cursor-pointer"
+                  <Button
+                    className="btn-secondary w-44"
                     onClick={() =>
                       NiceModal.show(Modal, {
                         title: "New Rates",
@@ -152,18 +151,14 @@ function AllocationsList(props: any) {
                   >
                     <PencilIcon className="h-6 w-6" />
                     Edit Rates
-                  </button>
+                  </Button>
                 )}
               </div>
             ) : (
-              <button
-                type="button"
-                className="btn w-44 gap-2 hover:cursor-pointer "
-                onClick={props.showModal}
-              >
+              <Button className="btn-secondary w-44" onClick={props.showModal}>
                 <UserPlusIcon className="h-6 w-6" />
                 Allocate Worker
-              </button>
+              </Button>
             )}
           </div>
         </div>
@@ -243,14 +238,9 @@ function AllocationModal() {
               </div>
             </div>
             <div className="hidden sm:flex sm:flex-col sm:items-end">
-              <button
-                type="button"
-                className="btn gap-2 hover:cursor-pointer"
-                onClick={() => console.log("Allocated")}
-              >
-                <UserPlusIcon className="h-6 w-6" />
+              <Button className="btn-secondary" onClick={() => console.log("Allocated")}>
                 Allocate
-              </button>
+              </Button>
             </div>
           </li>
         ))}

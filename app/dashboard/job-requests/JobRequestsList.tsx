@@ -1,4 +1,5 @@
 import { JobRequest } from "@/app/dashboard/job-requests/page"
+import { Button } from "@/components/Button"
 import { ExclamationTriangleIcon, XCircleIcon } from "@heroicons/react/24/outline"
 
 type JobRequestsListProps = {
@@ -32,9 +33,9 @@ export function JobRequestsList({ data }: JobRequestsListProps) {
             <span className="inline-flex items-center gap-2 rounded-md bg-yellow-50 px-2 py-1 text-sm text-yellow-800 ring-1 ring-inset ring-yellow-600/20">
               <ExclamationTriangleIcon className="h-6 w-6" /> Waiting Allocation
             </span>
-            <button type="button" className="btn gap-2">
+            <Button type="button" className="btn-secondary">
               <XCircleIcon className="h-6 w-6" /> Cancel Request
-            </button>
+            </Button>
           </div>
         </div>
       ))}

@@ -1,4 +1,4 @@
-import Link from "next/link"
+import { Button } from "@/components/Button"
 
 export function ClientsForm() {
   return (
@@ -17,19 +17,13 @@ export function ClientsForm() {
         <input type="email" name="businessEmail" placeholder="example@email.com" />
       </div>
 
-      <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-        <button
-          type="submit"
-          className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-        >
+      <div className="mt-5 gap-2 sm:mt-4 sm:flex sm:flex-row-reverse">
+        <Button type="submit" className="btn-success">
           Submit
-        </button>
-        <Link
-          href="?showModal=false"
-          className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm"
-        >
+        </Button>
+        <Button href="?showModal=false" className="btn-secondary">
           Cancel
-        </Link>
+        </Button>
       </div>
     </form>
   )

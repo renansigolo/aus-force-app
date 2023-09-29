@@ -1,5 +1,6 @@
 "use client"
 
+import { Button } from "@/components/Button"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Role } from "@/components/Roles"
@@ -53,13 +54,10 @@ function InvoicesList() {
             </div>
           </div>
           <div className="flex flex-shrink-0">
-            <button
-              type="button"
-              className="relative inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-            >
-              <CloudArrowDownIcon className="mr-1.5 h-5 w-5 text-gray-400" aria-hidden="true" />
-              <span>Download</span>
-            </button>
+            <Button type="button" className="btn-secondary">
+              <CloudArrowDownIcon className="h-5 w-5" aria-hidden="true" />
+              Download
+            </Button>
           </div>
         </div>
       </div>

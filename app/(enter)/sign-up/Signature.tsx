@@ -1,3 +1,4 @@
+import { Button } from "@/components/Button"
 import { TRegisterFormSchema } from "@/lib/schemas"
 import { useEffect, useRef } from "react"
 import { UseFormSetValue } from "react-hook-form"
@@ -50,9 +51,9 @@ export const SignatureForm = ({ setValue }: SignatureFormProps) => {
           }}
         />
         <div className="mt-2 flex gap-2">
-          <button className="btn" onClick={handleClear}>
+          <Button className="btn-secondary" onClick={handleClear}>
             Clear
-          </button>
+          </Button>
         </div>
       </div>
     </div>

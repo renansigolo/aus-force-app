@@ -1,14 +1,13 @@
 import Link from "next/link"
-import { ReactNode } from "react"
+import { ButtonHTMLAttributes, LinkHTMLAttributes, ReactNode } from "react"
 import { twMerge } from "tailwind-merge"
 
-type ButtonProps = {
-  href?: string
-  className?: string
-  children?: ReactNode
-  disabled?: boolean
-  // [key: string]: ButtonHTMLAttributes<HTMLButtonElement>["value"]
-}
+type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
+  LinkHTMLAttributes<HTMLAnchorElement> & {
+    href?: string
+    className?: string
+    children?: ReactNode
+  }
 
 export function Button({ href, className, ...props }: ButtonProps) {
   className = twMerge("btn btn-primary", className)
