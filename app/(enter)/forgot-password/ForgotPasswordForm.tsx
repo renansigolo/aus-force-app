@@ -1,5 +1,6 @@
 "use client"
 
+import { Button } from "@/components/Button"
 import { auth } from "@/lib/firebase"
 import { sendPasswordResetEmail } from "@firebase/auth"
 import { FirebaseError } from "@firebase/util"
@@ -37,12 +38,9 @@ export function ForgotPasswordForm() {
       </div>
 
       <div>
-        <button
-          disabled={isSubmitting || !isValid}
-          className="btn btn-primary flex w-full justify-center disabled:cursor-not-allowed disabled:opacity-50"
-        >
+        <Button disabled={isSubmitting || !isValid} className="w-full">
           {isSubmitting ? "Submitting..." : "Reset Password"}
-        </button>
+        </Button>
       </div>
     </form>
   )

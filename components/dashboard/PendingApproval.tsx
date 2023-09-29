@@ -1,5 +1,6 @@
 "use client"
 
+import { Button } from "@/components/Button"
 import Modal from "@/components/Modal"
 import { Role } from "@/components/Roles"
 import NiceModal from "@ebay/nice-modal-react"
@@ -170,12 +171,10 @@ function ShiftTable({ approveShift, showModal }: any) {
                     {person.overtimeHours}
                   </td>
                   <td className="flex flex-col-reverse gap-2 py-4 pl-3 pr-4 text-right text-sm font-medium lg:flex-row">
-                    <button className="btn w-full" onClick={showModal}>
-                      Edit<span className="sr-only">, {person.name}</span>
-                    </button>
-                    <button className="btn btn-primary w-full" onClick={approveShift}>
-                      Approve<span className="sr-only">, {person.name}</span>
-                    </button>
+                    <Button className="btn-secondary" onClick={showModal}>
+                      Edit
+                    </Button>
+                    <Button onClick={approveShift}>Approve</Button>
                   </td>
                 </tr>
               ))}

@@ -3,9 +3,9 @@
 import { EnterHeader } from "@/app/(enter)/EnterHeader"
 import { FormSectionHeading } from "@/app/(enter)/sign-up/FormSectionHeading"
 import { SignatureForm } from "@/app/(enter)/sign-up/Signature"
+import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
 import { FormInputError } from "@/components/FormInputError"
-import { Loader } from "@/components/Loader"
 import { auth, db, storage } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
 import { RegisterFormDefaultValues, TRegisterFormSchema } from "@/lib/schemas"
@@ -356,19 +356,9 @@ export default function SignUpPage() {
         </div>
 
         <div className="flex justify-end pt-5">
-          <button
-            className="btn btn-primary disabled:opacity-60"
-            disabled={isSubmitting || !isDirty}
-          >
-            {isSubmitting ? (
-              <>
-                <Loader show />
-                <p>Registering...</p>
-              </>
-            ) : (
-              <p>Register</p>
-            )}
-          </button>
+          <Button disabled={isSubmitting || !isDirty}>
+            {isSubmitting ? "Registering..." : "Register"}
+          </Button>
         </div>
       </form>
     </div>
