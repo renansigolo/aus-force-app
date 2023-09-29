@@ -1,6 +1,6 @@
 "use client"
 
-import { AccordionProps, StaffListDataProps } from "@/app/dashboard/staff/page"
+import { AccordionProps, StaffListDataProps } from "@/app/dashboard/(client)/staff/page"
 import { Disclosure } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon, UserCircleIcon } from "@heroicons/react/20/solid"
 

@@ -1,5 +1,5 @@
-import { JobSiteForm } from "@/app/dashboard/job-sites/JobSitesForm"
-import { JobSitesList } from "@/app/dashboard/job-sites/JobSitesList"
+import { JobSiteForm } from "@/app/dashboard/(client)/job-sites/JobSitesForm"
+import { JobSitesList } from "@/app/dashboard/(client)/job-sites/JobSitesList"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Empty } from "@/components/Empty"

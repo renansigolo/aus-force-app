@@ -1,4 +1,4 @@
-import { JobRequest } from "@/app/dashboard/job-requests/page"
+import { JobRequest } from "@/app/dashboard/(client)/job-requests/page"
 import { Button } from "@/components/Button"
 import { ExclamationTriangleIcon, XCircleIcon } from "@heroicons/react/24/outline"
 

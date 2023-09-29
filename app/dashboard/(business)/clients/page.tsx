@@ -1,6 +1,6 @@
 "use client"
 
-import { ClientsForm } from "@/app/dashboard/clients/ClientsForm"
+import { ClientsForm } from "@/app/dashboard/(business)/clients/ClientsForm"
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"

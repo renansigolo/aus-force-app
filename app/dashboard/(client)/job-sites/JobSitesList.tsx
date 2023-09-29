@@ -1,4 +1,4 @@
-import { JobSitesListDataProps } from "@/app/dashboard/job-sites/page"
+import { JobSitesListDataProps } from "@/app/dashboard/(client)/job-sites/page"
 import {
   BuildingOffice2Icon,
   CloudArrowDownIcon,

@@ -1,6 +1,6 @@
 "use client"
 
-import { RatesForm } from "@/app/dashboard/rates/RatesForm"
+import { RatesForm } from "@/app/dashboard/(business)/rates/RatesForm"
 import { Button } from "@/components/Button"
 import { Empty } from "@/components/Empty"
 import Modal from "@/components/Modal"

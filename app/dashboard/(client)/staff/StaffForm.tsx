@@ -1,6 +1,6 @@
 "use client"
 
-import { AccordionProps } from "@/app/dashboard/staff/page"
+import { AccordionProps } from "@/app/dashboard/(client)/staff/page"
 import { FormInputError } from "@/components/FormInputError"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"

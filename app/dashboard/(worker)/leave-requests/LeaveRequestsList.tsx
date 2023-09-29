@@ -1,6 +1,6 @@
 "use client"
 
-import { RequestLeaveData as LeaveRequestsData } from "@/app/dashboard/leave-requests/page"
+import { RequestLeaveData as LeaveRequestsData } from "@/app/dashboard/(worker)/leave-requests/page"
 import { deleteDocument } from "@/lib/firebase"
 import { SunIcon } from "@heroicons/react/20/solid"
 import {

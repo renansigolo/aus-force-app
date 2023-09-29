@@ -1,4 +1,4 @@
-import { RatesForm } from "@/app/dashboard/rates/RatesForm"
+import { RatesForm } from "@/app/dashboard/(business)/rates/RatesForm"
 import { Accordion } from "@/components/Accordion"
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
