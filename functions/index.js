@@ -20,7 +20,7 @@ const gmailPass = defineSecret("GMAIL_PASS")
  */
 exports.registerInterest = onRequest({ cors: true }, (req, res) =>
   db
-    .collection("registered-interest")
+    .collection("registerInterest")
     .doc()
     .set({ email: req.body.email })
     .then(() => res.send("Email saved"))
