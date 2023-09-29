@@ -1,5 +1,5 @@
+import { Navbar } from "@/app/dashboard/Navbar"
 import { AuthCheck } from "@/components/AuthCheck"
-import { Navbar } from "@/components/dashboard/Navbar"
 import { ReactNode } from "react"
 
 type DashboardLayoutProps = {

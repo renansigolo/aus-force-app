@@ -95,8 +95,9 @@ const navigation = [
 
 const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }]
 
-export function Navbar() {
+export async function Navbar() {
   const { user } = useAuthContext()
+
   const pathname = usePathname()
 
   const isActive = (href: string) => {
@@ -107,6 +108,8 @@ export function Navbar() {
     // Redirect to the home page if the user is not logged in
     if (user === null) redirect("/")
   }, [user])
+
+  console.log("🚀 ~ Navbar ~ user:", user)
 
   const signOutAndRedirect = () => {
     signOut(auth)

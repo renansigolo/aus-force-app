@@ -1,4 +1,5 @@
 // Import the functions you need from the SDKs you need
+import { CurrentUserProfile } from "@/app/dashboard/profile/page"
 import { getApp, initializeApp } from "firebase/app"
 import { getAuth } from "firebase/auth"
 import {
@@ -68,9 +69,20 @@ export const storage = getStorage(firebaseApp)
 //   return userDoc
 // }
 
+export const getUserDoc = async (uid: string) => {
+  const docRef = doc(db, `users/${uid}`)
+  const docSnap = await getDoc(docRef)
+  const data = docSnap.data() as CurrentUserProfile
+
+  return data
+}
+
 type FirestoreCollectionName = "users" | "leaveRequests" | "jobSites" | "jobRequests"
 
-export const getCollectionQuery = async (collectionName: string, orderByValue: string) => {
+export const getCollectionQuery = async (
+  collectionName: FirestoreCollectionName,
+  orderByValue: string,
+) => {
   const ref = collection(db, collectionName)
   const q = query(ref, orderBy(orderByValue, "desc"))
   const data = (await getDocs(q)).docs.map(serializeDoc)

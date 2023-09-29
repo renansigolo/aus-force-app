@@ -1,9 +1,9 @@
+import { Birthdays } from "@/app/dashboard/Birthdays"
+import { Overview } from "@/app/dashboard/Overview"
+import { PendingApprovals } from "@/app/dashboard/PendingApprovals"
+import { WeeklyActivity } from "@/app/dashboard/WeeklyActivity"
 import { Container } from "@/components/Container"
-import { Birthdays } from "@/components/dashboard/Birthdays"
 import { Leaves } from "@/components/dashboard/Leaves"
-import { Overview } from "@/components/dashboard/Overview"
-import { PendingApproval } from "@/components/dashboard/PendingApproval"
-import { WeeklyActivity } from "@/components/dashboard/WeeklyActivity"
 import { WelcomePanel } from "@/components/dashboard/WelcomePanel"
 
 export default function DashboardPage() {
@@ -14,7 +14,7 @@ export default function DashboardPage() {
           <WelcomePanel />
 
           <section className="mt-8">
-            <PendingApproval />
+            <PendingApprovals />
           </section>
 
           <section className="mt-8">

@@ -44,7 +44,7 @@ const person = [
   },
 ]
 
-export function PendingApproval() {
+export function PendingApprovals() {
   const approveShift = () => toast.success("Shift approved!")
   const showModal = () =>
     NiceModal.show(Modal, {
@@ -55,7 +55,7 @@ export function PendingApproval() {
 
   return (
     <Role role="client">
-      <h2 className="heading-3 mb-3">Shift Approval</h2>
+      <h2 className="heading-3 mb-3">Pending Approvals</h2>
       <Accordion approveShift={approveShift} showModal={showModal} />
     </Role>
   )
