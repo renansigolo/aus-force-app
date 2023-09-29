@@ -15,18 +15,18 @@ export function JobRequestsList({ data }: JobRequestsListProps) {
           className="flex rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm md:items-center"
         >
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-medium text-gray-900">Job Request {index + 1}</p>
-            <p className="text-sm text-gray-500">{item.jobSite}</p>
-            <p className="text-sm text-gray-500">
-              {item.quantity}x {item.jobPosition}
-            </p>
-            <p className="text-sm text-gray-500">
-              {item.startDateTime} - {item.endDateTime}
-            </p>
-            <p className="text-sm text-gray-500">{item.break ? "With" : "No"} Break</p>
-            <p className="text-sm text-gray-500">{item.supplier}</p>
-            <p className="text-sm text-gray-500">{item.serviceDescription}</p>
-            <p className="text-sm text-gray-500">{item.additionalNotes}</p>
+            <p className="mb-2 text-sm font-semibold text-gray-900">Job Request {index + 1}</p>
+            <ListItem label="Job site" value={item.jobSite} />
+            <ListItem
+              label="Job position"
+              value={`${item.quantity}x ${item.jobPosition} ${item.jobPosition}`}
+            />
+            <ListItem label="Start Date" value={item.startDateTime} />
+            <ListItem label="End Date" value={item.endDateTime} />
+            <ListItem label="Break" value={item.break ? "Yes" : "No"} />
+            <ListItem label="Supplier" value={item.supplier} />
+            <ListItem label="Service description" value={item.serviceDescription} />
+            <ListItem label="Additional notes" value={item.additionalNotes} />
           </div>
 
           <div className="flex flex-col items-center gap-2">
@@ -40,5 +40,19 @@ export function JobRequestsList({ data }: JobRequestsListProps) {
         </div>
       ))}
     </div>
+  )
+}
+
+type ListItemProps = {
+  label: string
+  value: string
+}
+
+function ListItem({ label, value }: ListItemProps) {
+  return (
+    <p className="text-sm text-gray-600">
+      <span className="font-medium text-gray-900">{label}: </span>
+      {value}
+    </p>
   )
 }

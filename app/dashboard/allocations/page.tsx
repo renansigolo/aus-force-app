@@ -97,14 +97,13 @@ function AllocationsList(props: any) {
           className="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm"
         >
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-medium text-gray-900">{item.title}</p>
-            <p className="text-sm text-gray-500">{item.jobPosition}</p>
-            <p className="text-sm text-gray-500">
-              {item.startTime} - {item.endTime}
-            </p>
-            <p className="text-sm text-gray-500">{item.break ? "With" : "No"} Break</p>
-            <p className="text-sm text-gray-500">{item.additionalNotes}</p>
-            <p className="text-sm text-gray-500">{item.supplier}</p>
+            <p className="mb-2 text-sm font-medium text-gray-900">{item.title}</p>
+            <AllocationListItem label="Job position" value={item.jobPosition} />
+            <AllocationListItem label="Start Date" value={item.startTime} />
+            <AllocationListItem label="End Date" value={item.endTime} />
+            <AllocationListItem label="Break" value={item.break ? "Yes" : "No"} />
+            <AllocationListItem label="Supplier" value={item.supplier} />
+            <AllocationListItem label="Additional notes" value={item.additionalNotes} />
           </div>
 
           <div className="flex flex-col items-center gap-2">
@@ -164,6 +163,20 @@ function AllocationsList(props: any) {
         </div>
       ))}
     </div>
+  )
+}
+
+type ListItemProps = {
+  label: string
+  value: string
+}
+
+function AllocationListItem({ label, value }: ListItemProps) {
+  return (
+    <p className="text-sm text-gray-600">
+      <span className="font-medium text-gray-900">{label}: </span>
+      {value}
+    </p>
   )
 }
 
