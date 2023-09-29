@@ -1,8 +1,8 @@
 "use client"
 
 import { useAuthContext } from "@/app/AuthContext"
-import { AdditionalDocumentsForm } from "@/app/dashboard/profile/AdditionalDocumentsForm"
 import { BankForm } from "@/app/dashboard/profile/BankForm"
+import { PersonalDocumentsForm } from "@/app/dashboard/profile/PersonalDocumentsForm"
 import { ProfileForm } from "@/app/dashboard/profile/ProfileForm"
 import { Divider } from "@/components/Divider"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
@@ -34,7 +34,6 @@ export type CurrentUserProfile = {
   identificationNumber: string
   identificationIssued: string
   identificationExpiry: string
-  whiteCardNumber: string
 }
 
 export default async function ProfilePage() {
@@ -68,8 +67,8 @@ export default async function ProfilePage() {
       <Divider />
 
       <section className={styleSection}>
-        <Heading title="Additional Documents" description="Some additional documents" />
-        <AdditionalDocumentsForm user={data} />
+        <Heading title="Personal Documents" description="Personal documents" />
+        <PersonalDocumentsForm user={data} />
       </section>
     </SectionWrapper>
   )

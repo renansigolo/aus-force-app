@@ -49,7 +49,6 @@ export default function SignUpPage() {
   const imageValue = getValues("profileImageFile")
 
   const onSubmit = async (data: TRegisterFormSchema) => {
-    console.log("🚀 ~ onSubmit ~ data:", data)
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -220,7 +219,7 @@ export default function SignUpPage() {
               </div>
 
               {/* <div className="col-span-full">
-                <label htmlFor="email" className="form-label">
+                <label htmlFor="jobTitle" className="form-label">
                   Job title
                   <span className="text-red-500">*</span>
                 </label>
@@ -229,6 +228,7 @@ export default function SignUpPage() {
                   autoComplete="organization-title"
                   {...register("jobTitle", { required: "Job title is required" })}
                 />
+                <FormInputError message={errors.jobTitle?.message} />
               </div> */}
             </div>
           </div>

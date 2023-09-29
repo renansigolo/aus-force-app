@@ -1,17 +1,18 @@
 "use client"
 
 import { CurrentUserProfile } from "@/app/dashboard/profile/page"
+import { Button } from "@/components/Button"
 import { updateDocument } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
-type AdditionalDocumentsFormProps = {
+type PersonalDocumentsFormProps = {
   user: CurrentUserProfile
 }
 
-export function AdditionalDocumentsForm({ user }: AdditionalDocumentsFormProps) {
+export function PersonalDocumentsForm({ user }: PersonalDocumentsFormProps) {
   const router = useRouter()
   const {
     register,
@@ -120,20 +121,6 @@ export function AdditionalDocumentsForm({ user }: AdditionalDocumentsFormProps) 
         </div>
 
         <div className="col-span-full">
-          <label htmlFor="whiteCardNumber" className="form-label">
-            White Card
-          </label>
-          <input
-            type="number"
-            disabled={isSubmitting}
-            {...register("whiteCardNumber", {
-              required: "White card is required",
-              valueAsNumber: true,
-            })}
-          />
-        </div>
-
-        <div className="col-span-full">
           <label htmlFor="signature" className="form-label">
             Signature
           </label>
@@ -146,9 +133,9 @@ export function AdditionalDocumentsForm({ user }: AdditionalDocumentsFormProps) 
       </div>
 
       <div className="mt-8 flex">
-        <button type="submit" className="btn btn-primary">
+        <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Save"}
-        </button>
+        </Button>
       </div>
     </form>
   )
