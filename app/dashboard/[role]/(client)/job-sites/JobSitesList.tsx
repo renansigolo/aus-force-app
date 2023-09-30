@@ -1,5 +1,5 @@
 import { JobSitesListDataProps } from "@/app/dashboard/[role]/(client)/job-sites/page"
-import { Card } from "@/components/Card"
+import { Card, CardContent, CardFooter } from "@/components/Card"
 import {
   BuildingOffice2Icon,
   CloudArrowDownIcon,
@@ -16,23 +16,8 @@ export function JobSitesList({ data }: JobSitesListProps) {
   return (
     <section className="grid gap-2">
       {data.map((jobSite, index) => (
-        <Card
-          key={index}
-          footer={
-            jobSite.policyAndProceduresURL && (
-              <Link
-                download
-                className="btn btn-secondary"
-                href={jobSite.policyAndProceduresURL}
-                target="_blank"
-              >
-                <CloudArrowDownIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
-                <span className="text-xs">Policy And Procedures</span>
-              </Link>
-            )
-          }
-        >
-          <div className="flex w-full">
+        <Card key={index}>
+          <CardContent>
             <div className="flex flex-col items-center justify-center">
               <BuildingOffice2Icon className="h-14 w-14 flex-shrink-0" />
             </div>
@@ -60,7 +45,21 @@ export function JobSitesList({ data }: JobSitesListProps) {
               </div>
               <p className="text-sm text-gray-500">{jobSite.additionalNotes}</p>
             </div>
-          </div>
+          </CardContent>
+
+          {jobSite.policyAndProceduresURL && (
+            <CardFooter>
+              <Link
+                download
+                className="btn btn-secondary"
+                href={jobSite.policyAndProceduresURL}
+                target="_blank"
+              >
+                <CloudArrowDownIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
+                <span className="text-xs">Policy And Procedures</span>
+              </Link>
+            </CardFooter>
+          )}
         </Card>
       ))}
     </section>

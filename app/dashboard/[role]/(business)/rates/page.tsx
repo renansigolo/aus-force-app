@@ -1,5 +1,6 @@
 import { RatesForm } from "@/app/dashboard/[role]/(business)/rates/RatesForm"
 import { Accordion } from "@/components/Accordion"
+import { Card, CardContent, CardHeader } from "@/components/Card"
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
@@ -77,21 +78,15 @@ export default function RatesPage({ searchParams }: RatesPageProps) {
 
         <section className="py-8">
           {accordionData.length > 0 ? (
-            <div className="overflow-hidden rounded-lg bg-white shadow">
-              {/* Heading */}
-              <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-                <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
-                  <div className="ml-4 mt-2">
-                    <h3 className="text-lg font-medium leading-6 text-gray-900">Client 01</h3>
-                  </div>
-                </div>
-              </div>
+            <Card>
+              <CardHeader>
+                <h3 className="text-lg font-medium leading-6 text-gray-900">Client 01</h3>
+              </CardHeader>
 
-              <div className="px-4 py-5 sm:p-6">
-                {/* Content */}
+              <CardContent>
                 <Accordion items={accordionData} />
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ) : (
             <Empty title="rates" />
           )}

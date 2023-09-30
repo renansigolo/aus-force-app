@@ -14,7 +14,7 @@ type AccordionProps = {
 
 export function Accordion({ items }: AccordionProps) {
   return (
-    <div className="rounded-lg bg-white shadow">
+    <div className="w-full rounded-lg bg-white shadow">
       <div className="mx-auto px-2 pb-6">
         <div className="mx-auto divide-gray-900/10">
           <dl className="space-y-6 divide-y divide-gray-900/10">

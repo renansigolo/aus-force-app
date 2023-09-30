@@ -1,24 +1,47 @@
-import { ReactNode } from "react"
+import { HTMLAttributes, forwardRef } from "react"
+import { twMerge } from "tailwind-merge"
 
-type CardProps = {
-  header?: ReactNode
-  children: ReactNode
-  footer?: ReactNode
-}
-export function Card({ header, children, footer }: CardProps) {
-  return (
-    <div className="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow">
-      {header && <CardHeader>{header}</CardHeader>}
-      <div className="px-4 py-5 sm:p-6">{children}</div>
-      {footer && <CardFooter>{footer}</CardFooter>}
-    </div>
-  )
-}
+const Card = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={twMerge(
+        "divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow",
+        className,
+      )}
+      {...props}
+    />
+  ),
+)
+Card.displayName = "Card"
 
-export function CardHeader({ children }: { children: ReactNode }) {
-  return <div className="px-4 py-5 sm:px-6">{children}</div>
-}
+const CardHeader = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={twMerge("flex items-center justify-between gap-1 px-4 py-5 sm:px-6", className)}
+      {...props}
+    />
+  ),
+)
+CardHeader.displayName = "CardHeader"
 
-export function CardFooter({ children }: { children: ReactNode }) {
-  return <div className="flex flex-row-reverse px-4 py-4 sm:px-6">{children}</div>
-}
+const CardContent = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div ref={ref} className={twMerge("flex gap-2 px-4 py-5 sm:p-6", className)} {...props} />
+  ),
+)
+CardContent.displayName = "CardContent"
+
+const CardFooter = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={twMerge("flex flex-row-reverse px-4 py-4 sm:px-6", className)}
+      {...props}
+    />
+  ),
+)
+CardFooter.displayName = "CardFooter"
+
+export { Card, CardContent, CardFooter, CardHeader }

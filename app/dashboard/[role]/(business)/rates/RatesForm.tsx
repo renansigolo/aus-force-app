@@ -1,6 +1,5 @@
 "use client"
 
-import { Button } from "@/components/Button"
 import { useRouter } from "next/navigation"
 import { Fragment, useState } from "react"
 
@@ -63,20 +62,6 @@ export function RatesForm() {
           <hr className="my-6" />
           <HoursWorked />
         </div>
-      </div>
-
-      <div className="gap-2 pt-5 sm:flex sm:flex-row-reverse sm:pt-4">
-        <Button type="submit" className="btn-success">
-          Submit
-        </Button>
-        <Button
-          type="button"
-          className="btn-secondary"
-          onClick={() => hideModal()}
-          // disabled={isSubmitting}
-        >
-          Cancel
-        </Button>
       </div>
     </form>
   )

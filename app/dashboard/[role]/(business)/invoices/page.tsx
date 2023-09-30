@@ -18,11 +18,11 @@ export default function InvoicesPage() {
       <Role role="business">
         <PageHeading title="Invoices" />
         <section className="py-8">
-          <h2 className="heading-3 mx-2 my-6 pl-4">⏳ Pending</h2>
+          <h2 className="heading-3 mx-2 my-6">⏳ Pending</h2>
           <Accordion />
-          <h2 className="heading-3 mx-2 my-6 pl-4">⚠️ Partially Paid</h2>
+          <h2 className="heading-3 mx-2 my-6">⚠️ Partially Paid</h2>
           <Accordion />
-          <h2 className="heading-3 mx-2 my-6 pl-4">✅ Paid</h2>
+          <h2 className="heading-3 mx-2 my-6">✅ Paid</h2>
           <Accordion />
         </section>
       </Role>

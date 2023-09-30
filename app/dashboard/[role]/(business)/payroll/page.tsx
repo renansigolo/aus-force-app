@@ -1,10 +1,11 @@
 "use client"
 
+import { Card, CardContent, CardHeader } from "@/components/Card"
 import { Role } from "@/components/Roles"
 import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
 import { Disclosure } from "@headlessui/react"
-import { ChevronDownIcon, ChevronRightIcon, EllipsisVerticalIcon } from "@heroicons/react/20/solid"
+import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
 
 const accordionItems = [{ title: "Client 1" }, { title: "Client 2" }, { title: "Client 3" }]
 const tableItems = [
@@ -49,105 +50,51 @@ export default function PayrollPage() {
         <PageHeading title="Payroll" />
         <section className="py-8">
           <p className="mb-2 text-lg font-semibold text-gray-900">Overdue payments</p>
-          <div className="overflow-hidden rounded-lg bg-white shadow">
-            {/* Heading */}
-            <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-              <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
-                <div className="ml-4 mt-2">
-                  <h3 className="text-lg font-medium leading-6 text-gray-900">
-                    Payment 13/07/2023
-                  </h3>
-                </div>
+          <Card>
+            <CardHeader>
+              <h3 className="text-lg font-medium leading-6 text-gray-900">Payment 13/07/2023</h3>
+            </CardHeader>
 
-                <div className="ml-4 mt-2 flex-shrink-0">
-                  <button
-                    type="button"
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  >
-                    <span className="sr-only">Open options</span>
-                    <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="px-4 py-5 sm:p-6">
+            <CardContent>
               <Accordion />
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </section>
 
         <section className="py-8">
           <p className="mb-2 text-lg font-semibold text-gray-900">Upcoming payments</p>
-          <div className="overflow-hidden rounded-lg bg-white shadow">
-            {/* Heading */}
-            <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-              <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
-                <div className="ml-4 mt-2">
-                  <h3 className="text-lg font-medium leading-6 text-gray-900">
-                    Payment 14/07/2023
-                  </h3>
-                </div>
+          <Card>
+            <CardHeader>
+              <h3 className="text-lg font-medium leading-6 text-gray-900">Payment 14/07/2023</h3>
+            </CardHeader>
 
-                <div className="ml-4 mt-2 flex-shrink-0">
-                  <button
-                    type="button"
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  >
-                    <span className="sr-only">Open options</span>
-                    <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="px-4 py-5 sm:p-6">
+            <CardContent>
               <Accordion />
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </section>
 
         {/* Previously Payments */}
         <section className="py-8">
           <p className="mb-2 text-lg font-semibold text-gray-900">Previously payments</p>
-          <div className="overflow-hidden rounded-lg bg-white shadow">
-            {/* Heading */}
-            <div className="border-b border-gray-200 bg-white px-4 py-5 sm:px-6">
-              <div className="-ml-4 -mt-2 flex flex-wrap items-center justify-between sm:flex-nowrap">
-                <div className="ml-4 mt-2">
-                  <h3 className="text-lg font-medium leading-6 text-gray-900">
-                    Payment 12/07/2023
-                  </h3>
-                </div>
+          <Card>
+            <CardHeader>
+              <h3 className="text-lg font-medium leading-6 text-gray-900">Payment 12/07/2023</h3>
+            </CardHeader>
 
-                <div className="ml-4 mt-2 flex-shrink-0">
-                  <button
-                    type="button"
-                    className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-transparent bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                  >
-                    <span className="sr-only">Open options</span>
-                    <EllipsisVerticalIcon className="h-5 w-5" aria-hidden="true" />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            {/* Content */}
-            <div className="px-4 py-5 sm:p-6">
+            <CardContent>
               <Accordion />
-            </div>
-          </div>
+            </CardContent>
+          </Card>
         </section>
       </Role>
     </PageWrapper>
   )
 }
 
-function Accordion({ approveShift, showModal }: any) {
+function Accordion() {
   return (
-    <div className="rounded-lg bg-white shadow">
+    <div className="w-full rounded-lg bg-white shadow">
       <div className="mx-auto px-2 pb-6">
         <div className="mx-auto divide-gray-900/10">
           <dl className="space-y-6 divide-y divide-gray-900/10">

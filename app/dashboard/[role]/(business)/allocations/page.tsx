@@ -2,6 +2,7 @@
 
 import { RatesForm } from "@/app/dashboard/[role]/(business)/rates/RatesForm"
 import { Button } from "@/components/Button"
+import { Card, CardContent, CardHeader } from "@/components/Card"
 import { Empty } from "@/components/Empty"
 import Modal from "@/components/Modal"
 import { Role } from "@/components/Roles"
@@ -92,24 +93,58 @@ function AllocationsList(props: any) {
   return (
     <div className="grid grid-cols-1 gap-2">
       {data.map((item) => (
-        <div
-          key={item.title}
-          className="relative flex items-center space-x-3 rounded-lg border border-gray-300 bg-white px-6 py-5 shadow-sm"
-        >
-          <div className="min-w-0 flex-1">
-            <p className="mb-2 text-sm font-medium text-gray-900">{item.title}</p>
-            <AllocationListItem label="Job position" value={item.jobPosition} />
-            <AllocationListItem label="Start Date" value={item.startTime} />
-            <AllocationListItem label="End Date" value={item.endTime} />
-            <AllocationListItem label="Break" value={item.break ? "Yes" : "No"} />
-            <AllocationListItem label="Supplier" value={item.supplier} />
-            <AllocationListItem label="Additional notes" value={item.additionalNotes} />
-          </div>
-
-          <div className="flex flex-col items-center gap-2">
+        <Card key={item.title}>
+          <CardHeader className="justify-between">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">{item.title}</h3>
             {item.allocatedWorker ? (
-              <div className="flex flex-col items-center gap-y-2 text-center">
-                <div className="flex flex-col items-center">
+              <>
+                {item.allocatedWorker.hasAllocatedRates ? (
+                  <Button
+                    className="btn-secondary"
+                    onClick={() =>
+                      NiceModal.show(Modal, {
+                        title: "New Rates",
+                        children: <RatesForm />,
+                      })
+                    }
+                  >
+                    <ClockIcon className="h-5 w-5" />
+                    Allocate Rates
+                  </Button>
+                ) : (
+                  <button
+                    className="hover:text-indigo-600"
+                    onClick={() =>
+                      NiceModal.show(Modal, {
+                        title: "New Rates",
+                        children: <RatesForm />,
+                      })
+                    }
+                  >
+                    <PencilIcon className="h-5 w-5" />
+                  </button>
+                )}
+              </>
+            ) : (
+              <Button className="btn-secondary" onClick={props.showModal}>
+                <UserPlusIcon className="h-5 w-5" />
+                Allocate Worker
+              </Button>
+            )}
+          </CardHeader>
+
+          <CardContent>
+            <div className="min-w-0 flex-1">
+              <AllocationListItem label="Job position" value={item.jobPosition} />
+              <AllocationListItem label="Start Date" value={item.startTime} />
+              <AllocationListItem label="End Date" value={item.endTime} />
+              <AllocationListItem label="Break" value={item.break ? "Yes" : "No"} />
+              <AllocationListItem label="Supplier" value={item.supplier} />
+              <AllocationListItem label="Additional notes" value={item.additionalNotes} />
+            </div>
+            <div>
+              {item.allocatedWorker && (
+                <div className="flex flex-col items-center text-center">
                   <img
                     className="h-12 w-12 rounded-full bg-gray-50 object-cover"
                     src={item.allocatedWorker.imageUrl}
@@ -124,43 +159,10 @@ function AllocationsList(props: any) {
                     </p>
                   </div>
                 </div>
-
-                {item.allocatedWorker.hasAllocatedRates ? (
-                  <Button
-                    className="btn-secondary w-44"
-                    onClick={() =>
-                      NiceModal.show(Modal, {
-                        title: "New Rates",
-                        children: <RatesForm />,
-                      })
-                    }
-                  >
-                    <ClockIcon className="h-6 w-6" />
-                    Allocate Rates
-                  </Button>
-                ) : (
-                  <Button
-                    className="btn-secondary w-44"
-                    onClick={() =>
-                      NiceModal.show(Modal, {
-                        title: "New Rates",
-                        children: <RatesForm />,
-                      })
-                    }
-                  >
-                    <PencilIcon className="h-6 w-6" />
-                    Edit Rates
-                  </Button>
-                )}
-              </div>
-            ) : (
-              <Button className="btn-secondary w-44" onClick={props.showModal}>
-                <UserPlusIcon className="h-6 w-6" />
-                Allocate Worker
-              </Button>
-            )}
-          </div>
-        </div>
+              )}
+            </div>
+          </CardContent>
+        </Card>
       ))}
     </div>
   )

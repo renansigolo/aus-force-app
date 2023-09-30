@@ -1,3 +1,4 @@
+import { Card, CardContent, CardHeader } from "@/components/Card"
 import { Role } from "@/components/Roles"
 import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
@@ -41,32 +42,39 @@ export default function ReportsPage() {
         <PageHeading title="Reports" buttonLabel="Download PDF" />
 
         {/* Filter */}
-        <div className="mt-6">
-          <div className="flex gap-2">
-            <FunnelIcon className="h-6 w-6" />
-            Filter your reports
-          </div>
-          <div className="col-span-1">
-            <label htmlFor="job-site">Job Site</label>
-            <select id="job-site" name="job-site">
-              <option>All Sites</option>
-              <option>Site 1</option>
-              <option>Site 2</option>
-            </select>
-          </div>
-          <div className="flex gap-2">
-            <div className="w-full">
-              <label htmlFor="startDate">Start Date</label>
-              <input type="date" name="startDate" id="startDate" />
-            </div>
-            <div className="w-full">
-              <label htmlFor="finishDate">Finish Date</label>
-              <input type="date" name="finishDate" id="finishDate" />
-            </div>
-          </div>
-        </div>
-
         <section className="py-8">
+          <Card>
+            <CardHeader>
+              <div className="flex gap-1">
+                <FunnelIcon className="h-6 w-6" />
+                <p>Filter your reports</p>
+              </div>
+            </CardHeader>
+
+            <CardContent className="flex-col">
+              <div className="col-span-1">
+                <label htmlFor="job-site">Job Site</label>
+                <select id="job-site" name="job-site">
+                  <option>All Sites</option>
+                  <option>Site 1</option>
+                  <option>Site 2</option>
+                </select>
+              </div>
+              <div className="flex gap-2">
+                <div className="w-full">
+                  <label htmlFor="startDate">Start Date</label>
+                  <input type="date" name="startDate" id="startDate" />
+                </div>
+                <div className="w-full">
+                  <label htmlFor="finishDate">Finish Date</label>
+                  <input type="date" name="finishDate" id="finishDate" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        <section>
           <h2 className="heading-3 pl-4">Company ABC</h2>
           {/* Activity list (smallest breakpoint only) */}
           <div className="rounded-lg shadow sm:hidden">

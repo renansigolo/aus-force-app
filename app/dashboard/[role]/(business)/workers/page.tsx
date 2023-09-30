@@ -80,7 +80,7 @@ type WorkersListProps = {
 function WorkersList({ category }: WorkersListProps) {
   return (
     <div className="pb-6">
-      <h2 className="heading-3 pl-4">{category}</h2>
+      <h2 className="heading-3">{category}</h2>
       {/* Activity list (smallest breakpoint only) */}
       <div className="rounded-lg shadow sm:hidden">
         <ul
