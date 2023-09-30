@@ -39,11 +39,10 @@ export function LoginForm() {
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label htmlFor="email" className="form-label">
-          Email
-        </label>
+        <label htmlFor="email">Email</label>
         <input
           {...register("email", { required: "Email is required" })}
+          id="email"
           type="email"
           autoComplete="email"
           disabled={isSubmitting}
@@ -52,11 +51,10 @@ export function LoginForm() {
       </div>
 
       <div>
-        <label htmlFor="password" className="form-label">
-          Password
-        </label>
+        <label htmlFor="password">Password</label>
         <input
           {...register("password", { required: "Password required" })}
+          id="password"
           type="password"
           autoComplete="current-password"
           disabled={isSubmitting}

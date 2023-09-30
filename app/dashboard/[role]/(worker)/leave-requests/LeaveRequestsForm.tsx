@@ -43,12 +43,11 @@ export function LeaveRequestsForm() {
     >
       <div className="flex flex-col gap-4 px-4 py-6 sm:p-7">
         <div>
-          <label htmlFor="reason" className="form-label">
-            Reason
-          </label>
+          <label htmlFor="reason">Reason</label>
           <select
-            {...register("reason", { required: "Reason is required" })}
+            id="reason"
             disabled={isSubmitting}
+            {...register("reason", { required: "Reason is required" })}
           >
             <option>Day(s) off (unpaid)</option>
             <option>Annual leave (unpaid)</option>
@@ -67,10 +66,9 @@ export function LeaveRequestsForm() {
 
         <div className="flex flex-col gap-4 sm:flex-row">
           <div className="w-full sm:w-1/2">
-            <label htmlFor="startDate" className="form-label">
-              Start date
-            </label>
+            <label htmlFor="startDate">Start date</label>
             <input
+              id="startDate"
               type="date"
               disabled={isSubmitting}
               {...register("startDate", {
@@ -88,10 +86,9 @@ export function LeaveRequestsForm() {
           </div>
 
           <div className="w-full sm:w-1/2">
-            <label htmlFor="endDate" className="form-label">
-              End date
-            </label>
+            <label htmlFor="endDate">End date</label>
             <input
+              id="endDate"
               type="date"
               disabled={isSubmitting}
               {...register("endDate", {
@@ -110,11 +107,9 @@ export function LeaveRequestsForm() {
         </div>
 
         <div>
-          <label htmlFor="additionalNotes" className="form-label">
-            Additional notes
-          </label>
+          <label htmlFor="additionalNotes">Additional notes</label>
           <textarea
-            className="form-input"
+            id="additionalNotes"
             rows={4}
             disabled={isSubmitting}
             {...register("additionalNotes")}

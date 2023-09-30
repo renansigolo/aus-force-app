@@ -57,18 +57,22 @@ export function JobSiteForm() {
   return (
     <form className="my-8 grid gap-4" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label htmlFor="siteName" className="form-label">
-          Site Name
-        </label>
-        <input {...register("siteName", { required: "Site name is required" })} type="text" />
+        <label htmlFor="siteName">Site Name</label>
+        <input
+          id="siteName"
+          type="text"
+          {...register("siteName", { required: "Site name is required" })}
+        />
         <FormInputError message={errors.siteName?.message} />
       </div>
 
       <div>
-        <label htmlFor="address" className="form-label">
-          Address
-        </label>
-        <input {...register("siteAddress", { required: "Address is required" })} type="text" />
+        <label htmlFor="siteAddress">Address</label>
+        <input
+          id="siteAddress"
+          type="text"
+          {...register("siteAddress", { required: "Address is required" })}
+        />
         <FormInputError message={errors.siteAddress?.message} />
       </div>
 
@@ -76,32 +80,28 @@ export function JobSiteForm() {
         <div className="relative flex items-start">
           <div className="flex h-5 items-center justify-center">
             <input
+              id="hasParking"
+              type="checkbox"
               {...register("hasParking")}
               aria-describedby="parking-availability"
-              type="checkbox"
               className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
             />
           </div>
           <div className="ml-3 text-sm">
-            <label htmlFor="parking" className="form-label">
-              Parking available for workers?
-            </label>
+            <label htmlFor="hasParking">Parking available for workers?</label>
           </div>
         </div>
       </div>
 
       <div>
-        <label htmlFor="additionalNotes" className="form-label">
-          Additional Notes
-        </label>
-        <textarea {...register("additionalNotes")} />
+        <label htmlFor="additionalNotes">Additional Notes</label>
+        <textarea id="additionalNotes" {...register("additionalNotes")} />
       </div>
 
       <div>
-        <label htmlFor="policyAndProceduresFile" className="form-label">
-          Policies and Procedures
-        </label>
+        <label htmlFor="policyAndProceduresFile">Policies and Procedures</label>
         <input
+          id="policyAndProceduresFile"
           type="file"
           accept=".pdf"
           className="form-input"

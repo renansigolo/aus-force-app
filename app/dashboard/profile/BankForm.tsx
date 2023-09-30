@@ -26,14 +26,7 @@ export function BankForm({ user }: BankFormProps) {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<BankFormValues>({
-    defaultValues: {
-      bankName: user.bankName,
-      accountName: user.accountName,
-      bsb: user.bsb,
-      accountNumber: user.accountNumber,
-    },
-  })
+  } = useForm<BankFormValues>({ defaultValues: user })
 
   const onSubmit = async (values: BankFormValues) => {
     try {
@@ -49,10 +42,9 @@ export function BankForm({ user }: BankFormProps) {
     <form className="md:col-span-2" onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
         <div className="col-span-full">
-          <label htmlFor="bankName" className="form-label">
-            Bank name
-          </label>
+          <label htmlFor="bankName">Bank name</label>
           <select
+            id="bankName"
             {...register("bankName", { required: "Bank name is required" })}
             defaultValue="UBank"
             disabled={isSubmitting}
@@ -81,10 +73,9 @@ export function BankForm({ user }: BankFormProps) {
         </div>
 
         <div className="col-span-full">
-          <label htmlFor="accountName" className="form-label">
-            Account name
-          </label>
+          <label htmlFor="accountName">Account name</label>
           <input
+            id="accountName"
             type="text"
             disabled={isSubmitting}
             {...register("accountName", { required: "Account name is required" })}
@@ -93,10 +84,9 @@ export function BankForm({ user }: BankFormProps) {
         </div>
 
         <div className="sm:col-span-3">
-          <label htmlFor="bsb" className="form-label">
-            BSB
-          </label>
+          <label htmlFor="bsb">BSB</label>
           <input
+            id="bsb"
             type="number"
             disabled={isSubmitting}
             {...register("bsb", {
@@ -109,10 +99,9 @@ export function BankForm({ user }: BankFormProps) {
         </div>
 
         <div className="sm:col-span-3">
-          <label htmlFor="accountNumber" className="form-label">
-            Account number
-          </label>
+          <label htmlFor="accountNumber">Account number</label>
           <input
+            id="accountNumber"
             type="number"
             disabled={isSubmitting}
             {...register("accountNumber", {

@@ -55,10 +55,8 @@ export function StaffForm({ accordionData }: StaffModalProps) {
   return (
     <form className="my-8 grid gap-4" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label htmlFor="job-site" className="form-label">
-          Job Site
-        </label>
-        <select {...register("jobSite")}>
+        <label htmlFor="jobSite">Job Site</label>
+        <select id="jobSite" {...register("jobSite")}>
           <option>Site 1</option>
           <option>Site 2</option>
           <option>Site 3</option>
@@ -67,10 +65,8 @@ export function StaffForm({ accordionData }: StaffModalProps) {
       </div>
 
       <div>
-        <label htmlFor="role" className="form-label">
-          Role
-        </label>
-        <select {...register("role")}>
+        <label htmlFor="role">Role</label>
+        <select id="role" {...register("role")}>
           <option>Supervisor</option>
           <option>Manager</option>
         </select>
@@ -78,16 +74,15 @@ export function StaffForm({ accordionData }: StaffModalProps) {
       </div>
 
       <div>
-        <label htmlFor="email" className="form-label">
-          Email address
-        </label>
+        <label htmlFor="email">Email address</label>
         <input
-          className="form-input"
+          id="email"
+          type="email"
+          placeholder="email@example.com"
           {...register("email", {
             required: "Email is required",
             pattern: { value: /\S+@\S+\.\S+/, message: "Invalid email address" },
           })}
-          placeholder="email@example.com"
         />
         <FormInputError message={errors.email?.message} />
       </div>

@@ -54,12 +54,13 @@ export function ClientForm() {
         <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
           {clientForm.map((field, index) => (
             <div key={index} className="sm:col-span-3">
-              <label htmlFor={field.id} className="form-label">
+              <label htmlFor={field.id}>
                 {field.label}
                 {field.required && <span className="text-red-500">*</span>}
               </label>
 
               <input
+                id={field.id}
                 type={field.type}
                 autoComplete={field.autoComplete}
                 {...register(field.id as any, { required: field.required })}
@@ -69,40 +70,40 @@ export function ClientForm() {
           ))}
 
           <div className="sm:col-span-6">
-            <label htmlFor="country" className="form-label">
-              Country
-            </label>
-            <select {...register("country")} autoComplete="country-name">
+            <label htmlFor="country">Country</label>
+            <select id="country" {...register("country")} autoComplete="country-name">
               <option>Australia</option>
             </select>
           </div>
 
           <div className="sm:col-span-6">
-            <label htmlFor="street-address" className="form-label">
-              Street address
-            </label>
-            <input {...register("streetAddress")} type="text" autoComplete="street-address" />
+            <label htmlFor="streetAddress">Street address</label>
+            <input
+              id="streetAddress"
+              type="text"
+              {...register("streetAddress")}
+              autoComplete="street-address"
+            />
           </div>
 
           <div className="sm:col-span-2">
-            <label htmlFor="city" className="form-label">
-              City
-            </label>
-            <input {...register("city")} type="text" autoComplete="address-level2" />
+            <label htmlFor="city">City</label>
+            <input id="city" {...register("city")} type="text" autoComplete="address-level2" />
           </div>
 
           <div className="sm:col-span-2">
-            <label htmlFor="region" className="form-label">
-              State / Province
-            </label>
-            <input {...register("region")} type="text" autoComplete="address-level1" />
+            <label htmlFor="region">State / Province</label>
+            <input id="region" {...register("region")} type="text" autoComplete="address-level1" />
           </div>
 
           <div className="sm:col-span-2">
-            <label htmlFor="postal-code" className="form-label">
-              ZIP / Postal code
-            </label>
-            <input {...register("postalCode")} type="text" autoComplete="postal-code" />
+            <label htmlFor="postalCode">ZIP / Postal code</label>
+            <input
+              id="postalCode"
+              {...register("postalCode")}
+              type="text"
+              autoComplete="postal-code"
+            />
           </div>
         </div>
       </Role>

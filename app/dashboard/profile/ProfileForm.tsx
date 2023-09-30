@@ -46,10 +46,9 @@ export function ProfileForm({ user }: ProfileFormProps) {
         </div>
 
         <div className="sm:col-span-3">
-          <label htmlFor="firstName" className="form-label">
-            First name
-          </label>
+          <label htmlFor="firstName">First name</label>
           <input
+            id="firstName"
             disabled
             type="text"
             autoComplete="given-name"
@@ -58,10 +57,9 @@ export function ProfileForm({ user }: ProfileFormProps) {
         </div>
 
         <div className="sm:col-span-3">
-          <label htmlFor="lastName" className="form-label">
-            Last name
-          </label>
+          <label htmlFor="lastName">Last name</label>
           <input
+            id="lastName"
             disabled
             type="text"
             autoComplete="family-name"
@@ -70,10 +68,9 @@ export function ProfileForm({ user }: ProfileFormProps) {
         </div>
 
         <div className="sm:col-span-3">
-          <label htmlFor="phoneNumber" className="form-label">
-            Phone number
-          </label>
+          <label htmlFor="phoneNumber">Phone number</label>
           <input
+            id="phoneNumber"
             type="tel"
             autoComplete="tel"
             disabled={isSubmitting}
@@ -82,10 +79,9 @@ export function ProfileForm({ user }: ProfileFormProps) {
         </div>
 
         <div className="sm:col-span-3">
-          <label htmlFor="dob" className="form-label">
-            Date of birthday
-          </label>
+          <label htmlFor="dob">Date of birthday</label>
           <input
+            id="dob"
             type="date"
             autoComplete="bday"
             disabled={isSubmitting}
@@ -99,7 +95,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
         </div>
 
         {/* <div className="col-span-full">
-            <label htmlFor="email" className="form-label">
+            <label htmlFor="email" >
               Job title
             </label>
             <input
@@ -110,10 +106,9 @@ export function ProfileForm({ user }: ProfileFormProps) {
           </div> */}
 
         <div className="col-span-full">
-          <label htmlFor="email" className="form-label">
-            Email address
-          </label>
+          <label htmlFor="email">Email address</label>
           <input
+            id="email"
             type="email"
             autoComplete="email"
             disabled={isSubmitting}
@@ -122,10 +117,8 @@ export function ProfileForm({ user }: ProfileFormProps) {
         </div>
 
         <div className="col-span-full">
-          <label htmlFor="role" className="form-label">
-            Role
-          </label>
-          <select {...register("role")} className="capitalize">
+          <label htmlFor="role">Role</label>
+          <select id="role" {...register("role")} className="capitalize">
             <option>worker</option>
             <option>client</option>
             <option>business</option>

@@ -38,7 +38,7 @@ textarea {
   @apply sm:text-sm;
 }
 
-.form-label {
+label {
   @apply mb-1 block text-sm font-medium leading-6 text-gray-900;
 }
 .form-input {

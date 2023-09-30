@@ -170,9 +170,7 @@ function TimesheetForm() {
     <form className="my-12 space-y-8 divide-y divide-gray-200">
       <div className="mt-6 grid gap-4">
         <div className="col-span-1">
-          <label htmlFor="startDay" className="form-label">
-            Starting Day
-          </label>
+          <label htmlFor="startDay">Starting Day</label>
 
           <select id="startDay" name="startDay">
             <option>Monday</option>

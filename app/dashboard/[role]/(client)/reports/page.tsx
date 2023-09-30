@@ -47,9 +47,7 @@ export default function ReportsPage() {
             Filter your reports
           </div>
           <div className="col-span-1">
-            <label htmlFor="job-site" className="form-label">
-              Job Site
-            </label>
+            <label htmlFor="job-site">Job Site</label>
             <select id="job-site" name="job-site">
               <option>All Sites</option>
               <option>Site 1</option>

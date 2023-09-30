@@ -121,7 +121,7 @@ type Route = {
   color?: string
 }
 
-export async function Navbar() {
+export function Navbar() {
   const { user } = useUserContext()
   const pathname = usePathname()
 

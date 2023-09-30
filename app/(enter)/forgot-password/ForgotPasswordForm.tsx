@@ -26,10 +26,9 @@ export function ForgotPasswordForm() {
   return (
     <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
       <div>
-        <label htmlFor="email" className="form-label">
-          Email address
-        </label>
+        <label htmlFor="email">Email address</label>
         <input
+          id="email"
           type="email"
           autoComplete="email"
           disabled={isSubmitting}

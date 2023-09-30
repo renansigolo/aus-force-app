@@ -13,26 +13,20 @@ export function AdditionalFields({ register, inputValues }: AdditionalFieldsProp
   return (
     <>
       <div>
-        <label htmlFor={inputValues.numberId} className="form-label">
-          Number
-        </label>
+        <label htmlFor={inputValues.numberId}>Number</label>
         <input type="text" {...register(inputValues.numberId)} />
         {/* <FormInputError message={errors.inputValues.numberId?.message} /> */}
       </div>
 
       <div className="flex gap-2">
         <div className="mt-2 w-full">
-          <label htmlFor={inputValues.dateOfIssueId} className="form-label">
-            Date of Issue
-          </label>
+          <label htmlFor={inputValues.dateOfIssueId}>Date of Issue</label>
           <input type="date" {...register(inputValues.dateOfIssueId)} />
           {/* <FormInputError message={errors.inputValues.dateOfIssueId?.message} /> */}
         </div>
 
         <div className="mt-2 w-full">
-          <label htmlFor={inputValues.expiryDateId} className="form-label">
-            Expiry Date
-          </label>
+          <label htmlFor={inputValues.expiryDateId}>Expiry Date</label>
           <input type="date" {...register(inputValues.expiryDateId)} />
           {/* <FormInputError message={errors.inputValues.expiryDateId?.message} /> */}
         </div>

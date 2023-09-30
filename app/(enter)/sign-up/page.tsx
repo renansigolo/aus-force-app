@@ -117,9 +117,7 @@ export default function SignUpPage() {
 
             <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
               <div className="sm:col-span-6">
-                <label htmlFor="photo" className="form-label">
-                  Photo
-                </label>
+                <label htmlFor="profileImageFile">Profile Photo</label>
                 <div className="flex items-center gap-2">
                   <img
                     alt="Profile Image"
@@ -131,6 +129,7 @@ export default function SignUpPage() {
                     }
                   />
                   <input
+                    id="profileImageFile"
                     type="file"
                     accept="image/x-png,image/gif,image/jpeg"
                     className="form-input"
@@ -142,11 +141,12 @@ export default function SignUpPage() {
 
             <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-6">
               <div className="sm:col-span-3">
-                <label htmlFor="firstName" className="form-label">
+                <label htmlFor="firstName">
                   First name
                   <span className="text-red-500">*</span>
                 </label>
                 <input
+                  id="firstName"
                   type="text"
                   autoComplete="given-name"
                   {...register("firstName", { required: "First name is required" })}
@@ -155,11 +155,12 @@ export default function SignUpPage() {
               </div>
 
               <div className="sm:col-span-3">
-                <label htmlFor="lastName" className="form-label">
+                <label htmlFor="lastName">
                   Last name
                   <span className="text-red-500">*</span>
                 </label>
                 <input
+                  id="lastName"
                   type="text"
                   autoComplete="family-name"
                   {...register("lastName", { required: "Last name is required" })}
@@ -168,11 +169,12 @@ export default function SignUpPage() {
               </div>
 
               <div className="sm:col-span-3">
-                <label htmlFor="phoneNumber" className="form-label">
+                <label htmlFor="phoneNumber">
                   Phone number
                   <span className="text-red-500">*</span>
                 </label>
                 <input
+                  id="phoneNumber"
                   type="tel"
                   autoComplete="tel"
                   {...register("phoneNumber", { required: "Phone number is required" })}
@@ -181,11 +183,12 @@ export default function SignUpPage() {
               </div>
 
               <div className="sm:col-span-3">
-                <label htmlFor="dob" className="form-label">
+                <label htmlFor="dob">
                   Date of birthday
                   <span className="text-red-500">*</span>
                 </label>
                 <input
+                  id="dob"
                   type="date"
                   autoComplete="bday"
                   {...register("dob", {
@@ -198,19 +201,6 @@ export default function SignUpPage() {
                 />
                 <FormInputError message={errors.dob?.message} />
               </div>
-
-              {/* <div className="col-span-full">
-                <label htmlFor="jobTitle" className="form-label">
-                  Job title
-                  <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  autoComplete="organization-title"
-                  {...register("jobTitle", { required: "Job title is required" })}
-                />
-                <FormInputError message={errors.jobTitle?.message} />
-              </div> */}
             </div>
           </div>
 
@@ -275,11 +265,12 @@ export default function SignUpPage() {
 
             <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-6">
               <div>
-                <label htmlFor="email" className="form-label">
+                <label htmlFor="email">
                   Email
                   <span className="text-red-500">*</span>
                 </label>
                 <input
+                  id="email"
                   type="email"
                   autoComplete="email"
                   {...register("email", { required: "Email is required" })}
@@ -288,11 +279,12 @@ export default function SignUpPage() {
               </div>
 
               <div>
-                <label htmlFor="password" className="form-label">
+                <label htmlFor="password">
                   Password
                   <span className="text-red-500">*</span>
                 </label>
                 <input
+                  id="password"
                   type="password"
                   autoComplete="new-password"
                   {...register("newPassword", {
@@ -307,11 +299,12 @@ export default function SignUpPage() {
               </div>
 
               <div>
-                <label htmlFor="confirmPassword" className="form-label">
+                <label htmlFor="confirmPassword">
                   Confirm password
                   <span className="text-red-500">*</span>
                 </label>
                 <input
+                  id="confirmPassword"
                   type="password"
                   autoComplete="new-password"
                   {...register("confirmPassword", {

@@ -42,12 +42,11 @@ export function JobRequestsForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="my-8 grid grid-cols-1 gap-4">
       <div>
-        <label htmlFor="jobSite" className="form-label">
-          Job Site
-        </label>
+        <label htmlFor="jobSite">Job Site</label>
         <select
-          {...register("jobSite", { required: "Job site is required" })}
+          id="jobSite"
           disabled={isSubmitting}
+          {...register("jobSite", { required: "Job site is required" })}
         >
           <option>Job Site A</option>
           <option>Job Site B</option>
@@ -55,12 +54,11 @@ export function JobRequestsForm() {
       </div>
 
       <div>
-        <label htmlFor="supplier" className="form-label">
-          Select Supplier
-        </label>
+        <label htmlFor="supplier">Select Supplier</label>
         <select
-          {...register("supplier", { required: "Supplier id required" })}
+          id="supplier"
           disabled={isSubmitting}
+          {...register("supplier", { required: "Supplier id required" })}
         >
           <option>Supplier 01</option>
           <option>Supplier 02</option>
@@ -71,10 +69,8 @@ export function JobRequestsForm() {
       <Tabs register={register} />
 
       <div>
-        <label htmlFor="additionalNotes" className="form-label">
-          Additional Notes
-        </label>
-        <textarea {...register("additionalNotes")} disabled={isSubmitting} />
+        <label htmlFor="additionalNotes">Additional Notes</label>
+        <textarea id="additionalNotes" {...register("additionalNotes")} disabled={isSubmitting} />
       </div>
 
       <div className="mt-5 gap-2 sm:mt-4 sm:flex sm:flex-row-reverse">
@@ -152,10 +148,8 @@ function WorkerFields({ register }: WorkerFieldsProps) {
   return (
     <>
       <div>
-        <label htmlFor="jobPosition" className="form-label">
-          Job Position
-        </label>
-        <select {...register("jobPosition")}>
+        <label htmlFor="jobPosition">Job Position</label>
+        <select id="jobPosition" {...register("jobPosition")}>
           <option>General Labour</option>
           <option>Skill Labour</option>
           <option>Traffic Controller</option>
@@ -177,37 +171,33 @@ function WorkerFields({ register }: WorkerFieldsProps) {
 
       {/* If the selection of job position is Other */}
       {/* <div>
-        <label htmlFor="jobPosition" className="form-label">
+        <label htmlFor="jobPosition" >
           Job Position
         </label>
         <input type="text" name="jobPosition" />
       </div> */}
 
       <div>
-        <label htmlFor="quantity" className="form-label">
-          Quantity
-        </label>
+        <label htmlFor="quantity">Quantity</label>
         <input
+          id="quantity"
           type="number"
           {...register("quantity", { valueAsNumber: true, min: 0, minLength: 0 })}
         />
       </div>
 
       <div>
-        <label htmlFor="startDateTime" className="form-label">
-          Start Time
-        </label>
+        <label htmlFor="startDateTime">Start Time</label>
         <input
+          id="startDateTime"
           type="datetime-local"
           {...register("startDateTime", { required: "Start date and time is required" })}
         />
       </div>
 
       <div>
-        <label htmlFor="endDateTime" className="form-label">
-          End Time
-        </label>
-        <input type="datetime-local" {...register("endDateTime")} />
+        <label htmlFor="endDateTime">End Time</label>
+        <input id="endDateTime" type="datetime-local" {...register("endDateTime")} />
       </div>
 
       <div className="flex h-5 flex-row-reverse items-center justify-end gap-2">
@@ -216,6 +206,7 @@ function WorkerFields({ register }: WorkerFieldsProps) {
         </label>
         <input
           {...register("break")}
+          id="break"
           type="checkbox"
           aria-describedby="break-description"
           className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -233,16 +224,12 @@ function ServiceFields({ register }: ServiceFieldsProps) {
   return (
     <>
       <div>
-        <label htmlFor="serviceDescription" className="form-label">
-          Service Description
-        </label>
+        <label htmlFor="serviceDescription">Service Description</label>
         <input type="text" {...register("serviceDescription")} />
       </div>
 
       <div>
-        <label htmlFor="quantity" className="form-label">
-          Quantity
-        </label>
+        <label htmlFor="quantity">Quantity</label>
         <input
           {...register("quantity", { valueAsNumber: true, min: 0, minLength: 0 })}
           type="number"
@@ -250,9 +237,7 @@ function ServiceFields({ register }: ServiceFieldsProps) {
       </div>
 
       <div>
-        <label htmlFor="startDateTime" className="form-label">
-          Start Time
-        </label>
+        <label htmlFor="startDateTime">Start Time</label>
         <input
           type="datetime-local"
           {...register("startDateTime", { required: "Start date and time is required" })}

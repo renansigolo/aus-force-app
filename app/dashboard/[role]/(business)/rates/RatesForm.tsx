@@ -25,9 +25,7 @@ export function RatesForm() {
     <form className="space-y-8 divide-y divide-gray-200">
       <div className="mt-6 grid gap-4">
         <div>
-          <label htmlFor="clientName" className="form-label">
-            Client Name
-          </label>
+          <label htmlFor="clientName">Client Name</label>
           <select
             id="clientName"
             name="clientName"
@@ -40,9 +38,7 @@ export function RatesForm() {
         </div>
 
         <div>
-          <label htmlFor="jobPosition" className="form-label">
-            Job position
-          </label>
+          <label htmlFor="jobPosition">Job position</label>
           <select id="jobPosition" name="jobPosition">
             <option>General Labour</option>
             <option>Skill Labour</option>

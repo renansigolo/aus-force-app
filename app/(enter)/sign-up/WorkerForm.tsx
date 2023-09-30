@@ -87,9 +87,7 @@ export function WorkerForm() {
                   <Disclosure.Panel as="dd" className="mt-2">
                     <p className="text-base leading-7 text-gray-600">
                       <div className="sm:col-span-6">
-                        <label htmlFor="whiteCardNumber" className="form-label">
-                          Number
-                        </label>
+                        <label htmlFor="whiteCardNumber">Number</label>
                         <input
                           type="text"
                           {...register("whiteCardNumber", {
@@ -101,9 +99,7 @@ export function WorkerForm() {
                         )}
 
                         <div className="mt-2">
-                          <label htmlFor="dateIssued" className="form-label">
-                            Date of Issue
-                          </label>
+                          <label htmlFor="dateIssued">Date of Issue</label>
                           <input
                             type="date"
                             {...register("whiteCardIssueDate", {
@@ -155,9 +151,7 @@ export function WorkerForm() {
                         <div key={index} className="sm:col-span-6">
                           {field.id === "other" && (
                             <div className="mt-2">
-                              <label htmlFor={field.id} className="form-label">
-                                License Name
-                              </label>
+                              <label htmlFor={field.id}>License Name</label>
                               <input
                                 type={field.type}
                                 autoComplete={field.autoComplete}
@@ -170,9 +164,7 @@ export function WorkerForm() {
                           )}
 
                           <div className="mt-2">
-                            <label htmlFor={field.id} className="form-label">
-                              Number
-                            </label>
+                            <label htmlFor={field.id}>Number</label>
                             <input
                               type={field.type}
                               autoComplete={field.autoComplete}
@@ -184,9 +176,7 @@ export function WorkerForm() {
                           </div>
 
                           <div className="mt-2">
-                            <label htmlFor={field.id} className="form-label">
-                              Class / Type
-                            </label>
+                            <label htmlFor={field.id}>Class / Type</label>
                             <input
                               type="text"
                               autoComplete={field.autoComplete}
@@ -199,9 +189,7 @@ export function WorkerForm() {
 
                           <div className="flex gap-2">
                             <div className="mt-2 w-full">
-                              <label htmlFor={field.id} className="form-label">
-                                Date of Issue
-                              </label>
+                              <label htmlFor={field.id}>Date of Issue</label>
                               <input
                                 type="date"
                                 autoComplete={field.autoComplete}
@@ -213,9 +201,7 @@ export function WorkerForm() {
                             </div>
 
                             <div className="mt-2 w-full">
-                              <label htmlFor={field.id} className="form-label">
-                                Expire Date
-                              </label>
+                              <label htmlFor={field.id}>Expire Date</label>
                               <input
                                 type="date"
                                 autoComplete={field.autoComplete}

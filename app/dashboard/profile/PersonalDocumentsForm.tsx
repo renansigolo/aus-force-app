@@ -34,10 +34,9 @@ export function PersonalDocumentsForm({ user }: PersonalDocumentsFormProps) {
     <form className="md:col-span-2" onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
         <div className="col-span-full">
-          <label htmlFor="passportNumber" className="form-label">
-            ID / Passport
-          </label>
+          <label htmlFor="passportNumber">ID / Passport</label>
           <input
+            id="passportNumber"
             type="text"
             disabled={isSubmitting}
             {...register("passportNumber", { required: "Passport number is required" })}
@@ -45,26 +44,21 @@ export function PersonalDocumentsForm({ user }: PersonalDocumentsFormProps) {
 
           <div className="flex gap-2">
             <div className="mt-2 w-full">
-              <label htmlFor="passportIssued" className="form-label">
-                Date of Issue
-              </label>
-              <input type="date" {...register("passportIssued")} />
+              <label htmlFor="passportIssued">Date of Issue</label>
+              <input id="passportIssued" type="date" {...register("passportIssued")} />
             </div>
 
             <div className="mt-2 w-full">
-              <label htmlFor="passportExpiry" className="form-label">
-                Expiry Date
-              </label>
-              <input type="date" {...register("passportExpiry")} />
+              <label htmlFor="passportExpiry">Expiry Date</label>
+              <input id="passportExpiry" type="date" {...register("passportExpiry")} />
             </div>
           </div>
         </div>
 
         <div className="col-span-full">
-          <label htmlFor="driverLicense" className="form-label">
-            Driver License
-          </label>
+          <label htmlFor="driverLicense">Driver License</label>
           <input
+            id="driverLicense"
             type="number"
             disabled={isSubmitting}
             {...register("driverLicense", {
@@ -75,26 +69,21 @@ export function PersonalDocumentsForm({ user }: PersonalDocumentsFormProps) {
 
           <div className="flex gap-2">
             <div className="mt-2 w-full">
-              <label htmlFor="driverLicenseIssued" className="form-label">
-                Date of Issue
-              </label>
-              <input type="date" {...register("driverLicenseIssued")} />
+              <label htmlFor="driverLicenseIssued">Date of Issue</label>
+              <input id="driverLicenseIssued" type="date" {...register("driverLicenseIssued")} />
             </div>
 
             <div className="mt-2 w-full">
-              <label htmlFor="driverLicenseExpiry" className="form-label">
-                Expiry Date
-              </label>
-              <input type="date" {...register("driverLicenseExpiry")} />
+              <label htmlFor="driverLicenseExpiry">Expiry Date</label>
+              <input id="driverLicenseExpiry" type="date" {...register("driverLicenseExpiry")} />
             </div>
           </div>
         </div>
 
         <div className="col-span-full">
-          <label htmlFor="identification" className="form-label">
-            ID
-          </label>
+          <label htmlFor="identificationNumber">ID</label>
           <input
+            id="identificationNumber"
             type="number"
             disabled={isSubmitting}
             {...register("identificationNumber", {
@@ -105,25 +94,19 @@ export function PersonalDocumentsForm({ user }: PersonalDocumentsFormProps) {
 
           <div className="flex gap-2">
             <div className="mt-2 w-full">
-              <label htmlFor="identificationIssued" className="form-label">
-                Date of Issue
-              </label>
-              <input type="date" {...register("identificationIssued")} />
+              <label htmlFor="identificationIssued">Date of Issue</label>
+              <input id="identificationIssued" type="date" {...register("identificationIssued")} />
             </div>
 
             <div className="mt-2 w-full">
-              <label htmlFor="identificationExpiry" className="form-label">
-                Expiry Date
-              </label>
-              <input type="date" {...register("identificationExpiry")} />
+              <label htmlFor="identificationExpiry">Expiry Date</label>
+              <input id="identificationExpiry" type="date" {...register("identificationExpiry")} />
             </div>
           </div>
         </div>
 
         <div className="col-span-full">
-          <label htmlFor="signature" className="form-label">
-            Signature
-          </label>
+          <span>Signature</span>
           {user.signatureURL && (
             <div className="rounded-md border border-gray-200 bg-white p-6 hover:cursor-not-allowed">
               <img src={user.signatureURL} alt="Signature" width={500} height={300} />

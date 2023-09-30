@@ -14,10 +14,8 @@ export function FormInputWrapper({ id, title, type, options, errors }: FormInput
 
   return (
     <div>
-      <label htmlFor={id} className="form-label">
-        {title}
-      </label>
-      <input className="form-input" type={type} {...register(id, options)} />
+      <label htmlFor={id}>{title}</label>
+      <input type={type} {...register(id, options)} />
       <FormInputError message={errors[id]?.message} />
     </div>
   )
