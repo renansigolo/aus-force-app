@@ -1,5 +1,6 @@
 "use client"
 
+import { Accordion } from "@/components/Accordion"
 import { Card, CardContent, CardHeader } from "@/components/Card"
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
@@ -7,14 +8,18 @@ import { Role } from "@/components/Roles"
 import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
 import { SearchParams } from "@/lib/schemas"
-import { Disclosure, Menu, Transition } from "@headlessui/react"
-import { ChevronDownIcon, ChevronRightIcon, EllipsisVerticalIcon } from "@heroicons/react/20/solid"
+import { Menu, Transition } from "@headlessui/react"
+import { EllipsisVerticalIcon } from "@heroicons/react/20/solid"
 import { CloudArrowDownIcon, DocumentTextIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { Fragment } from "react"
 import { twMerge } from "tailwind-merge"
 
-const accordionItems = [{ title: "Job Site A" }, { title: "Job Site B" }, { title: "Job Site C" }]
+const accordionItems = [
+  { title: "Job Site A", children: <TimesheetsList /> },
+  { title: "Job Site B", children: <TimesheetsList /> },
+  { title: "Job Site C", children: <TimesheetsList /> },
+]
 
 type TimesheetsPageProps = { searchParams: SearchParams }
 
@@ -82,47 +87,9 @@ function Client() {
       </CardHeader>
 
       <CardContent>
-        <TimesheetAccordion />
+        <Accordion items={accordionItems} />
       </CardContent>
     </Card>
-  )
-}
-
-function TimesheetAccordion() {
-  return (
-    <div className="w-full rounded-lg bg-white shadow">
-      <div className="mx-auto px-2 pb-6">
-        <div className="mx-auto divide-gray-900/10">
-          <dl className="space-y-6 divide-y divide-gray-900/10">
-            {accordionItems.map((item) => (
-              <Disclosure key={item.title} as="div" className="pt-6">
-                {({ open }) => (
-                  <>
-                    <dt>
-                      <Disclosure.Button className="flex w-full items-center justify-between text-left text-gray-900">
-                        <span className="flex h-7 items-center">
-                          {open ? (
-                            <ChevronDownIcon className="h-6 w-6" aria-hidden="true" />
-                          ) : (
-                            <ChevronRightIcon className="h-6 w-6" aria-hidden="true" />
-                          )}
-                          <span className="ml-2 text-base font-semibold leading-7">
-                            {item.title}
-                          </span>
-                        </span>
-                      </Disclosure.Button>
-                    </dt>
-                    <Disclosure.Panel as="dd" className="mt-2 px-2">
-                      <TimesheetsList />
-                    </Disclosure.Panel>
-                  </>
-                )}
-              </Disclosure>
-            ))}
-          </dl>
-        </div>
-      </div>
-    </div>
   )
 }
 

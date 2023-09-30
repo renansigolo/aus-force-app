@@ -53,7 +53,7 @@ const data = [
   },
 ]
 
-const accordionData = [
+const accordionItems = [
   {
     title: "General Labour",
     children: <RatesList />,
@@ -77,14 +77,14 @@ export default function RatesPage({ searchParams }: RatesPageProps) {
         <PageHeading title="Rates" buttonLabel="Add New Rates" />
 
         <section className="py-8">
-          {accordionData.length > 0 ? (
+          {accordionItems.length > 0 ? (
             <Card>
               <CardHeader>
                 <h3 className="text-lg font-medium leading-6 text-gray-900">Client 01</h3>
               </CardHeader>
 
               <CardContent>
-                <Accordion items={accordionData} />
+                <Accordion items={accordionItems} />
               </CardContent>
             </Card>
           ) : (

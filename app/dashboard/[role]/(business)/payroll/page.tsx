@@ -1,13 +1,17 @@
 "use client"
 
+import { Accordion } from "@/components/Accordion"
 import { Card, CardContent, CardHeader } from "@/components/Card"
 import { Role } from "@/components/Roles"
 import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
-import { Disclosure } from "@headlessui/react"
-import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
 
-const accordionItems = [{ title: "Client 1" }, { title: "Client 2" }, { title: "Client 3" }]
+const accordionItems = [
+  { title: "Client 1", children: <ClientTable /> },
+  { title: "Client 2", children: <ClientTable /> },
+  { title: "Client 3", children: <ClientTable /> },
+]
+
 const tableItems = [
   {
     status: "paid",
@@ -56,7 +60,7 @@ export default function PayrollPage() {
             </CardHeader>
 
             <CardContent>
-              <Accordion />
+              <Accordion items={accordionItems} />
             </CardContent>
           </Card>
         </section>
@@ -69,7 +73,7 @@ export default function PayrollPage() {
             </CardHeader>
 
             <CardContent>
-              <Accordion />
+              <Accordion items={accordionItems} />
             </CardContent>
           </Card>
         </section>
@@ -83,50 +87,12 @@ export default function PayrollPage() {
             </CardHeader>
 
             <CardContent>
-              <Accordion />
+              <Accordion items={accordionItems} />
             </CardContent>
           </Card>
         </section>
       </Role>
     </PageWrapper>
-  )
-}
-
-function Accordion() {
-  return (
-    <div className="w-full rounded-lg bg-white shadow">
-      <div className="mx-auto px-2 pb-6">
-        <div className="mx-auto divide-gray-900/10">
-          <dl className="space-y-6 divide-y divide-gray-900/10">
-            {accordionItems.map((item) => (
-              <Disclosure key={item.title} as="div" className="pt-6">
-                {({ open }) => (
-                  <>
-                    <dt>
-                      <Disclosure.Button className="flex w-full items-center justify-between text-left text-gray-900">
-                        <span className="flex h-7 items-center">
-                          {open ? (
-                            <ChevronDownIcon className="h-6 w-6" aria-hidden="true" />
-                          ) : (
-                            <ChevronRightIcon className="h-6 w-6" aria-hidden="true" />
-                          )}
-                          <span className="ml-2 text-base font-semibold leading-7">
-                            {item.title}
-                          </span>
-                        </span>
-                      </Disclosure.Button>
-                    </dt>
-                    <Disclosure.Panel as="dd" className="mt-2 px-2">
-                      <ClientTable />
-                    </Disclosure.Panel>
-                  </>
-                )}
-              </Disclosure>
-            ))}
-          </dl>
-        </div>
-      </div>
-    </div>
   )
 }
 
