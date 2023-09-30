@@ -1,8 +1,8 @@
 "use client"
 
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Role } from "@/components/Roles"
+import { PageWrapper } from "@/components/dashboard/PageWrapper"
+import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { Disclosure } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon, EllipsisVerticalIcon } from "@heroicons/react/20/solid"
 
@@ -44,7 +44,7 @@ const tableItems = [
 
 export default function PayrollPage() {
   return (
-    <SectionWrapper>
+    <PageWrapper>
       <Role role="business">
         <SectionHeading title="Payroll" />
         <section className="py-8">
@@ -141,7 +141,7 @@ export default function PayrollPage() {
           </div>
         </section>
       </Role>
-    </SectionWrapper>
+    </PageWrapper>
   )
 }
 

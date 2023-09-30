@@ -5,8 +5,8 @@ import { BankForm } from "@/app/dashboard/profile/BankForm"
 import { PersonalDocumentsForm } from "@/app/dashboard/profile/PersonalDocumentsForm"
 import { ProfileForm } from "@/app/dashboard/profile/ProfileForm"
 import { Divider } from "@/components/Divider"
+import { PageWrapper } from "@/components/dashboard/PageWrapper"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 
 export type UserRoles = "worker" | "client" | "business" | "admin"
 export type DatabaseUser = {
@@ -43,7 +43,7 @@ export default function ProfilePage() {
   const data = user as DatabaseUser
 
   return (
-    <SectionWrapper>
+    <PageWrapper>
       <SectionHeading title="Account Details" />
       <section className={styleSection}>
         <Heading
@@ -66,7 +66,7 @@ export default function ProfilePage() {
         <Heading title="Personal Documents" description="Personal documents" />
         <PersonalDocumentsForm user={data} />
       </section>
-    </SectionWrapper>
+    </PageWrapper>
   )
 }
 

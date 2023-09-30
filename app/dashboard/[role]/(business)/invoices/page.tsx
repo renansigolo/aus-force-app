@@ -1,9 +1,9 @@
 "use client"
 
 import { Button } from "@/components/Button"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Role } from "@/components/Roles"
+import { PageWrapper } from "@/components/dashboard/PageWrapper"
+import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { Disclosure } from "@headlessui/react"
 
 const accordionItems = [
@@ -14,7 +14,7 @@ const accordionItems = [
 
 export default function InvoicesPage() {
   return (
-    <SectionWrapper>
+    <PageWrapper>
       <Role role="business">
         <SectionHeading title="Invoices" />
         <section className="py-8">
@@ -26,7 +26,7 @@ export default function InvoicesPage() {
           <Accordion />
         </section>
       </Role>
-    </SectionWrapper>
+    </PageWrapper>
   )
 }
 

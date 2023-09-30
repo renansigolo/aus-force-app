@@ -2,8 +2,8 @@ import { LeaveRequestsForm } from "@/app/dashboard/[role]/(worker)/leave-request
 import { LeaveRequestsList } from "@/app/dashboard/[role]/(worker)/leave-requests/LeaveRequestsList"
 import { Empty } from "@/components/Empty"
 import { Role } from "@/components/Roles"
+import { PageWrapper } from "@/components/dashboard/PageWrapper"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { getCollectionQuery } from "@/lib/firebase"
 
 export type RequestLeaveData = {
@@ -21,7 +21,7 @@ export default async function RequestLeavePage() {
   const data = (await getCollectionQuery("leaveRequests", "createdAt")) as RequestLeaveData[]
 
   return (
-    <SectionWrapper>
+    <PageWrapper>
       <Role role="worker">
         <SectionHeading title="Leave Requests" />
 
@@ -31,6 +31,6 @@ export default async function RequestLeavePage() {
 
         {data.length > 0 ? <LeaveRequestsList data={data} /> : <Empty title="leave requests" />}
       </Role>
-    </SectionWrapper>
+    </PageWrapper>
   )
 }

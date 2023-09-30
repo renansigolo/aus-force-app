@@ -5,8 +5,8 @@ import { Button } from "@/components/Button"
 import { Empty } from "@/components/Empty"
 import Modal from "@/components/Modal"
 import { Role } from "@/components/Roles"
+import { PageWrapper } from "@/components/dashboard/PageWrapper"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import NiceModal from "@ebay/nice-modal-react"
 import { ClockIcon, PencilIcon, UserPlusIcon } from "@heroicons/react/24/outline"
 
@@ -72,7 +72,7 @@ export default function AllocationsPage() {
     })
 
   return (
-    <SectionWrapper>
+    <PageWrapper>
       <Role role="business">
         <SectionHeading title="Allocations" />
 
@@ -84,7 +84,7 @@ export default function AllocationsPage() {
           )}
         </section>
       </Role>
-    </SectionWrapper>
+    </PageWrapper>
   )
 }
 

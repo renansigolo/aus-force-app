@@ -1,10 +1,10 @@
 import { JobRequestsForm } from "@/app/dashboard/[role]/(client)/job-requests/JobRequestsForm"
 import { JobRequestsList } from "@/app/dashboard/[role]/(client)/job-requests/JobRequestsList"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
+import { PageWrapper } from "@/components/dashboard/PageWrapper"
+import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { getCollectionQuery } from "@/lib/firebase"
 import { SearchParams } from "@/lib/schemas"
 
@@ -29,7 +29,7 @@ export default async function JobRequestsPage({ searchParams }: JobRequestsPageP
   const showModal = searchParams.showModal === "true"
 
   return (
-    <SectionWrapper>
+    <PageWrapper>
       <Role role="client">
         <SectionHeading title="Job Requests" buttonLabel="New Job Request" />
 
@@ -41,6 +41,6 @@ export default async function JobRequestsPage({ searchParams }: JobRequestsPageP
       <ModalWrapper title="New Job" showModal={showModal}>
         <JobRequestsForm />
       </ModalWrapper>
-    </SectionWrapper>
+    </PageWrapper>
   )
 }

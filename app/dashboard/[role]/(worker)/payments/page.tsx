@@ -1,7 +1,7 @@
 import { Empty } from "@/components/Empty"
 import { Role } from "@/components/Roles"
+import { PageWrapper } from "@/components/dashboard/PageWrapper"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { BanknotesIcon } from "@heroicons/react/20/solid"
 import { twMerge } from "tailwind-merge"
 
@@ -52,12 +52,12 @@ const statusStyles: StatusStyles = {
 
 export default function PaymentsPage() {
   return (
-    <SectionWrapper>
+    <PageWrapper>
       <SectionHeading title="Payments" />
       <section className="py-8">
         {data.length > 0 ? <PaymentsList /> : <Empty title="payments" />}
       </section>
-    </SectionWrapper>
+    </PageWrapper>
   )
 }
 
