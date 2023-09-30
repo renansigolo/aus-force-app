@@ -3,7 +3,7 @@
 import { JobRequest } from "@/app/dashboard/[role]/(client)/job-requests/page"
 import { Badge } from "@/components/Badge"
 import { Button } from "@/components/Button"
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/Card"
+import { Card, CardContent, CardFooter } from "@/components/Card"
 import { deleteDocument } from "@/lib/firebase"
 import { ExclamationTriangleIcon, TrashIcon } from "@heroicons/react/24/outline"
 import { useRouter } from "next/navigation"
@@ -25,14 +25,6 @@ export function JobRequestsList({ data }: JobRequestsListProps) {
     <div className="grid grid-cols-1 gap-2">
       {data.map((item, index) => (
         <Card key={item.id}>
-          {item.status !== "allocated" && (
-            <CardHeader>
-              <Badge className="gap-1 bg-yellow-50 text-sm text-yellow-800 ring-yellow-600/20">
-                <ExclamationTriangleIcon className="h-5 w-5" /> Waiting Allocation
-              </Badge>
-            </CardHeader>
-          )}
-
           <CardContent>
             <div className="min-w-0 flex-1">
               <p className="mb-2 text-sm font-semibold text-gray-900">
@@ -50,9 +42,15 @@ export function JobRequestsList({ data }: JobRequestsListProps) {
               <ListItem label="Service description" value={item.serviceDescription} />
               <ListItem label="Additional notes" value={item.additionalNotes} />
             </div>
+            <div>
+              {item.status !== "allocated" && (
+                <Badge className="gap-x-1 bg-yellow-50 text-sm text-yellow-800 ring-yellow-600/20">
+                  <ExclamationTriangleIcon className="h-5 w-5" /> Waiting Allocation
+                </Badge>
+              )}
+            </div>
           </CardContent>
 
-          {/* <div className="flex flex-col items-center gap-2"></div> */}
           <CardFooter>
             <Button
               type="button"
