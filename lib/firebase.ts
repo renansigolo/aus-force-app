@@ -1,5 +1,5 @@
 // Import the functions you need from the SDKs you need
-import { FirestoreUser } from "@/app/dashboard/profile/page"
+import { DatabaseUser } from "@/app/dashboard/profile/page"
 import { getApp, initializeApp } from "firebase/app"
 import { getAuth } from "firebase/auth"
 import {
@@ -72,7 +72,7 @@ export const storage = getStorage(firebaseApp)
 export const getUserDoc = async (uid: string) => {
   const docRef = doc(db, `users/${uid}`)
   const docSnap = await getDoc(docRef)
-  const data = docSnap.data() as FirestoreUser
+  const data = docSnap.data() as DatabaseUser
 
   return data
 }

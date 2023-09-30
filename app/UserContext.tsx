@@ -1,6 +1,6 @@
 "use client"
 
-import { FirestoreUser } from "@/app/dashboard/profile/page"
+import { DatabaseUser } from "@/app/dashboard/profile/page"
 import { Loader } from "@/components/Loader"
 import { auth, getUserDoc } from "@/lib/firebase"
 import { onAuthStateChanged } from "firebase/auth"
@@ -16,8 +16,8 @@ import {
 } from "react"
 
 type UserContextType = {
-  user: FirestoreUser | null
-  setUser: Dispatch<SetStateAction<FirestoreUser | null>>
+  user: DatabaseUser | null
+  setUser: Dispatch<SetStateAction<DatabaseUser | null>>
 }
 
 // Create the authentication context
@@ -41,7 +41,7 @@ export function UserContextProvider({ children }: UserContextProviderProps): JSX
   const router = useRouter()
 
   // Set up state to track the authenticated user and loading status
-  const [user, setUser] = useState<FirestoreUser | null>(null)
+  const [user, setUser] = useState<DatabaseUser | null>(null)
   const [loading, setLoading] = useState(true)
 
   // Redirect to dashboard if user is logged in

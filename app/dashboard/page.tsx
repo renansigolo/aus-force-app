@@ -5,14 +5,11 @@ import { Birthdays } from "@/app/dashboard/(home)/Birthdays"
 import { Overview } from "@/app/dashboard/(home)/Overview"
 import { PendingApprovals } from "@/app/dashboard/(home)/PendingApprovals"
 import { WeeklyActivity } from "@/app/dashboard/(home)/WeeklyActivity"
-import { Badge } from "@/components/Badge"
 import { Container } from "@/components/Container"
 import { Leaves } from "@/components/dashboard/Leaves"
 import { WelcomePanel } from "@/components/dashboard/WelcomePanel"
-import { SearchParams } from "@/lib/schemas"
 
-type DashboardPageProps = { searchParams: SearchParams }
-export default async function DashboardPage({ searchParams }: DashboardPageProps) {
+export default function DashboardPage() {
   const { user } = useUserContext()
 
   return (
@@ -48,9 +45,6 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
           </section>
         </section>
       </Container>
-      <div className="fixed bottom-8 left-1 inline-flex flex-col">
-        <Badge>{user?.role}</Badge>
-      </div>
     </>
   )
 }

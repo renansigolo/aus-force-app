@@ -1,6 +1,9 @@
 "use client"
 
 import { useUserContext } from "@/app/UserContext"
+import { UserRoles } from "@/app/dashboard/profile/page"
+import { Badge } from "@/components/Badge"
+import { UserAvatar } from "@/components/User"
 import { auth } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
 import { Menu, Popover, Transition } from "@headlessui/react"
@@ -114,7 +117,7 @@ const businessRoutes: Route[] = [
 type Route = {
   name: string
   href: string
-  roles: string[]
+  roles: UserRoles[]
   color?: string
 }
 
@@ -175,7 +178,7 @@ export async function Navbar() {
                   </Link>
 
                   {/* Desktop - Authenticated Navigation Links */}
-                  <nav className="hidden flex-wrap pl-12 lg:flex lg:space-x-2" aria-label="Global">
+                  <nav className="hidden flex-wrap pl-3 lg:flex lg:space-x-2" aria-label="Global">
                     {protectedRoutes.map((item) => (
                       <Link
                         key={item.name}
@@ -211,13 +214,10 @@ export async function Navbar() {
                 <div className="hidden lg:flex lg:items-center lg:justify-end">
                   <Menu as="div" className="relative flex-shrink-0">
                     <div>
-                      <Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                      <Menu.Button className="flex flex-col items-center justify-center gap-1 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                         <span className="sr-only">Open user menu</span>
-                        <img
-                          className="h-8 w-8 rounded-full"
-                          alt="Profile Image"
-                          src={user?.photoURL || "/images/profile-placeholder.png"}
-                        />
+                        <UserAvatar className="h-8 w-8" />
+                        <Badge>{user?.role}</Badge>
                       </Menu.Button>
                     </div>
                     <Transition

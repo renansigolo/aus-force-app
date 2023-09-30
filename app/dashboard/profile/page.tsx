@@ -8,7 +8,8 @@ import { Divider } from "@/components/Divider"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 
-export type FirestoreUser = {
+export type UserRoles = "worker" | "client" | "business" | "admin"
+export type DatabaseUser = {
   displayName: string
   firstName: string
   lastName: string
@@ -17,7 +18,7 @@ export type FirestoreUser = {
   photoURL: string
   uid: string
   dob: string
-  role: string
+  role: UserRoles
   signatureURL: string
   accountName: string
   accountNumber: number
@@ -39,7 +40,7 @@ export default function ProfilePage() {
 
   // Get the user's data using the Firebase SDK in firestore
   const { user } = useUserContext()
-  const data = user as FirestoreUser
+  const data = user as DatabaseUser
 
   return (
     <SectionWrapper>

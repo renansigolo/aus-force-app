@@ -1,6 +1,6 @@
 "use client"
 
-import { FirestoreUser } from "@/app/dashboard/profile/page"
+import { DatabaseUser } from "@/app/dashboard/profile/page"
 import { Button } from "@/components/Button"
 import { updateDocument } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
 type PersonalDocumentsFormProps = {
-  user: FirestoreUser
+  user: DatabaseUser
 }
 
 export function PersonalDocumentsForm({ user }: PersonalDocumentsFormProps) {
@@ -18,9 +18,9 @@ export function PersonalDocumentsForm({ user }: PersonalDocumentsFormProps) {
     register,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<FirestoreUser>({ defaultValues: user })
+  } = useForm<DatabaseUser>({ defaultValues: user })
 
-  const onSubmit = async (values: FirestoreUser) => {
+  const onSubmit = async (values: DatabaseUser) => {
     try {
       await updateDocument("users", user.uid, values)
       router.refresh()
