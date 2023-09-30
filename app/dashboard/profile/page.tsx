@@ -5,8 +5,8 @@ import { BankForm } from "@/app/dashboard/profile/BankForm"
 import { PersonalDocumentsForm } from "@/app/dashboard/profile/PersonalDocumentsForm"
 import { ProfileForm } from "@/app/dashboard/profile/ProfileForm"
 import { Divider } from "@/components/Divider"
+import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
 
 export type UserRoles = "worker" | "client" | "business" | "admin"
 export type DatabaseUser = {
@@ -44,7 +44,7 @@ export default function ProfilePage() {
 
   return (
     <PageWrapper>
-      <SectionHeading title="Account Details" />
+      <PageHeading title="Account Details" />
       <section className={styleSection}>
         <Heading
           title="Personal Information"

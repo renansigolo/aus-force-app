@@ -2,8 +2,8 @@
 
 import { Button } from "@/components/Button"
 import { Role } from "@/components/Roles"
+import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { Disclosure } from "@headlessui/react"
 
 const accordionItems = [
@@ -16,7 +16,7 @@ export default function InvoicesPage() {
   return (
     <PageWrapper>
       <Role role="business">
-        <SectionHeading title="Invoices" />
+        <PageHeading title="Invoices" />
         <section className="py-8">
           <h2 className="heading-3 mx-2 my-6 pl-4">⏳ Pending</h2>
           <Accordion />

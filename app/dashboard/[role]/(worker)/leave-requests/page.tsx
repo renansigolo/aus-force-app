@@ -2,8 +2,8 @@ import { LeaveRequestsForm } from "@/app/dashboard/[role]/(worker)/leave-request
 import { LeaveRequestsList } from "@/app/dashboard/[role]/(worker)/leave-requests/LeaveRequestsList"
 import { Empty } from "@/components/Empty"
 import { Role } from "@/components/Roles"
+import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { getCollectionQuery } from "@/lib/firebase"
 
 export type RequestLeaveData = {
@@ -23,7 +23,7 @@ export default async function RequestLeavePage() {
   return (
     <PageWrapper>
       <Role role="worker">
-        <SectionHeading title="Leave Requests" />
+        <PageHeading title="Leave Requests" />
 
         <section className="py-8">
           <LeaveRequestsForm />

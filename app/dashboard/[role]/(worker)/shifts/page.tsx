@@ -1,7 +1,7 @@
 import { Empty } from "@/components/Empty"
 import { Role } from "@/components/Roles"
+import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { BanknotesIcon } from "@heroicons/react/20/solid"
 import { BuildingOffice2Icon } from "@heroicons/react/24/outline"
 import { twMerge } from "tailwind-merge"
@@ -63,7 +63,7 @@ const statusStyles: StatusStyles = {
 export default function ShiftsPage() {
   return (
     <PageWrapper>
-      <SectionHeading title="Shifts" />
+      <PageHeading title="Shifts" />
       <section className="py-8">
         {data.length > 0 ? <ShiftsList /> : <Empty title="shifts" />}
       </section>

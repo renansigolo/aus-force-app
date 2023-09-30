@@ -1,8 +1,8 @@
 "use client"
 
 import { Role } from "@/components/Roles"
+import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { UserCircleIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { twMerge } from "tailwind-merge"
@@ -62,7 +62,7 @@ export default function WorkersPage() {
   return (
     <PageWrapper>
       <Role role="business">
-        <SectionHeading title="Workers" />
+        <PageHeading title="Workers" />
         <section className="py-8">
           <WorkersList category="Allocated Workers" />
         </section>

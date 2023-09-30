@@ -3,8 +3,8 @@
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
+import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SearchParams } from "@/lib/schemas"
 import { Disclosure, Menu, Transition } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon, EllipsisVerticalIcon } from "@heroicons/react/20/solid"
@@ -23,7 +23,7 @@ export default function TimesheetsPage({ searchParams }: TimesheetsPageProps) {
   return (
     <PageWrapper>
       <Role role="business">
-        <SectionHeading title="Timesheets" />
+        <PageHeading title="Timesheets" />
         <section className="py-8">
           {accordionItems.length > 0 ? <Client /> : <Empty title="timesheets" />}
         </section>

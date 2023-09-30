@@ -3,8 +3,8 @@ import { Accordion } from "@/components/Accordion"
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
+import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SearchParams } from "@/lib/schemas"
 
 const data = [
@@ -73,7 +73,7 @@ export default function RatesPage({ searchParams }: RatesPageProps) {
   return (
     <PageWrapper>
       <Role role="business">
-        <SectionHeading title="Rates" buttonLabel="Add New Rates" />
+        <PageHeading title="Rates" buttonLabel="Add New Rates" />
 
         <section className="py-8">
           {accordionData.length > 0 ? (

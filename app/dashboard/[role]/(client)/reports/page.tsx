@@ -1,6 +1,6 @@
 import { Role } from "@/components/Roles"
+import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { UserIcon } from "@heroicons/react/20/solid"
 import { FunnelIcon } from "@heroicons/react/24/outline"
 import { twMerge } from "tailwind-merge"
@@ -38,7 +38,7 @@ export default function ReportsPage() {
   return (
     <PageWrapper>
       <Role role="client">
-        <SectionHeading title="Reports" buttonLabel="Download PDF" />
+        <PageHeading title="Reports" buttonLabel="Download PDF" />
 
         {/* Filter */}
         <div className="mt-6">

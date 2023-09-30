@@ -1,8 +1,8 @@
 "use client"
 
 import { Role } from "@/components/Roles"
+import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { Disclosure } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon, EllipsisVerticalIcon } from "@heroicons/react/20/solid"
 
@@ -46,7 +46,7 @@ export default function PayrollPage() {
   return (
     <PageWrapper>
       <Role role="business">
-        <SectionHeading title="Payroll" />
+        <PageHeading title="Payroll" />
         <section className="py-8">
           <p className="mb-2 text-lg font-semibold text-gray-900">Overdue payments</p>
           <div className="overflow-hidden rounded-lg bg-white shadow">

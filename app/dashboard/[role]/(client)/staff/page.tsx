@@ -5,8 +5,8 @@ import { StaffForm } from "@/app/dashboard/[role]/(client)/staff/StaffForm"
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
+import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SearchParams } from "@/lib/schemas"
 
 export type StaffListDataProps = {
@@ -30,7 +30,7 @@ export default function StaffPage({ searchParams }: StaffPageProps) {
     <>
       <PageWrapper>
         <Role role="client">
-          <SectionHeading title="Staff" buttonLabel="New Staff" />
+          <PageHeading title="Staff" buttonLabel="New Staff" />
           <section className="py-8">
             {accordionData.length > 0 ? (
               <StaffAccordion accordionData={accordionData} />
