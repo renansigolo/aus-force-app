@@ -7,6 +7,7 @@ import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
 import { getCollectionQuery } from "@/lib/firebase"
 import { SearchParams } from "@/lib/schemas"
+import { orderBy } from "firebase/firestore"
 
 export type JobRequest = {
   id: string
@@ -25,7 +26,10 @@ export type JobRequest = {
 type JobRequestsPageProps = { searchParams: SearchParams }
 
 export default async function JobRequestsPage({ searchParams }: JobRequestsPageProps) {
-  const data = (await getCollectionQuery("jobRequests", "createdAt")) as JobRequest[]
+  const data = (await getCollectionQuery(
+    "jobRequests",
+    orderBy("createdAt", "desc"),
+  )) as JobRequest[]
   const showModal = searchParams.showModal === "true"
 
   return (

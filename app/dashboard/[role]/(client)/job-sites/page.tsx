@@ -7,6 +7,7 @@ import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
 import { getCollectionQuery } from "@/lib/firebase"
 import { SearchParams } from "@/lib/schemas"
+import { orderBy } from "firebase/firestore"
 
 export type JobSitesListDataProps = {
   id: string
@@ -21,7 +22,10 @@ export type JobSitesListDataProps = {
 type JobSitesPageProps = { searchParams: SearchParams }
 
 export default async function JobSitesPage({ searchParams }: JobSitesPageProps) {
-  const data = (await getCollectionQuery("jobSites", "siteName")) as JobSitesListDataProps[]
+  const data = (await getCollectionQuery(
+    "jobSites",
+    orderBy("siteName", "asc"),
+  )) as JobSitesListDataProps[]
   const showModal = searchParams.showModal === "true"
 
   return (

@@ -5,6 +5,7 @@ import { Role } from "@/components/Roles"
 import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
 import { getCollectionQuery } from "@/lib/firebase"
+import { orderBy } from "firebase/firestore"
 
 export type RequestLeaveData = {
   id: string
@@ -18,7 +19,10 @@ export type RequestLeaveData = {
 }
 
 export default async function RequestLeavePage() {
-  const data = (await getCollectionQuery("leaveRequests", "createdAt")) as RequestLeaveData[]
+  const data = (await getCollectionQuery(
+    "leaveRequests",
+    orderBy("createdAt", "desc"),
+  )) as RequestLeaveData[]
 
   return (
     <PageWrapper>

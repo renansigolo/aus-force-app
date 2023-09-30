@@ -24,3 +24,18 @@ export const getISODate = (inputDate?: string): string => {
   const date = inputDate ? new Date(inputDate) : new Date()
   return date.toISOString().split("T")[0]
 }
+
+/** Trim all the string values in the object */
+export const trimFormValues = (obj: Record<string, unknown>): Record<string, unknown> => {
+  return Object.entries(obj).reduce(
+    (acc, [key, value]) => {
+      if (typeof value === "string") {
+        acc[key] = value.trim()
+      } else {
+        acc[key] = value
+      }
+      return acc
+    },
+    {} as Record<string, unknown>,
+  )
+}
