@@ -129,6 +129,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
             <option>worker</option>
             <option>client</option>
             <option>business</option>
+            <option>admin</option>
           </select>
         </div>
       </div>

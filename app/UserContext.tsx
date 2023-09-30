@@ -21,22 +21,22 @@ type UserContextType = {
 }
 
 // Create the authentication context
-export const AuthContext = createContext<UserContextType | null>(null)
+export const UserContext = createContext<UserContextType | null>(null)
 
 // Custom hook to access the authentication context
-export function useAuthContext() {
-  const context = useContext(AuthContext)
+export function useUserContext() {
+  const context = useContext(UserContext)
   if (!context) {
     throw new Error("useUserContext must be used within a UserProvider")
   }
   return context
 }
 
-interface AuthContextProviderProps {
+interface UserContextProviderProps {
   children: ReactNode
 }
 
-export function AuthContextProvider({ children }: AuthContextProviderProps): JSX.Element {
+export function UserContextProvider({ children }: UserContextProviderProps): JSX.Element {
   const pathname = usePathname()
   const router = useRouter()
 
@@ -61,10 +61,10 @@ export function AuthContextProvider({ children }: AuthContextProviderProps): JSX
   useEffect(() => {
     // Subscribe to the authentication state changes
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      const firestoreUser = user && (await getUserDoc(user.uid))
+      const dbUser = user && (await getUserDoc(user.uid))
 
       // Update the user state with the new user if available
-      user ? setUser(firestoreUser) : setUser(null)
+      user ? setUser(dbUser) : setUser(null)
       // Set loading to false once authentication state is determined
       setLoading(false)
     })
@@ -75,7 +75,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps): JSX
 
   // Provide the authentication context to child components
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser }}>
       {loading ? (
         <div className="grid min-h-screen place-content-center">
           <div className="flex flex-col items-center gap-2">
@@ -86,6 +86,6 @@ export function AuthContextProvider({ children }: AuthContextProviderProps): JSX
       ) : (
         children
       )}
-    </AuthContext.Provider>
+    </UserContext.Provider>
   )
 }

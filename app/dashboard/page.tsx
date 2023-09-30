@@ -1,6 +1,6 @@
 "use client"
 
-import { useAuthContext } from "@/app/AuthContext"
+import { useUserContext } from "@/app/UserContext"
 import { Birthdays } from "@/app/dashboard/(home)/Birthdays"
 import { Overview } from "@/app/dashboard/(home)/Overview"
 import { PendingApprovals } from "@/app/dashboard/(home)/PendingApprovals"
@@ -13,7 +13,7 @@ import { SearchParams } from "@/lib/schemas"
 
 type DashboardPageProps = { searchParams: SearchParams }
 export default async function DashboardPage({ searchParams }: DashboardPageProps) {
-  const { user } = useAuthContext()
+  const { user } = useUserContext()
 
   return (
     <>

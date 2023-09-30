@@ -1,6 +1,6 @@
 "use client"
 
-import { useAuthContext } from "@/app/AuthContext"
+import { useUserContext } from "@/app/UserContext"
 import { auth } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
 import { Menu, Popover, Transition } from "@headlessui/react"
@@ -19,25 +19,25 @@ const workerRoutes: Route[] = [
     name: "Weekly Jobs",
     href: "/dashboard/worker/weekly-jobs",
     color: "text-orange-500",
-    roles: ["worker"],
+    roles: ["worker", "admin"],
   },
   {
     name: "Leave Requests",
     href: "/dashboard/worker/leave-requests",
     color: "text-orange-500",
-    roles: ["worker"],
+    roles: ["worker", "admin"],
   },
   {
     name: "Shifts",
     href: "/dashboard/worker/shifts",
     color: "text-orange-500",
-    roles: ["worker"],
+    roles: ["worker", "admin"],
   },
   {
     name: "Payments",
     href: "/dashboard/worker/payments",
     color: "text-orange-500",
-    roles: ["worker"],
+    roles: ["worker", "admin"],
   },
 ]
 const clientRoutes: Route[] = [
@@ -45,25 +45,25 @@ const clientRoutes: Route[] = [
     name: "Staff",
     href: "/dashboard/client/staff",
     color: "text-blue-400",
-    roles: ["client"],
+    roles: ["client", "admin"],
   },
   {
     name: "Job Requests",
     href: "/dashboard/client/job-requests",
     color: "text-blue-400",
-    roles: ["client"],
+    roles: ["client", "admin"],
   },
   {
     name: "Job Sites",
     href: "/dashboard/client/job-sites",
     color: "text-blue-400",
-    roles: ["client"],
+    roles: ["client", "admin"],
   },
   {
     name: "Reports",
     href: "/dashboard/client/reports",
     color: "text-blue-400",
-    roles: ["client"],
+    roles: ["client", "admin"],
   },
 ]
 const businessRoutes: Route[] = [
@@ -71,43 +71,43 @@ const businessRoutes: Route[] = [
     name: "Rates",
     href: "/dashboard/business/rates",
     color: "text-pink-500",
-    roles: ["business"],
+    roles: ["business", "admin"],
   },
   {
     name: "Allocations",
     href: "/dashboard/business/allocations",
     color: "text-pink-500",
-    roles: ["business"],
+    roles: ["business", "admin"],
   },
   {
     name: "Clients",
     href: "/dashboard/business/clients",
     color: "text-pink-500",
-    roles: ["business"],
+    roles: ["business", "admin"],
   },
   {
     name: "Workers",
     href: "/dashboard/business/workers",
     color: "text-pink-500",
-    roles: ["business"],
+    roles: ["business", "admin"],
   },
   {
     name: "Payroll",
     href: "/dashboard/business/payroll",
     color: "text-pink-500",
-    roles: ["business"],
+    roles: ["business", "admin"],
   },
   {
     name: "Invoices",
     href: "/dashboard/business/invoices",
     color: "text-pink-500",
-    roles: ["business"],
+    roles: ["business", "admin"],
   },
   {
     name: "Timesheets",
     href: "/dashboard/business/timesheets",
     color: "text-pink-500",
-    roles: ["business"],
+    roles: ["business", "admin"],
   },
 ]
 
@@ -119,8 +119,7 @@ type Route = {
 }
 
 export async function Navbar() {
-  const { user } = useAuthContext()
-
+  const { user } = useUserContext()
   const pathname = usePathname()
 
   const userRole = user && user.role

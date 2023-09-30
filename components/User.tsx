@@ -1,10 +1,10 @@
 "use client"
 
-import { useAuthContext } from "@/app/AuthContext"
+import { useUserContext } from "@/app/UserContext"
 import Image from "next/image"
 
 export function UserAvatar() {
-  const { user } = useAuthContext()
+  const { user } = useUserContext()
 
   return (
     <Image

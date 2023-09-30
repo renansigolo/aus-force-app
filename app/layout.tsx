@@ -1,5 +1,5 @@
-import { AuthContextProvider } from "@/app/AuthContext"
 import { Providers } from "@/app/Providers"
+import { UserContextProvider } from "@/app/UserContext"
 import { Badge } from "@/components/Badge"
 import { Inter } from "next/font/google"
 import { ReactNode } from "react"
@@ -70,14 +70,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <head />
       <body>
         <Providers>
-          <AuthContextProvider>
+          <UserContextProvider>
             <div className="fixed bottom-1 left-1">
               <Badge>v.{packageJson.version}</Badge>
             </div>
 
             {children}
             <Toaster position="top-right" reverseOrder={true} />
-          </AuthContextProvider>
+          </UserContextProvider>
         </Providers>
       </body>
     </html>
