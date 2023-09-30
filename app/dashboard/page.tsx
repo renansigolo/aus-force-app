@@ -1,29 +1,40 @@
+import { Birthdays } from "@/app/dashboard/(home)/Birthdays"
+import { Overview } from "@/app/dashboard/(home)/Overview"
+import { PendingApprovals } from "@/app/dashboard/(home)/PendingApprovals"
+import { WeeklyActivity } from "@/app/dashboard/(home)/WeeklyActivity"
+import { Badge } from "@/components/Badge"
 import { Container } from "@/components/Container"
-import { Birthdays } from "@/components/dashboard/Birthdays"
 import { Leaves } from "@/components/dashboard/Leaves"
-import { Overview } from "@/components/dashboard/Overview"
-import { PendingApproval } from "@/components/dashboard/PendingApproval"
-import { WeeklyActivity } from "@/components/dashboard/WeeklyActivity"
 import { WelcomePanel } from "@/components/dashboard/WelcomePanel"
+import { SearchParams } from "@/lib/schemas"
 
-export default function DashboardPage() {
+type DashboardPageProps = { searchParams: SearchParams }
+export default async function DashboardPage({ searchParams }: DashboardPageProps) {
+  const { role } = searchParams
+
   return (
     <>
       <Container>
         <section className="flex-1 pb-8">
           <WelcomePanel />
 
-          <section className="mt-8">
-            <PendingApproval />
-          </section>
+          {role === "client" && (
+            <section className="mt-8">
+              <PendingApprovals />
+            </section>
+          )}
 
-          <section className="mt-8">
-            <Overview />
-          </section>
+          {role === "worker" && (
+            <>
+              <section className="mt-8">
+                <Overview />
+              </section>
 
-          <section className="mt-8">
-            <WeeklyActivity />
-          </section>
+              <section className="mt-8">
+                <WeeklyActivity />
+              </section>
+            </>
+          )}
 
           <section className="mt-8">
             <Birthdays />
@@ -34,6 +45,9 @@ export default function DashboardPage() {
           </section>
         </section>
       </Container>
+      <div className="fixed bottom-8 left-1 inline-flex flex-col">
+        <Badge>{role}</Badge>
+      </div>
     </>
   )
 }

@@ -1,6 +1,7 @@
 "use client"
 
 import { CurrentUserProfile } from "@/app/dashboard/profile/page"
+import { Button } from "@/components/Button"
 import { UserAvatar } from "@/components/User"
 import { updateDocument } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
@@ -18,15 +19,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
     register,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<CurrentUserProfile>({
-    defaultValues: {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      phoneNumber: user.phoneNumber,
-      dob: user.dob,
-      email: user.email,
-    },
-  })
+  } = useForm<CurrentUserProfile>({ defaultValues: user })
 
   const onSubmit = async (values: CurrentUserProfile) => {
     try {
@@ -126,12 +119,23 @@ export function ProfileForm({ user }: ProfileFormProps) {
             {...register("email", { required: "Email is required" })}
           />
         </div>
+
+        <div className="col-span-full">
+          <label htmlFor="role" className="form-label">
+            Role
+          </label>
+          <select {...register("role")} className="capitalize">
+            <option>worker</option>
+            <option>client</option>
+            <option>business</option>
+          </select>
+        </div>
       </div>
 
       <div className="mt-8 flex">
-        <button type="submit" className="btn btn-primary">
+        <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Save"}
-        </button>
+        </Button>
       </div>
     </form>
   )

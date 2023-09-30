@@ -13,7 +13,7 @@ export function Hero() {
           Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo.
           Elit sunt amet fugiat veniam occaecat fugiat aliqua.
         </p>
-        <Link href="/login" className="btn btn-primary btn-xl">
+        <Link href="/login" className="btn btn-primary px-6 py-3 text-base">
           Get Started
         </Link>
       </div>

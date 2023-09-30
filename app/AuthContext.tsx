@@ -23,7 +23,6 @@ type UserContextType = {
 export const AuthContext = createContext<UserContextType | null>(null)
 
 // Custom hook to access the authentication context
-// export const useAuthContext = () => useContext()
 export function useAuthContext() {
   const context = useContext(AuthContext)
   if (!context) {

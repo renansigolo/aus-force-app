@@ -1,5 +1,6 @@
 import { AuthContextProvider } from "@/app/AuthContext"
 import { Providers } from "@/app/Providers"
+import { Badge } from "@/components/Badge"
 import { Inter } from "next/font/google"
 import { ReactNode } from "react"
 import { Toaster } from "react-hot-toast"
@@ -70,10 +71,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <body>
         <Providers>
           <AuthContextProvider>
-            <div className="fixed right-0 top-0">
-              <span className="inline-flex items-center rounded-full bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 ring-1 ring-inset ring-indigo-700/10">
-                v.{packageJson.version}
-              </span>
+            <div className="fixed bottom-1 left-1">
+              <Badge>v.{packageJson.version}</Badge>
             </div>
 
             {children}

@@ -1,14 +1,13 @@
 "use client"
 
 import { useAuthContext } from "@/app/AuthContext"
-import { AdditionalDocumentsForm } from "@/app/dashboard/profile/AdditionalDocumentsForm"
 import { BankForm } from "@/app/dashboard/profile/BankForm"
+import { PersonalDocumentsForm } from "@/app/dashboard/profile/PersonalDocumentsForm"
 import { ProfileForm } from "@/app/dashboard/profile/ProfileForm"
 import { Divider } from "@/components/Divider"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
-import { db } from "@/lib/firebase"
-import { doc, getDoc } from "firebase/firestore"
+import { getUserDoc } from "@/lib/firebase"
 
 export type CurrentUserProfile = {
   displayName: string
@@ -26,8 +25,14 @@ export type CurrentUserProfile = {
   bsb: number
   bankName: string
   driverLicense: string
-  passport: string
-  whiteCard: string
+  driverLicenseIssued: string
+  driverLicenseExpiry: string
+  passportNumber: string
+  passportIssued: string
+  passportExpiry: string
+  identificationNumber: string
+  identificationIssued: string
+  identificationExpiry: string
 }
 
 export default async function ProfilePage() {
@@ -35,10 +40,7 @@ export default async function ProfilePage() {
 
   // Get the user's data using the Firebase SDK in firestore
   const { user } = useAuthContext()
-
-  const docRef = doc(db, `users/${user?.uid}`)
-  const docSnap = await getDoc(docRef)
-  const data = docSnap.data() as CurrentUserProfile
+  const data = await getUserDoc(String(user?.uid))
 
   return (
     <SectionWrapper>
@@ -61,8 +63,8 @@ export default async function ProfilePage() {
       <Divider />
 
       <section className={styleSection}>
-        <Heading title="Additional Documents" description="Some additional documents" />
-        <AdditionalDocumentsForm user={data} />
+        <Heading title="Personal Documents" description="Personal documents" />
+        <PersonalDocumentsForm user={data} />
       </section>
     </SectionWrapper>
   )

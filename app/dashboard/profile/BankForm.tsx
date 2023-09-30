@@ -1,6 +1,7 @@
 "use client"
 
 import { CurrentUserProfile } from "@/app/dashboard/profile/page"
+import { Button } from "@/components/Button"
 import { FormInputError } from "@/components/FormInputError"
 import { updateDocument } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
@@ -126,9 +127,9 @@ export function BankForm({ user }: BankFormProps) {
       </div>
 
       <div className="mt-8 flex">
-        <button type="submit" className="btn btn-primary">
+        <Button type="submit" disabled={isSubmitting}>
           {isSubmitting ? "Submitting..." : "Save"}
-        </button>
+        </Button>
       </div>
     </form>
   )
