@@ -21,10 +21,10 @@ export function JobSitesList({ data }: JobSitesListProps) {
           footer={
             jobSite.policyAndProceduresURL && (
               <Link
+                download
                 className="btn btn-secondary"
                 href={jobSite.policyAndProceduresURL}
                 target="_blank"
-                download
               >
                 <CloudArrowDownIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
                 <span className="text-xs">Policy And Procedures</span>

@@ -48,8 +48,8 @@ export function ProfileForm({ user }: ProfileFormProps) {
         <div className="sm:col-span-3">
           <label htmlFor="firstName">First name</label>
           <input
-            id="firstName"
             disabled
+            id="firstName"
             type="text"
             autoComplete="given-name"
             {...register("firstName", { required: "First name is required" })}
@@ -59,8 +59,8 @@ export function ProfileForm({ user }: ProfileFormProps) {
         <div className="sm:col-span-3">
           <label htmlFor="lastName">Last name</label>
           <input
-            id="lastName"
             disabled
+            id="lastName"
             type="text"
             autoComplete="family-name"
             {...register("lastName", { required: "Last name is required" })}
