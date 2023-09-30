@@ -15,7 +15,7 @@ import {
   query,
   updateDoc,
 } from "firebase/firestore"
-import { getStorage } from "firebase/storage"
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage"
 
 // Your web app's Firebase configuration
 export const firebaseConfig = {
@@ -71,9 +71,8 @@ export const storage = getStorage(firebaseApp)
 
 export const getUserDoc = async (uid: string) => {
   const docRef = doc(db, `users/${uid}`)
-  const docSnap = await getDoc(docRef)
-  const data = docSnap.data() as DatabaseUser
-
+  const docSnapshot = await getDoc(docRef)
+  const data = docSnapshot.data() as DatabaseUser
   return data
 }
 
@@ -86,14 +85,12 @@ export const getCollectionQuery = async (
   const ref = collection(db, collectionName)
   const q = query(ref, orderBy(orderByValue, "desc"))
   const data = (await getDocs(q)).docs.map(serializeDoc)
-
   return data
 }
 
 export const getCollection = async (collectionName: FirestoreCollectionName) => {
   const ref = collection(db, collectionName)
   const data = (await getDocs(ref)).docs.map(serializeDoc)
-
   return data
 }
 
@@ -134,4 +131,17 @@ export function serializeDoc(doc: DocumentSnapshot) {
     id: doc.id,
     createdAt: data?.createdAt?.toMillis() || 0,
   }
+}
+
+/** Upload a file to firebase storage */
+export async function upload(storagePath: string, file: Blob | null | undefined) {
+  if (!file) return ""
+
+  const storageRef = ref(storage, storagePath)
+  const fileSnapshot = await uploadBytes(storageRef, file)
+
+  const fileRef = ref(storage, fileSnapshot.ref.fullPath)
+  const fileURL = await getDownloadURL(fileRef)
+
+  return fileURL
 }

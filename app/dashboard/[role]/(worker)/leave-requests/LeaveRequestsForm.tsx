@@ -113,7 +113,12 @@ export function LeaveRequestsForm() {
           <label htmlFor="additionalNotes" className="form-label">
             Additional notes
           </label>
-          <textarea rows={4} disabled={isSubmitting} {...register("additionalNotes")} />
+          <textarea
+            className="form-input"
+            rows={4}
+            disabled={isSubmitting}
+            {...register("additionalNotes")}
+          />
           <p className="form-error">
             <ErrorMessage errors={errors} name="additionalNotes" />
           </p>

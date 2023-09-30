@@ -7,14 +7,13 @@ import { SignatureForm } from "@/app/(enter)/sign-up/Signature"
 import { Button } from "@/components/Button"
 import { Divider } from "@/components/Divider"
 import { FormInputError } from "@/components/FormInputError"
-import { auth, db, storage } from "@/lib/firebase"
+import { auth, db, upload } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
 import { RegisterFormDefaultValues, TRegisterFormSchema } from "@/lib/schemas"
 import { Disclosure } from "@headlessui/react"
 import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/20/solid"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { doc, setDoc } from "firebase/firestore"
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { useRouter } from "next/navigation"
 import { Controller, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
@@ -56,25 +55,19 @@ export default function SignUpPage() {
         data.newPassword,
       )
 
-      let imageSnapshot = null
-      let signatureSnapshot = null
-
-      if (data.profileImageFile) {
-        // Upload image to firebase storage
-        const storageRef = ref(storage, `users/${userCredential.user.uid}/profile.png`)
-        imageSnapshot = await uploadBytes(storageRef, data.profileImageFile)
-      }
-
-      if (data.signatureFile) {
-        // Upload image to firebase storage
-        const storageRef = ref(storage, `users/${userCredential.user.uid}/signature.png`)
-        signatureSnapshot = await uploadBytes(storageRef, data.signatureFile)
-      }
+      const imageURL = await upload(
+        `users/${userCredential.user.uid}/profile.png`,
+        data.profileImageFile,
+      )
+      const signatureURL = await upload(
+        `users/${userCredential.user.uid}/signature.png`,
+        data.signatureFile,
+      )
 
       const userPayload = {
         uid: userCredential.user.uid,
         displayName: `${data.firstName} ${data.lastName}`,
-        photoURL: await getDownloadURL(ref(storage, imageSnapshot?.ref.fullPath || "")),
+        photoURL: signatureURL,
       }
 
       // Update fields in firebase auth and firestore
@@ -94,7 +87,7 @@ export default function SignUpPage() {
         phoneNumber: data.phoneNumber,
         dob: data.dob,
         email: data.email,
-        signatureURL: await getDownloadURL(ref(storage, signatureSnapshot?.ref.fullPath || "")),
+        signatureURL: imageURL,
         role: "client",
         ...userPayload,
       })

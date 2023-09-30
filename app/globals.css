@@ -16,7 +16,7 @@ body {
   @apply h-full;
 }
 
-/* Registration Form */
+/* Form Input Styles */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -32,7 +32,10 @@ input[type="time"],
 input[type="week"],
 select,
 textarea {
-  @apply block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200 sm:text-sm;
+  @apply block w-full rounded-md border-gray-300 shadow-sm;
+  @apply focus:border-indigo-500 focus:ring-indigo-500;
+  @apply disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200;
+  @apply sm:text-sm;
 }
 
 .form-label {

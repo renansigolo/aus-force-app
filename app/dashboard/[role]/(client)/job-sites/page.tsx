@@ -29,16 +29,12 @@ export default async function JobSitesPage({ searchParams }: JobSitesPageProps) 
       <Role role="client">
         <PageHeading title="Job Sites" buttonLabel="New Job Site" />
         <section className="py-8">
-          {data.length > 0 ? (
-            data.map((item) => <JobSitesList {...item} key={item.siteName} />)
-          ) : (
-            <Empty title="job sites" />
-          )}
+          {data.length > 0 ? <JobSitesList data={data} /> : <Empty title="job sites" />}
         </section>
       </Role>
 
       <ModalWrapper title="New Job Site" showModal={showModal}>
-        <JobSiteForm data={data} />
+        <JobSiteForm />
       </ModalWrapper>
     </PageWrapper>
   )
