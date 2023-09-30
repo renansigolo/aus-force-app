@@ -9,88 +9,119 @@ import { BellIcon } from "@heroicons/react/24/outline"
 import { FirebaseError } from "firebase/app"
 import { signOut } from "firebase/auth"
 import Link from "next/link"
-import { redirect, usePathname } from "next/navigation"
-import { Fragment, useEffect } from "react"
+import { usePathname, useSearchParams } from "next/navigation"
+import { Fragment } from "react"
 import toast from "react-hot-toast"
 import { twMerge } from "tailwind-merge"
 
-const navigation = [
-  { name: "Home", href: "/dashboard" },
+const workerRoutes: Route[] = [
   {
     name: "Weekly Jobs",
     href: "/dashboard/weekly-jobs",
     color: "text-orange-500",
+    roles: ["worker"],
   },
   {
     name: "Leave Requests",
     href: "/dashboard/leave-requests",
     color: "text-orange-500",
+    roles: ["worker"],
   },
   {
     name: "Shifts",
     href: "/dashboard/shifts",
     color: "text-orange-500",
+    roles: ["worker"],
   },
   {
     name: "Payments",
     href: "/dashboard/payments",
     color: "text-orange-500",
+    roles: ["worker"],
   },
+]
+const clientRoutes: Route[] = [
   {
     name: "Staff",
     href: "/dashboard/staff",
     color: "text-blue-400",
+    roles: ["client"],
   },
   {
     name: "Job Requests",
     href: "/dashboard/job-requests",
     color: "text-blue-400",
+    roles: ["client"],
   },
   {
     name: "Job Sites",
     href: "/dashboard/job-sites",
     color: "text-blue-400",
+    roles: ["client"],
   },
   {
     name: "Reports",
     href: "/dashboard/reports",
     color: "text-blue-400",
+    roles: ["client"],
   },
+]
+const businessRoutes: Route[] = [
   {
     name: "Rates",
     href: "/dashboard/rates",
     color: "text-pink-500",
+    roles: ["business"],
   },
   {
     name: "Allocations",
     href: "/dashboard/allocations",
     color: "text-pink-500",
+    roles: ["business"],
   },
   {
     name: "Clients",
     href: "/dashboard/clients",
     color: "text-pink-500",
+    roles: ["business"],
   },
   {
     name: "Workers",
     href: "/dashboard/workers",
     color: "text-pink-500",
+    roles: ["business"],
   },
   {
     name: "Payroll",
     href: "/dashboard/payroll",
     color: "text-pink-500",
+    roles: ["business"],
   },
   {
     name: "Invoices",
     href: "/dashboard/invoices",
     color: "text-pink-500",
+    roles: ["business"],
   },
   {
     name: "Timesheets",
     href: "/dashboard/timesheets",
     color: "text-pink-500",
+    roles: ["business"],
   },
+]
+
+type Route = {
+  name: string
+  href: string
+  roles: string[]
+  color?: string
+}
+const routes: Route[] = [
+  { name: "Home", href: "/dashboard", roles: ["worker", "client", "business"] },
+  ...workerRoutes,
+  ...clientRoutes,
+  ...businessRoutes,
 ]
 
 const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }]
@@ -99,17 +130,25 @@ export async function Navbar() {
   const { user } = useAuthContext()
 
   const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  const role = searchParams.get("role")
+  console.log("🚀 ~ Navbar ~ role:", role)
+
+  // Filter routes based on the user's role
+  const protectedRoutes = routes.filter((route) => role && route.roles.includes(role))
+  // const protectedRoutes = routes.filter((route) => route.role === role)
 
   const isActive = (href: string) => {
     return pathname === href
   }
 
-  useEffect(() => {
-    // Redirect to the home page if the user is not logged in
-    if (user === null) redirect("/")
-  }, [user])
+  // useEffect(() => {
+  //   // Redirect to the home page if the user is not logged in
+  //   if (user === null) redirect("/")
+  // }, [user])
 
-  console.log("🚀 ~ Navbar ~ user:", user)
+  // console.log("🚀 ~ Navbar ~ user:", user)
 
   const signOutAndRedirect = () => {
     signOut(auth)
@@ -144,7 +183,7 @@ export async function Navbar() {
 
                   {/* Desktop - Authenticated Navigation Links */}
                   <nav className="hidden flex-wrap pl-12 lg:flex lg:space-x-2" aria-label="Global">
-                    {navigation.map((item) => (
+                    {protectedRoutes.map((item) => (
                       <Link
                         key={item.name}
                         href={item.href}
@@ -231,7 +270,7 @@ export async function Navbar() {
               {({ close }) => (
                 <>
                   <div className="mx-auto max-w-3xl space-y-1 px-2 pb-3 pt-2 sm:px-4">
-                    {navigation.map((item) => (
+                    {routes.map((item) => (
                       <Link
                         key={item.name}
                         href={item.href}

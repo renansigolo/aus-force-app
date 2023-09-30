@@ -1,5 +1,6 @@
 import toast from "react-hot-toast"
 
+/** Show an error message in the console and triggers a toast */
 export const showErrorMessage = (error: unknown): string => {
   let message: string
 
