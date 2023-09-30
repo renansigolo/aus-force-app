@@ -35,10 +35,7 @@ export function JobRequestsList({ data }: JobRequestsListProps) {
             </p>
 
             <ListItem label="Job site" value={item.jobSite} />
-            <ListItem
-              label="Job position"
-              value={`${item.quantity}x ${item.jobPosition} ${item.jobPosition}`}
-            />
+            <ListItem label="Job position" value={`${item.quantity}x ${item.jobPosition}`} />
             <ListItem label="Start Date" value={item.startDateTime} />
             <ListItem label="End Date" value={item.endDateTime} />
             <ListItem label="Break" value={item.break ? "Yes" : "No"} />
@@ -49,7 +46,7 @@ export function JobRequestsList({ data }: JobRequestsListProps) {
 
           <div className="flex flex-col items-center gap-2">
             {item.status !== "allocated" && (
-              <Badge className="gap-2 bg-yellow-50 text-sm text-yellow-800 ring-yellow-600/20">
+              <Badge className="gap-1 bg-yellow-50 text-sm text-yellow-800 ring-yellow-600/20">
                 <ExclamationTriangleIcon className="h-5 w-5" /> Waiting Allocation
               </Badge>
             )}
@@ -58,7 +55,7 @@ export function JobRequestsList({ data }: JobRequestsListProps) {
               className="btn-secondary hover:text-red-500"
               onClick={() => deleteLeaveRequest(item.id)}
             >
-              <TrashIcon className="h-5 w-5" /> Delete Request
+              <TrashIcon className="h-5 w-5" /> Delete
             </Button>
           </div>
         </div>

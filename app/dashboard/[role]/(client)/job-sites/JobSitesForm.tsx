@@ -110,13 +110,17 @@ export function JobSiteForm() {
         <FormInputError message={errors.siteAddress?.message} />
       </div>
 
-      <div className="mt-5 gap-2 sm:mt-4 sm:flex sm:flex-row-reverse">
-        <Button type="submit" className="btn-success" disabled={isSubmitting || !isValid}>
+      <div className="mt-5 flex gap-2 sm:mt-4 sm:flex-row-reverse">
+        <Button
+          type="submit"
+          className="btn-success w-full sm:w-auto"
+          disabled={isSubmitting || !isValid}
+        >
           Submit
         </Button>
         <Button
           type="button"
-          className="btn-secondary"
+          className="btn-secondary w-full sm:w-auto"
           onClick={() => hideModal()}
           disabled={isSubmitting}
         >
