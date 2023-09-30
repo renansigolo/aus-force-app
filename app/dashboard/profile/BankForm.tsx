@@ -1,6 +1,6 @@
 "use client"
 
-import { CurrentUserProfile } from "@/app/dashboard/profile/page"
+import { FirestoreUser } from "@/app/dashboard/profile/page"
 import { Button } from "@/components/Button"
 import { FormInputError } from "@/components/FormInputError"
 import { updateDocument } from "@/lib/firebase"
@@ -17,7 +17,7 @@ type BankFormValues = {
 }
 
 type BankFormProps = {
-  user: CurrentUserProfile
+  user: FirestoreUser
 }
 
 export function BankForm({ user }: BankFormProps) {

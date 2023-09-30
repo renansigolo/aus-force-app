@@ -9,7 +9,7 @@ import { BellIcon } from "@heroicons/react/24/outline"
 import { FirebaseError } from "firebase/app"
 import { signOut } from "firebase/auth"
 import Link from "next/link"
-import { useParams, usePathname, useSearchParams } from "next/navigation"
+import { usePathname } from "next/navigation"
 import { Fragment } from "react"
 import toast from "react-hot-toast"
 import { twMerge } from "tailwind-merge"
@@ -122,24 +122,21 @@ export async function Navbar() {
   const { user } = useAuthContext()
 
   const pathname = usePathname()
-  const searchParams = useSearchParams()
-  const params = useParams()
 
-  // find if any of the roles exist as a value of the role key in the params object
-  const paramsRole = Object.values(params).find(
-    (value) => value === "worker" || value === "client" || value === "business",
-  ) as string
-  const role = paramsRole || searchParams.get("role")
-
+  const userRole = user && user.role
   const routes: Route[] = [
-    { name: "Home", href: `/dashboard/?role=${role}`, roles: ["worker", "client", "business"] },
+    {
+      name: "Home",
+      href: "/dashboard",
+      roles: ["worker", "client", "business"],
+    },
     ...workerRoutes,
     ...clientRoutes,
     ...businessRoutes,
   ]
   // Filter routes based on the user's role
-  const protectedRoutes = routes.filter((route) => role && route.roles.includes(role))
-  const userNavigation = [{ name: "Your Profile", href: `/dashboard/profile/?role=${role}` }]
+  const protectedRoutes = routes.filter((route) => userRole && route.roles.includes(userRole))
+  const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }]
 
   const isActive = (href: string) => {
     return pathname === href
@@ -170,7 +167,7 @@ export async function Navbar() {
                 {/* Left Desktop Navbar */}
                 <div className="flex flex-shrink-0 items-center">
                   {/* Logo Image */}
-                  <Link href={`/dashboard/?role=${role}`}>
+                  <Link href={"/dashboard"}>
                     <img
                       className="block h-8 w-auto"
                       src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"

@@ -7,9 +7,8 @@ import { ProfileForm } from "@/app/dashboard/profile/ProfileForm"
 import { Divider } from "@/components/Divider"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
-import { getUserDoc } from "@/lib/firebase"
 
-export type CurrentUserProfile = {
+export type FirestoreUser = {
   displayName: string
   firstName: string
   lastName: string
@@ -35,12 +34,12 @@ export type CurrentUserProfile = {
   identificationExpiry: string
 }
 
-export default async function ProfilePage() {
+export default function ProfilePage() {
   const styleSection = "grid grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8"
 
   // Get the user's data using the Firebase SDK in firestore
   const { user } = useAuthContext()
-  const data = await getUserDoc(String(user?.uid))
+  const data = user as FirestoreUser
 
   return (
     <SectionWrapper>

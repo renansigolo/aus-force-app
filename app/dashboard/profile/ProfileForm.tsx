@@ -1,6 +1,6 @@
 "use client"
 
-import { CurrentUserProfile } from "@/app/dashboard/profile/page"
+import { FirestoreUser } from "@/app/dashboard/profile/page"
 import { Button } from "@/components/Button"
 import { UserAvatar } from "@/components/User"
 import { updateDocument } from "@/lib/firebase"
@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
 type ProfileFormProps = {
-  user: CurrentUserProfile
+  user: FirestoreUser
 }
 
 export function ProfileForm({ user }: ProfileFormProps) {
@@ -19,12 +19,13 @@ export function ProfileForm({ user }: ProfileFormProps) {
     register,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<CurrentUserProfile>({ defaultValues: user })
+  } = useForm<FirestoreUser>({ defaultValues: user })
 
-  const onSubmit = async (values: CurrentUserProfile) => {
+  const onSubmit = async (values: FirestoreUser) => {
     try {
       await updateDocument("users", user.uid, values)
-      router.refresh()
+      // Refresh the page if the user's role has changed to update the AuthContext
+      user.role !== values.role ? window.location.reload() : router.refresh()
       toast.success("Profile details submitted successfully")
     } catch (error) {
       showErrorMessage(error)

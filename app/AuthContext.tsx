@@ -1,8 +1,9 @@
 "use client"
 
+import { FirestoreUser } from "@/app/dashboard/profile/page"
 import { Loader } from "@/components/Loader"
-import { auth } from "@/lib/firebase"
-import { User, onAuthStateChanged } from "firebase/auth"
+import { auth, getUserDoc } from "@/lib/firebase"
+import { onAuthStateChanged } from "firebase/auth"
 import { usePathname, useRouter } from "next/navigation"
 import {
   Dispatch,
@@ -15,8 +16,8 @@ import {
 } from "react"
 
 type UserContextType = {
-  user: User | null
-  setUser: Dispatch<SetStateAction<User | null>>
+  user: FirestoreUser | null
+  setUser: Dispatch<SetStateAction<FirestoreUser | null>>
 }
 
 // Create the authentication context
@@ -40,7 +41,7 @@ export function AuthContextProvider({ children }: AuthContextProviderProps): JSX
   const router = useRouter()
 
   // Set up state to track the authenticated user and loading status
-  const [user, setUser] = useState<User | null>(null)
+  const [user, setUser] = useState<FirestoreUser | null>(null)
   const [loading, setLoading] = useState(true)
 
   // Redirect to dashboard if user is logged in
@@ -59,9 +60,11 @@ export function AuthContextProvider({ children }: AuthContextProviderProps): JSX
 
   useEffect(() => {
     // Subscribe to the authentication state changes
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      const firestoreUser = user && (await getUserDoc(user.uid))
+
       // Update the user state with the new user if available
-      user ? setUser(user) : setUser(null)
+      user ? setUser(firestoreUser) : setUser(null)
       // Set loading to false once authentication state is determined
       setLoading(false)
     })

@@ -1,3 +1,6 @@
+"use client"
+
+import { useAuthContext } from "@/app/AuthContext"
 import { Birthdays } from "@/app/dashboard/(home)/Birthdays"
 import { Overview } from "@/app/dashboard/(home)/Overview"
 import { PendingApprovals } from "@/app/dashboard/(home)/PendingApprovals"
@@ -10,7 +13,7 @@ import { SearchParams } from "@/lib/schemas"
 
 type DashboardPageProps = { searchParams: SearchParams }
 export default async function DashboardPage({ searchParams }: DashboardPageProps) {
-  const { role } = searchParams
+  const { user } = useAuthContext()
 
   return (
     <>
@@ -18,13 +21,13 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
         <section className="flex-1 pb-8">
           <WelcomePanel />
 
-          {role === "client" && (
+          {user?.role === "client" && (
             <section className="mt-8">
               <PendingApprovals />
             </section>
           )}
 
-          {role === "worker" && (
+          {user?.role === "worker" && (
             <>
               <section className="mt-8">
                 <Overview />
@@ -46,7 +49,7 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
         </section>
       </Container>
       <div className="fixed bottom-8 left-1 inline-flex flex-col">
-        <Badge>{role}</Badge>
+        <Badge>{user?.role}</Badge>
       </div>
     </>
   )
