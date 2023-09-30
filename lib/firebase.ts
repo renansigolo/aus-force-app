@@ -1,5 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { DatabaseUser } from "@/app/dashboard/profile/page"
+import { trimFormValues } from "@/lib/helpers"
 import { getApp, initializeApp } from "firebase/app"
 import { getAuth } from "firebase/auth"
 import {
@@ -96,9 +97,9 @@ export const getCollection = async (collectionName: FirestoreCollectionName) => 
 }
 
 // Create firebase CRUD helpers
-export const createDocument = async (collectionName: FirestoreCollectionName, data: any) => {
+export const createDocument = async (collectionName: FirestoreCollectionName, data: object) => {
   const ref = collection(db, collectionName)
-  const docRef = await addDoc(ref, data)
+  const docRef = await addDoc(ref, trimFormValues({ ...data }))
   return docRef
 }
 
@@ -111,7 +112,7 @@ export const readDocument = async (collectionName: FirestoreCollectionName, docI
 export const updateDocument = async (
   collectionName: FirestoreCollectionName,
   docId: string,
-  data: any,
+  data: object,
 ) => {
   const ref = doc(db, collectionName, docId)
   const response = await updateDoc(ref, data)

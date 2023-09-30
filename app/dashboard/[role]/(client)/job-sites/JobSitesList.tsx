@@ -14,7 +14,7 @@ type JobSitesListProps = {
 }
 export function JobSitesList({ data }: JobSitesListProps) {
   return (
-    <section className="grid gap-4">
+    <section className="grid gap-2">
       {data.map((jobSite, index) => (
         <Card
           key={index}

@@ -25,6 +25,7 @@ export function JobRequestsForm() {
   const onSubmit = async (values: JobRequest) => {
     const payload = {
       ...values,
+      status: "pendingWorkerAllocation",
       createdAt: serverTimestamp(),
     }
 

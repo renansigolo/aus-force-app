@@ -33,7 +33,7 @@ export function StaffForm({ accordionData }: StaffModalProps) {
     accordionItem
       ? // If the item exists, push the new staff member to the staff array
         accordionItem.staff.push({
-          email: values.email,
+          email: values.email.trim(),
           role: values.role,
         })
       : // Otherwise, create a new item with the staff array
@@ -42,7 +42,7 @@ export function StaffForm({ accordionData }: StaffModalProps) {
           title: values.jobSite,
           staff: [
             {
-              email: values.email,
+              email: values.email.trim(),
               role: values.role,
             },
           ],

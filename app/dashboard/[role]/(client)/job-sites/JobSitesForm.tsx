@@ -3,7 +3,7 @@
 import { Button } from "@/components/Button"
 import { FormInputError } from "@/components/FormInputError"
 import { createDocument, upload } from "@/lib/firebase"
-import { showErrorMessage, trimFormValues } from "@/lib/helpers"
+import { showErrorMessage } from "@/lib/helpers"
 import { serverTimestamp } from "firebase/firestore"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
@@ -36,11 +36,11 @@ export function JobSiteForm() {
         values.policyAndProceduresFile?.item(0),
       )
 
-      const payload = trimFormValues({
+      const payload = {
         ...values,
         policyAndProceduresURL,
         createdAt: serverTimestamp(),
-      })
+      }
 
       delete payload.policyAndProceduresFile
 

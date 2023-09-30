@@ -21,6 +21,7 @@ export type JobRequest = {
   supplier: string
   quantity: number
   serviceDescription: string
+  status: "allocated" | "pendingWorkerAllocation" | "pendingRatesAllocation"
 }
 
 type JobRequestsPageProps = { searchParams: SearchParams }
