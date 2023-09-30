@@ -1,6 +1,6 @@
 "use client"
 
-import { JobRequest } from "@/app/dashboard/(client)/job-requests/page"
+import { JobRequest } from "@/app/dashboard/[role]/(client)/job-requests/page"
 import { Button } from "@/components/Button"
 import { createDocument } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"

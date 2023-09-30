@@ -1,7 +1,7 @@
 "use client"
 
-import { StaffAccordion } from "@/app/dashboard/(client)/staff/StaffAccordion"
-import { StaffForm } from "@/app/dashboard/(client)/staff/StaffForm"
+import { StaffAccordion } from "@/app/dashboard/[role]/(client)/staff/StaffAccordion"
+import { StaffForm } from "@/app/dashboard/[role]/(client)/staff/StaffForm"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"
 import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Empty } from "@/components/Empty"

@@ -9,7 +9,7 @@ import { BellIcon } from "@heroicons/react/24/outline"
 import { FirebaseError } from "firebase/app"
 import { signOut } from "firebase/auth"
 import Link from "next/link"
-import { usePathname, useSearchParams } from "next/navigation"
+import { useParams, usePathname, useSearchParams } from "next/navigation"
 import { Fragment } from "react"
 import toast from "react-hot-toast"
 import { twMerge } from "tailwind-merge"
@@ -17,25 +17,25 @@ import { twMerge } from "tailwind-merge"
 const workerRoutes: Route[] = [
   {
     name: "Weekly Jobs",
-    href: "/dashboard/weekly-jobs",
+    href: "/dashboard/worker/weekly-jobs",
     color: "text-orange-500",
     roles: ["worker"],
   },
   {
     name: "Leave Requests",
-    href: "/dashboard/leave-requests",
+    href: "/dashboard/worker/leave-requests",
     color: "text-orange-500",
     roles: ["worker"],
   },
   {
     name: "Shifts",
-    href: "/dashboard/shifts",
+    href: "/dashboard/worker/shifts",
     color: "text-orange-500",
     roles: ["worker"],
   },
   {
     name: "Payments",
-    href: "/dashboard/payments",
+    href: "/dashboard/worker/payments",
     color: "text-orange-500",
     roles: ["worker"],
   },
@@ -43,25 +43,25 @@ const workerRoutes: Route[] = [
 const clientRoutes: Route[] = [
   {
     name: "Staff",
-    href: "/dashboard/staff",
+    href: "/dashboard/client/staff",
     color: "text-blue-400",
     roles: ["client"],
   },
   {
     name: "Job Requests",
-    href: "/dashboard/job-requests",
+    href: "/dashboard/client/job-requests",
     color: "text-blue-400",
     roles: ["client"],
   },
   {
     name: "Job Sites",
-    href: "/dashboard/job-sites",
+    href: "/dashboard/client/job-sites",
     color: "text-blue-400",
     roles: ["client"],
   },
   {
     name: "Reports",
-    href: "/dashboard/reports",
+    href: "/dashboard/client/reports",
     color: "text-blue-400",
     roles: ["client"],
   },
@@ -69,43 +69,43 @@ const clientRoutes: Route[] = [
 const businessRoutes: Route[] = [
   {
     name: "Rates",
-    href: "/dashboard/rates",
+    href: "/dashboard/business/rates",
     color: "text-pink-500",
     roles: ["business"],
   },
   {
     name: "Allocations",
-    href: "/dashboard/allocations",
+    href: "/dashboard/business/allocations",
     color: "text-pink-500",
     roles: ["business"],
   },
   {
     name: "Clients",
-    href: "/dashboard/clients",
+    href: "/dashboard/business/clients",
     color: "text-pink-500",
     roles: ["business"],
   },
   {
     name: "Workers",
-    href: "/dashboard/workers",
+    href: "/dashboard/business/workers",
     color: "text-pink-500",
     roles: ["business"],
   },
   {
     name: "Payroll",
-    href: "/dashboard/payroll",
+    href: "/dashboard/business/payroll",
     color: "text-pink-500",
     roles: ["business"],
   },
   {
     name: "Invoices",
-    href: "/dashboard/invoices",
+    href: "/dashboard/business/invoices",
     color: "text-pink-500",
     roles: ["business"],
   },
   {
     name: "Timesheets",
-    href: "/dashboard/timesheets",
+    href: "/dashboard/business/timesheets",
     color: "text-pink-500",
     roles: ["business"],
   },
@@ -117,38 +117,33 @@ type Route = {
   roles: string[]
   color?: string
 }
-const routes: Route[] = [
-  { name: "Home", href: "/dashboard", roles: ["worker", "client", "business"] },
-  ...workerRoutes,
-  ...clientRoutes,
-  ...businessRoutes,
-]
-
-const userNavigation = [{ name: "Your Profile", href: "/dashboard/profile" }]
 
 export async function Navbar() {
   const { user } = useAuthContext()
 
   const pathname = usePathname()
   const searchParams = useSearchParams()
+  const params = useParams()
 
-  const role = searchParams.get("role")
-  console.log("🚀 ~ Navbar ~ role:", role)
+  // find if any of the roles exist as a value of the role key in the params object
+  const paramsRole = Object.values(params).find(
+    (value) => value === "worker" || value === "client" || value === "business",
+  ) as string
+  const role = paramsRole || searchParams.get("role")
 
+  const routes: Route[] = [
+    { name: "Home", href: `/dashboard/?role=${role}`, roles: ["worker", "client", "business"] },
+    ...workerRoutes,
+    ...clientRoutes,
+    ...businessRoutes,
+  ]
   // Filter routes based on the user's role
   const protectedRoutes = routes.filter((route) => role && route.roles.includes(role))
-  // const protectedRoutes = routes.filter((route) => route.role === role)
+  const userNavigation = [{ name: "Your Profile", href: `/dashboard/profile/?role=${role}` }]
 
   const isActive = (href: string) => {
     return pathname === href
   }
-
-  // useEffect(() => {
-  //   // Redirect to the home page if the user is not logged in
-  //   if (user === null) redirect("/")
-  // }, [user])
-
-  // console.log("🚀 ~ Navbar ~ user:", user)
 
   const signOutAndRedirect = () => {
     signOut(auth)
@@ -175,11 +170,13 @@ export async function Navbar() {
                 {/* Left Desktop Navbar */}
                 <div className="flex flex-shrink-0 items-center">
                   {/* Logo Image */}
-                  <img
-                    className="block h-8 w-auto"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Company Logo"
-                  />
+                  <Link href={`/dashboard/?role=${role}`}>
+                    <img
+                      className="block h-8 w-auto"
+                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                      alt="Company Logo"
+                    />
+                  </Link>
 
                   {/* Desktop - Authenticated Navigation Links */}
                   <nav className="hidden flex-wrap pl-12 lg:flex lg:space-x-2" aria-label="Global">

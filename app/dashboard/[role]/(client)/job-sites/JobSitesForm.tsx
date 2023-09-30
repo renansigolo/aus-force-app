@@ -1,6 +1,6 @@
 "use client"
 
-import { JobSitesListDataProps } from "@/app/dashboard/(client)/job-sites/page"
+import { JobSitesListDataProps } from "@/app/dashboard/[role]/(client)/job-sites/page"
 import { Button } from "@/components/Button"
 import { FormInputError } from "@/components/FormInputError"
 import { createDocument } from "@/lib/firebase"

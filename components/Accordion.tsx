@@ -1,6 +1,6 @@
 "use client"
 
-import { RatesForm } from "@/app/dashboard/(business)/rates/RatesForm"
+import { RatesForm } from "@/app/dashboard/[role]/(business)/rates/RatesForm"
 import Modal from "@/components/Modal"
 import NiceModal from "@ebay/nice-modal-react"
 import { Disclosure } from "@headlessui/react"

@@ -1,5 +1,5 @@
-import { LeaveRequestsForm } from "@/app/dashboard/(worker)/leave-requests/LeaveRequestsForm"
-import { LeaveRequestsList } from "@/app/dashboard/(worker)/leave-requests/LeaveRequestsList"
+import { LeaveRequestsForm } from "@/app/dashboard/[role]/(worker)/leave-requests/LeaveRequestsForm"
+import { LeaveRequestsList } from "@/app/dashboard/[role]/(worker)/leave-requests/LeaveRequestsList"
 import { Empty } from "@/components/Empty"
 import { Role } from "@/components/Roles"
 import { SectionHeading } from "@/components/dashboard/SectionHeading"

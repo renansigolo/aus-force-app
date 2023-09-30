@@ -1,3 +1,4 @@
+import { Badge } from "@/components/Badge"
 import { ReactNode } from "react"
 
 type RoleProps = {
@@ -18,7 +19,7 @@ export function Role({ role, children }: RoleProps) {
 
   return (
     <>
-      <span className={`rounded-lg px-3 ring-1 ${badgeClasses}`}>{role}</span>
+      <Badge className={badgeClasses}>{role}</Badge>
       <div className={`rounded-md ring-1 ${roleClasses}`}>{children}</div>
     </>
   )

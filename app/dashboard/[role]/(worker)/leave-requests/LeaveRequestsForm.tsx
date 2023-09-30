@@ -1,6 +1,6 @@
 "use client"
 
-import { RequestLeaveData as LeaveRequestsData } from "@/app/dashboard/(worker)/leave-requests/page"
+import { RequestLeaveData as LeaveRequestsData } from "@/app/dashboard/[role]/(worker)/leave-requests/page"
 import { createDocument } from "@/lib/firebase"
 import { getISODate, showErrorMessage } from "@/lib/helpers"
 import { ErrorMessage } from "@hookform/error-message"
