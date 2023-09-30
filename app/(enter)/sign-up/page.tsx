@@ -15,7 +15,7 @@ import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/20/solid"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { doc, setDoc } from "firebase/firestore"
 import { useRouter } from "next/navigation"
-import { Controller, useForm } from "react-hook-form"
+import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
 const personalForm = [
@@ -41,11 +41,11 @@ export default function SignUpPage() {
     handleSubmit,
     setValue,
     getValues,
-    control,
+    watch,
     formState: { errors, isDirty, isSubmitting },
   } = useForm<TRegisterFormSchema>({ defaultValues: RegisterFormDefaultValues })
 
-  const imageValue = getValues("profileImageFile")
+  const profileImageFileValue = watch("profileImageFile")
 
   const onSubmit = async (data: TRegisterFormSchema) => {
     try {
@@ -57,7 +57,7 @@ export default function SignUpPage() {
 
       const imageURL = await upload(
         `users/${userCredential.user.uid}/profile.png`,
-        data.profileImageFile,
+        data.profileImageFile?.item(0),
       )
       const signatureURL = await upload(
         `users/${userCredential.user.uid}/signature.png`,
@@ -67,7 +67,7 @@ export default function SignUpPage() {
       const userPayload = {
         uid: userCredential.user.uid,
         displayName: `${data.firstName} ${data.lastName}`,
-        photoURL: signatureURL,
+        photoURL: imageURL,
       }
 
       // Update fields in firebase auth and firestore
@@ -87,7 +87,7 @@ export default function SignUpPage() {
         phoneNumber: data.phoneNumber,
         dob: data.dob,
         email: data.email,
-        signatureURL: imageURL,
+        signatureURL: signatureURL,
         role: "client",
         ...userPayload,
       })
@@ -120,33 +120,21 @@ export default function SignUpPage() {
                 <label htmlFor="photo" className="form-label">
                   Photo
                 </label>
-                <div className="flex items-center">
+                <div className="flex items-center gap-2">
                   <img
                     alt="Profile Image"
                     className="aspect-square h-12 w-12 rounded-full object-fill"
                     src={
-                      (imageValue && URL.createObjectURL(imageValue)) ||
+                      (profileImageFileValue &&
+                        URL.createObjectURL(profileImageFileValue?.item(0) as Blob)) ||
                       "/images/profile-placeholder.png"
                     }
                   />
-
-                  <Controller
-                    name="profileImageFile"
-                    control={control}
-                    render={({ field: { onChange, name } }) => (
-                      <input
-                        name={name}
-                        type="file"
-                        accept="image/x-png,image/gif,image/jpeg"
-                        className="btn ml-4 w-full"
-                        onChange={(event) => {
-                          onChange(event)
-                          if (!event.target.files) return
-                          const imageFile = event.target.files[0]
-                          setValue("profileImageFile", imageFile)
-                        }}
-                      />
-                    )}
+                  <input
+                    type="file"
+                    accept="image/x-png,image/gif,image/jpeg"
+                    className="form-input"
+                    {...register("profileImageFile")}
                   />
                 </div>
               </div>
