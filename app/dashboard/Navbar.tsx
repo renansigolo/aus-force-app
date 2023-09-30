@@ -1,6 +1,9 @@
 "use client"
 
-import { useAuthContext } from "@/app/AuthContext"
+import { useUserContext } from "@/app/UserContext"
+import { UserRoles } from "@/app/dashboard/profile/page"
+import { Badge } from "@/components/Badge"
+import { UserAvatar } from "@/components/User"
 import { auth } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
 import { Menu, Popover, Transition } from "@headlessui/react"
@@ -19,25 +22,25 @@ const workerRoutes: Route[] = [
     name: "Weekly Jobs",
     href: "/dashboard/worker/weekly-jobs",
     color: "text-orange-500",
-    roles: ["worker"],
+    roles: ["worker", "admin"],
   },
   {
     name: "Leave Requests",
     href: "/dashboard/worker/leave-requests",
     color: "text-orange-500",
-    roles: ["worker"],
+    roles: ["worker", "admin"],
   },
   {
     name: "Shifts",
     href: "/dashboard/worker/shifts",
     color: "text-orange-500",
-    roles: ["worker"],
+    roles: ["worker", "admin"],
   },
   {
     name: "Payments",
     href: "/dashboard/worker/payments",
     color: "text-orange-500",
-    roles: ["worker"],
+    roles: ["worker", "admin"],
   },
 ]
 const clientRoutes: Route[] = [
@@ -45,25 +48,25 @@ const clientRoutes: Route[] = [
     name: "Staff",
     href: "/dashboard/client/staff",
     color: "text-blue-400",
-    roles: ["client"],
+    roles: ["client", "admin"],
   },
   {
     name: "Job Requests",
     href: "/dashboard/client/job-requests",
     color: "text-blue-400",
-    roles: ["client"],
+    roles: ["client", "admin"],
   },
   {
     name: "Job Sites",
     href: "/dashboard/client/job-sites",
     color: "text-blue-400",
-    roles: ["client"],
+    roles: ["client", "admin"],
   },
   {
     name: "Reports",
     href: "/dashboard/client/reports",
     color: "text-blue-400",
-    roles: ["client"],
+    roles: ["client", "admin"],
   },
 ]
 const businessRoutes: Route[] = [
@@ -71,56 +74,55 @@ const businessRoutes: Route[] = [
     name: "Rates",
     href: "/dashboard/business/rates",
     color: "text-pink-500",
-    roles: ["business"],
+    roles: ["business", "admin"],
   },
   {
     name: "Allocations",
     href: "/dashboard/business/allocations",
     color: "text-pink-500",
-    roles: ["business"],
+    roles: ["business", "admin"],
   },
   {
     name: "Clients",
     href: "/dashboard/business/clients",
     color: "text-pink-500",
-    roles: ["business"],
+    roles: ["business", "admin"],
   },
   {
     name: "Workers",
     href: "/dashboard/business/workers",
     color: "text-pink-500",
-    roles: ["business"],
+    roles: ["business", "admin"],
   },
   {
     name: "Payroll",
     href: "/dashboard/business/payroll",
     color: "text-pink-500",
-    roles: ["business"],
+    roles: ["business", "admin"],
   },
   {
     name: "Invoices",
     href: "/dashboard/business/invoices",
     color: "text-pink-500",
-    roles: ["business"],
+    roles: ["business", "admin"],
   },
   {
     name: "Timesheets",
     href: "/dashboard/business/timesheets",
     color: "text-pink-500",
-    roles: ["business"],
+    roles: ["business", "admin"],
   },
 ]
 
 type Route = {
   name: string
   href: string
-  roles: string[]
+  roles: UserRoles[]
   color?: string
 }
 
 export async function Navbar() {
-  const { user } = useAuthContext()
-
+  const { user } = useUserContext()
   const pathname = usePathname()
 
   const userRole = user && user.role
@@ -176,7 +178,7 @@ export async function Navbar() {
                   </Link>
 
                   {/* Desktop - Authenticated Navigation Links */}
-                  <nav className="hidden flex-wrap pl-12 lg:flex lg:space-x-2" aria-label="Global">
+                  <nav className="hidden flex-wrap pl-3 lg:flex lg:space-x-2" aria-label="Global">
                     {protectedRoutes.map((item) => (
                       <Link
                         key={item.name}
@@ -212,13 +214,10 @@ export async function Navbar() {
                 <div className="hidden lg:flex lg:items-center lg:justify-end">
                   <Menu as="div" className="relative flex-shrink-0">
                     <div>
-                      <Menu.Button className="flex rounded-full bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                      <Menu.Button className="flex flex-col items-center justify-center gap-1 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                         <span className="sr-only">Open user menu</span>
-                        <img
-                          className="h-8 w-8 rounded-full"
-                          alt="Profile Image"
-                          src={user?.photoURL || "/images/profile-placeholder.png"}
-                        />
+                        <UserAvatar className="h-8 w-8" />
+                        <Badge>{user?.role}</Badge>
                       </Menu.Button>
                     </div>
                     <Transition

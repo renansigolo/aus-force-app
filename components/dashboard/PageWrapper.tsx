@@ -1,10 +1,10 @@
 import { Container } from "@/components/Container"
 import { ReactNode } from "react"
 
-type SectionWrapperProps = {
+type PageWrapperProps = {
   children: ReactNode
 }
-export function SectionWrapper({ children }: SectionWrapperProps) {
+export function PageWrapper({ children }: PageWrapperProps) {
   return (
     <section className="flex-1">
       <div className="relative mx-auto max-w-4xl pb-16 pt-10">

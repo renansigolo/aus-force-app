@@ -1,11 +1,9 @@
 "use client"
 
-import { JobSitesListDataProps } from "@/app/dashboard/[role]/(client)/job-sites/page"
 import { Button } from "@/components/Button"
 import { FormInputError } from "@/components/FormInputError"
-import { createDocument } from "@/lib/firebase"
+import { createDocument, upload } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
-import { DocumentArrowUpIcon } from "@heroicons/react/24/outline"
 import { serverTimestamp } from "firebase/firestore"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
@@ -16,14 +14,11 @@ type FormValues = {
   siteAddress: string
   hasParking: boolean
   additionalNotes: string
-  policyAndProceduresURL: string
+  policyAndProceduresFile?: Blob | null
+  policyAndProceduresURL?: Blob | null
 }
 
-type JobSiteFormProps = {
-  data: JobSitesListDataProps[]
-}
-
-export function JobSiteForm({ data }: JobSiteFormProps) {
+export function JobSiteForm() {
   const router = useRouter()
   const {
     register,
@@ -35,13 +30,20 @@ export function JobSiteForm({ data }: JobSiteFormProps) {
   const hideModal = () => router.push("?showModal=false")
 
   const onSubmit = async (values: FormValues) => {
-    const payload = {
-      ...values,
-      createdAt: serverTimestamp(),
-      policyAndProceduresURL: "",
-    }
-
     try {
+      const policyAndProceduresURL = await upload(
+        `jobSite/${values.siteName}/policyAndProcedures.pdf`,
+        values.policyAndProceduresFile,
+      )
+
+      const payload = {
+        ...values,
+        policyAndProceduresURL,
+        createdAt: serverTimestamp(),
+      }
+
+      delete payload.policyAndProceduresFile
+
       await createDocument("jobSites", payload)
       reset()
       router.refresh()
@@ -96,17 +98,16 @@ export function JobSiteForm({ data }: JobSiteFormProps) {
       </div>
 
       <div>
-        <label className="form-label">Policies and Procedures</label>
-        <input type="file" className="hidden" {...register("policyAndProceduresURL")} />
-        <button
-          type="button"
-          className="relative block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-        >
-          <DocumentArrowUpIcon className="mx-auto h-12 w-12 text-gray-400" />
-          <span className="mt-2 block text-sm font-semibold text-gray-900">
-            Upload a new policy
-          </span>
-        </button>
+        <label htmlFor="policyAndProceduresFile" className="form-label">
+          Policies and Procedures
+        </label>
+        <input
+          type="file"
+          // accept=".pdf"
+          className="form-input"
+          {...register("policyAndProceduresFile")}
+        />
+        <FormInputError message={errors.siteAddress?.message} />
       </div>
 
       <div className="mt-5 gap-2 sm:mt-4 sm:flex sm:flex-row-reverse">

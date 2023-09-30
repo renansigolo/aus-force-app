@@ -1,8 +1,8 @@
 "use client"
 
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Role } from "@/components/Roles"
+import { PageHeading } from "@/components/dashboard/PageHeading"
+import { PageWrapper } from "@/components/dashboard/PageWrapper"
 import { UserCircleIcon } from "@heroicons/react/24/outline"
 import Link from "next/link"
 import { twMerge } from "tailwind-merge"
@@ -60,9 +60,9 @@ const statusStyles: any = {
 
 export default function WorkersPage() {
   return (
-    <SectionWrapper>
+    <PageWrapper>
       <Role role="business">
-        <SectionHeading title="Workers" />
+        <PageHeading title="Workers" />
         <section className="py-8">
           <WorkersList category="Allocated Workers" />
         </section>
@@ -70,7 +70,7 @@ export default function WorkersPage() {
           <WorkersList category="Non Allocated Workers" />
         </section>
       </Role>
-    </SectionWrapper>
+    </PageWrapper>
   )
 }
 

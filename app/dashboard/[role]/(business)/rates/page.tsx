@@ -3,8 +3,8 @@ import { Accordion } from "@/components/Accordion"
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
+import { PageHeading } from "@/components/dashboard/PageHeading"
+import { PageWrapper } from "@/components/dashboard/PageWrapper"
 import { SearchParams } from "@/lib/schemas"
 
 const data = [
@@ -71,9 +71,9 @@ export default function RatesPage({ searchParams }: RatesPageProps) {
   const showModal = searchParams.showModal === "true"
 
   return (
-    <SectionWrapper>
+    <PageWrapper>
       <Role role="business">
-        <SectionHeading title="Rates" buttonLabel="Add New Rates" />
+        <PageHeading title="Rates" buttonLabel="Add New Rates" />
 
         <section className="py-8">
           {accordionData.length > 0 ? (
@@ -101,7 +101,7 @@ export default function RatesPage({ searchParams }: RatesPageProps) {
           <RatesForm />
         </ModalWrapper>
       </Role>
-    </SectionWrapper>
+    </PageWrapper>
   )
 }
 

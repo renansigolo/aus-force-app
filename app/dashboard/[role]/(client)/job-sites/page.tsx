@@ -1,10 +1,10 @@
 import { JobSiteForm } from "@/app/dashboard/[role]/(client)/job-sites/JobSitesForm"
 import { JobSitesList } from "@/app/dashboard/[role]/(client)/job-sites/JobSitesList"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
+import { PageHeading } from "@/components/dashboard/PageHeading"
+import { PageWrapper } from "@/components/dashboard/PageWrapper"
 import { getCollectionQuery } from "@/lib/firebase"
 import { SearchParams } from "@/lib/schemas"
 
@@ -25,21 +25,17 @@ export default async function JobSitesPage({ searchParams }: JobSitesPageProps) 
   const showModal = searchParams.showModal === "true"
 
   return (
-    <SectionWrapper>
+    <PageWrapper>
       <Role role="client">
-        <SectionHeading title="Job Sites" buttonLabel="New Job Site" />
+        <PageHeading title="Job Sites" buttonLabel="New Job Site" />
         <section className="py-8">
-          {data.length > 0 ? (
-            data.map((item) => <JobSitesList {...item} key={item.siteName} />)
-          ) : (
-            <Empty title="job sites" />
-          )}
+          {data.length > 0 ? <JobSitesList data={data} /> : <Empty title="job sites" />}
         </section>
       </Role>
 
       <ModalWrapper title="New Job Site" showModal={showModal}>
-        <JobSiteForm data={data} />
+        <JobSiteForm />
       </ModalWrapper>
-    </SectionWrapper>
+    </PageWrapper>
   )
 }

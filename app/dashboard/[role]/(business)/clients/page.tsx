@@ -4,8 +4,8 @@ import { ClientsForm } from "@/app/dashboard/[role]/(business)/clients/ClientsFo
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
+import { PageHeading } from "@/components/dashboard/PageHeading"
+import { PageWrapper } from "@/components/dashboard/PageWrapper"
 import { SearchParams } from "@/lib/schemas"
 import { Disclosure, Menu, Transition } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon, EllipsisVerticalIcon } from "@heroicons/react/20/solid"
@@ -39,9 +39,9 @@ export default function ClientsPage({ searchParams }: ClientsPageProps) {
   const showModal = searchParams.showModal === "true"
 
   return (
-    <SectionWrapper>
+    <PageWrapper>
       <Role role="business">
-        <SectionHeading title="Clients" buttonLabel="Add New Client" />
+        <PageHeading title="Clients" buttonLabel="Add New Client" />
 
         <section className="py-8">
           {accordionData.length > 0 ? <Client /> : <Empty title="clients" />}
@@ -51,7 +51,7 @@ export default function ClientsPage({ searchParams }: ClientsPageProps) {
           <ClientsForm />
         </ModalWrapper>
       </Role>
-    </SectionWrapper>
+    </PageWrapper>
   )
 }
 

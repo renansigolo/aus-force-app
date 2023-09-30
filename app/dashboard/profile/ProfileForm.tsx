@@ -1,6 +1,6 @@
 "use client"
 
-import { FirestoreUser } from "@/app/dashboard/profile/page"
+import { DatabaseUser } from "@/app/dashboard/profile/page"
 import { Button } from "@/components/Button"
 import { UserAvatar } from "@/components/User"
 import { updateDocument } from "@/lib/firebase"
@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
 type ProfileFormProps = {
-  user: FirestoreUser
+  user: DatabaseUser
 }
 
 export function ProfileForm({ user }: ProfileFormProps) {
@@ -19,9 +19,9 @@ export function ProfileForm({ user }: ProfileFormProps) {
     register,
     handleSubmit,
     formState: { isSubmitting },
-  } = useForm<FirestoreUser>({ defaultValues: user })
+  } = useForm<DatabaseUser>({ defaultValues: user })
 
-  const onSubmit = async (values: FirestoreUser) => {
+  const onSubmit = async (values: DatabaseUser) => {
     try {
       await updateDocument("users", user.uid, values)
       // Refresh the page if the user's role has changed to update the AuthContext
@@ -129,6 +129,7 @@ export function ProfileForm({ user }: ProfileFormProps) {
             <option>worker</option>
             <option>client</option>
             <option>business</option>
+            <option>admin</option>
           </select>
         </div>
       </div>

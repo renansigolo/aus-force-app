@@ -1,14 +1,15 @@
 "use client"
 
-import { useAuthContext } from "@/app/AuthContext"
+import { useUserContext } from "@/app/UserContext"
 import { BankForm } from "@/app/dashboard/profile/BankForm"
 import { PersonalDocumentsForm } from "@/app/dashboard/profile/PersonalDocumentsForm"
 import { ProfileForm } from "@/app/dashboard/profile/ProfileForm"
 import { Divider } from "@/components/Divider"
-import { SectionHeading } from "@/components/dashboard/SectionHeading"
-import { SectionWrapper } from "@/components/dashboard/SectionWrapper"
+import { PageHeading } from "@/components/dashboard/PageHeading"
+import { PageWrapper } from "@/components/dashboard/PageWrapper"
 
-export type FirestoreUser = {
+export type UserRoles = "worker" | "client" | "business" | "admin"
+export type DatabaseUser = {
   displayName: string
   firstName: string
   lastName: string
@@ -17,7 +18,7 @@ export type FirestoreUser = {
   photoURL: string
   uid: string
   dob: string
-  role: string
+  role: UserRoles
   signatureURL: string
   accountName: string
   accountNumber: number
@@ -38,12 +39,12 @@ export default function ProfilePage() {
   const styleSection = "grid grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8"
 
   // Get the user's data using the Firebase SDK in firestore
-  const { user } = useAuthContext()
-  const data = user as FirestoreUser
+  const { user } = useUserContext()
+  const data = user as DatabaseUser
 
   return (
-    <SectionWrapper>
-      <SectionHeading title="Account Details" />
+    <PageWrapper>
+      <PageHeading title="Account Details" />
       <section className={styleSection}>
         <Heading
           title="Personal Information"
@@ -65,7 +66,7 @@ export default function ProfilePage() {
         <Heading title="Personal Documents" description="Personal documents" />
         <PersonalDocumentsForm user={data} />
       </section>
-    </SectionWrapper>
+    </PageWrapper>
   )
 }
 

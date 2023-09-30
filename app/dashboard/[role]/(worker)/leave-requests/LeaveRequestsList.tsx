@@ -3,12 +3,7 @@
 import { RequestLeaveData as LeaveRequestsData } from "@/app/dashboard/[role]/(worker)/leave-requests/page"
 import { deleteDocument } from "@/lib/firebase"
 import { SunIcon } from "@heroicons/react/20/solid"
-import {
-  CalendarDaysIcon,
-  CalendarIcon,
-  PencilSquareIcon,
-  TrashIcon,
-} from "@heroicons/react/24/outline"
+import { CalendarDaysIcon, CalendarIcon, TrashIcon } from "@heroicons/react/24/outline"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { twMerge } from "tailwind-merge"
@@ -50,10 +45,11 @@ export function LeaveRequestsList({ data }: LeaveRequestsListProps) {
                       className="h-5 w-5 flex-shrink-0 font-medium text-gray-900"
                       aria-hidden="true"
                     />
-
                     <span className="flex flex-col text-sm text-gray-500">
                       <span className="font-medium text-gray-900">{item.reason}</span>
-                      <span className="inline-flex flex-wrap">{item.additionalNotes}</span>
+                      <span className="inline-flex flex-wrap" style={{ overflowWrap: "anywhere" }}>
+                        {item.additionalNotes}
+                      </span>
                       <time dateTime={item.startDate} className="mt-2 flex items-center gap-1">
                         <CalendarIcon className="inline-flex h-5 w-5 flex-shrink-0 items-center font-medium text-gray-900" />
                         {item.startDate}
@@ -110,12 +106,14 @@ export function LeaveRequestsList({ data }: LeaveRequestsListProps) {
                   <tr key={item.id}>
                     <td className="w-full max-w-0 px-6 py-4">
                       <div className="flex flex-shrink-0">
-                        <span className="group inline-flex flex-col space-x-2 text-sm">
+                        <span className="group inline-flex flex-col flex-wrap space-x-2 text-sm">
                           <div className="inline-flex gap-1 font-medium text-gray-900">
                             <SunIcon className="h-5 w-5 flex-shrink-0" aria-hidden="true" />
                             <span>{item.reason}</span>
                           </div>
-                          <p className="text-gray-400">{item.additionalNotes}</p>
+                          <span className="text-gray-400" style={{ overflowWrap: "anywhere" }}>
+                            {item.additionalNotes}
+                          </span>
                         </span>
                       </div>
                     </td>
@@ -136,12 +134,16 @@ export function LeaveRequestsList({ data }: LeaveRequestsListProps) {
                       </span>
                     </td>
                     <td className="table-data mx-auto">
-                      <div className="flex justify-between">
-                        <PencilSquareIcon
+                      <div className="flex justify-center">
+                        {/* <PencilSquareIcon
                           className="h-5 w-5 text-gray-400 hover:cursor-pointer hover:text-indigo-500"
                           aria-hidden="true"
-                        />
-                        <button type="button" onClick={() => deleteLeaveRequest(item.id)}>
+                        /> */}
+                        <button
+                          type="button"
+                          onClick={() => deleteLeaveRequest(item.id)}
+                          disabled={item.status !== "pending"}
+                        >
                           <TrashIcon
                             className="h-5 w-5 text-gray-400 hover:text-red-600"
                             aria-hidden="true"
