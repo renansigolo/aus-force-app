@@ -7,13 +7,14 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &
     href?: string
     className?: string
     children?: ReactNode
+    download?: boolean
   }
 
-export function Button({ href, className, ...props }: ButtonProps) {
+export function Button({ href, className, download, ...props }: ButtonProps) {
   className = twMerge("btn btn-primary", className)
 
   return href ? (
-    <Link href={href} className={className} {...props} />
+    <Link href={href} className={className} {...props} download={download} />
   ) : (
     <button className={className} {...props}>
       {props.children}

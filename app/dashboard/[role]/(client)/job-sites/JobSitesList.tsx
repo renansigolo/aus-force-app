@@ -1,5 +1,4 @@
 import { JobSitesListDataProps } from "@/app/dashboard/[role]/(client)/job-sites/page"
-import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
 import {
   BuildingOffice2Icon,
@@ -8,6 +7,7 @@ import {
   NoSymbolIcon,
   TruckIcon,
 } from "@heroicons/react/24/outline"
+import Link from "next/link"
 
 type JobSitesListProps = {
   data: JobSitesListDataProps[]
@@ -20,10 +20,15 @@ export function JobSitesList({ data }: JobSitesListProps) {
           key={index}
           footer={
             jobSite.policyAndProceduresURL && (
-              <Button className="btn-secondary" href={jobSite.policyAndProceduresURL}>
+              <Link
+                className="btn btn-secondary"
+                href={jobSite.policyAndProceduresURL}
+                target="_blank"
+                download
+              >
                 <CloudArrowDownIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
                 <span className="text-xs">Policy And Procedures</span>
-              </Button>
+              </Link>
             )
           }
         >

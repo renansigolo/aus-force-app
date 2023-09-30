@@ -14,7 +14,7 @@ type FormValues = {
   siteAddress: string
   hasParking: boolean
   additionalNotes: string
-  policyAndProceduresFile?: Blob | null
+  policyAndProceduresFile?: FileList
   policyAndProceduresURL?: Blob | null
 }
 
@@ -30,10 +30,13 @@ export function JobSiteForm() {
   const hideModal = () => router.push("?showModal=false")
 
   const onSubmit = async (values: FormValues) => {
+    values.policyAndProceduresFile?.item(0)
+
     try {
+      values.policyAndProceduresFile
       const policyAndProceduresURL = await upload(
         `jobSite/${values.siteName}/policyAndProcedures.pdf`,
-        values.policyAndProceduresFile,
+        values.policyAndProceduresFile?.item(0),
       )
 
       const payload = {
