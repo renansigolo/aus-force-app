@@ -1,11 +1,15 @@
 "use client"
 
+import { Popover } from "@/app/dashboard/[role]/(business)/clients/Popover"
 import { Accordion } from "@/components/Accordion"
-import { Card, CardContent, CardHeader } from "@/components/Card"
+import { Button } from "@/components/Button"
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/Card"
 import { Empty } from "@/components/Empty"
-import { getCollectionQuery } from "@/lib/firebase"
-import { Popover } from "@headlessui/react"
+import { deleteDocument, getCollectionQuery } from "@/lib/firebase"
+import { TrashIcon } from "@heroicons/react/20/solid"
 import { orderBy } from "firebase/firestore"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 
 export type ClientData = {
   id: string
@@ -60,16 +64,37 @@ function ClientCard({ data }: ClientCardProps) {
     { title: "JOB_SITE_TITLE_HERE", children: <ClientAccordionContent /> },
   ]
 
+  const router = useRouter()
+  const deleteLeaveRequest = async (id: string) => {
+    await deleteDocument("clients", id)
+    router.refresh()
+    toast.success("Client deleted")
+  }
+
   return (
     <Card>
-      <CardHeader>
-        <h3 className="text-lg font-medium leading-6 text-gray-900">{data.name}</h3>
+      <CardHeader className="flex">
+        <div>
+          <h3 className="text-lg font-medium leading-6 text-gray-900">{data.name}</h3>
+          <span className="text-xs font-medium text-gray-400">{data.email}</span>
+        </div>
+        {/* TODO: Refactor Popover to receive all items options */}
         <Popover />
       </CardHeader>
 
       <CardContent>
         <Accordion items={accordionItems} />
       </CardContent>
+
+      <CardFooter>
+        <Button
+          type="button"
+          className="btn-secondary hover:text-red-500"
+          onClick={() => deleteLeaveRequest(data.id)}
+        >
+          <TrashIcon className="h-5 w-5" /> Delete
+        </Button>
+      </CardFooter>
     </Card>
   )
 }

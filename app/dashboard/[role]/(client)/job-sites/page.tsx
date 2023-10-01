@@ -1,3 +1,4 @@
+import { JobRequest } from "@/app/dashboard/[role]/(client)/job-requests/page"
 import { JobSiteForm } from "@/app/dashboard/[role]/(client)/job-sites/JobSitesForm"
 import { JobSitesList } from "@/app/dashboard/[role]/(client)/job-sites/JobSitesList"
 import { StaffData } from "@/app/dashboard/[role]/(client)/staff/page"
@@ -19,6 +20,7 @@ export type JobSitesData = {
   additionalNotes: string
   policyAndProceduresURL: string
   staff?: StaffData[]
+  jobRequests?: JobRequest[]
 }
 
 type JobSitesPageProps = { searchParams: SearchParams }
