@@ -29,11 +29,10 @@ export default async function RequestLeavePage() {
       <Role role="worker">
         <PageHeading title="Leave Requests" />
 
-        <section className="py-8">
+        <div className="grid gap-4">
           <LeaveRequestsForm />
-        </section>
-
-        {data.length > 0 ? <LeaveRequestsList data={data} /> : <Empty title="leave requests" />}
+          {data.length > 0 ? <LeaveRequestsList data={data} /> : <Empty title="leave requests" />}
+        </div>
       </Role>
     </PageWrapper>
   )

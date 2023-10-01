@@ -32,7 +32,7 @@ CardContent.displayName = "CardContent"
 const CardFooter = forwardRef<HTMLDivElement, CardProps>(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={twMerge("flex flex-row-reverse px-4 py-4 sm:px-6", className)}
+    className={twMerge("flex flex-row-reverse gap-2 px-4 py-4 sm:px-6", className)}
     {...props}
   />
 ))

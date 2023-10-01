@@ -1,18 +1,32 @@
-import { JobSitesListDataProps } from "@/app/dashboard/[role]/(client)/job-sites/page"
+"use client"
+
+import { JobSitesData } from "@/app/dashboard/[role]/(client)/job-sites/page"
+import { Button } from "@/components/Button"
 import { Card, CardContent, CardFooter } from "@/components/Card"
+import { deleteDocument } from "@/lib/firebase"
 import {
   BuildingOffice2Icon,
   CloudArrowDownIcon,
   MapPinIcon,
   NoSymbolIcon,
+  TrashIcon,
   TruckIcon,
 } from "@heroicons/react/24/outline"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
+import toast from "react-hot-toast"
 
 type JobSitesListProps = {
-  data: JobSitesListDataProps[]
+  data: JobSitesData[]
 }
 export function JobSitesList({ data }: JobSitesListProps) {
+  const router = useRouter()
+  const deleteLeaveRequest = async (id: string) => {
+    await deleteDocument("jobSites", id)
+    router.refresh()
+    toast.success("Job site deleted")
+  }
+
   return (
     <section className="grid gap-2">
       {data.map((jobSite, index) => (
@@ -47,8 +61,16 @@ export function JobSitesList({ data }: JobSitesListProps) {
             </div>
           </CardContent>
 
-          {jobSite.policyAndProceduresURL && (
-            <CardFooter>
+          <CardFooter>
+            <Button
+              type="button"
+              className="btn-secondary hover:text-red-500"
+              onClick={() => deleteLeaveRequest(jobSite.id)}
+            >
+              <TrashIcon className="h-5 w-5" /> Delete
+            </Button>
+
+            {jobSite.policyAndProceduresURL && (
               <Link
                 download
                 className="btn btn-secondary"
@@ -58,8 +80,8 @@ export function JobSitesList({ data }: JobSitesListProps) {
                 <CloudArrowDownIcon className="h-6 w-6 text-gray-400" aria-hidden="true" />
                 <span className="text-xs">Policy And Procedures</span>
               </Link>
-            </CardFooter>
-          )}
+            )}
+          </CardFooter>
         </Card>
       ))}
     </section>

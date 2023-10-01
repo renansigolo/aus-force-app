@@ -19,18 +19,17 @@ export default async function AllocationsPage({ searchParams }: AllocationsPageP
   )) as JobRequest[]
 
   return (
-    <PageWrapper>
-      <Role role="business">
-        <PageHeading title="Allocations" />
-
-        <section className="py-8">
+    <>
+      <PageWrapper>
+        <Role role="business">
+          <PageHeading title="Allocations" />
           {data.length > 0 ? <AllocationsList data={data} /> : <Empty title="allocations" />}
-        </section>
-      </Role>
+        </Role>
+      </PageWrapper>
 
       <ModalWrapper title="Allocate Worker" showModal={showModal}>
         <AllocateWorkerModal />
       </ModalWrapper>
-    </PageWrapper>
+    </>
   )
 }

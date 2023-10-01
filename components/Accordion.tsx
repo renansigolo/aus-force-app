@@ -1,11 +1,7 @@
 "use client"
 
-import { RatesForm } from "@/app/dashboard/[role]/(business)/rates/RatesForm"
-import Modal from "@/components/Modal"
-import NiceModal from "@ebay/nice-modal-react"
 import { Disclosure } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
-import { PencilSquareIcon } from "@heroicons/react/24/outline"
 import { ReactNode } from "react"
 
 type AccordionProps = {
@@ -30,10 +26,11 @@ export function Accordion({ items }: AccordionProps) {
 
 type AccordionItem = {
   title: string
+  actionButton?: ReactNode
   children: ReactNode
 }
 
-function AccordionItem({ title, children }: AccordionItem) {
+function AccordionItem({ title, actionButton, children }: AccordionItem) {
   return (
     <Disclosure as="div" className="pt-6">
       {({ open }) => (
@@ -49,18 +46,7 @@ function AccordionItem({ title, children }: AccordionItem) {
                 <span className="ml-2 text-base font-semibold leading-7">{title}</span>
               </span>
             </Disclosure.Button>
-            <button
-              type="button"
-              className="z-20 p-3 hover:cursor-pointer"
-              onClick={() =>
-                NiceModal.show(Modal, {
-                  title: "New Rates",
-                  children: <RatesForm />,
-                })
-              }
-            >
-              <PencilSquareIcon className="h-6 w-6 text-indigo-600 hover:text-indigo-500" />
-            </button>
+            {actionButton}
           </dt>
 
           {/* Content */}

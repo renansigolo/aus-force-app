@@ -14,6 +14,7 @@ import {
   getDocs,
   getFirestore,
   query,
+  serverTimestamp,
   updateDoc,
 } from "firebase/firestore"
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage"
@@ -77,7 +78,7 @@ export const getUserDoc = async (uid: string) => {
   return data
 }
 
-type FirestoreCollectionName = "users" | "leaveRequests" | "jobSites" | "jobRequests"
+type FirestoreCollectionName = "users" | "leaveRequests" | "jobSites" | "jobRequests" | "clients"
 
 export const getCollectionQuery = async (
   collectionName: FirestoreCollectionName,
@@ -99,7 +100,7 @@ export const getCollection = async (collectionName: FirestoreCollectionName) => 
 // Create firebase CRUD helpers
 export const createDocument = async (collectionName: FirestoreCollectionName, data: object) => {
   const ref = collection(db, collectionName)
-  const docRef = await addDoc(ref, trimFormValues({ ...data }))
+  const docRef = await addDoc(ref, trimFormValues({ createdAt: serverTimestamp(), ...data }))
   return docRef
 }
 

@@ -1,100 +1,103 @@
-import { Empty } from "@/components/Empty"
-import { Role } from "@/components/Roles"
-import { PageHeading } from "@/components/dashboard/PageHeading"
-import { PageWrapper } from "@/components/dashboard/PageWrapper"
-import { BanknotesIcon } from "@heroicons/react/20/solid"
+const reports = [
+  {
+    id: 1,
+    name: "Worker ABC",
+    href: "#",
+    amount: "$20,000",
+    currency: "AUD",
+    status: "87 hours",
+    date: "July 12, 2021",
+    datetime: "2020-07-11",
+  },
+  {
+    id: 2,
+    name: "Worker DEF",
+    href: "#",
+    amount: "20,000",
+    currency: "AUD",
+    status: "135 hours",
+    date: "July 11, 2021",
+    datetime: "2020-07-11",
+  },
+]
+
+import { Card, CardContent, CardHeader } from "@/components/Card"
+import { FunnelIcon, UserIcon } from "@heroicons/react/20/solid"
 import { twMerge } from "tailwind-merge"
 
-// const data = [
-// {
-//   id: 1,
-//   name: "Payment from company ABC",
-//   href: "#",
-//   amount: "$20,000",
-//   currency: "AUD",
-//   status: "success",
-//   date: "July 12, 2021",
-//   datetime: "2020-07-11",
-// },
-//   {
-//     id: 2,
-//     name: "Payment from company DEF",
-//     href: "#",
-//     amount: "$20,000",
-//     currency: "AUD",
-//     status: "success",
-//     date: "July 11, 2021",
-//     datetime: "2020-07-11",
-//   },
-// ]
-type Status = "success" | "processing" | "failed"
-type Payment = {
-  id: string
-  createdAt: Date
-  name: string
-  href: string
-  amount: string
-  currency: string
-  status: Status
-  date: string
-  datetime: string
-}
-const data: Payment[] = []
-
-type StatusStyles = {
-  [key in Status]: string
-}
-const statusStyles: StatusStyles = {
+const statusStyles: any = {
   success: "bg-green-100 text-green-800",
   processing: "bg-yellow-100 text-yellow-800",
   failed: "bg-gray-100 text-gray-800",
 }
 
-export default function PaymentsPage() {
+export function ReportsContent() {
   return (
-    <PageWrapper>
-      <PageHeading title="Payments" />
-      {data.length > 0 ? <PaymentsList /> : <Empty title="payments" />}
-    </PageWrapper>
-  )
-}
+    <>
+      <section>
+        <Card>
+          <CardHeader>
+            <div className="flex gap-1">
+              <FunnelIcon className="h-6 w-6" />
+              <p>Filter your reports</p>
+            </div>
+          </CardHeader>
 
-function PaymentsList() {
-  return (
-    <Role role="worker">
-      <div className="pb-6">
-        <h2 className="heading-3 pl-4">Week 32</h2>
+          <CardContent className="flex-col">
+            <div className="col-span-1">
+              <label htmlFor="job-site">Job Site</label>
+              <select id="job-site" name="job-site">
+                <option>All Sites</option>
+                <option>Site 1</option>
+                <option>Site 2</option>
+              </select>
+            </div>
+            <div className="flex gap-2">
+              <div className="w-full">
+                <label htmlFor="startDate">Start Date</label>
+                <input type="date" name="startDate" id="startDate" />
+              </div>
+              <div className="w-full">
+                <label htmlFor="finishDate">Finish Date</label>
+                <input type="date" name="finishDate" id="finishDate" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+      <section>
+        <h2 className="heading-3 pl-4">Company ABC</h2>
         {/* Activity list (smallest breakpoint only) */}
         <div className="rounded-lg shadow sm:hidden">
           <ul
             role="list"
             className="mt-2 divide-y divide-gray-200 overflow-hidden rounded-lg shadow sm:hidden"
           >
-            {data.map((transaction) => (
-              <li key={transaction.id}>
-                <span className="block bg-white px-4 py-4">
+            {reports.map((report) => (
+              <li key={report.id}>
+                <span className="block bg-white px-4 py-4 hover:bg-gray-50">
                   <span className="flex items-center space-x-4">
                     <span className="flex flex-1 space-x-2 truncate">
-                      <BanknotesIcon
+                      <UserIcon
                         className="h-5 w-5 flex-shrink-0 text-gray-400"
                         aria-hidden="true"
                       />
                       <span className="flex flex-col truncate text-sm text-gray-500">
-                        <span className="truncate">{transaction.name}</span>
+                        <span className="truncate">{report.name}</span>
                         <span>
-                          <span className="font-medium text-gray-900">{transaction.amount}</span>{" "}
-                          {transaction.currency}
+                          <span className="font-medium text-gray-900">{report.amount}</span>{" "}
+                          {report.currency}
                         </span>
-                        <time dateTime={transaction.datetime}>{transaction.date}</time>
+                        <time dateTime={report.datetime}>{report.date}</time>
                       </span>
                     </span>
                     <span
                       className={twMerge(
-                        statusStyles[transaction.status],
+                        statusStyles[report.status],
                         "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize",
                       )}
                     >
-                      {transaction.status}
+                      {report.status}
                     </span>
                   </span>
                 </span>
@@ -119,52 +122,57 @@ function PaymentsList() {
                       className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
                       scope="col"
                     >
-                      Amount
+                      Cost
                     </th>
                     <th
                       className="hidden bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900 md:block"
                       scope="col"
                     >
-                      Status
+                      Hours
                     </th>
                     <th
                       className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
                       scope="col"
                     >
-                      Date
+                      Start Date
                     </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-200 bg-white">
-                  {data.map((transaction) => (
-                    <tr key={transaction.id} className="bg-white">
+                  {reports.map((report) => (
+                    <tr key={report.id} className="bg-white">
                       <td className="w-full max-w-0 whitespace-nowrap px-6 py-4 text-sm text-gray-900">
                         <div className="flex">
-                          <span className="group inline-flex space-x-2 truncate text-sm">
-                            <BanknotesIcon
-                              className="h-5 w-5 flex-shrink-0 text-gray-400"
+                          <a
+                            href={report.href}
+                            className="group inline-flex space-x-2 truncate text-sm"
+                          >
+                            <UserIcon
+                              className="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                               aria-hidden="true"
                             />
-                            <p className="truncate text-gray-500">{transaction.name}</p>
-                          </span>
+                            <p className="truncate text-gray-500 group-hover:text-gray-900">
+                              {report.name}
+                            </p>
+                          </a>
                         </div>
                       </td>
                       <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                        <span className="font-medium text-gray-900">{transaction.amount}</span>
-                        {transaction.currency}
+                        <span className="font-medium text-gray-900">{report.amount}</span>
+                        {report.currency}
                       </td>
                       <td className="hidden whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block">
                         <span
                           className={twMerge(
-                            statusStyles[transaction.status],
+                            statusStyles[report.status],
                             "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize",
                           )}
                         >
-                          {transaction.status}
+                          {report.status}
                         </span>
                       </td>
                       <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                        <time dateTime={transaction.datetime}>{transaction.date}</time>
+                        <time dateTime={report.datetime}>{report.date}</time>
                       </td>
                     </tr>
                   ))}
@@ -173,7 +181,7 @@ function PaymentsList() {
             </div>
           </div>
         </div>
-      </div>
-    </Role>
+      </section>
+    </>
   )
 }

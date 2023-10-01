@@ -1,5 +1,7 @@
+import { JobRequest } from "@/app/dashboard/[role]/(client)/job-requests/page"
 import { JobSiteForm } from "@/app/dashboard/[role]/(client)/job-sites/JobSitesForm"
 import { JobSitesList } from "@/app/dashboard/[role]/(client)/job-sites/JobSitesList"
+import { StaffData } from "@/app/dashboard/[role]/(client)/staff/page"
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
@@ -9,7 +11,7 @@ import { getCollectionQuery } from "@/lib/firebase"
 import { SearchParams } from "@/lib/schemas"
 import { orderBy } from "firebase/firestore"
 
-export type JobSitesListDataProps = {
+export type JobSitesData = {
   id: string
   createdAt: Date
   siteName: string
@@ -17,24 +19,21 @@ export type JobSitesListDataProps = {
   hasParking: boolean
   additionalNotes: string
   policyAndProceduresURL: string
+  staff?: StaffData[]
+  jobRequests?: JobRequest[]
 }
 
 type JobSitesPageProps = { searchParams: SearchParams }
 
 export default async function JobSitesPage({ searchParams }: JobSitesPageProps) {
-  const data = (await getCollectionQuery(
-    "jobSites",
-    orderBy("siteName", "asc"),
-  )) as JobSitesListDataProps[]
+  const data = (await getCollectionQuery("jobSites", orderBy("siteName", "asc"))) as JobSitesData[]
   const showModal = searchParams.showModal === "true"
 
   return (
     <PageWrapper>
       <Role role="client">
         <PageHeading title="Job Sites" buttonLabel="New Job Site" />
-        <section className="py-8">
-          {data.length > 0 ? <JobSitesList data={data} /> : <Empty title="job sites" />}
-        </section>
+        {data.length > 0 ? <JobSitesList data={data} /> : <Empty title="job sites" />}
       </Role>
 
       <ModalWrapper title="New Job Site" showModal={showModal}>
