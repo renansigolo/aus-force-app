@@ -68,7 +68,6 @@ type RatesListProps = {
 }
 
 export async function RatesList({ data }: RatesListProps) {
-  console.log("🚀 ~ RatesList ~ data:", data)
   return data.map((item) => <ClientCard key={item.id} client={item} />)
 }
 

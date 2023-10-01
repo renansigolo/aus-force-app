@@ -1,6 +1,7 @@
 import { WorkerProfile } from "@/app/dashboard/[role]/(business)/allocations/AllocateWorkerModal"
 import { JobRequestsForm } from "@/app/dashboard/[role]/(client)/job-requests/JobRequestsForm"
 import { JobRequestsList } from "@/app/dashboard/[role]/(client)/job-requests/JobRequestsList"
+import { JobSitesData } from "@/app/dashboard/[role]/(client)/job-sites/page"
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
@@ -29,10 +30,16 @@ export type JobRequest = {
 type JobRequestsPageProps = { searchParams: SearchParams }
 
 export default async function JobRequestsPage({ searchParams }: JobRequestsPageProps) {
-  const data = (await getCollectionQuery(
+  const jobRequestsData = (await getCollectionQuery(
     "jobRequests",
     orderBy("createdAt", "desc"),
   )) as JobRequest[]
+
+  const jobSitesData = (await getCollectionQuery(
+    "jobSites",
+    orderBy("siteName", "desc"),
+  )) as JobSitesData[]
+
   const showModal = searchParams.showModal === "true"
 
   return (
@@ -40,12 +47,16 @@ export default async function JobRequestsPage({ searchParams }: JobRequestsPageP
       <PageWrapper>
         <Role role="client">
           <PageHeading title="Job Requests" buttonLabel="New Job Request" />
-          {data.length > 0 ? <JobRequestsList data={data} /> : <Empty title="job requests" />}
+          {jobRequestsData.length === 0 ? (
+            <Empty title="job requests" />
+          ) : (
+            <JobRequestsList data={jobRequestsData} />
+          )}
         </Role>
       </PageWrapper>
 
       <ModalWrapper title="New Job" showModal={showModal}>
-        <JobRequestsForm />
+        <JobRequestsForm jobSitesData={jobSitesData} />
       </ModalWrapper>
     </>
   )

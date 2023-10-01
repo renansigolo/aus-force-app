@@ -1,6 +1,6 @@
 "use client"
 
-import { JobSitesListDataProps } from "@/app/dashboard/[role]/(client)/job-sites/page"
+import { JobSitesData } from "@/app/dashboard/[role]/(client)/job-sites/page"
 import { Button } from "@/components/Button"
 import { FormInputError } from "@/components/FormInputError"
 import { createDocument } from "@/lib/firebase"
@@ -12,7 +12,7 @@ import toast from "react-hot-toast"
 type ClientFormInputs = {
   name: string
   email: string
-  jobSites?: JobSitesListDataProps
+  jobSites?: JobSitesData
 }
 
 export function ClientsForm() {

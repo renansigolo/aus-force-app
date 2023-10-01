@@ -1,7 +1,10 @@
 "use client"
 
-import { AccordionProps } from "@/app/dashboard/[role]/(client)/staff/page"
+import { JobSitesData } from "@/app/dashboard/[role]/(client)/job-sites/page"
 import { FormInputError } from "@/components/FormInputError"
+import { updateDocument } from "@/lib/firebase"
+import { showErrorMessage } from "@/lib/helpers"
+import { arrayUnion } from "firebase/firestore"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 
@@ -12,10 +15,10 @@ type StaffFormInputs = {
 }
 
 type StaffModalProps = {
-  accordionData: AccordionProps[]
+  jobSitesData: JobSitesData[]
 }
 
-export function StaffForm({ accordionData }: StaffModalProps) {
+export function StaffForm({ jobSitesData }: StaffModalProps) {
   const router = useRouter()
   const {
     register,
@@ -27,26 +30,16 @@ export function StaffForm({ accordionData }: StaffModalProps) {
   const hideModal = () => router.push("?showModal=false")
 
   const onSubmit = async (values: StaffFormInputs) => {
-    // Find the item in the accordionData array that matches the jobSite
-    const accordionItem = accordionData.find((item) => item.title === values.jobSite)
-
-    accordionItem
-      ? // If the item exists, push the new staff member to the staff array
-        accordionItem.staff.push({
+    try {
+      updateDocument("jobSites", values.jobSite, {
+        staff: arrayUnion({
           email: values.email.trim(),
           role: values.role,
-        })
-      : // Otherwise, create a new item with the staff array
-        accordionData.push({
-          ...accordionData,
-          title: values.jobSite,
-          staff: [
-            {
-              email: values.email.trim(),
-              role: values.role,
-            },
-          ],
-        })
+        }),
+      })
+    } catch (error) {
+      showErrorMessage(error)
+    }
 
     reset()
     hideModal()
@@ -57,9 +50,11 @@ export function StaffForm({ accordionData }: StaffModalProps) {
       <div>
         <label htmlFor="jobSite">Job Site</label>
         <select id="jobSite" {...register("jobSite")}>
-          <option>Site 1</option>
-          <option>Site 2</option>
-          <option>Site 3</option>
+          {jobSitesData.map((jobSite) => (
+            <option key={jobSite.id} value={jobSite.id}>
+              {jobSite.siteName}
+            </option>
+          ))}
         </select>
         <FormInputError message={errors.jobSite?.message} />
       </div>
@@ -67,8 +62,8 @@ export function StaffForm({ accordionData }: StaffModalProps) {
       <div>
         <label htmlFor="role">Role</label>
         <select id="role" {...register("role")}>
-          <option>Supervisor</option>
-          <option>Manager</option>
+          <option value="supervisor">Supervisor</option>
+          <option value="manager">Manager</option>
         </select>
         <FormInputError message={errors.role?.message} />
       </div>

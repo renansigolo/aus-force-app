@@ -1,4 +1,4 @@
-import { JobSitesListDataProps } from "@/app/dashboard/[role]/(client)/job-sites/page"
+import { JobSitesData } from "@/app/dashboard/[role]/(client)/job-sites/page"
 import { Card, CardContent, CardFooter } from "@/components/Card"
 import {
   BuildingOffice2Icon,
@@ -10,7 +10,7 @@ import {
 import Link from "next/link"
 
 type JobSitesListProps = {
-  data: JobSitesListDataProps[]
+  data: JobSitesData[]
 }
 export function JobSitesList({ data }: JobSitesListProps) {
   return (

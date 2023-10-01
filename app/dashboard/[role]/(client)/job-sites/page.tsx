@@ -1,5 +1,6 @@
 import { JobSiteForm } from "@/app/dashboard/[role]/(client)/job-sites/JobSitesForm"
 import { JobSitesList } from "@/app/dashboard/[role]/(client)/job-sites/JobSitesList"
+import { StaffData } from "@/app/dashboard/[role]/(client)/staff/page"
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
 import { Role } from "@/components/Roles"
@@ -9,7 +10,7 @@ import { getCollectionQuery } from "@/lib/firebase"
 import { SearchParams } from "@/lib/schemas"
 import { orderBy } from "firebase/firestore"
 
-export type JobSitesListDataProps = {
+export type JobSitesData = {
   id: string
   createdAt: Date
   siteName: string
@@ -17,15 +18,13 @@ export type JobSitesListDataProps = {
   hasParking: boolean
   additionalNotes: string
   policyAndProceduresURL: string
+  staff?: StaffData[]
 }
 
 type JobSitesPageProps = { searchParams: SearchParams }
 
 export default async function JobSitesPage({ searchParams }: JobSitesPageProps) {
-  const data = (await getCollectionQuery(
-    "jobSites",
-    orderBy("siteName", "asc"),
-  )) as JobSitesListDataProps[]
+  const data = (await getCollectionQuery("jobSites", orderBy("siteName", "asc"))) as JobSitesData[]
   const showModal = searchParams.showModal === "true"
 
   return (

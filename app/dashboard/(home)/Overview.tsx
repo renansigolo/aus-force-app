@@ -42,6 +42,7 @@ export function Overview() {
       children: <ShiftApprovalModal />,
     })
   }
+
   return (
     <div>
       <h2 className="heading-3 mb-3">Overview</h2>

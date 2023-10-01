@@ -1,6 +1,7 @@
 "use client"
 
 import { JobRequest } from "@/app/dashboard/[role]/(client)/job-requests/page"
+import { JobSitesData } from "@/app/dashboard/[role]/(client)/job-sites/page"
 import { Button } from "@/components/Button"
 import { createDocument } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
@@ -11,7 +12,10 @@ import { UseFormReturn, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 import { twMerge } from "tailwind-merge"
 
-export function JobRequestsForm() {
+type JobRequestsFormProps = {
+  jobSitesData: JobSitesData[]
+}
+export function JobRequestsForm({ jobSitesData }: JobRequestsFormProps) {
   const router = useRouter()
   const {
     register,
@@ -49,8 +53,9 @@ export function JobRequestsForm() {
           disabled={isSubmitting}
           {...register("jobSite", { required: "Job site is required" })}
         >
-          <option>Job Site A</option>
-          <option>Job Site B</option>
+          {jobSitesData.map((jobSite) => (
+            <option key={jobSite.id}>{jobSite.siteName}</option>
+          ))}
         </select>
       </div>
 
