@@ -73,11 +73,11 @@ export default function RatesPage({ searchParams }: RatesPageProps) {
   const showModal = searchParams.showModal === "true"
 
   return (
-    <PageWrapper>
-      <Role role="business">
-        <PageHeading title="Rates" buttonLabel="Add New Rates" />
+    <>
+      <PageWrapper>
+        <Role role="business">
+          <PageHeading title="Rates" buttonLabel="Add New Rates" />
 
-        <section className="py-8">
           {accordionItems.length > 0 ? (
             <Card>
               <CardHeader>
@@ -92,13 +92,13 @@ export default function RatesPage({ searchParams }: RatesPageProps) {
           ) : (
             <Empty title="rates" />
           )}
-        </section>
+        </Role>
+      </PageWrapper>
 
-        <ModalWrapper title="New Rates" showModal={showModal}>
-          <RatesForm />
-        </ModalWrapper>
-      </Role>
-    </PageWrapper>
+      <ModalWrapper title="New Rates" showModal={showModal}>
+        <RatesForm />
+      </ModalWrapper>
+    </>
   )
 }
 

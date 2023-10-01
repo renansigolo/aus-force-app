@@ -36,18 +36,17 @@ export default async function JobRequestsPage({ searchParams }: JobRequestsPageP
   const showModal = searchParams.showModal === "true"
 
   return (
-    <PageWrapper>
-      <Role role="client">
-        <PageHeading title="Job Requests" buttonLabel="New Job Request" />
-
-        <section className="py-8">
+    <>
+      <PageWrapper>
+        <Role role="client">
+          <PageHeading title="Job Requests" buttonLabel="New Job Request" />
           {data.length > 0 ? <JobRequestsList data={data} /> : <Empty title="job requests" />}
-        </section>
-      </Role>
+        </Role>
+      </PageWrapper>
 
       <ModalWrapper title="New Job" showModal={showModal}>
         <JobRequestsForm />
       </ModalWrapper>
-    </PageWrapper>
+    </>
   )
 }

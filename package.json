@@ -1,6 +1,6 @@
 {
   "name": "aus-force-app",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "private": true,
   "homepage": "https://aus-force-app.vercel.app",
   "scripts": {

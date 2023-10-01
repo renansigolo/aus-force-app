@@ -54,9 +54,7 @@ export default function PaymentsPage() {
   return (
     <PageWrapper>
       <PageHeading title="Payments" />
-      <section className="py-8">
-        {data.length > 0 ? <PaymentsList /> : <Empty title="payments" />}
-      </section>
+      {data.length > 0 ? <PaymentsList /> : <Empty title="payments" />}
     </PageWrapper>
   )
 }

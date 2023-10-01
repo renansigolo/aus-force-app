@@ -31,13 +31,12 @@ export default function StaffPage({ searchParams }: StaffPageProps) {
       <PageWrapper>
         <Role role="client">
           <PageHeading title="Staff" buttonLabel="New Staff" />
-          <section className="py-8">
-            {accordionData.length > 0 ? (
-              <StaffAccordion accordionData={accordionData} />
-            ) : (
-              <Empty title="staff" />
-            )}
-          </section>
+
+          {accordionData.length > 0 ? (
+            <StaffAccordion accordionData={accordionData} />
+          ) : (
+            <Empty title="staff" />
+          )}
         </Role>
 
         <ModalWrapper title="New Staff" showModal={showModal}>

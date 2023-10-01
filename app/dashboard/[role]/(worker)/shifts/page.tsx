@@ -64,9 +64,7 @@ export default function ShiftsPage() {
   return (
     <PageWrapper>
       <PageHeading title="Shifts" />
-      <section className="py-8">
-        {data.length > 0 ? <ShiftsList /> : <Empty title="shifts" />}
-      </section>
+      {data.length > 0 ? <ShiftsList /> : <Empty title="shifts" />}
     </PageWrapper>
   )
 }
