@@ -1,3 +1,4 @@
+import { WorkerProfile } from "@/app/dashboard/[role]/(business)/allocations/AllocateWorkerModal"
 import { JobRequestsForm } from "@/app/dashboard/[role]/(client)/job-requests/JobRequestsForm"
 import { JobRequestsList } from "@/app/dashboard/[role]/(client)/job-requests/JobRequestsList"
 import { Empty } from "@/components/Empty"
@@ -22,6 +23,7 @@ export type JobRequest = {
   quantity: number
   serviceDescription: string
   status: "allocated" | "pendingWorkerAllocation" | "pendingRatesAllocation"
+  allocatedWorker?: WorkerProfile
 }
 
 type JobRequestsPageProps = { searchParams: SearchParams }

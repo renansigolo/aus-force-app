@@ -25,7 +25,7 @@ const CardHeader = forwardRef<HTMLDivElement, CardProps>(({ className, ...props 
 CardHeader.displayName = "CardHeader"
 
 const CardContent = forwardRef<HTMLDivElement, CardProps>(({ className, ...props }, ref) => (
-  <div ref={ref} className={twMerge("flex gap-2 px-4 py-5 sm:p-6", className)} {...props} />
+  <div ref={ref} className={twMerge("flex gap-4 px-4 py-5 sm:p-6", className)} {...props} />
 ))
 CardContent.displayName = "CardContent"
 

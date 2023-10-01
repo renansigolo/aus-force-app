@@ -36,22 +36,22 @@ const people = [
     lastSeenDateTime: "2023-01-23T13:23Z",
   },
   {
-    name: "Michael Foster",
+    name: "Jenny Wilson",
     yearsOld: "24y",
     role: "CTO",
     company: "COMP 2",
     imageUrl:
-      "https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      "https://images.unsplash.com/photo-1507101105822-7472b28e22ac?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
     lastSeen: "2 days ago",
     lastSeenDateTime: "2023-01-23T13:23Z",
   },
   {
-    name: "Dries Vincent",
+    name: "Kristin Watson",
     yearsOld: "54y",
     role: "Forklift Driver",
     company: "COMP 3",
     imageUrl:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+      "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
     lastSeen: "yesterday",
     lastSeenDateTime: "2023-01-23T13:23Z",
   },
