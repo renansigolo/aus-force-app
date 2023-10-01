@@ -7,7 +7,7 @@ import { getCollectionQuery } from "@/lib/firebase"
 import { Popover } from "@headlessui/react"
 import { orderBy } from "firebase/firestore"
 
-type ClientFormData = {
+export type ClientData = {
   id: string
   createdAt: Date
   name: string
@@ -36,7 +36,7 @@ const tableData = [
 ]
 
 export async function ClientsList() {
-  const data = (await getCollectionQuery("clients", orderBy("name", "desc"))) as ClientFormData[]
+  const data = (await getCollectionQuery("clients", orderBy("name", "desc"))) as ClientData[]
 
   return data.length > 0 ? (
     <div className="grid grid-cols-1 gap-4">
@@ -50,7 +50,7 @@ export async function ClientsList() {
 }
 
 type ClientCardProps = {
-  data: ClientFormData
+  data: ClientData
 }
 
 function ClientCard({ data }: ClientCardProps) {

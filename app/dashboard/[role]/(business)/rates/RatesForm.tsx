@@ -1,7 +1,8 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { Button } from "@/components/Button"
 import { Fragment, useState } from "react"
+import { useForm } from "react-hook-form"
 
 const hoursWorkedData = [
   {
@@ -17,19 +18,17 @@ const hoursWorkedData = [
 ]
 
 export function RatesForm() {
-  const router = useRouter()
-  const hideModal = () => router.push("?showModal=false")
+  const {
+    register,
+    formState: { isSubmitting, isValid },
+  } = useForm()
 
   return (
     <form className="space-y-8 divide-y divide-gray-200">
       <div className="mt-6 grid gap-4">
         <div>
           <label htmlFor="clientName">Client Name</label>
-          <select
-            id="clientName"
-            name="clientName"
-            className="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
-          >
+          <select id="clientName" {...register("clientName")}>
             <option>Client 01</option>
             <option>Client 02</option>
             <option>Client 03</option>
@@ -38,7 +37,7 @@ export function RatesForm() {
 
         <div>
           <label htmlFor="jobPosition">Job position</label>
-          <select id="jobPosition" name="jobPosition">
+          <select id="jobPosition" {...register("jobPosition")}>
             <option>General Labour</option>
             <option>Skill Labour</option>
             <option>Traffic Controller</option>
@@ -62,6 +61,15 @@ export function RatesForm() {
           <hr className="my-6" />
           <HoursWorked />
         </div>
+      </div>
+
+      <div className="gap-2 pt-5 sm:flex sm:flex-row-reverse sm:pt-4">
+        <Button type="submit" className="btn-success" disabled={isSubmitting || !isValid}>
+          Submit
+        </Button>
+        <Button href="?showModal=false" className="btn-secondary">
+          Cancel
+        </Button>
       </div>
     </form>
   )
