@@ -5,15 +5,15 @@ import Link from "next/link"
 const cards = [
   {
     name: "Hours Worked",
-    href: "/dashboard/shifts",
+    href: "/dashboard/worker/shifts",
     icon: ClockIcon,
-    amount: "48h",
+    amount: "0h",
   },
   {
     name: "Week Payment",
-    href: "/dashboard/payments",
+    href: "/dashboard/worker/payments",
     icon: BanknotesIcon,
-    amount: "$4.800,00",
+    amount: "$0,00",
   },
 ]
 

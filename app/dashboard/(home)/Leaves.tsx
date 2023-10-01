@@ -41,7 +41,7 @@ const people = [
     role: "CTO",
     company: "COMP 2",
     imageUrl:
-      "https://images.unsplash.com/photo-1507101105822-7472b28e22ac?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
+      "https://images.unsplash.com/photo-1507101105822-7472b28e22ac?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
     lastSeen: "2 days ago",
     lastSeenDateTime: "2023-01-23T13:23Z",
   },
@@ -51,7 +51,7 @@ const people = [
     role: "Forklift Driver",
     company: "COMP 3",
     imageUrl:
-      "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=1024&h=1024&q=80",
+      "https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80",
     lastSeen: "yesterday",
     lastSeenDateTime: "2023-01-23T13:23Z",
   },

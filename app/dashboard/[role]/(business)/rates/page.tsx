@@ -1,3 +1,4 @@
+import { EditRatesButton } from "@/app/dashboard/[role]/(business)/rates/EditRatesButtton"
 import { RatesForm } from "@/app/dashboard/[role]/(business)/rates/RatesForm"
 import { Accordion } from "@/components/Accordion"
 import { Card, CardContent, CardHeader } from "@/components/Card"
@@ -81,6 +82,7 @@ export default function RatesPage({ searchParams }: RatesPageProps) {
             <Card>
               <CardHeader>
                 <h3 className="text-lg font-medium leading-6 text-gray-900">Client 01</h3>
+                <EditRatesButton />
               </CardHeader>
 
               <CardContent>

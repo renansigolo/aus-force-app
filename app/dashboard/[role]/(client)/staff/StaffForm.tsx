@@ -5,7 +5,7 @@ import { FormInputError } from "@/components/FormInputError"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 
-type FormInputs = {
+type StaffFormInputs = {
   email: string
   role: "Supervisor" | "Manager"
   jobSite: string
@@ -22,11 +22,11 @@ export function StaffForm({ accordionData }: StaffModalProps) {
     handleSubmit,
     reset,
     formState: { errors, isSubmitting, isValid },
-  } = useForm<FormInputs>()
+  } = useForm<StaffFormInputs>()
 
   const hideModal = () => router.push("?showModal=false")
 
-  const onSubmit = async (values: FormInputs) => {
+  const onSubmit = async (values: StaffFormInputs) => {
     // Find the item in the accordionData array that matches the jobSite
     const accordionItem = accordionData.find((item) => item.title === values.jobSite)
 
