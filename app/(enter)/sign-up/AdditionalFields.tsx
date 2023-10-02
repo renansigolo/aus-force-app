@@ -1,4 +1,3 @@
-import { DocumentArrowUpIcon } from "@heroicons/react/20/solid"
 import { UseFormReturn } from "react-hook-form"
 
 type AdditionalFieldsProps = {
@@ -7,6 +6,7 @@ type AdditionalFieldsProps = {
     numberId: string
     dateOfIssueId: string
     expiryDateId: string
+    imageFile: any
   }
 }
 export function AdditionalFields({ register, inputValues }: AdditionalFieldsProps) {
@@ -32,7 +32,19 @@ export function AdditionalFields({ register, inputValues }: AdditionalFieldsProp
         </div>
       </div>
 
-      <button
+      <div className="mt-2 w-full">
+        <label htmlFor={inputValues.imageFile}>Upload Image</label>
+        <input
+          id={inputValues.imageFile}
+          type="file"
+          accept="image/x-png,image/gif,image/jpeg"
+          className="form-input"
+          // {...register(inputValues.imageFile)}
+        />
+        {/* <FormInputError message={errors.siteAddress?.message} /> */}
+      </div>
+
+      {/* <button
         type="button"
         className="relative mt-2 block w-full rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
       >
@@ -40,7 +52,7 @@ export function AdditionalFields({ register, inputValues }: AdditionalFieldsProp
           <DocumentArrowUpIcon className="h-12 w-12 text-gray-400" />
           <span className="mt-2 block text-sm font-semibold text-gray-900">Upload Image</span>
         </div>
-      </button>
+      </button> */}
     </>
   )
 }

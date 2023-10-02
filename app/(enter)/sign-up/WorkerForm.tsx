@@ -5,7 +5,7 @@ import { Role } from "@/components/Roles"
 import { Disclosure } from "@headlessui/react"
 import { DocumentArrowUpIcon, MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/24/outline"
 import { ChangeEvent, KeyboardEvent, useState } from "react"
-import { useForm } from "react-hook-form"
+import { UseFormReturn, useForm } from "react-hook-form"
 
 const documentsForm = [
   {
@@ -53,6 +53,7 @@ const documentsForm = [
 export function WorkerForm() {
   const {
     register,
+    setValue,
     formState: { errors },
   } = useForm()
 
@@ -237,14 +238,14 @@ export function WorkerForm() {
         {/* Qualifications */}
         <div>
           <FormSectionHeading title="Qualifications" description="Add your qualifications" />
-          <WordInputChips />
+          <WordInputChips setValue={setValue} />
         </div>
       </Role>
     </>
   )
 }
 
-function WordInputChips() {
+function WordInputChips({ setValue }: { setValue: UseFormReturn<any>["setValue"] }) {
   const [inputValue, setInputValue] = useState("")
   const [words, setWords] = useState<string[]>([])
 
@@ -254,7 +255,9 @@ function WordInputChips() {
 
   const handleInputKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && inputValue.trim()) {
+      e.preventDefault()
       setWords([...words, inputValue.trim()])
+      setValue("qualifications", [...words, inputValue.trim()])
       setInputValue("")
     }
   }
@@ -263,6 +266,7 @@ function WordInputChips() {
     const updatedWords = [...words]
     updatedWords.splice(index, 1)
     setWords(updatedWords)
+    setValue("qualifications", updatedWords)
   }
 
   return (

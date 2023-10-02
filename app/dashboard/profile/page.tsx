@@ -27,12 +27,15 @@ export type DatabaseUser = {
   driverLicense: string
   driverLicenseIssued: string
   driverLicenseExpiry: string
+  driverLicenseURL: string
   passportNumber: string
   passportIssued: string
   passportExpiry: string
+  passportURL: string
   identificationNumber: string
   identificationIssued: string
   identificationExpiry: string
+  identificationURL: string
 }
 
 export default function ProfilePage() {

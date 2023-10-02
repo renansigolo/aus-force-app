@@ -14,6 +14,7 @@ import { Disclosure } from "@headlessui/react"
 import { MinusSmallIcon, PlusSmallIcon } from "@heroicons/react/20/solid"
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth"
 import { doc, setDoc } from "firebase/firestore"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
@@ -63,6 +64,18 @@ export default function SignUpPage() {
         `users/${userCredential.user.uid}/signature.png`,
         data.signatureFile,
       )
+      const passportURL = await upload(
+        `users/${userCredential.user.uid}/passport.png`,
+        data.passportImageFile?.item(0),
+      )
+      const driverLicenseURL = await upload(
+        `users/${userCredential.user.uid}/driverLicense.png`,
+        data.driverLicenseImageFile?.item(0),
+      )
+      const identificationURL = await upload(
+        `users/${userCredential.user.uid}/identification.png`,
+        data.identificationImageFile?.item(0),
+      )
 
       const userPayload = {
         uid: userCredential.user.uid,
@@ -76,12 +89,15 @@ export default function SignUpPage() {
         driverLicenseNumber: data.driverLicenseNumber,
         driverLicenseIssued: data.driverLicenseIssued,
         driverLicenseExpiry: data.driverLicenseExpiry,
+        driverLicenseURL: driverLicenseURL,
         identificationNumber: data.identificationNumber,
         identificationIssued: data.identificationIssued,
         identificationExpiry: data.identificationExpiry,
+        identificationURL: identificationURL,
         passportNumber: data.passportNumber,
         passportIssued: data.passportIssued,
         passportExpiry: data.passportExpiry,
+        passportURL: passportURL,
         firstName: data.firstName,
         lastName: data.lastName,
         phoneNumber: data.phoneNumber,
@@ -119,7 +135,10 @@ export default function SignUpPage() {
               <div className="sm:col-span-6">
                 <label htmlFor="profileImageFile">Profile Photo</label>
                 <div className="flex items-center gap-2">
-                  <img
+                  <Image
+                    priority
+                    width={64}
+                    height={64}
                     alt="Profile Image"
                     className="aspect-square h-12 w-12 rounded-full object-fill"
                     src={
