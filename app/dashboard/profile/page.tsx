@@ -36,6 +36,7 @@ export type DatabaseUser = {
   identificationIssued: string
   identificationExpiry: string
   identificationURL: string
+  status: "allocated" | "unallocated"
 }
 
 export default function ProfilePage() {

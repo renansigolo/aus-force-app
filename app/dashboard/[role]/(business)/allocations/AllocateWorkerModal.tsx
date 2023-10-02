@@ -19,8 +19,6 @@ type AllocateWorkerModalProps = {
 }
 
 export function AllocateWorkerModal({ workers }: AllocateWorkerModalProps) {
-  console.log("🚀 ~ AllocateWorkerModal ~ workers:", workers)
-
   const router = useRouter()
   const searchParams = useSearchParams()
   const jobRequestId = searchParams.get("jobRequestId") as string

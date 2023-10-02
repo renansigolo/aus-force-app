@@ -1,6 +1,6 @@
+import { DatabaseUser } from "@/app/dashboard/profile/page"
 import { Empty } from "@/components/Empty"
 import { UserCircleIcon } from "@heroicons/react/20/solid"
-import Link from "next/link"
 import { Fragment } from "react"
 import { twMerge } from "tailwind-merge"
 
@@ -86,16 +86,28 @@ const statusStyles: { [key in string]: string } = {
   fired: "bg-red-100 text-red-800",
 }
 
-export function WorkersList() {
+type WorkersListProps = {
+  workers: DatabaseUser[]
+}
+
+export function WorkersList({ workers }: WorkersListProps) {
+  // filter workers by status
+  const allocatedWorkers = workers.filter((worker) => worker.status === "allocated")
+  const unallocatedWorkers = workers.filter((worker) => worker.status === "unallocated")
+
   return (
     <div className="flex flex-col gap-4">
       {workers.length === 0 ? (
         <Empty title="worker" />
       ) : (
         workers.map((item) => (
-          <Fragment key={item.id}>
-            {item.status === "allocated" && <WorkersTable status="Allocated Workers" />}
-            {item.status === "non-allocated" && <WorkersTable status="Non Allocated Workers" />}
+          <Fragment key={item.uid}>
+            {item.status === "allocated" && (
+              <WorkersTable status="Allocated Workers" workers={allocatedWorkers} />
+            )}
+            {item.status === "unallocated" && (
+              <WorkersTable status="Non Allocated Workers" workers={unallocatedWorkers} />
+            )}
           </Fragment>
         ))
       )}
@@ -105,8 +117,9 @@ export function WorkersList() {
 
 type WorkersTableProps = {
   status: string
+  workers: DatabaseUser[]
 }
-function WorkersTable({ status }: WorkersTableProps) {
+function WorkersTable({ status, workers }: WorkersTableProps) {
   return (
     <div>
       <h2 className="heading-3">{status}</h2>
@@ -118,7 +131,7 @@ function WorkersTable({ status }: WorkersTableProps) {
           className="mt-2 divide-y divide-gray-200 overflow-hidden rounded-lg shadow sm:hidden"
         >
           {workers.map((item) => (
-            <li key={item.id}>
+            <li key={item.uid}>
               <span className="block bg-white px-4 py-4">
                 <span className="flex items-center space-x-4">
                   <span className="flex flex-1 space-x-2 truncate">
@@ -127,23 +140,23 @@ function WorkersTable({ status }: WorkersTableProps) {
                       aria-hidden="true"
                     />
                     <span className="flex flex-col truncate text-sm text-gray-500">
-                      <span className="truncate">{item.name}</span>
+                      <span className="truncate">{item.displayName}</span>
                       <span>{item.dob}</span>
-                      <span>{item.age}</span>
+                      {/* <span>{item.age}</span> */}
                       <span>{item.email}</span>
-                      <span>{item.phone}</span>
-                      <span>
+                      <span>{item.phoneNumber}</span>
+                      {/* <span>
                         <span className="font-medium text-gray-900">{item.rate}</span>{" "}
                       </span>
                       <time dateTime={item.hoursWorked}>{item.startDate}</time>
-                      <span>Worked: {item.hoursWorked}</span>
+                      <span>Worked: {item.hoursWorked}</span> */}
                     </span>
                   </span>
-                  <span className="inline-flex flex-col items-center px-2.5 py-0.5 text-xs font-medium capitalize">
+                  {/* <span className="inline-flex flex-col items-center px-2.5 py-0.5 text-xs font-medium capitalize">
                     {item.qualifications.map((qualification, index) => (
                       <p key={index}>{qualification}</p>
                     ))}
-                  </span>
+                  </span> */}
                   <span
                     className={twMerge(
                       statusStyles[item.status],
@@ -178,12 +191,12 @@ function WorkersTable({ status }: WorkersTableProps) {
                   >
                     DOB
                   </th>
-                  <th
+                  {/* <th
                     className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
                     scope="col"
                   >
                     Age
-                  </th>
+                  </th> */}
                   <th
                     className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
                     scope="col"
@@ -196,7 +209,7 @@ function WorkersTable({ status }: WorkersTableProps) {
                   >
                     Phone
                   </th>
-                  <th
+                  {/* <th
                     className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
                     scope="col"
                   >
@@ -219,7 +232,7 @@ function WorkersTable({ status }: WorkersTableProps) {
                     scope="col"
                   >
                     Qualifications
-                  </th>
+                  </th> */}
                   <th
                     className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
                     scope="col"
@@ -230,31 +243,31 @@ function WorkersTable({ status }: WorkersTableProps) {
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
                 {workers.map((item) => (
-                  <tr key={item.id} className="bg-white">
+                  <tr key={item.uid} className="bg-white">
                     <td className="w-full whitespace-nowrap px-6 py-4 text-sm text-gray-900">
-                      <div className="flex">
-                        <Link href={item.href} className="group inline-flex space-x-2 text-sm">
-                          <UserCircleIcon
-                            className="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                            aria-hidden="true"
-                          />
-                          <p className="text-gray-500 group-hover:text-gray-900">{item.name}</p>
-                        </Link>
+                      <div className="flex gap-1">
+                        <UserCircleIcon
+                          className="h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
+                          aria-hidden="true"
+                        />
+                        <p className="text-gray-500 group-hover:text-gray-900">
+                          {item.displayName}
+                        </p>
                       </div>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
                       <span className="font-medium text-gray-900">{item.dob}</span>
                     </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
+                    {/* <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
                       <span className="font-medium text-gray-900">{item.age}</span>
-                    </td>
+                    </td> */}
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
                       <span className="font-medium text-gray-900">{item.email}</span>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
-                      <span className="font-medium text-gray-900">{item.phone}</span>
+                      <span className="font-medium text-gray-900">{item.phoneNumber}</span>
                     </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
+                    {/* <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
                       <span className="font-medium text-gray-900">{item.rate}</span>
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
@@ -262,14 +275,14 @@ function WorkersTable({ status }: WorkersTableProps) {
                     </td>
                     <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
                       <time dateTime={item.hoursWorked}>{item.hoursWorked}</time>
-                    </td>
-                    <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
+                    </td> */}
+                    {/* <td className="whitespace-nowrap px-6 py-4 text-right text-sm text-gray-500">
                       <span className="inline-flex flex-col items-center px-2.5 py-0.5 text-xs font-medium capitalize">
                         {item.qualifications.map((qualification, index) => (
                           <p key={index}>{qualification}</p>
                         ))}
                       </span>
-                    </td>
+                    </td> */}
                     <td className="hidden whitespace-nowrap px-6 py-4 text-sm text-gray-500 md:block">
                       <span
                         className={twMerge(
