@@ -25,14 +25,14 @@ const timesheets: Timesheet[] = []
 export function TimesheetsList() {
   return (
     <div className="grid gap-2">
-      {timesheets.length > 0 ? (
+      {timesheets.length === 0 ? (
+        <Empty title="timesheets" />
+      ) : (
         timesheets.map((timesheet) => (
           <div key={timesheet.id}>
             <Client id={timesheet.id} />
           </div>
         ))
-      ) : (
-        <Empty title="timesheets" />
       )}
     </div>
   )

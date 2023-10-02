@@ -10,13 +10,13 @@ export async function Birthdays() {
   const data: DatabaseUser[] = await getCollectionQuery("users", where("dob", "<", currentDate), 9)
   if (!data.length) return null
 
+  const pastMonths = data.filter((user) => user.dob.split("-")[1] < currentDate.split("-")[1])
+  const upcomingMonths = data.filter((user) => user.dob.split("-")[1] >= currentDate.split("-")[1])
   const today = data.filter(
     (user) =>
       user.dob.split("-")[1] === currentDate.split("-")[1] &&
       user.dob.split("-")[2] === currentDate.split("-")[2],
   )
-  const upcomingMonths = data.filter((user) => user.dob.split("-")[1] >= currentDate.split("-")[1])
-  const pastMonths = data.filter((user) => user.dob.split("-")[1] < currentDate.split("-")[1])
 
   return (
     <div>

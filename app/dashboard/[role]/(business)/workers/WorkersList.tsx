@@ -1,6 +1,7 @@
 import { Empty } from "@/components/Empty"
 import { UserCircleIcon } from "@heroicons/react/20/solid"
 import Link from "next/link"
+import { Fragment } from "react"
 import { twMerge } from "tailwind-merge"
 
 type Worker = {
@@ -79,7 +80,7 @@ const workers: Worker[] = [
   },
 ]
 
-const statusStyles: any = {
+const statusStyles: { [key in string]: string } = {
   active: "bg-green-100 text-green-800",
   holidays: "bg-yellow-100 text-yellow-800",
   fired: "bg-red-100 text-red-800",
@@ -88,15 +89,15 @@ const statusStyles: any = {
 export function WorkersList() {
   return (
     <div className="flex flex-col gap-4">
-      {workers.length > 0 ? (
+      {workers.length === 0 ? (
+        <Empty title="worker" />
+      ) : (
         workers.map((item) => (
-          <>
+          <Fragment key={item.id}>
             {item.status === "allocated" && <WorkersTable status="Allocated Workers" />}
             {item.status === "non-allocated" && <WorkersTable status="Non Allocated Workers" />}
-          </>
+          </Fragment>
         ))
-      ) : (
-        <Empty title="worker" />
       )}
     </div>
   )
