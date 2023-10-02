@@ -1,28 +1,6 @@
-"use client"
-
-const stats = [
-  {
-    name: "Past",
-    company: "ACR",
-    address: "377/12 Church Avenue",
-    time: "7am - 3pm",
-    policies: "View Policies and Procedures",
-  },
-  {
-    name: "Today",
-    company: "NSAC",
-    address: "6 Mackenzie St.",
-    time: "9am - 5pm",
-    policies: "View Policies and Procedures",
-  },
-  {
-    name: "Upcoming",
-    company: "CAPA",
-    address: "333 George St",
-    time: "8am - 4pm",
-    policies: "View Policies and Procedures",
-  },
-]
+import { RequestLeaveData } from "@/app/dashboard/[role]/(worker)/leave-requests/page"
+import { Card } from "@/components/Card"
+import { getCollection } from "@/lib/firebase"
 
 const people = [
   {
@@ -57,15 +35,29 @@ const people = [
   },
 ]
 
-export function Leaves() {
+export async function Leaves() {
+  const data = (await getCollection("leaveRequests")) as RequestLeaveData[]
+  if (!data.length) return null
+
+  // const usersData: any[] = []
+  // data.map(async (leaveRequest) => {
+  //   const user = await getCollectionQuery("users", where("uid", "==", leaveRequest.requestedBy))
+  //   usersData.push({
+  //     leave: leaveRequest,
+  //     user: user[0],
+  //   })
+  // })
+
   return (
     <div>
       <h2 className="heading-3 mb-3">Leaves</h2>
-      <dl className="grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-x md:divide-y-0">
-        <LeaveList title="Past" />
-        <LeaveList title="Today" />
-        <LeaveList title="Upcoming" />
-      </dl>
+      <Card>
+        <div className="grid grid-cols-1 divide-y md:grid-cols-3 md:divide-x md:divide-y-0">
+          <LeaveList title="Past" />
+          <LeaveList title="Today" />
+          <LeaveList title="Upcoming" />
+        </div>
+      </Card>
     </div>
   )
 }
@@ -73,7 +65,8 @@ export function Leaves() {
 type LeaveListProps = {
   title: string
 }
-export function LeaveList(props: LeaveListProps) {
+function LeaveList(props: LeaveListProps) {
+  console.log("🚀 ~ LeaveList ~ props:", props)
   return (
     <div className="px-4 py-5 sm:p-6">
       <div className="flex justify-between text-lg font-semibold leading-8 text-gray-900">
@@ -89,7 +82,7 @@ export function LeaveList(props: LeaveListProps) {
                 />
                 <div className="min-w-0 flex-auto">
                   <p className="inline-flex align-middle text-sm font-semibold leading-6 text-gray-900">
-                    {person.name} ({person.yearsOld})
+                    {person.name}
                   </p>
                   <p className="mt-1 truncate text-xs leading-5 text-gray-500">
                     {person.role} at {person.company}

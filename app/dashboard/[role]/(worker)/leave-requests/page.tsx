@@ -16,6 +16,9 @@ export type RequestLeaveData = {
   startDate: string
   endDate: string
   policyAndProceduresURL: string
+  requestedBy: string
+  reviewedBy?: string
+  reviewedAt?: Date
 }
 
 export default async function RequestLeavePage() {

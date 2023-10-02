@@ -5,6 +5,7 @@ import { getApp, initializeApp } from "firebase/app"
 import { getAuth } from "firebase/auth"
 import {
   DocumentSnapshot,
+  QueryFieldFilterConstraint,
   QueryOrderByConstraint,
   addDoc,
   collection,
@@ -13,6 +14,7 @@ import {
   getDoc,
   getDocs,
   getFirestore,
+  limit,
   query,
   serverTimestamp,
   updateDoc,
@@ -82,13 +84,13 @@ type FirestoreCollectionName = "users" | "leaveRequests" | "jobSites" | "jobRequ
 
 export const getCollectionQuery = async (
   collectionName: FirestoreCollectionName,
-  orderByValue: QueryOrderByConstraint,
+  orderByValue: QueryOrderByConstraint | QueryFieldFilterConstraint,
+  limitTo?: number,
 ) => {
   const ref = collection(db, collectionName)
-  const q = query(ref, orderByValue)
-  // const q = query(ref, orderBy(orderByValue, "desc"))
+  const q = query(ref, orderByValue, limit(limitTo || 10))
   const data = (await getDocs(q)).docs.map(serializeDoc)
-  return data
+  return data as any
 }
 
 export const getCollection = async (collectionName: FirestoreCollectionName) => {

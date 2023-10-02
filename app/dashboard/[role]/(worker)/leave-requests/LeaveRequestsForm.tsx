@@ -1,5 +1,6 @@
 "use client"
 
+import { useUserContext } from "@/app/UserContext"
 import { RequestLeaveData as LeaveRequestsData } from "@/app/dashboard/[role]/(worker)/leave-requests/page"
 import { Button } from "@/components/Button"
 import { Card, CardContent, CardFooter } from "@/components/Card"
@@ -12,6 +13,8 @@ import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
 export function LeaveRequestsForm() {
+  const { user } = useUserContext()
+
   const router = useRouter()
   const {
     register,
@@ -24,6 +27,7 @@ export function LeaveRequestsForm() {
   const onSubmit = async (values: LeaveRequestsData) => {
     const payload = {
       ...values,
+      requestedBy: user?.uid,
       createdAt: serverTimestamp(),
       status: "pending",
     }

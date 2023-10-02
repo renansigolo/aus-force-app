@@ -1,5 +1,6 @@
 "use client"
 
+import { Card } from "@/components/Card"
 import Modal from "@/components/Modal"
 import { Role } from "@/components/Roles"
 import NiceModal from "@ebay/nice-modal-react"
@@ -47,45 +48,47 @@ export function Overview() {
     <div>
       <h2 className="heading-3 mb-3">Overview</h2>
       <Role role="worker">
-        <dl className="grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-3 md:divide-x md:divide-y-0">
-          {stats.map((item, index) => (
-            <div key={item.name} className="px-4 py-5 sm:p-6">
-              <dt className="flex justify-between text-lg font-semibold leading-8 text-gray-900">
-                {item.name}
-                {index === 0 && (
-                  <button type="button" className="btn" onClick={showModal}>
-                    Submit Shit
-                  </button>
-                )}
-              </dt>
+        <Card>
+          <dl className="grid grid-cols-1 divide-y md:grid-cols-3 md:divide-x md:divide-y-0">
+            {stats.map((item, index) => (
+              <div key={item.name} className="px-4 py-5 sm:p-6">
+                <dt className="flex justify-between text-lg font-semibold leading-8 text-gray-900">
+                  {item.name}
+                  {index === 0 && (
+                    <button type="button" className="btn" onClick={showModal}>
+                      Submit Shit
+                    </button>
+                  )}
+                </dt>
 
-              <ul role="list" className="mt-8 space-y-3 text-sm leading-6 text-gray-600">
-                <li className="flex gap-x-3">
-                  <BuildingOffice2Icon
-                    className="h-6 w-5 flex-none text-indigo-600"
-                    aria-hidden="true"
-                  />
-                  {item.company}
-                </li>
-                <li className="flex gap-x-3">
-                  <MapIcon className="h-6 w-5 flex-none text-indigo-600" aria-hidden="true" />
-                  {item.address}
-                </li>
-                <li className="flex gap-x-3">
-                  <ClockIcon className="h-6 w-5 flex-none text-indigo-600" aria-hidden="true" />
-                  {item.time}
-                </li>
-                <li className="flex gap-x-3">
-                  <DocumentTextIcon
-                    className="h-6 w-5 flex-none text-indigo-600"
-                    aria-hidden="true"
-                  />
-                  {item.policies}
-                </li>
-              </ul>
-            </div>
-          ))}
-        </dl>
+                <ul role="list" className="mt-8 space-y-3 text-sm leading-6 text-gray-600">
+                  <li className="flex gap-x-3">
+                    <BuildingOffice2Icon
+                      className="h-6 w-5 flex-none text-indigo-600"
+                      aria-hidden="true"
+                    />
+                    {item.company}
+                  </li>
+                  <li className="flex gap-x-3">
+                    <MapIcon className="h-6 w-5 flex-none text-indigo-600" aria-hidden="true" />
+                    {item.address}
+                  </li>
+                  <li className="flex gap-x-3">
+                    <ClockIcon className="h-6 w-5 flex-none text-indigo-600" aria-hidden="true" />
+                    {item.time}
+                  </li>
+                  <li className="flex gap-x-3">
+                    <DocumentTextIcon
+                      className="h-6 w-5 flex-none text-indigo-600"
+                      aria-hidden="true"
+                    />
+                    {item.policies}
+                  </li>
+                </ul>
+              </div>
+            ))}
+          </dl>
+        </Card>
       </Role>
     </div>
   )
