@@ -66,7 +66,6 @@ type LeaveListProps = {
   title: string
 }
 function LeaveList(props: LeaveListProps) {
-  console.log("🚀 ~ LeaveList ~ props:", props)
   return (
     <div className="px-4 py-5 sm:p-6">
       <div className="flex justify-between text-lg font-semibold leading-8 text-gray-900">
