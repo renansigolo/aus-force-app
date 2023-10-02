@@ -80,12 +80,12 @@ export function AllocationsList({ data }: AllocationsListProps) {
                     height={48}
                     width={48}
                     className="aspect-square h-16 w-16 rounded-full bg-gray-50 object-cover"
-                    src={item.allocatedWorker.imageUrl}
+                    src={item.allocatedWorker.photoURL || "/images/profile-placeholder.png"}
                     alt="Worker profile image"
                   />
                   <div>
                     <p className="text-sm font-semibold leading-6 text-gray-900">
-                      {item.allocatedWorker.name}
+                      {item.allocatedWorker.displayName}
                     </p>
                     <p className="truncate text-xs leading-5 text-gray-500">
                       {item.allocatedWorker.role}

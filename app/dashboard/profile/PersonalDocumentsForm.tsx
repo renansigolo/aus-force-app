@@ -61,7 +61,7 @@ export function PersonalDocumentsForm({ user }: PersonalDocumentsFormProps) {
             id="driverLicense"
             type="number"
             disabled={isSubmitting}
-            {...register("driverLicense", {
+            {...register("driverLicenseNumber", {
               required: "Driver license is required",
               valueAsNumber: true,
             })}

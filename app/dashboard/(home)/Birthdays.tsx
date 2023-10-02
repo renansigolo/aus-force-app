@@ -53,7 +53,7 @@ function BirthdaysList(props: BirthdaysListProps) {
                       width={48}
                       height={48}
                       className="h-12 w-12 flex-none rounded-full bg-gray-50"
-                      src={person.photoURL}
+                      src={person.photoURL || "/images/profile-placeholder.png"}
                       alt="User profile image"
                       loading="lazy"
                     />

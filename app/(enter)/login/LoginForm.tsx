@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/Button"
 import { FormInputError } from "@/components/FormInputError"
-import { auth, getUserDoc } from "@/lib/firebase"
+import { auth } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
 import { LoginFormSchema, TLoginFormSchema } from "@/lib/schemas"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -27,10 +27,9 @@ export function LoginForm() {
     // If we're in development, just redirect to the dashboard bypassing the authentication
     try {
       const { user } = await signInWithEmailAndPassword(auth, data.email, data.password)
-      const currentUser = await getUserDoc(user.uid)
 
       toast.success(`Welcome back, ${user.email}`)
-      router.push(`/dashboard?role=${currentUser.role}`)
+      router.push(`/dashboard`)
     } catch (error) {
       showErrorMessage(error)
     }

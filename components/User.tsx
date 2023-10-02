@@ -6,18 +6,20 @@ import { twMerge } from "tailwind-merge"
 
 type UserAvatarProps = {
   className?: string
+  priority?: boolean
 }
 
-export function UserAvatar({ className }: UserAvatarProps) {
+export function UserAvatar({ className, ...props }: UserAvatarProps) {
   const { user } = useUserContext()
 
   return (
     <Image
       className={twMerge("h-20 w-20 rounded-full", className)}
-      src={user?.photoURL ?? "/images/profile-placeholder.png"}
+      src={user?.photoURL || "/images/profile-placeholder.png"}
       width={80}
       height={80}
       alt="Profile Image"
+      {...props}
     />
   )
 }

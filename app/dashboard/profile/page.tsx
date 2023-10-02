@@ -24,7 +24,7 @@ export type DatabaseUser = {
   accountNumber: number
   bsb: number
   bankName: string
-  driverLicense: string
+  driverLicenseNumber: string
   driverLicenseIssued: string
   driverLicenseExpiry: string
   driverLicenseURL: string

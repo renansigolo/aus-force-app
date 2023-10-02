@@ -1,5 +1,6 @@
 "use client"
 
+import { Button } from "@/components/Button"
 import NiceModal, { useModal } from "@ebay/nice-modal-react"
 import { Dialog, Transition } from "@headlessui/react"
 import { Fragment, ReactNode, useRef } from "react"
@@ -68,17 +69,13 @@ export default NiceModal.create(({ title, description, children }: ModalProps) =
                 </div>
 
                 <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                  <button
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                    onClick={handleResolve}
-                  >
+                  <Button type="button" className="btn-success" onClick={handleResolve}>
                     Submit
-                  </button>
+                  </Button>
                   <button
                     ref={cancelButtonRef}
                     type="button"
-                    className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:w-auto sm:text-sm"
+                    className="btn btn-secondary"
                     onClick={closeModal}
                   >
                     Cancel
