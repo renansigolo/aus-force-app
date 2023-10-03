@@ -11,6 +11,7 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid"
 import { BellIcon } from "@heroicons/react/24/outline"
 import { FirebaseError } from "firebase/app"
 import { signOut } from "firebase/auth"
+import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Fragment } from "react"
@@ -170,9 +171,11 @@ export function Navbar() {
                 <div className="flex flex-shrink-0 items-center">
                   {/* Logo Image */}
                   <Link href={"/dashboard"}>
-                    <img
+                    <Image
+                      width={38}
+                      height={32}
                       className="block h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                      src="/logo.svg"
                       alt="Company Logo"
                     />
                   </Link>
@@ -282,7 +285,7 @@ export function Navbar() {
                   <div className="border-t border-gray-200 pt-4">
                     <div className="mx-auto flex max-w-3xl items-center px-4 sm:px-6">
                       <div className="flex-shrink-0">
-                        <img
+                        <Image
                           className="h-10 w-10 rounded-full"
                           alt="Profile Image"
                           src={user?.photoURL || "/images/profile-placeholder.png"}

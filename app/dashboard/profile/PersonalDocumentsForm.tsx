@@ -4,6 +4,7 @@ import { DatabaseUser } from "@/app/dashboard/profile/page"
 import { Button } from "@/components/Button"
 import { updateDocument } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
+import Image from "next/image"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import toast from "react-hot-toast"
@@ -109,7 +110,7 @@ export function PersonalDocumentsForm({ user }: PersonalDocumentsFormProps) {
           <span>Signature</span>
           {user.signatureURL && (
             <div className="rounded-md border border-gray-200 bg-white p-6 hover:cursor-not-allowed">
-              <img src={user.signatureURL} alt="Signature" width={500} height={300} />
+              <Image src={user.signatureURL} alt="Signature" width={500} height={300} />
             </div>
           )}
         </div>
