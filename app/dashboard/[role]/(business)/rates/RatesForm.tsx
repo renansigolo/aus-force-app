@@ -1,6 +1,5 @@
 "use client"
 
-import { Button } from "@/components/Button"
 import { Fragment, useState } from "react"
 import { useForm } from "react-hook-form"
 
@@ -26,7 +25,7 @@ export function RatesForm() {
   return (
     <form className="space-y-8 divide-y divide-gray-200">
       <div className="mt-6 grid gap-4">
-        <div>
+        {/* <div>
           <label htmlFor="clientName">Client Name</label>
           <select id="clientName" {...register("clientName")}>
             <option>Client 01</option>
@@ -54,7 +53,7 @@ export function RatesForm() {
             <option>Formworker</option>
             <option>Manitou Operator</option>
           </select>
-        </div>
+        </div> */}
 
         <div>
           <DayScheduleForm />
@@ -63,14 +62,14 @@ export function RatesForm() {
         </div>
       </div>
 
-      <div className="gap-2 pt-5 sm:flex sm:flex-row-reverse sm:pt-4">
+      {/* <div className="gap-2 pt-5 sm:flex sm:flex-row-reverse sm:pt-4">
         <Button type="submit" className="btn-success" disabled={isSubmitting || !isValid}>
           Submit
         </Button>
         <Button href="?showModal=false" className="btn-secondary">
           Cancel
         </Button>
-      </div>
+      </div> */}
     </form>
   )
 }

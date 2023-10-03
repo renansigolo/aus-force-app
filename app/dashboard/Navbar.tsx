@@ -8,7 +8,6 @@ import { auth } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
 import { Menu, Popover, Transition } from "@headlessui/react"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/20/solid"
-import { BellIcon } from "@heroicons/react/24/outline"
 import { FirebaseError } from "firebase/app"
 import { signOut } from "firebase/auth"
 import Image from "next/image"
@@ -286,6 +285,8 @@ export function Navbar() {
                     <div className="mx-auto flex max-w-3xl items-center px-4 sm:px-6">
                       <div className="flex-shrink-0">
                         <Image
+                          width={40}
+                          height={40}
                           className="h-10 w-10 rounded-full"
                           alt="Profile Image"
                           src={user?.photoURL || "/images/profile-placeholder.png"}
@@ -297,13 +298,6 @@ export function Navbar() {
                         </div>
                         <div className="text-sm font-medium text-gray-500">{user?.email || ""}</div>
                       </div>
-                      <button
-                        type="button"
-                        className="ml-auto flex-shrink-0 rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                      >
-                        <span className="sr-only">View notifications</span>
-                        <BellIcon className="h-6 w-6" aria-hidden="true" />
-                      </button>
                     </div>
                     <div className="mx-auto mt-3 max-w-3xl space-y-1 px-2 sm:px-4">
                       {userNavigation.map((item) => (

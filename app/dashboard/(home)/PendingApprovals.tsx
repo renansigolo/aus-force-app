@@ -65,56 +65,32 @@ function ShiftTable({ approveShift, showModal }: any) {
   return (
     <div className="px-4 sm:px-0">
       <div className="-mx-4 mt-4 sm:-mx-0">
-        <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
+        <div className="overflow-hidden rounded-lg shadow ring-1 ring-black ring-opacity-5">
           <table className="min-w-full divide-y divide-gray-300">
             <thead>
-              <tr>
-                <th
-                  scope="col"
-                  className="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:hidden"
-                >
+              <tr className="bg-gray-50 text-sm font-semibold text-gray-900">
+                <th scope="col" className="py-3.5 pl-4 pr-3 text-left sm:hidden">
                   Shift Details
                 </th>
-                <th
-                  scope="col"
-                  className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
-                >
+                <th scope="col" className="hidden px-3 py-3.5 text-left sm:table-cell">
                   Worker Name
                 </th>
-                <th
-                  scope="col"
-                  className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 lg:table-cell"
-                >
+                <th scope="col" className="hidden px-3 py-3.5 text-left lg:table-cell">
                   Job Site
                 </th>
-                <th
-                  scope="col"
-                  className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
-                >
+                <th scope="col" className="hidden px-3 py-3.5 text-left sm:table-cell">
                   Start Time
                 </th>
-                <th
-                  scope="col"
-                  className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
-                >
+                <th scope="col" className="hidden px-3 py-3.5 text-left sm:table-cell">
                   End Time
                 </th>
-                <th
-                  scope="col"
-                  className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
-                >
+                <th scope="col" className="hidden px-3 py-3.5 text-left sm:table-cell">
                   Break
                 </th>
-                <th
-                  scope="col"
-                  className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
-                >
+                <th scope="col" className="hidden px-3 py-3.5 text-left sm:table-cell">
                   Normal Hours
                 </th>
-                <th
-                  scope="col"
-                  className="hidden px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:table-cell"
-                >
+                <th scope="col" className="hidden px-3 py-3.5 text-left sm:table-cell">
                   Overtime Hours
                 </th>
                 <th scope="col" className="relative py-3.5 pl-3 pr-4">

@@ -35,10 +35,10 @@ export default async function JobRequestsPage({ searchParams }: JobRequestsPageP
     orderBy("createdAt", "desc"),
   )
 
-  const jobSitesData = (await getCollectionQuery(
+  const jobSitesData = await getCollectionQuery<JobSitesData>(
     "jobSites",
     orderBy("siteName", "desc"),
-  )) as JobSitesData[]
+  )
 
   const showModal = searchParams.showModal === "true"
 

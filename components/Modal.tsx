@@ -68,7 +68,7 @@ export default NiceModal.create(({ title, description, children }: ModalProps) =
                   </div>
                 </div>
 
-                <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                <div className="mt-5 gap-2 sm:mt-4 sm:flex sm:flex-row-reverse">
                   <Button type="button" className="btn-success" onClick={handleResolve}>
                     Submit
                   </Button>
