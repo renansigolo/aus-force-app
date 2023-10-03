@@ -30,10 +30,10 @@ export type JobRequest = {
 type JobRequestsPageProps = { searchParams: SearchParams }
 
 export default async function JobRequestsPage({ searchParams }: JobRequestsPageProps) {
-  const jobRequestsData = (await getCollectionQuery(
+  const jobRequestsData = await getCollectionQuery<JobRequest>(
     "jobRequests",
     orderBy("createdAt", "desc"),
-  )) as JobRequest[]
+  )
 
   const jobSitesData = (await getCollectionQuery(
     "jobSites",

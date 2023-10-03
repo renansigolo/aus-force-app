@@ -22,10 +22,10 @@ export type RequestLeaveData = {
 }
 
 export default async function RequestLeavePage() {
-  const data = (await getCollectionQuery(
+  const data = await getCollectionQuery<RequestLeaveData>(
     "leaveRequests",
     orderBy("createdAt", "desc"),
-  )) as RequestLeaveData[]
+  )
 
   return (
     <PageWrapper>

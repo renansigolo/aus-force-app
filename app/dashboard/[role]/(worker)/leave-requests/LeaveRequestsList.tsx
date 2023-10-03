@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { twMerge } from "tailwind-merge"
 
-const statusStyles: any = {
+const statusStyles: { [key in string]: string } = {
   approved: "bg-green-100 text-green-800",
   pending: "bg-yellow-100 text-yellow-800",
   declined: "bg-red-100 text-red-800",

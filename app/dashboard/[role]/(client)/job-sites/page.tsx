@@ -26,7 +26,7 @@ export type JobSitesData = {
 type JobSitesPageProps = { searchParams: SearchParams }
 
 export default async function JobSitesPage({ searchParams }: JobSitesPageProps) {
-  const data = (await getCollectionQuery("jobSites", orderBy("siteName", "asc"))) as JobSitesData[]
+  const data = await getCollectionQuery<JobSitesData>("jobSites", orderBy("siteName", "asc"))
   const showModal = searchParams.showModal === "true"
 
   return (

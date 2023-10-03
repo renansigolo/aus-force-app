@@ -14,7 +14,7 @@ type RatesPageProps = { searchParams: SearchParams }
 
 export default async function RatesPage({ searchParams }: RatesPageProps) {
   const showModal = searchParams.showModal === "true"
-  const data = (await getCollectionQuery("clients", orderBy("name", "desc"))) as ClientData[]
+  const data = await getCollectionQuery<ClientData>("clients", orderBy("name", "desc"))
 
   return (
     <>

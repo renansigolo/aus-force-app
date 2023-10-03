@@ -5,7 +5,7 @@ import { SunIcon } from "@heroicons/react/24/outline"
 
 export async function Leaves() {
   const currentDate = new Date().toISOString().split("T")[0]
-  const data = (await getCollection("leaveRequests")) as RequestLeaveData[]
+  const data = await getCollection<RequestLeaveData>("leaveRequests")
   if (!data.length) return null
 
   const pastMonths = data.filter(

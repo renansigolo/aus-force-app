@@ -50,29 +50,7 @@ export const db = getFirestore(firebaseApp)
 // Storage
 export const storage = getStorage(firebaseApp)
 
-// export const listenToCollection = (collectionName: string, callback: (data: any[]) => void) => {
-//   const query = collection(db, collectionName)
-
-//   const unsubscribe = onSnapshot(query, (snapshot) => {
-//     const data: any[] = []
-//     snapshot.forEach((doc) => {
-//       data.push({ id: doc.id, ...doc.data() })
-//     })
-//     callback(data)
-//   })
-
-//   // Return an unsubscribe function to stop listening when needed
-//   return unsubscribe
-// }
-
-/** Gets a users/{uid} document with username */
-// export async function getUserDoc(uid: string) {
-//   const q = query(collection(db, "users"), where("uid", "==", uid), limit(1))
-//   const userDoc = (await getDocs(q)).docs[0]
-
-//   return userDoc
-// }
-
+// Get user doc
 export const getUserDoc = async (uid: string) => {
   const docRef = doc(db, `users/${uid}`)
   const docSnapshot = await getDoc(docRef)
@@ -80,50 +58,46 @@ export const getUserDoc = async (uid: string) => {
   return data
 }
 
-type FirestoreCollectionName = "users" | "leaveRequests" | "jobSites" | "jobRequests" | "clients"
+type CollectionId = "users" | "leaveRequests" | "jobSites" | "jobRequests" | "clients"
 
-export const getCollectionQuery = async (
-  collectionName: FirestoreCollectionName,
+export const getCollectionQuery = async <T>(
+  collectionId: CollectionId,
   orderByValue: QueryOrderByConstraint | QueryFieldFilterConstraint,
   limitTo?: number,
 ) => {
-  const ref = collection(db, collectionName)
+  const ref = collection(db, collectionId)
   const q = query(ref, orderByValue, limit(limitTo || 10))
   const data = (await getDocs(q)).docs.map(serializeDoc)
-  return data as any
+  return data as T[]
 }
 
-export const getCollection = async (collectionName: FirestoreCollectionName) => {
-  const ref = collection(db, collectionName)
-  const data = (await getDocs(ref)).docs.map(serializeDoc)
+export const getCollection = async <T>(collectionId: CollectionId) => {
+  const ref = collection(db, collectionId)
+  const data = (await getDocs(ref)).docs.map(serializeDoc) as T[]
   return data
 }
 
 // Create firebase CRUD helpers
-export const createDocument = async (collectionName: FirestoreCollectionName, data: object) => {
-  const ref = collection(db, collectionName)
+export const createDocument = async (collectionId: CollectionId, data: object) => {
+  const ref = collection(db, collectionId)
   const docRef = await addDoc(ref, trimFormValues({ createdAt: serverTimestamp(), ...data }))
   return docRef
 }
 
-export const readDocument = async (collectionName: FirestoreCollectionName, docId: string) => {
-  const ref = doc(db, collectionName, docId)
+export const readDocument = async (collectionId: CollectionId, docId: string) => {
+  const ref = doc(db, collectionId, docId)
   const docSnap = await getDoc(ref)
   return serializeDoc(docSnap)
 }
 
-export const updateDocument = async (
-  collectionName: FirestoreCollectionName,
-  docId: string,
-  data: object,
-) => {
-  const ref = doc(db, collectionName, docId)
+export const updateDocument = async (collectionId: CollectionId, docId: string, data: object) => {
+  const ref = doc(db, collectionId, docId)
   const response = await updateDoc(ref, data)
   return response
 }
 
-export const deleteDocument = async (collectionName: FirestoreCollectionName, docId: string) => {
-  const ref = doc(db, collectionName, docId)
+export const deleteDocument = async (collectionId: CollectionId, docId: string) => {
+  const ref = doc(db, collectionId, docId)
   const response = await deleteDoc(ref)
   return response
 }
