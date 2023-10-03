@@ -4,7 +4,7 @@ import { Disclosure } from "@headlessui/react"
 import { ChevronDownIcon, ChevronRightIcon } from "@heroicons/react/20/solid"
 import { ReactNode } from "react"
 
-type AccordionProps = {
+export type AccordionProps = {
   items: AccordionItem[]
 }
 
@@ -46,7 +46,7 @@ function AccordionItem({ title, actionButton, children }: AccordionItem) {
                 <span className="ml-2 text-base font-semibold leading-7">{title}</span>
               </span>
             </Disclosure.Button>
-            {actionButton}
+            <div className="flex-nowrap">{actionButton}</div>
           </dt>
 
           {/* Content */}
