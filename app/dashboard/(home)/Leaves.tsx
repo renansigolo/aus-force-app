@@ -33,7 +33,7 @@ export async function Leaves() {
     <div>
       <h2 className="heading-3 mb-3">Leaves</h2>
       <Card>
-        <div className="grid grid-cols-1 divide-y md:grid-cols-3 md:divide-x md:divide-y-0">
+        <div className="grid grid-cols-1 divide-y lg:grid-cols-3 lg:divide-x lg:divide-y-0">
           <LeaveList title="Past" items={pastMonths} />
           <LeaveList title="Today" items={today} />
           <LeaveList title="Upcoming" items={upcomingMonths} />
@@ -51,7 +51,11 @@ function LeaveList(props: LeaveListProps) {
   return (
     <div className="px-4 py-5 sm:p-6">
       <div className="flex justify-between text-lg font-semibold leading-8 text-gray-900">
-        <ul role="list" className="w-full divide-y divide-gray-100">
+        <ul
+          role="list"
+          className="w-full divide-y divide-gray-100"
+          style={{ overflowWrap: "anywhere" }}
+        >
           {props.title}
           {props.items.length === 0 ? (
             <EmptySlot />
@@ -66,8 +70,8 @@ function LeaveList(props: LeaveListProps) {
                     src={"/images/profile-placeholder.png"}
                     alt="User profile image"
                   />
-                  <div className="min-w-0 flex-auto">
-                    <p className="inline-flex align-middle text-sm font-semibold leading-6 text-gray-900">
+                  <div className="flex-wrap">
+                    <p className="text-sm font-semibold leading-6 text-gray-900">
                       {item.requestedBy}
                     </p>
                     <p className="mt-1 truncate text-xs leading-5 text-gray-500">
