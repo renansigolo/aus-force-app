@@ -47,7 +47,7 @@ type LeaveListProps = {
   title: string
   items: RequestLeaveData[]
 }
-function LeaveList(props: LeaveListProps) {
+async function LeaveList({ title, items }: LeaveListProps) {
   return (
     <div className="px-4 py-5 sm:p-6">
       <div className="flex justify-between text-lg font-semibold leading-8 text-gray-900">
@@ -56,11 +56,11 @@ function LeaveList(props: LeaveListProps) {
           className="w-full divide-y divide-gray-100"
           style={{ overflowWrap: "anywhere" }}
         >
-          {props.title}
-          {props.items.length === 0 ? (
+          {title}
+          {items.length === 0 ? (
             <EmptySlot />
           ) : (
-            props.items.map((item) => (
+            items.map((item) => (
               <li key={item.id} className="flex w-full justify-between gap-x-6 px-2 py-5">
                 <div className="flex gap-x-4">
                   <Image
