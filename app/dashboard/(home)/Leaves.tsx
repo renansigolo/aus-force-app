@@ -2,10 +2,11 @@ import { RequestLeaveData } from "@/app/dashboard/[role]/(worker)/leave-requests
 import { Card } from "@/components/Card"
 import { getCollection } from "@/lib/firebase"
 import { SunIcon } from "@heroicons/react/24/outline"
+import Image from "next/image"
 
 export async function Leaves() {
   const currentDate = new Date().toISOString().split("T")[0]
-  const data = (await getCollection("leaveRequests")) as RequestLeaveData[]
+  const data = await getCollection<RequestLeaveData>("leaveRequests")
   if (!data.length) return null
 
   const pastMonths = data.filter(
@@ -58,7 +59,9 @@ function LeaveList(props: LeaveListProps) {
             props.items.map((item) => (
               <li key={item.id} className="flex w-full justify-between gap-x-6 px-2 py-5">
                 <div className="flex gap-x-4">
-                  <img
+                  <Image
+                    width={48}
+                    height={48}
                     className="h-12 w-12 flex-none rounded-full bg-gray-50"
                     src={"/images/profile-placeholder.png"}
                     alt="User profile image"

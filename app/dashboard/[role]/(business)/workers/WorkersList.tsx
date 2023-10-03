@@ -178,65 +178,35 @@ function WorkersTable({ status, workers }: WorkersTableProps) {
           <div className="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-200">
               <thead>
-                <tr>
-                  <th
-                    className="bg-gray-50 px-6 py-3 text-left text-sm font-semibold text-gray-900"
-                    scope="col"
-                  >
+                <tr className="bg-gray-50 text-sm font-semibold text-gray-900">
+                  <th className="px-6 py-3 text-left" scope="col">
                     Name
                   </th>
-                  <th
-                    className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
-                    scope="col"
-                  >
+                  <th className="px-6 py-3 text-right" scope="col">
                     DOB
                   </th>
-                  {/* <th
-                    className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
-                    scope="col"
-                  >
+                  {/* <th className="px-6 py-3 text-right" scope="col">
                     Age
                   </th> */}
-                  <th
-                    className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
-                    scope="col"
-                  >
+                  <th className="px-6 py-3 text-right" scope="col">
                     Email
                   </th>
-                  <th
-                    className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
-                    scope="col"
-                  >
+                  <th className="px-6 py-3 text-right" scope="col">
                     Phone
                   </th>
-                  {/* <th
-                    className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
-                    scope="col"
-                  >
+                  {/* <th className="px-6 py-3 text-right" scope="col">
                     Rate
                   </th>
-                  <th
-                    className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
-                    scope="col"
-                  >
+                  <th className="px-6 py-3 text-right" scope="col">
                     Start Date
                   </th>
-                  <th
-                    className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
-                    scope="col"
-                  >
+                  <th className="px-6 py-3 text-right" scope="col">
                     Hours Worked
                   </th>
-                  <th
-                    className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
-                    scope="col"
-                  >
+                  <th className="px-6 py-3 text-right" scope="col">
                     Qualifications
                   </th> */}
-                  <th
-                    className="bg-gray-50 px-6 py-3 text-right text-sm font-semibold text-gray-900"
-                    scope="col"
-                  >
+                  <th className="px-6 py-3 text-right" scope="col">
                     Status
                   </th>
                 </tr>

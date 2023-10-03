@@ -4,7 +4,7 @@ import { DatabaseUser } from "@/app/dashboard/profile/page"
 import { updateDocument } from "@/lib/firebase"
 import Image from "next/image"
 import { useRouter, useSearchParams } from "next/navigation"
-import React from "react"
+import { MouseEvent } from "react"
 
 export type WorkerProfile = {
   id: string
@@ -18,12 +18,12 @@ type AllocateWorkerModalProps = {
   workers: DatabaseUser[]
 }
 
-export function AllocateWorkerModal({ workers }: AllocateWorkerModalProps) {
+export async function AllocateWorkerModal({ workers }: AllocateWorkerModalProps) {
   const router = useRouter()
   const searchParams = useSearchParams()
   const jobRequestId = searchParams.get("jobRequestId") as string
 
-  const allocateWorker = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const allocateWorker = (event: MouseEvent<HTMLButtonElement>) => {
     const selectedWorker = workers.find(
       (worker) => worker.displayName === event.currentTarget.dataset.name,
     )

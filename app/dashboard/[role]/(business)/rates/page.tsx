@@ -14,13 +14,13 @@ type RatesPageProps = { searchParams: SearchParams }
 
 export default async function RatesPage({ searchParams }: RatesPageProps) {
   const showModal = searchParams.showModal === "true"
-  const data = (await getCollectionQuery("clients", orderBy("name", "desc"))) as ClientData[]
+  const data = await getCollectionQuery<ClientData>("clients", orderBy("name", "desc"))
 
   return (
     <>
       <PageWrapper>
         <Role role="business">
-          <PageHeading title="Rates" buttonLabel="Add New Rates" />
+          <PageHeading title="Rates" />
 
           <div className="grid gap-4">
             {data.length === 0 ? <Empty title="rates" /> : <RatesList data={data} />}

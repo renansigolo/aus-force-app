@@ -7,10 +7,7 @@ import { getCollectionQuery } from "@/lib/firebase"
 import { where } from "firebase/firestore"
 
 export default async function WorkersPage() {
-  const workers = (await getCollectionQuery(
-    "users",
-    where("role", "==", "worker"),
-  )) as DatabaseUser[]
+  const workers = await getCollectionQuery<DatabaseUser>("users", where("role", "==", "worker"))
 
   return (
     <PageWrapper>

@@ -40,7 +40,7 @@ const tableData = [
 ]
 
 export async function ClientsList() {
-  const data = (await getCollectionQuery("clients", orderBy("name", "desc"))) as ClientData[]
+  const data = await getCollectionQuery<ClientData>("clients", orderBy("name", "desc"))
 
   return data.length > 0 ? (
     <div className="grid grid-cols-1 gap-4">

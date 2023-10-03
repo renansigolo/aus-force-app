@@ -7,7 +7,7 @@ import Image from "next/image"
 
 export async function Birthdays() {
   const currentDate = new Date().toISOString().split("T")[0]
-  const data: DatabaseUser[] = await getCollectionQuery("users", where("dob", "<", currentDate), 9)
+  const data = await getCollectionQuery<DatabaseUser>("users", where("dob", "<", currentDate), 9)
   if (!data.length) return null
 
   const pastMonths = data.filter((user) => user.dob.split("-")[1] < currentDate.split("-")[1])

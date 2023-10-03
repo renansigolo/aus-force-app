@@ -20,10 +20,10 @@ type StaffPageProps = { searchParams: SearchParams }
 export default async function StaffPage({ searchParams }: StaffPageProps) {
   const showModal = searchParams.showModal === "true"
 
-  const jobSitesData = (await getCollectionQuery(
+  const jobSitesData = await getCollectionQuery<JobSitesData>(
     "jobSites",
     orderBy("siteName", "desc"),
-  )) as JobSitesData[]
+  )
 
   return (
     <>

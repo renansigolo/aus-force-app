@@ -30,15 +30,15 @@ export type JobRequest = {
 type JobRequestsPageProps = { searchParams: SearchParams }
 
 export default async function JobRequestsPage({ searchParams }: JobRequestsPageProps) {
-  const jobRequestsData = (await getCollectionQuery(
+  const jobRequestsData = await getCollectionQuery<JobRequest>(
     "jobRequests",
     orderBy("createdAt", "desc"),
-  )) as JobRequest[]
+  )
 
-  const jobSitesData = (await getCollectionQuery(
+  const jobSitesData = await getCollectionQuery<JobSitesData>(
     "jobSites",
     orderBy("siteName", "desc"),
-  )) as JobSitesData[]
+  )
 
   const showModal = searchParams.showModal === "true"
 

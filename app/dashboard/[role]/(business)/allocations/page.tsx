@@ -14,15 +14,8 @@ import { orderBy, where } from "firebase/firestore"
 type AllocationsPageProps = { searchParams: SearchParams }
 export default async function AllocationsPage({ searchParams }: AllocationsPageProps) {
   const showModal = searchParams.showModal === "true"
-  const data = (await getCollectionQuery(
-    "jobRequests",
-    orderBy("createdAt", "desc"),
-  )) as JobRequest[]
-
-  const workers = (await getCollectionQuery(
-    "users",
-    where("role", "==", "worker"),
-  )) as DatabaseUser[]
+  const data = await getCollectionQuery<JobRequest>("jobRequests", orderBy("createdAt", "desc"))
+  const workers = await getCollectionQuery<DatabaseUser>("users", where("role", "==", "worker"))
 
   return (
     <>
