@@ -3,9 +3,9 @@
 import { useUserContext } from "@/app/UserContext"
 import { Birthdays } from "@/app/dashboard/(home)/Birthdays"
 import { Leaves } from "@/app/dashboard/(home)/Leaves"
-import { Overview } from "@/app/dashboard/(home)/Overview"
 import { PendingApprovals } from "@/app/dashboard/(home)/PendingApprovals"
-import { ShiftApprovalModal } from "@/app/dashboard/(home)/ShiftApprovalModal"
+import { ShiftReviewModal } from "@/app/dashboard/(home)/ShiftReviewModal"
+import { ShiftsOverview } from "@/app/dashboard/(home)/ShiftsOverview"
 import { WeeklyActivity } from "@/app/dashboard/(home)/WeeklyActivity"
 import { WelcomePanel } from "@/app/dashboard/(home)/WelcomePanel"
 import { Container } from "@/components/Container"
@@ -27,7 +27,7 @@ export default function DashboardPage() {
 
           {(user?.role === "worker" || user?.role === "admin") && (
             <>
-              <Overview />
+              <ShiftsOverview />
               <WeeklyActivity />
             </>
           )}
@@ -37,8 +37,8 @@ export default function DashboardPage() {
         </section>
       </Container>
 
-      <ModalWrapper title="Approve Shift" showModal={showModal}>
-        <ShiftApprovalModal />
+      <ModalWrapper title="Review Shift" showModal={showModal}>
+        <ShiftReviewModal />
       </ModalWrapper>
     </>
   )

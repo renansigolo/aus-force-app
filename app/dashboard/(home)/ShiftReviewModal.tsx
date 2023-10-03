@@ -1,8 +1,9 @@
 import { Button } from "@/components/Button"
+import { FormEvent } from "react"
 import toast from "react-hot-toast"
 
-export function ShiftApprovalModal() {
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+export function ShiftReviewModal() {
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     toast.error("Not implemented yet")
   }
