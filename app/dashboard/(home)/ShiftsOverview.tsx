@@ -46,12 +46,12 @@ const shifts: Shift[] = []
 
 export function ShiftsOverview() {
   return (
-    <div>
-      <Role role="worker">
+    <Role role="worker">
+      <div>
         <h2 className="heading-3 mb-3">Shifts Overview</h2>
         {shifts.length === 0 ? <Empty title="shift" /> : <ShiftsList shifts={shifts} />}
-      </Role>
-    </div>
+      </div>
+    </Role>
   )
 }
 

@@ -1,3 +1,5 @@
+"use client"
+
 import { Button } from "@/components/Button"
 import { FormEvent } from "react"
 import toast from "react-hot-toast"

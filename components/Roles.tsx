@@ -1,3 +1,6 @@
+"use client"
+
+import { useUserContext } from "@/app/UserContext"
 import { Badge } from "@/components/Badge"
 import { ReactNode } from "react"
 
@@ -16,6 +19,9 @@ export function Role({ role, children }: RoleProps) {
   if (role === "worker") roleClasses = "ring-orange-500"
   if (role === "client") roleClasses = "ring-blue-500"
   if (role === "business") roleClasses = "ring-pink-500"
+
+  const { user } = useUserContext()
+  if (user?.role !== "admin" && user?.role !== role) return null
 
   return (
     <>

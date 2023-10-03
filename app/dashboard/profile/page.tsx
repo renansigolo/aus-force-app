@@ -2,9 +2,11 @@
 
 import { useUserContext } from "@/app/UserContext"
 import { BankForm } from "@/app/dashboard/profile/BankForm"
+import { CreditCardForm } from "@/app/dashboard/profile/CreditCardForm"
 import { PersonalDocumentsForm } from "@/app/dashboard/profile/PersonalDocumentsForm"
 import { ProfileForm } from "@/app/dashboard/profile/ProfileForm"
 import { Divider } from "@/components/Divider"
+import { Role } from "@/components/Roles"
 import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
 
@@ -63,6 +65,15 @@ export default function ProfilePage() {
         <Heading title="Bank Details" description="Your bank details" />
         <BankForm user={data} />
       </section>
+
+      <Role role="business">
+        <Divider />
+
+        <section className={styleSection}>
+          <Heading title="Credit Card Details" description="Your credit card details" />
+          <CreditCardForm user={data} />
+        </section>
+      </Role>
 
       <Divider />
 

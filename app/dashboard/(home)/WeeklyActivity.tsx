@@ -19,8 +19,8 @@ const cards = [
 
 export function WeeklyActivity() {
   return (
-    <div>
-      <Role role="worker">
+    <Role role="worker">
+      <div>
         <h2 className="heading-3">Weekly Activity</h2>
         <div className="mt-3 grid grid-cols-1 gap-5 sm:grid-cols-2">
           {cards.map((card) => (
@@ -53,7 +53,7 @@ export function WeeklyActivity() {
             </div>
           ))}
         </div>
-      </Role>
-    </div>
+      </div>
+    </Role>
   )
 }

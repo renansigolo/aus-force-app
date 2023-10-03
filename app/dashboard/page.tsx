@@ -1,6 +1,3 @@
-"use client"
-
-import { useUserContext } from "@/app/UserContext"
 import { Birthdays } from "@/app/dashboard/(home)/Birthdays"
 import { Leaves } from "@/app/dashboard/(home)/Leaves"
 import { PendingApprovals } from "@/app/dashboard/(home)/PendingApprovals"
@@ -10,12 +7,12 @@ import { WeeklyActivity } from "@/app/dashboard/(home)/WeeklyActivity"
 import { WelcomePanel } from "@/app/dashboard/(home)/WelcomePanel"
 import { Container } from "@/components/Container"
 import { ModalWrapper } from "@/components/ModalWrapper"
-import { useSearchParams } from "next/navigation"
+import { SearchParams } from "@/lib/schemas"
 
-export default function DashboardPage() {
-  const { user } = useUserContext()
-  const searchParams = useSearchParams()
-  const showModal = searchParams.get("showModal") === "true"
+type DashboardPageProps = { searchParams: SearchParams }
+export default function DashboardPage({ searchParams }: DashboardPageProps) {
+  // const searchParams = useSearchParams()
+  const showModal = searchParams.showModal === "true"
 
   return (
     <>
@@ -23,16 +20,14 @@ export default function DashboardPage() {
         <section className="grid gap-y-8 pb-8">
           <WelcomePanel />
 
-          {(user?.role === "client" || user?.role === "admin") && <PendingApprovals />}
+          <PendingApprovals />
 
-          {(user?.role === "worker" || user?.role === "admin") && (
-            <>
-              <ShiftsOverview />
-              <WeeklyActivity />
-            </>
-          )}
+          <ShiftsOverview />
+
+          <WeeklyActivity />
 
           <Birthdays />
+
           <Leaves />
         </section>
       </Container>

@@ -14,15 +14,15 @@ const accordionItems: AccordionProps["items"] = []
 
 export function PendingApprovals() {
   return (
-    <div>
-      <Role role="client">
+    <Role role="client">
+      <div>
         <h2 className="heading-3 mb-3">Pending Approvals</h2>
         {accordionItems.length === 0 ? (
           <Empty title="shift" />
         ) : (
           <PendingApprovalsList items={accordionItems} />
         )}
-      </Role>
-    </div>
+      </div>
+    </Role>
   )
 }
