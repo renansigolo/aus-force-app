@@ -1,9 +1,11 @@
 import { AllocateWorkerModal } from "@/app/dashboard/[role]/(business)/allocations/AllocateWorkerModal"
 import { AllocationsList } from "@/app/dashboard/[role]/(business)/allocations/AllocationsList"
+import { RatesForm } from "@/app/dashboard/[role]/(business)/rates/RatesForm"
 import { JobRequest } from "@/app/dashboard/[role]/(client)/job-requests/page"
 import { DatabaseUser } from "@/app/dashboard/profile/page"
 import { Empty } from "@/components/Empty"
 import { ModalWrapper } from "@/components/ModalWrapper"
+import { ModalWrapperRates } from "@/components/ModalWrapperRates"
 import { Role } from "@/components/Roles"
 import { PageHeading } from "@/components/dashboard/PageHeading"
 import { PageWrapper } from "@/components/dashboard/PageWrapper"
@@ -14,6 +16,7 @@ import { orderBy, where } from "firebase/firestore"
 type AllocationsPageProps = { searchParams: SearchParams }
 export default async function AllocationsPage({ searchParams }: AllocationsPageProps) {
   const showModal = searchParams.showModal === "true"
+  const showModalRates = searchParams.showModalRates === "true"
   const data = await getCollectionQuery<JobRequest>("jobRequests", orderBy("createdAt", "desc"))
   const workers = await getCollectionQuery<DatabaseUser>("users", where("role", "==", "worker"))
 
@@ -29,6 +32,10 @@ export default async function AllocationsPage({ searchParams }: AllocationsPageP
       <ModalWrapper title="Allocate Worker" showModal={showModal}>
         <AllocateWorkerModal workers={workers} />
       </ModalWrapper>
+
+      <ModalWrapperRates title="Allocate Rates" showModal={showModalRates}>
+        <RatesForm />
+      </ModalWrapperRates>
     </>
   )
 }

@@ -1,7 +1,10 @@
 "use client"
 
+import { Button } from "@/components/Button"
+import { useRouter } from "next/navigation"
 import { Fragment, useState } from "react"
 import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 
 const hoursWorkedData = [
   {
@@ -17,13 +20,19 @@ const hoursWorkedData = [
 ]
 
 export function RatesForm() {
+  const router = useRouter()
   const {
-    register,
+    handleSubmit,
     formState: { isSubmitting, isValid },
   } = useForm()
 
+  const onSubmit = () => {
+    router.push("?showModalRates=false")
+    toast.error("Rates not saved. This is just a demo.")
+  }
+
   return (
-    <form className="space-y-8 divide-y divide-gray-200">
+    <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit(onSubmit)}>
       <div className="mt-6 grid gap-4">
         {/* <div>
           <label htmlFor="clientName">Client Name</label>
@@ -70,6 +79,18 @@ export function RatesForm() {
           Cancel
         </Button>
       </div> */}
+      <div className="pt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+        <button
+          type="submit"
+          className="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+          disabled={isSubmitting || !isValid}
+        >
+          Submit
+        </button>
+        <Button href="?showModalRates=false" className="btn-secondary" disabled={isSubmitting}>
+          Cancel
+        </Button>
+      </div>
     </form>
   )
 }

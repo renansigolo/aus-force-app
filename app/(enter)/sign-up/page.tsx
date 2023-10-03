@@ -124,6 +124,9 @@ export default function SignUpPage() {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
+          {/* <BusinessForm /> */}
+          {/* <WorkerForm /> */}
+
           {/* Profile Details */}
           <div>
             <FormSectionHeading

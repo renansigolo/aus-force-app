@@ -33,15 +33,7 @@ export function AllocationsList({ data }: AllocationsListProps) {
             ) : (
               <>
                 {item.status === "pendingRatesAllocation" ? (
-                  <Button
-                    className="btn-secondary"
-                    onClick={() =>
-                      NiceModal.show(Modal, {
-                        title: "Allocate Rates",
-                        children: <RatesForm />,
-                      })
-                    }
-                  >
+                  <Button className="btn-secondary" href={"?showModalRates=true"}>
                     <ClockIcon className="h-5 w-5" />
                     Allocate Rates
                   </Button>

@@ -52,6 +52,31 @@ export function BusinessForm() {
             title="Plan Details"
             description="The details for the plan selected"
           />
+
+          <div className="flex justify-center">
+            <RadioGroup
+              value={frequency}
+              onChange={setFrequency}
+              className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200"
+            >
+              <RadioGroup.Label className="sr-only">Payment frequency</RadioGroup.Label>
+              {frequencies.map((option) => (
+                <RadioGroup.Option
+                  key={option.value}
+                  value={option}
+                  className={({ checked }) =>
+                    twMerge(
+                      checked ? "bg-indigo-600 text-white" : "text-gray-500",
+                      "cursor-pointer rounded-full px-2.5 py-1",
+                    )
+                  }
+                >
+                  <span>{option.label}</span>
+                </RadioGroup.Option>
+              ))}
+            </RadioGroup>
+          </div>
+
           <RadioGroup value={selected} onChange={setSelected}>
             <RadioGroup.Label className="sr-only">Pricing plans</RadioGroup.Label>
             <div className="relative -space-y-px rounded-md bg-white">
@@ -123,33 +148,6 @@ export function BusinessForm() {
                 </RadioGroup.Option>
               ))}
             </div>
-          </RadioGroup>
-        </div>
-
-        <p className="mb-3 mt-6 block text-sm font-medium leading-6 text-gray-900">
-          Payment frequency
-        </p>
-        <div className="flex">
-          <RadioGroup
-            value={frequency}
-            onChange={setFrequency}
-            className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200"
-          >
-            <RadioGroup.Label className="sr-only">Payment frequency</RadioGroup.Label>
-            {frequencies.map((option) => (
-              <RadioGroup.Option
-                key={option.value}
-                value={option}
-                className={({ checked }) =>
-                  twMerge(
-                    checked ? "bg-indigo-600 text-white" : "text-gray-500",
-                    "cursor-pointer rounded-full px-2.5 py-1",
-                  )
-                }
-              >
-                <span>{option.label}</span>
-              </RadioGroup.Option>
-            ))}
           </RadioGroup>
         </div>
 
