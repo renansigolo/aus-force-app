@@ -1,7 +1,15 @@
 "use client"
 
 import { FormSectionHeading } from "@/app/(enter)/sign-up/FormSectionHeading"
+import { Button } from "@/components/Button"
+import { CardFooter } from "@/components/Card"
+import { updateDocument } from "@/lib/firebase"
+import { showErrorMessage } from "@/lib/helpers"
+import { RegisterClientFormDefaultValues, TRegisterClientFormDefaultValues } from "@/lib/schemas"
+import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
+import { isDirty } from "zod"
 
 const clientForm = [
   {
@@ -38,12 +46,26 @@ const clientForm = [
   },
 ]
 
-export function ClientForm() {
-  const { register } = useForm()
+export function ClientForm({ uid }: { uid: string }) {
+  const router = useRouter()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<TRegisterClientFormDefaultValues>({ defaultValues: RegisterClientFormDefaultValues })
+
+  const onSubmit = async (values: TRegisterClientFormDefaultValues) => {
+    try {
+      await updateDocument("users", uid, values)
+      router.push("/dashboard")
+      toast.success("Client details submitted successfully")
+    } catch (error) {
+      showErrorMessage(error)
+    }
+  }
 
   return (
-    <>
-      {/* Business Information */}
+    <form onSubmit={handleSubmit(onSubmit)}>
       {/* <Role role="client"> */}
       <FormSectionHeading
         title="Business Information"
@@ -64,7 +86,7 @@ export function ClientForm() {
               autoComplete={field.autoComplete}
               {...register(field.id as any, { required: field.required })}
             />
-            {/* <FormInputError message={errors[field.id] || ""} /> */}
+            {/* <FormInputError message={errors?[field.id] && undefined : ""} /> */}
           </div>
         ))}
 
@@ -76,13 +98,8 @@ export function ClientForm() {
         </div>
 
         <div className="sm:col-span-6">
-          <label htmlFor="streetAddress">Street address</label>
-          <input
-            id="streetAddress"
-            type="text"
-            {...register("streetAddress")}
-            autoComplete="street-address"
-          />
+          <label htmlFor="street">Street address</label>
+          <input id="street" type="text" {...register("street")} autoComplete="street-address" />
         </div>
 
         <div className="sm:col-span-2">
@@ -91,21 +108,21 @@ export function ClientForm() {
         </div>
 
         <div className="sm:col-span-2">
-          <label htmlFor="region">State / Province</label>
-          <input id="region" {...register("region")} type="text" autoComplete="address-level1" />
+          <label htmlFor="state">State / Province</label>
+          <input id="state" {...register("state")} type="text" autoComplete="address-level1" />
         </div>
 
         <div className="sm:col-span-2">
-          <label htmlFor="postalCode">ZIP / Postal code</label>
-          <input
-            id="postalCode"
-            {...register("postalCode")}
-            type="text"
-            autoComplete="postal-code"
-          />
+          <label htmlFor="postcode">ZIP / Postcode</label>
+          <input id="postcode" {...register("postcode")} type="text" autoComplete="postal-code" />
         </div>
       </div>
       {/* </Role> */}
-    </>
+      <CardFooter>
+        <Button disabled={isSubmitting || !isDirty}>
+          {isSubmitting ? "Registering..." : "Register"}
+        </Button>
+      </CardFooter>
+    </form>
   )
 }

@@ -1,10 +1,23 @@
 "use client"
 
 import { FormSectionHeading } from "@/app/(enter)/sign-up/FormSectionHeading"
+import { Button } from "@/components/Button"
+import { CardFooter } from "@/components/Card"
 import { Divider } from "@/components/Divider"
+import { FormInputError } from "@/components/FormInputError"
+import { updateDocument } from "@/lib/firebase"
+import { showErrorMessage } from "@/lib/helpers"
+import {
+  RegisterBusinessFormDefaultValues,
+  TRegisterBusinessFormDefaultValues,
+} from "@/lib/schemas"
 import { RadioGroup } from "@headlessui/react"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
+import { useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 import { twMerge } from "tailwind-merge"
+import { isDirty } from "zod"
 
 const frequencies = [
   { value: "monthly", label: "Monthly", priceSuffix: "/month" },
@@ -13,38 +26,63 @@ const frequencies = [
 
 const plans = [
   {
+    id: "basic",
     name: "Basic",
     priceMonthly: 100,
     priceYearly: 1000,
-    limit: "Up to 5 owener's and 10 client's",
+    limit: "Up to 5 owner's and 10 client's",
   },
   {
+    id: "intermediate",
     name: "Intermediate",
     priceMonthly: 150,
     priceYearly: 1500,
-    limit: "Up to 10 owener's and 20 client's",
+    limit: "Up to 10 owner's and 20 client's",
   },
   {
+    id: "advanced",
     name: "Advanced",
     priceMonthly: 200,
     priceYearly: 2000,
-    limit: "Up to 20 owener's and 40 client's",
+    limit: "Up to 20 owner's and 40 client's",
   },
 
   {
+    id: "ultimate",
     name: "Ultimate",
     priceMonthly: 400,
     priceYearly: 4000,
-    limit: "Unlimited owener's and client's",
+    limit: "Unlimited owner's and client's",
   },
 ]
 
-export function BusinessForm() {
+export function BusinessForm({ uid }: { uid: string }) {
   const [selected, setSelected] = useState(plans[0])
   const [frequency, setFrequency] = useState(frequencies[0])
 
+  const router = useRouter()
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<TRegisterBusinessFormDefaultValues>({
+    defaultValues: RegisterBusinessFormDefaultValues,
+  })
+
+  const onSubmit = async (values: TRegisterBusinessFormDefaultValues) => {
+    console.log("🚀 ~ onSubmit ~ values:", values)
+    try {
+      await updateDocument("users", uid, values)
+      router.push("/dashboard")
+      toast.success("Business details submitted successfully")
+    } catch (error) {
+      showErrorMessage(error)
+    }
+  }
+
   return (
-    <>
+    <form onSubmit={handleSubmit(onSubmit)}>
       {/* Plan Details */}
       {/* <Role role="business"> */}
       <div className="grid gap-4">
@@ -53,7 +91,10 @@ export function BusinessForm() {
         <div className="flex justify-center">
           <RadioGroup
             value={frequency}
-            onChange={setFrequency}
+            onChange={(item) => {
+              setFrequency(item)
+              setValue("planFrequency", item.value)
+            }}
             className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200"
           >
             <RadioGroup.Label className="sr-only">Payment frequency</RadioGroup.Label>
@@ -74,7 +115,13 @@ export function BusinessForm() {
           </RadioGroup>
         </div>
 
-        <RadioGroup value={selected} onChange={setSelected}>
+        <RadioGroup
+          value={selected}
+          onChange={(item) => {
+            setSelected(item)
+            setValue("planId", item.id)
+          }}
+        >
           <RadioGroup.Label className="sr-only">Pricing plans</RadioGroup.Label>
           <div className="relative -space-y-px rounded-md bg-white">
             {plans.map((plan, planIdx) => (
@@ -157,12 +204,12 @@ export function BusinessForm() {
             <input
               id="cardHolder"
               type="text"
-              // disabled={isSubmitting}
+              disabled={isSubmitting}
               placeholder="Full name on card"
               autoComplete="cc-name"
-              // {...register("cardName", { required: "Card holder name is required" })}
+              {...register("cardName", { required: "Card holder name is required" })}
             />
-            {/* <FormInputError message={errors.cardName?.message} /> */}
+            <FormInputError message={errors.cardName?.message} />
           </div>
 
           <div className="col-span-full">
@@ -170,12 +217,12 @@ export function BusinessForm() {
             <input
               id="cardNumber"
               type="text"
-              // disabled={isSubmitting}
+              disabled={isSubmitting}
               placeholder="1234 1234 1234 1234"
               autoComplete="cc-number"
-              // {...register("cardNumber", { required: "Card number is required" })}
+              {...register("cardNumber", { required: "Card number is required" })}
             />
-            {/* <FormInputError message={errors.cardNumber?.message} /> */}
+            <FormInputError message={errors.cardNumber?.message} />
           </div>
 
           <div className="sm:col-span-3">
@@ -183,19 +230,19 @@ export function BusinessForm() {
             <input
               id="cardExpire"
               type="text"
-              // disabled={isSubmitting}
+              disabled={isSubmitting}
               placeholder="MM/YY"
               autoComplete="cc-exp"
-              // {...register("cardExpire", {
-              //   required: "Expire date is required",
-              //   // must follow the format MM/YY
-              //   pattern: {
-              //     value: /^(0[1-9]|1[0-2])\/?([0-9]{2})$/,
-              //     message: "Expire date must follow the format MM/YY",
-              //   },
-              // })}
+              {...register("cardExpire", {
+                required: "Expire date is required",
+                // must follow the format MM/YY
+                pattern: {
+                  value: /^(0[1-9]|1[0-2])\/?([0-9]{2})$/,
+                  message: "Expire date must follow the format MM/YY",
+                },
+              })}
             />
-            {/* <FormInputError message={errors.cardExpire?.message} /> */}
+            <FormInputError message={errors.cardExpire?.message} />
           </div>
 
           <div className="sm:col-span-3">
@@ -203,44 +250,17 @@ export function BusinessForm() {
             <input
               id="cardCvc"
               type="number"
-              // disabled={isSubmitting}
+              disabled={isSubmitting}
               placeholder="CVC"
               autoComplete="cc-csc"
-              // {...register("cardCvc", {
-              //   required: "CVC number is required",
-              //   valueAsNumber: true,
-              //   validate: (value) => value.toString().length === 3 || "CVC must be 3 digits",
-              // })}
+              {...register("cardCvc", {
+                required: "CVC number is required",
+                valueAsNumber: true,
+                validate: (value) => value?.toString().length === 3 || "CVC must be 3 digits",
+              })}
             />
-            {/* <FormInputError message={errors.cardCvc?.message} /> */}
+            <FormInputError message={errors.cardCvc?.message} />
           </div>
-
-          {/* <div className="flex gap-2">
-              <div className="w-1/2 min-w-0 flex-1">
-                <label htmlFor="card-expiration-date" className="sr-only">
-                  Expiration date
-                </label>
-                <input
-                  type="text"
-                  name="card-expiration-date"
-                  id="card-expiration-date"
-                  className="relative block w-full rounded-none rounded-bl-md border-0 bg-transparent py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="MM / YY"
-                />
-              </div>
-              <div className="min-w-0 flex-1">
-                <label htmlFor="card-cvc" className="sr-only">
-                  CVC
-                </label>
-                <input
-                  type="text"
-                  name="card-cvc"
-                  id="card-cvc"
-                  className="relative block w-full rounded-none rounded-br-md border-0 bg-transparent py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                  placeholder="CVC"
-                />
-              </div>
-            </div> */}
         </div>
       </div>
 
@@ -259,6 +279,12 @@ export function BusinessForm() {
         </div>
       </div>
       {/* </Role> */}
-    </>
+
+      <CardFooter>
+        <Button disabled={isSubmitting || !isDirty}>
+          {isSubmitting ? "Registering..." : "Register"}
+        </Button>
+      </CardFooter>
+    </form>
   )
 }

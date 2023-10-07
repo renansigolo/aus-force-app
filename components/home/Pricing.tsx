@@ -19,7 +19,7 @@ const tiers = [
     href: "#",
     price: { monthly: "$100", annually: "$1000" },
     description: "The essentials to provide your best work for clients.",
-    features: ["5 owener's accounts", "Up to 10 client's accounts", "Basic app support"],
+    features: ["5 owner's accounts", "Up to 10 client's accounts", "Basic app support"],
     mostPopular: false,
   },
   {
@@ -28,7 +28,7 @@ const tiers = [
     href: "#",
     price: { monthly: "$150", annually: "$1500" },
     description: "The essentials to provide your best work for clients.",
-    features: ["10 owener's accounts", "Up to 20 client's accounts", "Basic app support"],
+    features: ["10 owner's accounts", "Up to 20 client's accounts", "Basic app support"],
     mostPopular: false,
   },
   {
@@ -37,7 +37,7 @@ const tiers = [
     href: "#",
     price: { monthly: "$200", annually: "$2000" },
     description: "A plan that scales with your rapidly growing business.",
-    features: ["20 owener's accounts", "Up to 40 client's accounts", "Advanced app support"],
+    features: ["20 owner's accounts", "Up to 40 client's accounts", "Advanced app support"],
     mostPopular: true,
   },
   {
@@ -47,7 +47,7 @@ const tiers = [
     price: { monthly: "$400", annually: "$4000" } as any,
     description: "Dedicated support and infrastructure for your company.",
     features: [
-      "Unlimited owener's accounts",
+      "Unlimited owner's accounts",
       "Unlimited client's accounts",
       "Advanced app support",
       "Dedicated app support response time",

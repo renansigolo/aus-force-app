@@ -35,11 +35,19 @@ export const RegisterFormDefaultValues = {
   lastName: "",
   phoneNumber: "",
   dob: "",
-  // jobTitle: "",
   profileImageFile: null,
   passportNumber: "",
   passportIssued: "",
   passportExpiry: "",
+  passportImageFile: null,
+  driverLicenseNumber: "",
+  driverLicenseIssued: "",
+  driverLicenseExpiry: "",
+  driverLicenseImageFile: null,
+  identificationNumber: "",
+  identificationIssued: "",
+  identificationExpiry: "",
+  identificationImageFile: null,
   email: "",
   password: "",
   confirmPassword: "",
@@ -49,7 +57,6 @@ export type TRegisterFormSchema = {
   firstName: string
   lastName: string
   phoneNumber: string
-  // jobTitle: string
   dob: string
   passportNumber?: string
   passportIssued?: string
@@ -67,4 +74,64 @@ export type TRegisterFormSchema = {
   newPassword: string
   confirmPassword: string
   signatureFile: Blob | null
+}
+
+export const RegisterBusinessFormDefaultValues = {
+  cardName: "",
+  cardNumber: "",
+  cardExpire: "",
+  cardCvc: undefined,
+  planId: "basic",
+  planFrequency: "montlhy",
+}
+export type TRegisterBusinessFormDefaultValues = {
+  cardName: string
+  cardNumber: string
+  cardExpire: string
+  cardCvc: number | undefined
+  planId: string
+  planFrequency: string
+}
+
+export const RegisterClientFormDefaultValues = {
+  legalName: "",
+  tradingName: "",
+  abn: undefined,
+  acn: undefined,
+  country: "",
+  state: "",
+  city: "",
+  street: "",
+  postcode: "",
+}
+export type TRegisterClientFormDefaultValues = {
+  legalName: string
+  tradingName: string
+  abn: number | undefined
+  acn: number | undefined
+  country: string
+  state: string
+  city: string
+  street: string
+  postcode: string
+}
+
+export const RegisterWorkerFormDefaultValues = {
+  // qualifications: [],
+}
+export type TRegisterWorkerFormDefaultValues = DocumentIds & {
+  qualifications: string[]
+  whiteCardNumber: string
+  whiteCardIssueDate: string
+  whiteCardImageFile: FileList | null
+}
+type DocumentIds = {
+  [key: string]: {
+    name: string
+    number: string
+    category: string
+    issuedAt: string
+    expireAt: string
+    imageFile: FileList | null
+  }
 }
