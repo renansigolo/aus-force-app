@@ -28,11 +28,11 @@ export function CreditCardForm({ user }: CreditCardFormValues) {
     formState: { errors, isSubmitting },
   } = useForm<CreditCardValues>({
     defaultValues: {
-      ...user,
       cardName: "",
       cardNumber: "",
       cardExpire: "",
-      cardCvc: 0,
+      cardCvc: undefined,
+      ...user,
     },
   })
 
@@ -50,12 +50,14 @@ export function CreditCardForm({ user }: CreditCardFormValues) {
     <form className="md:col-span-2" onSubmit={handleSubmit(onSubmit)}>
       <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-xl sm:grid-cols-6">
         <div className="col-span-full">
-          <label htmlFor="cardName">Card name</label>
+          <label htmlFor="cardName">Cardholder name</label>
           <input
-            id="cardName"
+            id="cardHolder"
             type="text"
             disabled={isSubmitting}
-            {...register("cardName", { required: "Credit card name is required" })}
+            placeholder="Full name on card"
+            autoComplete="cc-name"
+            {...register("cardName", { required: "Card holder name is required" })}
           />
           <FormInputError message={errors.cardName?.message} />
         </div>
@@ -66,35 +68,45 @@ export function CreditCardForm({ user }: CreditCardFormValues) {
             id="cardNumber"
             type="text"
             disabled={isSubmitting}
+            placeholder="1234 1234 1234 1234"
+            autoComplete="cc-number"
             {...register("cardNumber", { required: "Card number is required" })}
           />
           <FormInputError message={errors.cardNumber?.message} />
         </div>
 
         <div className="sm:col-span-3">
-          <label htmlFor="cardExpire">BSB</label>
+          <label htmlFor="cardExpire">Card Expire</label>
           <input
             id="cardExpire"
-            type="number"
+            type="text"
             disabled={isSubmitting}
+            placeholder="MM/YY"
+            autoComplete="cc-exp"
             {...register("cardExpire", {
               required: "Expire date is required",
+              // must follow the format MM/YY
+              pattern: {
+                value: /^(0[1-9]|1[0-2])\/?([0-9]{2})$/,
+                message: "Expire date must follow the format MM/YY",
+              },
             })}
           />
           <FormInputError message={errors.cardExpire?.message} />
         </div>
 
         <div className="sm:col-span-3">
-          <label htmlFor="cardCvc">Account number</label>
+          <label htmlFor="cardCvc">CVC</label>
           <input
             id="cardCvc"
             type="number"
             disabled={isSubmitting}
+            placeholder="CVC"
+            autoComplete="cc-csc"
             {...register("cardCvc", {
               required: "CVC number is required",
               valueAsNumber: true,
-              validate: (value) =>
-                value.toString().length === 3 || "Account number must be 3 digits",
+              validate: (value) => value.toString().length === 3 || "CVC must be 3 digits",
             })}
           />
           <FormInputError message={errors.cardCvc?.message} />

@@ -124,9 +124,6 @@ export default function SignUpPage() {
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          {/* <BusinessForm /> */}
-          {/* <WorkerForm /> */}
-
           {/* Profile Details */}
           <div>
             <FormSectionHeading
@@ -272,10 +269,6 @@ export default function SignUpPage() {
             </dl>
           </div>
 
-          {/* <ClientForm />
-          <WorkerForm />
-          <BusinessForm /> */}
-
           <Divider />
 
           {/* Account Details */}
@@ -350,6 +343,12 @@ export default function SignUpPage() {
             />
             <SignatureForm setValue={setValue} />
           </div>
+
+          {/* <Divider />
+          <BusinessForm /> */}
+
+          {/* <Divider />
+          <ClientForm /> */}
         </div>
 
         <div className="flex justify-end pt-5">
