@@ -3,7 +3,12 @@
   "version": "0.3.6",
   "private": true,
   "homepage": "https://aus-force-app.vercel.app",
+  "workspaces": [
+    ".react-email"
+  ],
   "scripts": {
+    "email": "email dev",
+    "export": "email export",
     "build": "next build",
     "clean": "rm -rf .next node_modules package-lock.json next-env.d.ts",
     "dev": "next dev",
@@ -23,15 +28,18 @@
     "@heroicons/react": "2.0.18",
     "@hookform/error-message": "2.0.1",
     "@hookform/resolvers": "3.3.1",
+    "@react-email/components": "0.0.7",
     "@tailwindcss/forms": "0.5.6",
     "firebase": "10.4.0",
     "next": "13.5.4",
     "next-sitemap": "4.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-email": "1.9.5",
     "react-hook-form": "7.47.0",
     "react-hot-toast": "2.4.1",
     "react-signature-canvas": "1.0.6",
+    "resend": "^1.1.0",
     "zod": "3.22.4"
   },
   "devDependencies": {
