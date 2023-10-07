@@ -43,3 +43,6 @@ public/robots.txt
 functions/firebase-debug.log
 firebase-debug.log
 ui-debug.log
+
+# React Email cache
+.react-email
