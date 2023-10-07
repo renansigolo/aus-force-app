@@ -24,7 +24,7 @@ export function Accordion({ items }: AccordionProps) {
   )
 }
 
-type AccordionItem = {
+export type AccordionItem = {
   title: string
   actionButton?: ReactNode
   children: ReactNode

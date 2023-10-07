@@ -1,9 +1,10 @@
 import { ClientData } from "@/app/dashboard/[role]/(business)/clients/ClientsList"
 import { EditRatesButton } from "@/app/dashboard/[role]/(business)/rates/EditRatesButtton"
-import { Accordion } from "@/components/Accordion"
+import { Accordion, AccordionItem } from "@/components/Accordion"
 import { Card, CardContent, CardHeader } from "@/components/Card"
+import { Empty } from "@/components/Empty"
 
-const data = [
+const ratesData = [
   {
     day: "Monday",
     startTime: "",
@@ -48,20 +49,21 @@ const data = [
   },
 ]
 
-const accordionItems = [
-  {
-    title: "General Labour",
-    children: <RatesClients />,
-  },
-  {
-    title: "Traffic Controller",
-    children: <RatesClients />,
-  },
-  {
-    title: "Forklift Driver",
-    children: <RatesClients />,
-  },
-]
+const accordionItems: AccordionItem[] = []
+// const accordionItems = [
+//   {
+//     title: "General Labour",
+//     children: <RatesClients />,
+//   },
+//   {
+//     title: "Traffic Controller",
+//     children: <RatesClients />,
+//   },
+//   {
+//     title: "Forklift Driver",
+//     children: <RatesClients />,
+//   },
+// ]
 
 type RatesListProps = {
   data: ClientData[]
@@ -80,7 +82,11 @@ function ClientCard({ client }: { client: ClientData }) {
       </CardHeader>
 
       <CardContent>
-        <Accordion items={accordionItems} />
+        {accordionItems.length === 0 ? (
+          <Empty title="job for this client" />
+        ) : (
+          <Accordion items={accordionItems} />
+        )}
       </CardContent>
     </Card>
   )
@@ -90,7 +96,7 @@ export function RatesClients() {
   return (
     <div className="mt-6 border-t border-gray-100">
       <dl className="divide-y divide-gray-100">
-        {data.map((item, index) => (
+        {ratesData.map((item, index) => (
           <div key={index} className="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
             <dt className="col-span-1 text-sm font-medium leading-6 text-gray-900">{item.day}</dt>
             <dd className="col-span-2 grid grid-cols-3">
