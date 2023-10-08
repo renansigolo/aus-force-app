@@ -1,3 +1,4 @@
+import { UserRoles } from "@/app/dashboard/profile/page"
 import {
   Body,
   Button,
@@ -14,24 +15,24 @@ import {
   Text,
 } from "@react-email/components"
 
-type InviteUserEmailProps = {
-  username?: string
+export type InviteUserEmailProps = {
+  clientName: string
+  clientEmail: string
+  clientRole?: UserRoles
   invitedByDisplayName: string
-  invitedByEmail?: string
-  teamName?: string
-  inviteLink?: string
+  invitedByEmail: string
 }
 
 const baseUrl = process.env.VERCEL_URL ? process.env.VERCEL_URL : ""
 
 export default function InviteUserEmail({
-  username = "zenorocha",
-  invitedByDisplayName = "bukinoshita",
-  invitedByEmail = "bukinoshita@example.com",
-  teamName = "My Project",
-  inviteLink = `${baseUrl}/sign-up`,
+  clientName,
+  clientRole,
+  invitedByDisplayName,
+  invitedByEmail,
 }: InviteUserEmailProps) {
   const previewText = `Join ${invitedByDisplayName} on AUS Force App`
+  const inviteLink = clientRole ? `${baseUrl}/sign-up?role=${clientRole}` : `${baseUrl}/sign-up`
 
   return (
     <Html>
@@ -50,16 +51,15 @@ export default function InviteUserEmail({
               />
             </Section>
             <Heading className="mx-0 my-[30px] p-0 text-center text-[24px] font-normal text-black">
-              Join <strong>{teamName}</strong> on the <strong>AUS Force App</strong>
+              Join <strong>{invitedByDisplayName}</strong> on the <strong>AUS Force App</strong>
             </Heading>
-            <Text className="text-[14px] leading-[24px] text-black">Hello {username},</Text>
+            <Text className="text-[14px] leading-[24px] text-black">Hello {clientName},</Text>
             <Text className="text-[14px] leading-[24px] text-black">
               <strong>{invitedByDisplayName}</strong> (
-              <Link href={`mailto:${invitedByEmail}`} className="text-blue-600 no-underline">
+              <Link href={`mailto:${invitedByEmail}`} className="text-indigo-600 no-underline">
                 {invitedByEmail}
               </Link>
-              ) has invited you to the <strong>{teamName}</strong> team on the{" "}
-              <strong>AUS Force App</strong>.
+              ) has invited you to the <strong>AUS Force App</strong>.
             </Text>
             <Section className="mb-[32px] mt-[32px] text-center">
               <Button
@@ -73,7 +73,7 @@ export default function InviteUserEmail({
             </Section>
             <Text className="text-[14px] leading-[24px] text-black">
               or copy and paste this URL into your browser:{" "}
-              <Link href={inviteLink} className="text-blue-600 no-underline">
+              <Link href={inviteLink} className="text-indigo-600 no-underline">
                 {inviteLink}
               </Link>
             </Text>

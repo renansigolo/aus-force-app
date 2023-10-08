@@ -1,8 +1,10 @@
 "use client"
 
+import { useUserContext } from "@/app/UserContext"
 import { JobSitesData } from "@/app/dashboard/[role]/(client)/job-sites/page"
 import { Button } from "@/components/Button"
 import { FormInputError } from "@/components/FormInputError"
+import { InviteUserEmailProps } from "@/emails/invite-user"
 import { createDocument } from "@/lib/firebase"
 import { showErrorMessage } from "@/lib/helpers"
 import { useRouter } from "next/navigation"
@@ -17,6 +19,7 @@ type ClientFormInputs = {
 
 export function ClientsForm() {
   const router = useRouter()
+  const { user } = useUserContext()
   const {
     register,
     handleSubmit,
@@ -29,8 +32,27 @@ export function ClientsForm() {
   const onSubmit = async (values: ClientFormInputs) => {
     try {
       await createDocument("clients", values)
+
+      const emailPayload: InviteUserEmailProps = {
+        clientName: values.name,
+        clientEmail: values.email,
+        clientRole: "client",
+        invitedByDisplayName: String(user?.displayName),
+        invitedByEmail: String(user?.email),
+      }
+
+      const sendEmailResponse = await fetch("/api/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(emailPayload),
+      })
+
+      if (!sendEmailResponse.ok) throw new Error("Failed to send email")
+
       router.refresh()
-      toast.success("New client created")
+      toast.success(
+        `An email has been sent to ${values.email} with instructions on how to sign up.`,
+      )
       reset()
     } catch (error) {
       showErrorMessage(error)
