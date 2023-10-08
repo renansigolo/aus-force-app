@@ -71,7 +71,6 @@ export function BusinessForm({ uid }: { uid: string }) {
   })
 
   const onSubmit = async (values: TRegisterBusinessFormDefaultValues) => {
-    console.log("🚀 ~ onSubmit ~ values:", values)
     try {
       await updateDocument("users", uid, values)
       router.push("/dashboard")

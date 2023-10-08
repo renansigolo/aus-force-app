@@ -1,11 +1,8 @@
 "use client"
 
-import { RatesForm } from "@/app/dashboard/[role]/(business)/rates/RatesForm"
 import { JobRequest } from "@/app/dashboard/[role]/(client)/job-requests/page"
 import { Button } from "@/components/Button"
 import { Card, CardContent, CardHeader } from "@/components/Card"
-import Modal from "@/components/Modal"
-import NiceModal from "@ebay/nice-modal-react"
 import { ClockIcon, PencilSquareIcon, UserPlusIcon } from "@heroicons/react/24/outline"
 import Image from "next/image"
 
@@ -31,26 +28,16 @@ export function AllocationsList({ data }: AllocationsListProps) {
                 Allocate Worker
               </Button>
             ) : (
-              <>
+              <Button className="btn-secondary" href={"?showModalRates=true"}>
                 {item.status === "pendingRatesAllocation" ? (
-                  <Button className="btn-secondary" href={"?showModalRates=true"}>
+                  <>
                     <ClockIcon className="h-5 w-5" />
                     Allocate Rates
-                  </Button>
+                  </>
                 ) : (
-                  <button
-                    className="hover:text-indigo-600"
-                    onClick={() =>
-                      NiceModal.show(Modal, {
-                        title: "Edit Rates",
-                        children: <RatesForm />,
-                      })
-                    }
-                  >
-                    <PencilSquareIcon className="h-5 w-5" />
-                  </button>
+                  <PencilSquareIcon className="h-5 w-5" />
                 )}
-              </>
+              </Button>
             )}
           </CardHeader>
 

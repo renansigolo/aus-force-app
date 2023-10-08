@@ -4,9 +4,9 @@ import { useUserContext } from "@/app/UserContext"
 import { RequestLeaveData as LeaveRequestsData } from "@/app/dashboard/[role]/(worker)/leave-requests/page"
 import { Button } from "@/components/Button"
 import { Card, CardContent, CardFooter } from "@/components/Card"
+import { FormInputError } from "@/components/FormInputError"
 import { createDocument } from "@/lib/firebase"
 import { getISODate, showErrorMessage } from "@/lib/helpers"
-import { ErrorMessage } from "@hookform/error-message"
 import { serverTimestamp } from "firebase/firestore"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
@@ -63,9 +63,7 @@ export function LeaveRequestsForm() {
               <option>Community service leave </option>
               <option>Other leave</option>
             </select>
-            <p className="form-error">
-              <ErrorMessage errors={errors} name="reason" />
-            </p>
+            <FormInputError message={errors.reason?.message} />
           </div>
 
           <div className="flex flex-col gap-2 sm:flex-row">
@@ -84,9 +82,7 @@ export function LeaveRequestsForm() {
                     "Start date cannot be in the past or higher than end date",
                 })}
               />
-              <p className="form-error">
-                <ErrorMessage errors={errors} name="startDate" />
-              </p>
+              <FormInputError message={errors.startDate?.message} />
             </div>
 
             <div className="w-full sm:w-1/2">
@@ -104,9 +100,7 @@ export function LeaveRequestsForm() {
                     "End date cannot be in the past or lower than start date",
                 })}
               />
-              <p className="form-error">
-                <ErrorMessage errors={errors} name="endDate" />
-              </p>
+              <FormInputError message={errors.endDate?.message} />
             </div>
           </div>
 
@@ -118,9 +112,7 @@ export function LeaveRequestsForm() {
               disabled={isSubmitting}
               {...register("additionalNotes")}
             />
-            <p className="form-error">
-              <ErrorMessage errors={errors} name="additionalNotes" />
-            </p>
+            <FormInputError message={errors.additionalNotes?.message} />
           </div>
         </CardContent>
 

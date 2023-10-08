@@ -1,8 +1,9 @@
 import { ClientData } from "@/app/dashboard/[role]/(business)/clients/ClientsList"
-import { EditRatesButton } from "@/app/dashboard/[role]/(business)/rates/EditRatesButtton"
 import { Accordion, AccordionItem } from "@/components/Accordion"
+import { Button } from "@/components/Button"
 import { Card, CardContent, CardHeader } from "@/components/Card"
 import { Empty } from "@/components/Empty"
+import { PencilSquareIcon } from "@heroicons/react/24/outline"
 
 const ratesData = [
   {
@@ -78,7 +79,10 @@ function ClientCard({ client }: { client: ClientData }) {
     <Card>
       <CardHeader>
         <h3 className="text-lg font-medium leading-6 text-gray-900">{client.name}</h3>
-        <EditRatesButton />
+
+        <Button href="?showModal=true" className="btn-secondary">
+          <PencilSquareIcon className="h-6 w-6 text-indigo-600 hover:text-indigo-500" />
+        </Button>
       </CardHeader>
 
       <CardContent>

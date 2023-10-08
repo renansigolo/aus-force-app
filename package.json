@@ -1,6 +1,6 @@
 {
   "name": "aus-force-app",
-  "version": "0.3.7",
+  "version": "0.4.0",
   "private": true,
   "homepage": "https://aus-force-app.vercel.app",
   "workspaces": [
@@ -23,10 +23,8 @@
     "turbo": "next dev --turbo"
   },
   "dependencies": {
-    "@ebay/nice-modal-react": "1.2.13",
     "@headlessui/react": "1.7.17",
     "@heroicons/react": "2.0.18",
-    "@hookform/error-message": "2.0.1",
     "@hookform/resolvers": "3.3.1",
     "@react-email/components": "0.0.7",
     "@tailwindcss/forms": "0.5.6",
@@ -39,7 +37,7 @@
     "react-hook-form": "7.47.0",
     "react-hot-toast": "2.4.1",
     "react-signature-canvas": "1.0.6",
-    "resend": "^1.1.0",
+    "resend": "1.1.0",
     "zod": "3.22.4"
   },
   "devDependencies": {
