@@ -1,5 +1,6 @@
 "use client"
 
+import { JobRequest } from "@/app/dashboard/[role]/(client)/job-requests/page"
 import { Button } from "@/components/Button"
 import { Card } from "@/components/Card"
 import { Empty } from "@/components/Empty"
@@ -44,7 +45,7 @@ const shifts: Shift[] = []
 //   },
 // ]
 
-export function ShiftsOverview() {
+export function ShiftsOverview({ jobs }: { jobs: JobRequest[] }) {
   return (
     <Role role="worker">
       <div>

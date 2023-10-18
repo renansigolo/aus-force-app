@@ -5,14 +5,21 @@ import { ShiftReviewModal } from "@/app/dashboard/(home)/ShiftReviewModal"
 import { ShiftsOverview } from "@/app/dashboard/(home)/ShiftsOverview"
 import { WeeklyActivity } from "@/app/dashboard/(home)/WeeklyActivity"
 import { WelcomePanel } from "@/app/dashboard/(home)/WelcomePanel"
+import { JobRequest } from "@/app/dashboard/[role]/(client)/job-requests/page"
 import { Container } from "@/components/Container"
 import { ModalWrapper } from "@/components/ModalWrapper"
+import { getCollectionQuery } from "@/lib/firebase"
 import { SearchParams } from "@/lib/schemas"
+import { where } from "firebase/firestore"
 
 type DashboardPageProps = { searchParams: SearchParams }
-export default function DashboardPage({ searchParams }: DashboardPageProps) {
-  // const searchParams = useSearchParams()
+export default async function DashboardPage({ searchParams }: DashboardPageProps) {
   const showModal = searchParams.showModal === "true"
+  const jobs = await getCollectionQuery<JobRequest>(
+    "jobRequests",
+    where("allocatedWorker.id", "==", "leslie-alexander"),
+  )
+  console.log("🚀 ~ DashboardPage ~ jobs:", jobs)
 
   return (
     <>
@@ -22,7 +29,7 @@ export default function DashboardPage({ searchParams }: DashboardPageProps) {
 
           <PendingApprovals />
 
-          <ShiftsOverview />
+          <ShiftsOverview jobs={jobs} />
 
           <WeeklyActivity />
 
