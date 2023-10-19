@@ -90,11 +90,11 @@ export function BusinessForm({ uid }: { uid: string }) {
         <div className="flex justify-center">
           <RadioGroup
             value={frequency}
+            className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200"
             onChange={(item) => {
               setFrequency(item)
               setValue("planFrequency", item.value)
             }}
-            className="grid grid-cols-2 gap-x-1 rounded-full p-1 text-center text-xs font-semibold leading-5 ring-1 ring-inset ring-gray-200"
           >
             <RadioGroup.Label className="sr-only">Payment frequency</RadioGroup.Label>
             {frequencies.map((option) => (

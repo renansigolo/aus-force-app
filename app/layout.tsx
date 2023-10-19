@@ -1,12 +1,13 @@
+import "../lib/firebase"
+import "./globals.css"
+
 import { Providers } from "@/app/Providers"
 import { UserContextProvider } from "@/app/UserContext"
 import { Badge } from "@/components/Badge"
 import { Inter } from "next/font/google"
 import { ReactNode } from "react"
 import { Toaster } from "react-hot-toast"
-import "../lib/firebase"
 import packageJson from "../package.json"
-import "./globals.css"
 
 const isProduction = process.env.NODE_ENV === "production"
 
