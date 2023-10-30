@@ -25,7 +25,6 @@ export const metadata = {
   description: "AUS Force App",
   authors: [{ name: "Renan Sigolo", url: "https://renansigolo.com" }],
   creator: "Renan Sigolo",
-  colorScheme: "light",
   icons: {
     icon: "/icon.png",
     apple: "/apple-icon.png",

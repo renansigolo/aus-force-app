@@ -19,7 +19,6 @@ export default async function DashboardPage({ searchParams }: DashboardPageProps
     "jobRequests",
     where("allocatedWorker.id", "==", "leslie-alexander"),
   )
-  console.log("🚀 ~ DashboardPage ~ jobs:", jobs)
 
   return (
     <>

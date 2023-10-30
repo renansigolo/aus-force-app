@@ -1,6 +1,6 @@
 {
   "name": "aus-force-app",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "private": true,
   "homepage": "https://aus-force-app.vercel.app",
   "workspaces": [
@@ -26,10 +26,10 @@
     "@headlessui/react": "1.7.17",
     "@heroicons/react": "2.0.18",
     "@hookform/resolvers": "3.3.2",
-    "@react-email/components": "0.0.7",
+    "@react-email/components": "0.0.9",
     "@tailwindcss/forms": "0.5.6",
-    "firebase": "10.5.0",
-    "next": "13.5.6",
+    "firebase": "10.5.2",
+    "next": "14.0.0",
     "next-sitemap": "4.2.3",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -41,22 +41,22 @@
     "zod": "3.22.4"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.8.0",
-    "@commitlint/config-conventional": "17.8.0",
-    "@types/node": "20.8.7",
-    "@types/react": "18.2.29",
+    "@commitlint/cli": "18.2.0",
+    "@commitlint/config-conventional": "18.1.0",
+    "@types/node": "20.8.9",
+    "@types/react": "18.2.33",
     "@types/react-dom": "18.2.14",
     "@types/react-signature-canvas": "1.0.4",
     "autoprefixer": "10.4.16",
     "encoding": "0.1.13",
-    "eslint": "8.51.0",
-    "eslint-config-next": "13.5.6",
+    "eslint": "8.52.0",
+    "eslint-config-next": "14.0.0",
     "husky": "8.0.3",
     "postcss": "8.4.31",
     "prettier": "3.0.3",
     "prettier-plugin-tailwindcss": "0.5.6",
-    "tailwind-merge": "1.14.0",
-    "tailwindcss": "3.3.3",
+    "tailwind-merge": "2.0.0",
+    "tailwindcss": "3.3.5",
     "typescript": "5.2.2"
   }
 }
