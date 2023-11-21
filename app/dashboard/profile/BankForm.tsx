@@ -87,7 +87,7 @@ export function BankForm({ user }: BankFormProps) {
           <label htmlFor="bsb">BSB</label>
           <input
             id="bsb"
-            type="number"
+            type="tel"
             disabled={isSubmitting}
             {...register("bsb", {
               required: "BNB number is required",
@@ -102,13 +102,13 @@ export function BankForm({ user }: BankFormProps) {
           <label htmlFor="accountNumber">Account number</label>
           <input
             id="accountNumber"
-            type="number"
+            type="tel"
             disabled={isSubmitting}
             {...register("accountNumber", {
               required: "Account number is required",
               valueAsNumber: true,
               validate: (value) =>
-                value.toString().length === 9 || "Account number must be 9 digits",
+                value.toString().length <= 8 || "Account number must have at least 8 digits",
             })}
           />
           <FormInputError message={errors.accountNumber?.message} />
