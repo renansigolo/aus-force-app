@@ -7,7 +7,7 @@ export default function ComponentsPage() {
   return (
     <>
       <h1>Test Components in Isolation</h1>
-      <Button onClick={() => toast.success("asd")}>Toast</Button>
+      <Button onClick={() => toast.success("Working")}>Toast</Button>
     </>
   )
 }
