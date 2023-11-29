@@ -167,11 +167,13 @@ function DayScheduleForm() {
               type="time"
               value={day.startTime}
               onChange={(e) => handleDayChange(index, "startTime", e.target.value)}
+              className="min-w-[118px]"
             />
             <input
               type="time"
               value={day.endTime}
               onChange={(e) => handleDayChange(index, "endTime", e.target.value)}
+              className="min-w-[118px]"
             />
 
             <div className="relative rounded-md shadow-sm">
@@ -200,11 +202,13 @@ function DayScheduleForm() {
               type="time"
               value={day.startTime}
               onChange={(e) => handleDayChange(index, "startTime", e.target.value)}
+              className="min-w-[118px]"
             />
             <input
               type="time"
               value={day.endTime}
               onChange={(e) => handleDayChange(index, "endTime", e.target.value)}
+              className="min-w-[118px]"
             />
             <div className="relative rounded-md shadow-sm">
               <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
