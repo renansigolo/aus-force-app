@@ -2,8 +2,8 @@
 
 import { Button } from "@/components/Button"
 import { auth } from "@/lib/firebase"
-import { sendPasswordResetEmail } from "@firebase/auth"
 import { FirebaseError } from "@firebase/util"
+import { sendPasswordResetEmail } from "firebase/auth"
 import { useRouter } from "next/navigation"
 import { FieldValues, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
