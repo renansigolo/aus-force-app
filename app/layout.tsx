@@ -1,7 +1,6 @@
 import "../lib/firebase"
 import "./globals.css"
 
-import { Providers } from "@/app/Providers"
 import { UserContextProvider } from "@/app/UserContext"
 import { Badge } from "@/components/Badge"
 import { Inter } from "next/font/google"
@@ -69,16 +68,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
     <html lang="en" className={inter.className}>
       <head />
       <body>
-        <Providers>
-          <UserContextProvider>
-            <div className="fixed bottom-1 left-1">
-              <Badge>v.{packageJson.version}</Badge>
-            </div>
+        {/* <Providers> */}
+        <UserContextProvider>
+          <div className="fixed bottom-1 left-1">
+            <Badge>v.{packageJson.version}</Badge>
+          </div>
 
-            {children}
-            <Toaster position="top-right" reverseOrder={true} />
-          </UserContextProvider>
-        </Providers>
+          {children}
+          <Toaster position="top-right" reverseOrder={true} />
+        </UserContextProvider>
+        {/* </Providers> */}
       </body>
     </html>
   )
