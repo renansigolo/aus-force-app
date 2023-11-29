@@ -6,6 +6,7 @@ import toast from "react-hot-toast"
 export default function ComponentsPage() {
   return (
     <>
+      <h1>Test Components in Isolation</h1>
       <Button onClick={() => toast.success("asd")}>Toast</Button>
     </>
   )
