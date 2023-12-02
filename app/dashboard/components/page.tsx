@@ -1,7 +1,9 @@
 "use client"
 
+import { Container } from "@/components/Container"
 import { FocusEvent } from "react"
 import { useFieldArray, useForm } from "react-hook-form"
+import toast from "react-hot-toast"
 
 type Range = {
   startHour: number
@@ -65,7 +67,7 @@ const DynamicForm = () => {
     const dayFields: any = getValues(`week.${daysOfWeek[dayIndex]}`)
     const currentField = dayFields[index]
     if (currentField.endHour <= currentField.startHour) {
-      alert("End hour must be greater than start hour.")
+      toast.error("End hour must be greater than start hour.")
       return false
     }
 
@@ -78,7 +80,7 @@ const DynamicForm = () => {
     }, 0)
 
     if (totalHours > 24) {
-      alert("Total hours for the day cannot exceed 24.")
+      toast.error("Total hours for the day cannot exceed 24.")
       return false
     }
 
@@ -104,49 +106,46 @@ const DynamicForm = () => {
       console.log(data)
     } else {
       console.log(data)
-      alert("Each day must have time ranges totaling exactly 24 hours.")
+      toast.error("Each day must have time ranges totaling exactly 24 hours.")
     }
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      {daysOfWeek.map((day, dayIndex) => (
-        <div key={day}>
-          <h3>{day}</h3>
-          {weekFieldArrays[dayIndex].fields.map((field, index) => (
-            <div key={field.id} className="flex items-center space-x-2">
-              <input
-                type="number"
-                {...register(`week.${day}.${index}.startHour`)}
-                readOnly
-                className="input-class" // Tailwind CSS class
-              />
-              <input
-                type="number"
-                {...register(`week.${day}.${index}.endHour`)}
-                className="input-class" // Tailwind CSS class
-                onBlur={(e) => handleEndHourChange(dayIndex, index, e)}
-              />
-              <input
-                type="number"
-                {...register(`week.${day}.${index}.baseRate`)}
-                defaultValue={0}
-                placeholder="Base Rate"
-                className="input-class" // Tailwind CSS class
-              />
-              <button
-                type="button"
-                onClick={() => weekFieldArrays[dayIndex].remove(index)}
-                className="remove-button-class" // Tailwind CSS class
-              >
-                Remove
-              </button>
-            </div>
-          ))}
-        </div>
-      ))}
-      <input type="submit" className="submit-button-class" />
-    </form>
+    <Container>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        {daysOfWeek.map((day, dayIndex) => (
+          <div key={day}>
+            <h3>{day}</h3>
+            {weekFieldArrays[dayIndex].fields.map((field, index) => (
+              <div key={field.id} className="flex items-center space-x-2">
+                <input
+                  type="number"
+                  placeholder="Start Hour"
+                  {...register(`week.${day}.${index}.startHour`)}
+                  readOnly
+                />
+                <input
+                  type="number"
+                  placeholder="End Hour"
+                  {...register(`week.${day}.${index}.endHour`)}
+                  onBlur={(e) => handleEndHourChange(dayIndex, index, e)}
+                />
+                <input
+                  type="number"
+                  {...register(`week.${day}.${index}.baseRate`)}
+                  defaultValue={0}
+                  placeholder="Base Rate"
+                />
+                <button type="button" onClick={() => weekFieldArrays[dayIndex].remove(index)}>
+                  Remove
+                </button>
+              </div>
+            ))}
+          </div>
+        ))}
+        <input type="submit" className="submit-button-class" />
+      </form>
+    </Container>
   )
 }
 

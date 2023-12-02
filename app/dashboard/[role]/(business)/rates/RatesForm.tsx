@@ -1,9 +1,10 @@
 "use client"
 
 import { Button } from "@/components/Button"
+import { TrashIcon } from "@heroicons/react/24/outline"
 import { useRouter } from "next/navigation"
-import { Fragment, useState } from "react"
-import { useForm } from "react-hook-form"
+import { FocusEvent, Fragment, useState } from "react"
+import { useFieldArray, useForm } from "react-hook-form"
 import toast from "react-hot-toast"
 
 const hoursWorkedData = [
@@ -34,51 +35,15 @@ export function RatesForm() {
   return (
     <form className="space-y-8 divide-y divide-gray-200" onSubmit={handleSubmit(onSubmit)}>
       <div className="mt-6 grid gap-4">
-        {/* <div>
-          <label htmlFor="clientName">Client Name</label>
-          <select id="clientName" {...register("clientName")}>
-            <option>Client 01</option>
-            <option>Client 02</option>
-            <option>Client 03</option>
-          </select>
-        </div>
-
-        <div>
-          <label htmlFor="jobPosition">Job position</label>
-          <select id="jobPosition" {...register("jobPosition")}>
-            <option>General Labour</option>
-            <option>Skill Labour</option>
-            <option>Traffic Controller</option>
-            <option>Forklift Operator</option>
-            <option>LO Operator</option>
-            <option>Picker/Packer</option>
-            <option>Dogman</option>
-            <option>Crane Operator</option>
-            <option>Rigger</option>
-            <option>Escavator Operator</option>
-            <option>Trade Assistant</option>
-            <option>Carpenter</option>
-            <option>Steel Fixer</option>
-            <option>Formworker</option>
-            <option>Manitou Operator</option>
-          </select>
-        </div> */}
-
-        <div>
+        <>
           <DayScheduleForm />
+
           <hr className="my-6" />
+
           <HoursWorked />
-        </div>
+        </>
       </div>
 
-      {/* <div className="gap-2 pt-5 sm:flex sm:flex-row-reverse sm:pt-4">
-        <Button type="submit" className="btn-success" disabled={isSubmitting || !isValid}>
-          Submit
-        </Button>
-        <Button href="?showModal=false" className="btn-secondary">
-          Cancel
-        </Button>
-      </div> */}
       <div className="pt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
         <button
           type="submit"
@@ -95,56 +60,103 @@ export function RatesForm() {
   )
 }
 
+type Range = {
+  startHour: number
+  endHour: number
+  baseRate: number
+}
+type Week = {
+  [key: string]: Range[]
+}
+const daysOfWeek = [
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+] as const
+type DaysOfWeek = typeof daysOfWeek
 function DayScheduleForm() {
-  const [days, setDays] = useState([
-    {
-      day: "Monday",
-      startTime: "",
-      endTime: "",
-      price: "",
-    },
-    {
-      day: "Tuesday",
-      startTime: "",
-      endTime: "",
-      price: "",
-    },
-    {
-      day: "Wednesday",
-      startTime: "",
-      endTime: "",
-      price: "",
-    },
-    {
-      day: "Thursday",
-      startTime: "",
-      endTime: "",
-      price: "",
-    },
-    {
-      day: "Friday",
-      startTime: "",
-      endTime: "",
-      price: "",
-    },
-    {
-      day: "Saturday",
-      startTime: "",
-      endTime: "",
-      price: "",
-    },
-    {
-      day: "Sunday",
-      startTime: "",
-      endTime: "",
-      price: "",
-    },
-  ])
+  const defaultValues: Week = daysOfWeek.reduce(
+    (acc, day) => ({ ...acc, [day]: [{ startHour: 0, endHour: "", baseRate: 0 }] }) as Week,
+    {} as Week,
+  )
 
-  const handleDayChange = (index: number, field: string, value: string) => {
-    setDays((prevDays) =>
-      prevDays.map((day, i) => (i === index ? { ...day, [field]: value } : day)),
-    )
+  const {
+    register,
+    control,
+    handleSubmit,
+    getValues,
+    setValue,
+    formState: { errors },
+  } = useForm<Week>({
+    defaultValues: { week: defaultValues as any },
+  })
+
+  const weekFieldArrays = daysOfWeek.map((day) =>
+    // eslint-disable-next-line
+    useFieldArray({
+      control,
+      name: `week.${day}`,
+    }),
+  )
+
+  const calculateTotalHours = (day: DaysOfWeek) => {
+    const dayFields: any = getValues(`week.${day}`)
+    return dayFields.reduce((total: number, current: any) => {
+      return total + (current.endHour - current.startHour)
+    }, 0)
+  }
+
+  const validateForm = () => {
+    return daysOfWeek.every((day) => calculateTotalHours(day as any) === 24)
+  }
+
+  const validateEndHour = (dayIndex: number, index: number) => {
+    const dayFields: any = getValues(`week.${daysOfWeek[dayIndex]}`)
+    const currentField = dayFields[index]
+    if (currentField.endHour <= currentField.startHour) {
+      toast.error("End hour must be greater than start hour.")
+      return false
+    }
+
+    const totalHours = dayFields.reduce((total: number, field: any, idx: number) => {
+      if (idx <= index) {
+        const rangeHours = field.endHour - field.startHour
+        return total + (rangeHours > 0 ? rangeHours : 0)
+      }
+      return total
+    }, 0)
+
+    if (totalHours > 24) {
+      toast.error("Total hours for the day cannot exceed 24.")
+      return false
+    }
+
+    if (index === dayFields.length - 1 && totalHours < 24) {
+      weekFieldArrays[dayIndex].append({ startHour: currentField.endHour, endHour: "" })
+    }
+
+    return true
+  }
+
+  const handleEndHourChange = (
+    dayIndex: number,
+    index: number,
+    e: FocusEvent<HTMLInputElement, Element>,
+  ) => {
+    const value = parseInt(e.target.value)
+    setValue(`week.${daysOfWeek[dayIndex]}.${index}.endHour`, value as never)
+    validateEndHour(dayIndex, index)
+  }
+
+  const onSubmit = (data: any) => {
+    console.log(data)
+    validateForm()
+      ? toast.success("Rates saved.")
+      : toast.error("Each day must have time ranges totaling exactly 24 hours.")
   }
 
   return (
@@ -155,84 +167,64 @@ function DayScheduleForm() {
           You must set a rate for the range of 24h per day
         </p>
       </div>
-      <div className="grid grid-cols-4 gap-4">
-        <div className="font-bold">Day</div>
-        <div className="font-bold">Start Time</div>
-        <div className="font-bold">End Time</div>
-        <div className="font-bold">Base rate</div>
-        {days.map((day, index) => (
-          <Fragment key={index}>
-            <div>{day.day}</div>
-            <input
-              type="time"
-              value={day.startTime}
-              onChange={(e) => handleDayChange(index, "startTime", e.target.value)}
-              className="min-w-[118px]"
-            />
-            <input
-              type="time"
-              value={day.endTime}
-              onChange={(e) => handleDayChange(index, "endTime", e.target.value)}
-              className="min-w-[118px]"
-            />
 
-            <div className="relative rounded-md shadow-sm">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <span className="text-gray-500 sm:text-sm">$</span>
-              </div>
-              <input
-                type="text"
-                name="price"
-                id="price"
-                className="block h-full w-full rounded-md border-0 pl-7 pr-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder="0"
-                aria-describedby="price-currency"
-                value={day.price}
-                onChange={(e) => handleDayChange(index, "price", e.target.value)}
-              />
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                <span className="text-gray-500 sm:text-sm" id="price-currency">
-                  AUD
-                </span>
-              </div>
-            </div>
+      <form>
+        {daysOfWeek.map((day, dayIndex) => (
+          <div key={day}>
+            <h3>{day}</h3>
 
-            <div></div>
-            <input
-              type="time"
-              value={day.startTime}
-              onChange={(e) => handleDayChange(index, "startTime", e.target.value)}
-              className="min-w-[118px]"
-            />
-            <input
-              type="time"
-              value={day.endTime}
-              onChange={(e) => handleDayChange(index, "endTime", e.target.value)}
-              className="min-w-[118px]"
-            />
-            <div className="relative rounded-md shadow-sm">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <span className="text-gray-500 sm:text-sm">$</span>
+            {weekFieldArrays[dayIndex].fields.map((field, index) => (
+              <div key={field.id} className="flex h-12 items-center gap-2">
+                <input
+                  type="number"
+                  placeholder="Start Hour"
+                  {...register(`week.${day}.${index}.startHour`)}
+                  readOnly
+                  className="form-input"
+                />
+
+                <input
+                  type="number"
+                  placeholder="End Hour"
+                  {...register(`week.${day}.${index}.endHour`, { max: 24 })}
+                  onBlur={(e) => handleEndHourChange(dayIndex, index, e)}
+                  className="form-input"
+                />
+
+                <div className="relative h-9 min-w-[120px] rounded-md shadow-sm">
+                  <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                    <span className="text-gray-500 sm:text-sm">$</span>
+                  </div>
+                  <input
+                    type="number"
+                    {...register(`week.${day}.${index}.baseRate`)}
+                    defaultValue={0}
+                    placeholder="Base Rate"
+                    className="block h-full w-full rounded-md border-0 py-1.5 pl-7 pr-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  />
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                    <span className="text-gray-500 sm:text-sm" id="price-currency">
+                      AUD
+                    </span>
+                  </div>
+                </div>
+
+                {index > 0 ? (
+                  <Button type="button" onClick={() => weekFieldArrays[dayIndex].remove(index)}>
+                    <TrashIcon className="h-5 w-5" />
+                  </Button>
+                ) : (
+                  <div className="min-w-[50px]"></div>
+                )}
               </div>
-              <input
-                type="text"
-                name="price"
-                id="price"
-                className="block h-full w-full rounded-md border-0 py-1.5 pl-7 pr-12 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                placeholder="0"
-                aria-describedby="price-currency"
-                value={day.price}
-                onChange={(e) => handleDayChange(index, "price", e.target.value)}
-              />
-              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
-                <span className="text-gray-500 sm:text-sm" id="price-currency">
-                  AUD
-                </span>
-              </div>
-            </div>
-          </Fragment>
+            ))}
+          </div>
         ))}
-      </div>
+
+        <Button type="button" onClick={handleSubmit(onSubmit)}>
+          Submit
+        </Button>
+      </form>
     </div>
   )
 }
